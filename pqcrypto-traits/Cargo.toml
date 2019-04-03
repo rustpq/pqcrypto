@@ -1,0 +1,7 @@
+[package]
+name = "pqcrypto-traits"
+version = "0.1.0"
+authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
+edition = "2018"
+
+[dependencies]
