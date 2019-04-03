@@ -1,5 +1,6 @@
 [workspace]
 members=[
+    "pqcrypto",
     "pqcrypto-traits",
     "pqcrypto-kyber",
 ]

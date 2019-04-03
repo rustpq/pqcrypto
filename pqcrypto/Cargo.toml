@@ -1,0 +1,9 @@
+[package]
+name = "pqcrypto"
+version = "0.1.0"
+authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
+edition = "2018"
+
+[dependencies]
+pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.1.0" }
+pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.1.0" }
