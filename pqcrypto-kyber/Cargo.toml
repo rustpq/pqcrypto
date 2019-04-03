@@ -4,6 +4,11 @@ description = "Post-Quantum key-encapsulation mechanism Kyber768"
 version = "0.1.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/rustpq/"
+repository = "https://github.com/rustpq/pqclean/"
+keywords = ["cryptography", "post-quantum", "security"]
+categories = ["cryptography"]
 
 [dependencies]
 pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.1.0" }
