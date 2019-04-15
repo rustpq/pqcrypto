@@ -1,0 +1,4 @@
+language: rust
+
+env:
+    RUST_MIN_STACK: 8192000
