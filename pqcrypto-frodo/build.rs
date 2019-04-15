@@ -25,6 +25,7 @@ fn main() {
     let scheme_frodokem1344shake_files = glob::glob(target_frodokem1344shake_dir.join("*.c").to_str().unwrap()).unwrap();
     cc::Build::new()
         .include("pqclean/common")
+        .flag("-std=c99")
         .files(common_files.into_iter())
         .include(target_frodokem640shake_dir)
         .files(scheme_frodokem640shake_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
