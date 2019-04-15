@@ -28,6 +28,8 @@ def render_template(target_dir, target_file, template_file, **templ_vars):
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader('pqcrypto-template'),
         undefined=jinja2.StrictUndefined,
+        trim_blocks=True,
+        lstrip_blocks=True,
     )
     env.filters['namespaceize'] = namespaceize
     env.filters['split'] = lambda x, y: x.split(y)
@@ -92,9 +94,7 @@ def generate_scheme(name, type, properties):
 
 
 def generate_pqcrypto_crate(implementations):
-    from packaging import version
-    version = max([version.parse(crate['version'])
-                   for crate in implementations['kems'].values()])
+    version = implementations['version']
     target_dir = 'pqcrypto'
     shutil.rmtree(target_dir)
     os.makedirs(os.path.join(target_dir, 'src'))

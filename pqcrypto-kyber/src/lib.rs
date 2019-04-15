@@ -4,18 +4,13 @@
 //! implementations from [PQClean][pqc]:
 //!
 //! * kyber768 - clean
-
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
 
-
 pub mod ffi;
 
-
 pub mod kyber768;
-
-
 
 pub use crate::kyber768::{
     encapsulate as kyber768_encapsulate,

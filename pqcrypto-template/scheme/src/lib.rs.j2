@@ -1,5 +1,5 @@
 //! # {{ name }}
-//! 
+//!
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
@@ -28,5 +28,4 @@ pub use crate::{{ scheme.name }}::{
     ciphertext_bytes as {{ scheme.name }}_ciphertext_bytes,
     shared_secret_bytes as {{ scheme.name }}_shared_secret_bytes,
 };
-
 {% endfor %}

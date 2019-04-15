@@ -63,7 +63,6 @@ macro_rules! simple_struct {
 }
 
 
-
 simple_struct!(PublicKey, ffi::PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES);
 simple_struct!(SecretKey, ffi::PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES);
 simple_struct!(

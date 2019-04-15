@@ -63,7 +63,6 @@ macro_rules! simple_struct {
 }
 
 
-
 simple_struct!(PublicKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES);
 simple_struct!(SecretKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES);
 simple_struct!(
