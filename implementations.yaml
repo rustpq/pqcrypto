@@ -1,0 +1,23 @@
+---
+
+kems:
+  kyber:
+    version: 0.1.0
+    schemes:
+      - name: kyber768
+        implementation: clean
+  frodo:
+    version: 0.1.0
+    schemes:
+      - name: frodokem640shake
+        implementation: clean
+        # - name: frodokem976aes
+        #   implementation: clean
+        #      - name: frodokem976shake
+        #        implementation: clean
+        #      - name: frodokem1344aes
+        #        implementation: clean
+      - name: frodokem1344shake
+        implementation: clean
+
+#  vim: set ft=yaml ts=2 sw=2 tw=0 et :

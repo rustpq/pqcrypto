@@ -1,10 +1,10 @@
-//! kyber768
+//! frodokem640shake
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
 //! # Examples
 //! ```
-//! use pqcrypto_kyber::kyber768::*;
+//! use pqcrypto_frodo::frodokem640shake::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(pk);
 //! let ss2 = decapsulate(ct, sk);
@@ -64,55 +64,55 @@ macro_rules! simple_struct {
 
 
 
-simple_struct!(PublicKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES);
-simple_struct!(SecretKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES);
+simple_struct!(PublicKey, ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES);
+simple_struct!(SecretKey, ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES);
 simple_struct!(
     Ciphertext,
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES
 );
-simple_struct!(SharedSecret, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES);
+simple_struct!(SharedSecret, ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_BYTES);
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes for the encapsulated ciphertext
 pub const fn ciphertext_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES
 }
 
 /// Get the number of bytes for the shared secret
 pub const fn shared_secret_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES
+    ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_BYTES
 }
 
-/// Generate a kyber768 keypair
+/// Generate a frodokem640shake keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
     let mut pk = PublicKey::new();
     let mut sk = SecretKey::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_KYBER768_CLEAN_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
+            ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
         },
         0
     );
     (pk, sk)
 }
 
-/// Encapsulate to a kyber768 public key
+/// Encapsulate to a frodokem640shake public key
 pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ss = SharedSecret::new();
     let mut ct = Ciphertext::new();
 
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_KYBER768_CLEAN_crypto_kem_enc(
+            ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_crypto_kem_enc(
                 ct.0.as_mut_ptr(),
                 ss.0.as_mut_ptr(),
                 pk.0.as_ptr(),
@@ -124,12 +124,12 @@ pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
     (ss, ct)
 }
 
-/// Decapsulate the received kyber768 ciphertext
+/// Decapsulate the received frodokem640shake ciphertext
 pub fn decapsulate(ct: Ciphertext, sk: SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_KYBER768_CLEAN_crypto_kem_dec(
+            ffi::PQCLEAN_FRODOKEM640SHAKE_CLEAN_crypto_kem_dec(
                 ss.0.as_mut_ptr(),
                 ct.0.as_ptr(),
                 sk.0.as_ptr(),

@@ -1,6 +1,6 @@
 [package]
 name = "pqcrypto-kyber"
-description = "Post-Quantum key-encapsulation mechanism Kyber768"
+description = "Post-Quantum kem kyber"
 version = "0.1.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"

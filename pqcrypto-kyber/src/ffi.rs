@@ -1,13 +1,28 @@
-#![allow(unused)]
+//! Foreign function interfaces
+//!
+//! This module defines the foreign function interface for the following
+//! crypto implementations from PQClean:
+//!
+//!  * kyber768
+
+// This file has been generated from PQClean.
+// Find the templates in pqcrypto-template
 use libc::c_int;
+
+
+
+
 
 pub const PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2400;
 pub const PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1088;
 pub const PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1152;
 pub const PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[link(name = "kyber768")]
+
+#[link(name = "kyber")]
 extern "C" {
+
+
     pub fn PQCLEAN_KYBER768_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_KYBER768_CLEAN_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8) -> c_int;
     pub fn PQCLEAN_KYBER768_CLEAN_crypto_kem_dec(
@@ -15,10 +30,13 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
 }
 
+
+
 #[cfg(test)]
-mod test {
+mod test_kyber768_clean {
     use super::*;
     use std::mem;
     #[test]

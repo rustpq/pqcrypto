@@ -1,0 +1,31 @@
+extern crate cc;
+extern crate glob;
+
+use std::path::Path;
+
+
+fn main() {
+    let common_dir = Path::new("pqclean/common");
+    let common_files = [
+        common_dir.join("fips202.c"),
+        common_dir.join("aes.c"),
+        common_dir.join("randombytes.c"),
+        common_dir.join("sha2.c"),
+    ];
+
+    {% for scheme in schemes %}
+    let target_{{ scheme.name }}_dir = Path::new("pqclean/crypto_{{ type }}/{{ scheme.name }}/{{ scheme.implementation }}");
+    let scheme_{{ scheme.name }}_files = glob::glob(target_{{scheme.name}}_dir.join("*.c").to_str().unwrap()).unwrap();
+    {% endfor %}
+    cc::Build::new()
+        .flag("-g")
+        .flag("-fsplit-stack")
+        .include("pqclean/common")
+        .files(common_files.into_iter())
+        {% for scheme in schemes %}
+        .include(target_{{ scheme.name }}_dir)
+        .files(scheme_{{ scheme.name }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
+        {% endfor %}
+        .compile("lib{{ name }}.a");
+
+}

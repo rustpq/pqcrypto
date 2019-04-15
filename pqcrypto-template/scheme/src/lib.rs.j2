@@ -1,0 +1,28 @@
+//! # {{ name }}
+//! 
+//! This crate provides bindings to and wrappers around the following
+//! implementations from [PQClean][pqc]:
+//!
+{% for scheme in schemes %}//! * {{ scheme.name }} - {{ scheme.implementation }}
+{% endfor %}
+//!
+//! [pqc]: https://github.com/pqclean/pqclean/
+
+pub mod ffi;
+
+{% for scheme in schemes %}
+pub mod {{ scheme.name }};
+{% endfor %}
+
+{% for scheme in schemes %}
+pub use crate::{{ scheme.name }}::{
+    encapsulate as {{ scheme.name }}_encapsulate,
+    decapsulate as {{ scheme.name }}_decapsulate,
+    keypair as {{ scheme.name }}_keypair,
+    public_key_bytes as {{ scheme.name }}_public_key_bytes,
+    secret_key_bytes as {{ scheme.name }}_secret_key_bytes,
+    ciphertext_bytes as {{ scheme.name }}_ciphertext_bytes,
+    shared_secret_bytes as {{ scheme.name }}_shared_secret_bytes,
+};
+
+{% endfor %}

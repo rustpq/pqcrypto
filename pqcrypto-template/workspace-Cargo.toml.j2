@@ -3,9 +3,7 @@
 members=[
     "pqcrypto",
     "pqcrypto-traits",
-
-    "pqcrypto-kyber",
-
-    "pqcrypto-frodo",
-
+{% for name in names %}
+    "{{ name }}",
+{% endfor %}
 ]

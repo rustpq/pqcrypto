@@ -1,10 +1,10 @@
-//! kyber768
+//! {{ scheme.name }}
 //!
-//! These bindings use the clean version from [PQClean][pqc]
+//! These bindings use the {{ scheme.implementation }} version from [PQClean][pqc]
 //!
 //! # Examples
 //! ```
-//! use pqcrypto_kyber::kyber768::*;
+//! use pqcrypto_{{ name }}::{{ scheme.name }}::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(pk);
 //! let ss2 = decapsulate(ct, sk);
@@ -62,57 +62,57 @@ macro_rules! simple_struct {
     };
 }
 
+{% set NS_NAME = [scheme.name|namespaceize, scheme.implementation|namespaceize]|join('_') %}
 
-
-simple_struct!(PublicKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES);
-simple_struct!(SecretKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES);
+simple_struct!(PublicKey, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES);
+simple_struct!(SecretKey, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES);
 simple_struct!(
     Ciphertext,
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES
 );
-simple_struct!(SharedSecret, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES);
+simple_struct!(SharedSecret, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes for the encapsulated ciphertext
 pub const fn ciphertext_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES
 }
 
 /// Get the number of bytes for the shared secret
 pub const fn shared_secret_bytes() -> usize {
-    ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES
+    ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES
 }
 
-/// Generate a kyber768 keypair
+/// Generate a {{ scheme.name }} keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
     let mut pk = PublicKey::new();
     let mut sk = SecretKey::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_KYBER768_CLEAN_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
+            ffi::PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
         },
         0
     );
     (pk, sk)
 }
 
-/// Encapsulate to a kyber768 public key
+/// Encapsulate to a {{ scheme.name }} public key
 pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ss = SharedSecret::new();
     let mut ct = Ciphertext::new();
 
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_KYBER768_CLEAN_crypto_kem_enc(
+            ffi::PQCLEAN_{{ NS_NAME }}_crypto_kem_enc(
                 ct.0.as_mut_ptr(),
                 ss.0.as_mut_ptr(),
                 pk.0.as_ptr(),
@@ -124,12 +124,12 @@ pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
     (ss, ct)
 }
 
-/// Decapsulate the received kyber768 ciphertext
+/// Decapsulate the received {{ scheme.name }} ciphertext
 pub fn decapsulate(ct: Ciphertext, sk: SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_KYBER768_CLEAN_crypto_kem_dec(
+            ffi::PQCLEAN_{{ NS_NAME }}_crypto_kem_dec(
                 ss.0.as_mut_ptr(),
                 ct.0.as_ptr(),
                 sk.0.as_ptr(),

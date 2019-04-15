@@ -1,6 +1,6 @@
 [package]
-name = "pqcrypto"
-description = "Post-Quantum cryptographic primitives"
+name = "pqcrypto-frodo"
+description = "Post-Quantum kem frodo"
 version = "0.1.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
@@ -11,8 +11,9 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
-pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.1.0" }
+pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.1.0" }
+libc = "0.2.0"
 
-pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.1.0" }
-
-pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.1.0" }
+[build-dependencies]
+cc = { version = "1.0" }
+glob = "0.3.0"
