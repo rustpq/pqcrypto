@@ -18,8 +18,6 @@ fn main() {
     let scheme_kyber768_files = glob::glob(target_kyber768_dir.join("*.c").to_str().unwrap()).unwrap();
 
     cc::Build::new()
-        .flag("-g")
-        .flag("-fsplit-stack")
         .include("pqclean/common")
         .files(common_files.into_iter())
 

@@ -18,8 +18,6 @@ fn main() {
     let scheme_{{ scheme.name }}_files = glob::glob(target_{{scheme.name}}_dir.join("*.c").to_str().unwrap()).unwrap();
     {% endfor %}
     cc::Build::new()
-        .flag("-g")
-        .flag("-fsplit-stack")
         .include("pqclean/common")
         .files(common_files.into_iter())
         {% for scheme in schemes %}

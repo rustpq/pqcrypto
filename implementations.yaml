@@ -8,15 +8,18 @@ kems:
         implementation: clean
   frodo:
     version: 0.1.0
+    notes: |
+      Frodo needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make sure it has
+      enough stack space in threads.
     schemes:
       - name: frodokem640shake
         implementation: clean
-        # - name: frodokem976aes
-        #   implementation: clean
-        #      - name: frodokem976shake
-        #        implementation: clean
-        #      - name: frodokem1344aes
-        #        implementation: clean
+      - name: frodokem976aes
+        implementation: clean
+      - name: frodokem976shake
+        implementation: clean
+      - name: frodokem1344aes
+        implementation: clean
       - name: frodokem1344shake
         implementation: clean
 

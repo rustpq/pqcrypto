@@ -30,6 +30,7 @@ def render_template(target_dir, target_file, template_file, **templ_vars):
         undefined=jinja2.StrictUndefined,
     )
     env.filters['namespaceize'] = namespaceize
+    env.filters['split'] = lambda x, y: x.split(y)
 
     target_path = os.path.join(target_dir, target_file)
     template = env.get_template(template_file)
@@ -85,6 +86,7 @@ def generate_scheme(name, type, properties):
     render_template(
         target_dir, 'src/lib.rs', 'scheme/src/lib.rs.j2',
         name=name,
+        notes=properties.get('notes', None),
         schemes=properties['schemes'],
     )
 
