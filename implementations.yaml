@@ -24,6 +24,11 @@ kems:
         implementation: clean
       - name: frodokem1344shake
         implementation: clean
+  ntru:
+    version: 0.1.0
+    schemes:
+      - name: ntruhps2048509
+        implementation: clean
 
 signs:
   sphincsplus:
