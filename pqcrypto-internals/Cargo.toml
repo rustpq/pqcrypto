@@ -1,0 +1,12 @@
+[package]
+name = "pqcrypto-internals"
+version = "0.1.0"
+authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.5.0"
+libc = "0.1.0"
+
+[lib]
+crate-type=["staticlib", "cdylib"]

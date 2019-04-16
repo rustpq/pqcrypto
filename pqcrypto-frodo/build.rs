@@ -9,7 +9,6 @@ fn main() {
     let common_files = [
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
-        common_dir.join("randombytes.c"),
         common_dir.join("sha2.c"),
     ];
 
@@ -39,4 +38,5 @@ fn main() {
         .files(scheme_frodokem1344shake_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
         .compile("libfrodo.a");
 
+    println!("cargo:rustc-link-lib=pqcrypto_internals");
 }
