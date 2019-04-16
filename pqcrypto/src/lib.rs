@@ -9,3 +9,7 @@ pub mod kem {
     pub use pqcrypto_kyber::*;
     pub use pqcrypto_frodo::*;
 }
+
+pub mod sign {
+    pub use pqcrypto_sphincsplus::*;
+}

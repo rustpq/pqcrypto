@@ -28,6 +28,7 @@ extern "C" {
 mod test_kyber768_clean {
     use super::*;
     use std::mem;
+
     #[test]
     fn test_ffi() {
         unsafe {
@@ -56,4 +57,5 @@ mod test_kyber768_clean {
             assert_eq!(ss1, ss2);
         }
     }
+
 }

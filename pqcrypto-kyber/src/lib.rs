@@ -13,11 +13,11 @@ pub mod ffi;
 pub mod kyber768;
 
 pub use crate::kyber768::{
-    encapsulate as kyber768_encapsulate,
-    decapsulate as kyber768_decapsulate,
     keypair as kyber768_keypair,
     public_key_bytes as kyber768_public_key_bytes,
     secret_key_bytes as kyber768_secret_key_bytes,
+    encapsulate as kyber768_encapsulate,
+    decapsulate as kyber768_decapsulate,
     ciphertext_bytes as kyber768_ciphertext_bytes,
     shared_secret_bytes as kyber768_shared_secret_bytes,
 };

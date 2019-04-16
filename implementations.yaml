@@ -1,15 +1,15 @@
 ---
 
-version: 0.2.1
+version: 0.3.0
 
 kems:
   kyber:
-    version: 0.1.1
+    version: 0.1.2
     schemes:
       - name: kyber768
         implementation: clean
   frodo:
-    version: 0.1.1
+    version: 0.1.2
     notes: |
       Frodo needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make sure it has
       enough stack space in threads.

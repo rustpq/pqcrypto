@@ -8,8 +8,10 @@
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
-{% if notes %}//! # Notes{% for line in notes|split('\n')|join(' ')|wordwrap(width=70)|split('\n') %}
-//! {{ line }}{% endfor %}
+{% if notes %}//! # Notes
+{% for line in notes|split('\n')|join(' ')|wordwrap(width=70)|split('\n') %}
+//! {{ line }}
+{% endfor %}
 {% endif %}
 
 pub mod ffi;

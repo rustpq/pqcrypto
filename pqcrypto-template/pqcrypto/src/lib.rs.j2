@@ -10,3 +10,9 @@ pub mod kem {
     pub use pqcrypto_{{ kem }}::*;
     {% endfor %}
 }
+
+pub mod sign {
+    {% for sign in signs.keys() %}
+    pub use pqcrypto_{{ sign }}::*;
+    {% endfor %}
+}

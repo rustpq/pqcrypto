@@ -18,7 +18,7 @@
 use std::mem;
 
 use crate::ffi;
-use pqcrypto_traits::kem;
+use pqcrypto_traits::kem as primitive;
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
@@ -35,7 +35,7 @@ macro_rules! simple_struct {
             }
         }
 
-        impl kem::$type for $type {
+        impl primitive::$type for $type {
             /// Get this object as a byte slice
             #[inline]
             fn as_bytes(&self) -> &[u8] {
@@ -51,6 +51,7 @@ macro_rules! simple_struct {
         }
 
         impl PartialEq for $type {
+            /// By no means constant time comparison
             fn eq(&self, other: &Self) -> bool {
                 self.0
                     .iter()

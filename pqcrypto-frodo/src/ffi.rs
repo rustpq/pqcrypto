@@ -76,6 +76,7 @@ extern "C" {
 mod test_frodokem640shake_clean {
     use super::*;
     use std::mem;
+
     #[test]
     fn test_ffi() {
         unsafe {
@@ -104,11 +105,13 @@ mod test_frodokem640shake_clean {
             assert_eq!(ss1, ss2);
         }
     }
+
 }
 #[cfg(test)]
 mod test_frodokem976aes_clean {
     use super::*;
     use std::mem;
+
     #[test]
     fn test_ffi() {
         unsafe {
@@ -137,11 +140,13 @@ mod test_frodokem976aes_clean {
             assert_eq!(ss1, ss2);
         }
     }
+
 }
 #[cfg(test)]
 mod test_frodokem976shake_clean {
     use super::*;
     use std::mem;
+
     #[test]
     fn test_ffi() {
         unsafe {
@@ -170,11 +175,13 @@ mod test_frodokem976shake_clean {
             assert_eq!(ss1, ss2);
         }
     }
+
 }
 #[cfg(test)]
 mod test_frodokem1344aes_clean {
     use super::*;
     use std::mem;
+
     #[test]
     fn test_ffi() {
         unsafe {
@@ -203,11 +210,13 @@ mod test_frodokem1344aes_clean {
             assert_eq!(ss1, ss2);
         }
     }
+
 }
 #[cfg(test)]
 mod test_frodokem1344shake_clean {
     use super::*;
     use std::mem;
+
     #[test]
     fn test_ffi() {
         unsafe {
@@ -236,4 +245,5 @@ mod test_frodokem1344shake_clean {
             assert_eq!(ss1, ss2);
         }
     }
+
 }
