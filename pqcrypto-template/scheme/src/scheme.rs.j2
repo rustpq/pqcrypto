@@ -4,11 +4,12 @@
 //!
 //! # Examples
 //! ```
-//! use pqcrypto_{{ name }}::{{ scheme.name }}::*;
+{% if type == "kem" %}//! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(pk);
 //! let ss2 = decapsulate(ct, sk);
 //! assert!(ss1 == ss2);
+{% endif %}
 //! ```
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
@@ -18,7 +19,11 @@
 use std::mem;
 
 use crate::ffi;
-use pqcrypto_traits::kem;
+{% if type == "kem" %}
+use pqcrypto_traits::kem as primitive;
+{% else %}
+use pqcrypto_traits::sign as primitive;
+{% endif %}
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
@@ -35,7 +40,7 @@ macro_rules! simple_struct {
             }
         }
 
-        impl kem::$type for $type {
+        impl primitive::$type for $type {
             /// Get this object as a byte slice
             #[inline]
             fn as_bytes(&self) -> &[u8] {
@@ -51,6 +56,7 @@ macro_rules! simple_struct {
         }
 
         impl PartialEq for $type {
+            /// By no means constant time comparison
             fn eq(&self, other: &Self) -> bool {
                 self.0
                     .iter()
@@ -66,11 +72,64 @@ macro_rules! simple_struct {
 
 simple_struct!(PublicKey, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES);
 simple_struct!(SecretKey, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES);
+{% if type == "kem" %}
 simple_struct!(
     Ciphertext,
     ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES
 );
 simple_struct!(SharedSecret, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
+{% else %}
+pub struct DetachedSignature([u8; ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES], usize);
+
+impl DetachedSignature {
+    fn new() -> Self {
+        DetachedSignature(
+            unsafe { mem::uninitialized() },
+            0
+        )
+    }
+}
+
+impl primitive::DetachedSignature for DetachedSignature {
+    /// Get this object as a byte slice
+    #[inline]
+    fn as_bytes(&self) -> &[u8] {
+        &self.0[..self.1]
+    }
+
+    #[inline]
+    fn from_bytes(bytes: &[u8]) -> Self {
+        debug_assert!(bytes.len() <= ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
+        let mut array: [u8; ffi::PQCLEAN_{{NS_NAME}}_CRYPTO_BYTES] = unsafe { mem::uninitialized() };
+        array.copy_from_slice(bytes);
+        DetachedSignature(array, bytes.len())
+    }
+}
+
+
+pub struct SignedMessage(Vec<u8>);
+impl primitive::SignedMessage for SignedMessage {
+    /// Get this object as a byte slice
+    #[inline]
+    fn as_bytes(&self) -> &[u8] {
+        &self.0.as_slice()
+    }
+
+    /// Construct this object from a byte slice
+    #[inline]
+    fn from_bytes(bytes: &[u8]) -> Self {
+        SignedMessage(bytes.to_vec())
+    }
+}
+
+impl SignedMessage {
+    pub fn len(&self) -> usize {
+        let len = self.0.len();
+        debug_assert!(len > signature_bytes());
+        len
+    }
+}
+{% endif %}
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
@@ -82,6 +141,7 @@ pub const fn secret_key_bytes() -> usize {
     ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES
 }
 
+{% if type == "kem" %}
 /// Get the number of bytes for the encapsulated ciphertext
 pub const fn ciphertext_bytes() -> usize {
     ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES
@@ -91,6 +151,12 @@ pub const fn ciphertext_bytes() -> usize {
 pub const fn shared_secret_bytes() -> usize {
     ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES
 }
+{% else %}
+/// Get the number of bytes that a signature occupies
+pub const fn signature_bytes() -> usize {
+    ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES
+}
+{% endif %}
 
 /// Generate a {{ scheme.name }} keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
@@ -98,13 +164,18 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     let mut sk = SecretKey::new();
     assert_eq!(
         unsafe {
+            {% if type == "kem" %}
             ffi::PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
+            {% else %}
+            ffi::PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
+            {% endif %}
         },
         0
     );
     (pk, sk)
 }
 
+{% if type == "kem" %}
 /// Encapsulate to a {{ scheme.name }} public key
 pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ss = SharedSecret::new();
@@ -139,11 +210,72 @@ pub fn decapsulate(ct: Ciphertext, sk: SecretKey) -> SharedSecret {
     );
     ss
 }
+{% else %}
+pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
+    let max_len = msg.len() + signature_bytes();
+    let mut signed_msg = Vec::with_capacity(max_len);
+    let mut smlen: usize = 0;
+    unsafe {
+        ffi::PQCLEAN_{{ NS_NAME }}_crypto_sign(
+            signed_msg.as_mut_ptr(), &mut smlen as *mut usize,
+            msg.as_ptr(), msg.len(),
+            sk.0.as_ptr()
+        );
+        debug_assert!(smlen <= max_len, "exceeded Vec capacity");
+        signed_msg.set_len(smlen);
+    }
+    SignedMessage(signed_msg)
+}
+
+pub fn open(sm: &SignedMessage, pk: &PublicKey) -> Option<Vec<u8>> {
+    let mut m: Vec<u8> = Vec::with_capacity(sm.len());
+    let mut mlen: usize = 0;
+    unsafe {
+        let res = ffi::PQCLEAN_{{ NS_NAME }}_crypto_sign_open(
+            m.as_mut_ptr(), &mut mlen as *mut usize,
+            sm.0.as_ptr(), sm.len(),
+            pk.0.as_ptr()
+        );
+        if res != 0 {
+            return None;
+        }
+        m.set_len(mlen);
+    }
+    Some(m)
+}
+
+pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
+    let mut sig = DetachedSignature::new();
+    unsafe {
+        ffi::PQCLEAN_{{ NS_NAME }}_crypto_sign_signature(
+            sig.0.as_mut_ptr(), &mut sig.1 as *mut usize,
+            msg.as_ptr(), msg.len(),
+            sk.0.as_ptr()
+        );
+    }
+    sig
+}
+
+pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> bool {
+    unsafe {
+        ffi::PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
+            sig.0.as_ptr(), sig.1,
+            msg.as_ptr(), msg.len(),
+            pk.0.as_ptr()
+        ) == 0
+    }
+}
+
+{% endif %}
 
 #[cfg(test)]
 mod test {
     use super::*;
+{% if type == "sign" %}
+    use rand::prelude::*;
+{% endif %}
 
+{% if type == "kem" %}
     #[test]
     pub fn test_kem() {
         let (pk, sk) = keypair();
@@ -151,4 +283,29 @@ mod test {
         let ss2 = decapsulate(ct, sk);
         assert!(ss1.0 == ss2.0, "Difference in shared secrets!");
     }
+{% else %}
+    #[test]
+    pub fn test_sign() {
+        let mut rng = rand::thread_rng();
+        let len: u16 = rng.gen();
+
+        let message = (0..len).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
+        let (pk, sk) = keypair();
+        let sm = sign(&message, &sk);
+        let verifiedmsg = open(&sm, &pk).unwrap();
+        assert!(verifiedmsg == message);
+    }
+
+    #[test]
+    pub fn test_sign_detached() {
+        let mut rng = rand::thread_rng();
+        let len: u16 = rng.gen();
+        let message = (0..len).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
+
+        let (pk, sk) = keypair();
+        let sig = detached_sign(&message, &sk);
+        assert!(verify_detached_signature(&sig, &message, &pk));
+        assert!(!verify_detached_signature(&sig, &message[..message.len()-1], &pk));
+    }
+{% endif %}
 }

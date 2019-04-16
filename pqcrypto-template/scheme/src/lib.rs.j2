@@ -15,17 +15,22 @@
 pub mod ffi;
 
 {% for scheme in schemes %}
-pub mod {{ scheme.name }};
+pub mod {{ scheme.name|nameize }};
 {% endfor %}
 
 {% for scheme in schemes %}
-pub use crate::{{ scheme.name }}::{
-    encapsulate as {{ scheme.name }}_encapsulate,
-    decapsulate as {{ scheme.name }}_decapsulate,
-    keypair as {{ scheme.name }}_keypair,
-    public_key_bytes as {{ scheme.name }}_public_key_bytes,
-    secret_key_bytes as {{ scheme.name }}_secret_key_bytes,
-    ciphertext_bytes as {{ scheme.name }}_ciphertext_bytes,
-    shared_secret_bytes as {{ scheme.name }}_shared_secret_bytes,
+{% set scheme_name = scheme.name|nameize %}
+pub use crate::{{ scheme_name }}::{
+    keypair as {{ scheme_name }}_keypair,
+    public_key_bytes as {{ scheme_name }}_public_key_bytes,
+    secret_key_bytes as {{ scheme_name }}_secret_key_bytes,
+    {% if type == "kem" %}
+    encapsulate as {{ scheme_name }}_encapsulate,
+    decapsulate as {{ scheme_name }}_decapsulate,
+    ciphertext_bytes as {{ scheme_name }}_ciphertext_bytes,
+    shared_secret_bytes as {{ scheme_name }}_shared_secret_bytes,
+    {% else %}
+    signature_bytes as {{ scheme_name }}_signature_bytes,
+    {% endif %}
 };
 {% endfor %}

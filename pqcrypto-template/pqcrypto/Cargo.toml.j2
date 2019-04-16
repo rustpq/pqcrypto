@@ -12,6 +12,6 @@ categories = ["cryptography"]
 
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.1.0" }
-{% for (name, props) in kems.items() %}
+{% for (name, props) in kems.items()|list + signs.items()|list %}
 pqcrypto-{{ name }} = { path = "../pqcrypto-{{ name }}", version = "{{ props.version }}" }
 {% endfor %}

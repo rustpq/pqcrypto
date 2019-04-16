@@ -1,6 +1,6 @@
 [package]
 name = "pqcrypto-{{ name }}"
-description = "Post-Quantum {{ type }} {{ name }}"
+description = "Post-Quantum {% if type == "kem" %}Key-Encapsulation Mechanism{% else %}Signature Scheme{% endif %} {{ name }}"
 version = "{{ version }}"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
@@ -13,6 +13,11 @@ categories = ["cryptography"]
 [dependencies]
 pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.1.0" }
 libc = "0.2.0"
+
+[dev-dependencies]
+{% if type == "sign" %}
+rand = "0.5.0"
+{% endif %}
 
 [build-dependencies]
 cc = { version = "1.0" }

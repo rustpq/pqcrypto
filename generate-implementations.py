@@ -21,6 +21,10 @@ def read_scheme_metadata(type, scheme_name):
     return metadata
 
 
+def nameize(value):
+    return re.sub(r'[^a-z0-9]', '', value)
+
+
 def render_template(target_dir, target_file, template_file, **templ_vars):
     def namespaceize(value):
         return re.sub(r'(\s|[-_])', '', value).upper()
@@ -32,6 +36,7 @@ def render_template(target_dir, target_file, template_file, **templ_vars):
         lstrip_blocks=True,
     )
     env.filters['namespaceize'] = namespaceize
+    env.filters['nameize'] = nameize
     env.filters['split'] = lambda x, y: x.split(y)
 
     target_path = os.path.join(target_dir, target_file)
@@ -43,7 +48,10 @@ def generate_scheme(name, type, properties):
     """Schemes: list of dicts from yaml"""
     target_dir = f"pqcrypto-{name}"
     src_dir = os.path.join(target_dir, "src")
-    shutil.rmtree(target_dir)
+    try:
+        shutil.rmtree(target_dir)
+    except FileNotFoundError:
+        pass
     os.makedirs(src_dir)
     try:
         os.symlink(os.path.join('..', 'pqclean'),
@@ -72,6 +80,7 @@ def generate_scheme(name, type, properties):
 
     render_template(
         target_dir, 'src/ffi.rs', 'scheme/src/ffi.rs.j2',
+        type=type,
         name=name,
         metadatas=metadatas,
         schemes=properties['schemes']
@@ -79,8 +88,9 @@ def generate_scheme(name, type, properties):
 
     for scheme in properties['schemes']:
         render_template(
-            target_dir, f"src/{ scheme['name'] }.rs",
+            target_dir, f"src/{ nameize(scheme['name']) }.rs",
             "scheme/src/scheme.rs.j2",
+            type=type,
             name=name,
             scheme=scheme,
         )
@@ -88,6 +98,7 @@ def generate_scheme(name, type, properties):
     render_template(
         target_dir, 'src/lib.rs', 'scheme/src/lib.rs.j2',
         name=name,
+        type=type,
         notes=properties.get('notes', None),
         schemes=properties['schemes'],
     )
@@ -103,16 +114,20 @@ def generate_pqcrypto_crate(implementations):
         target_dir, 'Cargo.toml', "pqcrypto/Cargo.toml.j2",
         version=version,
         kems=implementations['kems'],
+        signs=implementations['signs'],
     )
     render_template(
         target_dir, 'src/lib.rs', 'pqcrypto/src/lib.rs.j2',
         kems=implementations['kems'],
+        signs=implementations['signs'],
     )
 
 
 def generate_cargo_workspace(implementations):
     names = []
     for name in implementations['kems'].keys():
+        names.append(f'pqcrypto-{name}')
+    for name in implementations['signs'].keys():
         names.append(f'pqcrypto-{name}')
 
     render_template(
@@ -125,6 +140,8 @@ if __name__ == "__main__":
     implementations = read_yaml()
     for (name, properties) in implementations['kems'].items():
         generate_scheme(name, 'kem', properties)
+    for (name, properties) in implementations['signs'].items():
+        generate_scheme(name, 'sign', properties)
 
     generate_cargo_workspace(implementations)
     generate_pqcrypto_crate(implementations)
