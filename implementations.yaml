@@ -25,4 +25,11 @@ kems:
       - name: frodokem1344shake
         implementation: clean
 
+signs:
+  sphincsplus:
+    version: 0.1.0
+    schemes:
+      - name: sphincs-shake256-128f-simple
+        implementation: clean
+
 #  vim: set ft=yaml ts=2 sw=2 tw=0 et :

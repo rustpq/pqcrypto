@@ -5,4 +5,5 @@ members=[
     "pqcrypto-traits",
     "pqcrypto-kyber",
     "pqcrypto-frodo",
+    "pqcrypto-sphincsplus",
 ]
