@@ -145,3 +145,4 @@ if __name__ == "__main__":
 
     generate_cargo_workspace(implementations)
     generate_pqcrypto_crate(implementations)
+    os.system("cargo fmt")

@@ -13,11 +13,9 @@ pub mod ffi;
 pub mod ntruhps2048509;
 
 pub use crate::ntruhps2048509::{
-    keypair as ntruhps2048509_keypair,
+    ciphertext_bytes as ntruhps2048509_ciphertext_bytes, decapsulate as ntruhps2048509_decapsulate,
+    encapsulate as ntruhps2048509_encapsulate, keypair as ntruhps2048509_keypair,
     public_key_bytes as ntruhps2048509_public_key_bytes,
     secret_key_bytes as ntruhps2048509_secret_key_bytes,
-    encapsulate as ntruhps2048509_encapsulate,
-    decapsulate as ntruhps2048509_decapsulate,
-    ciphertext_bytes as ntruhps2048509_ciphertext_bytes,
     shared_secret_bytes as ntruhps2048509_shared_secret_bytes,
 };

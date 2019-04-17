@@ -3,7 +3,6 @@ extern crate glob;
 
 use std::path::Path;
 
-
 fn main() {
     let common_dir = Path::new("pqclean/common");
     let common_files = [
@@ -13,13 +12,18 @@ fn main() {
     ];
 
     let target_kyber768_dir = Path::new("pqclean/crypto_kem/kyber768/clean");
-    let scheme_kyber768_files = glob::glob(target_kyber768_dir.join("*.c").to_str().unwrap()).unwrap();
+    let scheme_kyber768_files =
+        glob::glob(target_kyber768_dir.join("*.c").to_str().unwrap()).unwrap();
     cc::Build::new()
         .include("pqclean/common")
         .flag("-std=c99")
         .files(common_files.into_iter())
         .include(target_kyber768_dir)
-        .files(scheme_kyber768_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
+        .files(
+            scheme_kyber768_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        )
         .compile("libkyber.a");
 
     println!("cargo:rustc-link-lib=pqcrypto_internals");

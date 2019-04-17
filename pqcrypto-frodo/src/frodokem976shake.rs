@@ -22,6 +22,7 @@ use pqcrypto_traits::kem as primitive;
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
+        #[derive(Clone)]
         pub struct $type([u8; $size]);
 
         impl $type {
@@ -63,14 +64,22 @@ macro_rules! simple_struct {
     };
 }
 
-
-simple_struct!(PublicKey, ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES);
-simple_struct!(SecretKey, ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES);
+simple_struct!(
+    PublicKey,
+    ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES
+);
+simple_struct!(
+    SecretKey,
+    ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES
+);
 simple_struct!(
     Ciphertext,
     ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES
 );
-simple_struct!(SharedSecret, ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_BYTES);
+simple_struct!(
+    SharedSecret,
+    ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_BYTES
+);
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
@@ -98,7 +107,10 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     let mut sk = SecretKey::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
+            ffi::PQCLEAN_FRODOKEM976SHAKE_CLEAN_crypto_kem_keypair(
+                pk.0.as_mut_ptr(),
+                sk.0.as_mut_ptr(),
+            )
         },
         0
     );

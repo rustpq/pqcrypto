@@ -1,5 +1,5 @@
-use rand::prelude::*;
 use libc;
+use rand::prelude::*;
 
 #[no_mangle]
 pub extern "C" fn randombytes(buf: *mut libc::uint8_t, xlen: libc::size_t) -> libc::c_int {

@@ -17,6 +17,7 @@ use pqcrypto_traits::sign as primitive;
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
+        #[derive(Clone)]
         pub struct $type([u8; $size]);
 
         impl $type {
@@ -58,17 +59,23 @@ macro_rules! simple_struct {
     };
 }
 
-
-simple_struct!(PublicKey, ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES);
-simple_struct!(SecretKey, ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES);
-pub struct DetachedSignature([u8; ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES], usize);
+simple_struct!(
+    PublicKey,
+    ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES
+);
+simple_struct!(
+    SecretKey,
+    ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES
+);
+#[derive(Clone)]
+pub struct DetachedSignature(
+    [u8; ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES],
+    usize,
+);
 
 impl DetachedSignature {
     fn new() -> Self {
-        DetachedSignature(
-            unsafe { mem::uninitialized() },
-            0
-        )
+        DetachedSignature(unsafe { mem::uninitialized() }, 0)
     }
 }
 
@@ -82,13 +89,14 @@ impl primitive::DetachedSignature for DetachedSignature {
     #[inline]
     fn from_bytes(bytes: &[u8]) -> Self {
         debug_assert!(bytes.len() <= ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES);
-        let mut array: [u8; ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES] = unsafe { mem::uninitialized() };
+        let mut array: [u8; ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES] =
+            unsafe { mem::uninitialized() };
         array.copy_from_slice(bytes);
         DetachedSignature(array, bytes.len())
     }
 }
 
-
+#[derive(Clone)]
 pub struct SignedMessage(Vec<u8>);
 impl primitive::SignedMessage for SignedMessage {
     /// Get this object as a byte slice
@@ -133,7 +141,10 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     let mut sk = SecretKey::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
+            ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_keypair(
+                pk.0.as_mut_ptr(),
+                sk.0.as_mut_ptr(),
+            )
         },
         0
     );
@@ -146,9 +157,11 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     let mut smlen: usize = 0;
     unsafe {
         ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign(
-            signed_msg.as_mut_ptr(), &mut smlen as *mut usize,
-            msg.as_ptr(), msg.len(),
-            sk.0.as_ptr()
+            signed_msg.as_mut_ptr(),
+            &mut smlen as *mut usize,
+            msg.as_ptr(),
+            msg.len(),
+            sk.0.as_ptr(),
         );
         debug_assert!(smlen <= max_len, "exceeded Vec capacity");
         signed_msg.set_len(smlen);
@@ -156,45 +169,63 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     SignedMessage(signed_msg)
 }
 
-pub fn open(sm: &SignedMessage, pk: &PublicKey) -> Option<Vec<u8>> {
+#[must_use]
+pub fn open(sm: &SignedMessage, pk: &PublicKey) -> Result<Vec<u8>, primitive::VerificationError> {
     let mut m: Vec<u8> = Vec::with_capacity(sm.len());
     let mut mlen: usize = 0;
-    unsafe {
-        let res = ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_open(
-            m.as_mut_ptr(), &mut mlen as *mut usize,
-            sm.0.as_ptr(), sm.len(),
-            pk.0.as_ptr()
-        );
-        if res != 0 {
-            return None;
+    match unsafe {
+        ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_open(
+            m.as_mut_ptr(),
+            &mut mlen as *mut usize,
+            sm.0.as_ptr(),
+            sm.len(),
+            pk.0.as_ptr(),
+        )
+    } {
+        0 => {
+            unsafe { m.set_len(mlen) };
+            Ok(m)
         }
-        m.set_len(mlen);
+        -1 => Err(primitive::VerificationError::InvalidSignature),
+        _ => Err(primitive::VerificationError::UnknownVerificationError),
     }
-    Some(m)
 }
 
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     let mut sig = DetachedSignature::new();
     unsafe {
         ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_signature(
-            sig.0.as_mut_ptr(), &mut sig.1 as *mut usize,
-            msg.as_ptr(), msg.len(),
-            sk.0.as_ptr()
+            sig.0.as_mut_ptr(),
+            &mut sig.1 as *mut usize,
+            msg.as_ptr(),
+            msg.len(),
+            sk.0.as_ptr(),
         );
     }
     sig
 }
 
-pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> bool {
-    unsafe {
+#[must_use]
+pub fn verify_detached_signature(
+    sig: &DetachedSignature,
+    msg: &[u8],
+    pk: &PublicKey,
+) -> Result<(), primitive::VerificationError> {
+    let res = unsafe {
         ffi::PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_verify(
-            sig.0.as_ptr(), sig.1,
-            msg.as_ptr(), msg.len(),
-            pk.0.as_ptr()
-        ) == 0
+            sig.0.as_ptr(),
+            sig.1,
+            msg.as_ptr(),
+            msg.len(),
+            pk.0.as_ptr(),
+        )
+    };
+    match res {
+        0 => Ok(()),
+        -1 => Err(primitive::VerificationError::InvalidSignature),
+        _ => Err(primitive::VerificationError::UnknownVerificationError),
     }
 }
-
 
 #[cfg(test)]
 mod test {
@@ -221,7 +252,7 @@ mod test {
 
         let (pk, sk) = keypair();
         let sig = detached_sign(&message, &sk);
-        assert!(verify_detached_signature(&sig, &message, &pk));
-        assert!(!verify_detached_signature(&sig, &message[..message.len()-1], &pk));
+        assert!(verify_detached_signature(&sig, &message, &pk).is_ok());
+        assert!(!verify_detached_signature(&sig, &message[..message.len() - 1], &pk).is_ok());
     }
 }

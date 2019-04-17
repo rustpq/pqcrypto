@@ -22,6 +22,7 @@ use pqcrypto_traits::kem as primitive;
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
+        #[derive(Clone)]
         pub struct $type([u8; $size]);
 
         impl $type {
@@ -62,7 +63,6 @@ macro_rules! simple_struct {
         }
     };
 }
-
 
 simple_struct!(PublicKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES);
 simple_struct!(SecretKey, ffi::PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES);
