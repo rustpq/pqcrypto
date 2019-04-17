@@ -2,7 +2,7 @@
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
-//! # Examples
+//! # Example
 //! ```
 //! use pqcrypto_ntru::ntruhps2048509::*;
 //! let (pk, sk) = keypair();

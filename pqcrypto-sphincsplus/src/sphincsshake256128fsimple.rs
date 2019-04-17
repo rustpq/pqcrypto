@@ -2,8 +2,14 @@
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
-//! # Examples
+//! # Example
 //! ```
+//! use pqcrypto_sphincsplus::sphincsshake256128fsimple::*;
+//! let message = vec![0, 1, 2, 3, 4, 5];
+//! let (pk, sk) = keypair();
+//! let sm = sign(&message, &sk);
+//! let verifiedmsg = open(&sm, &pk).unwrap();
+//! assert!(verifiedmsg == message);
 //! ```
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/

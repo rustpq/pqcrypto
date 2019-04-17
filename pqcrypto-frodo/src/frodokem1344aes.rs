@@ -2,7 +2,7 @@
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
-//! # Examples
+//! # Example
 //! ```
 //! use pqcrypto_frodo::frodokem1344aes::*;
 //! let (pk, sk) = keypair();

@@ -2,13 +2,21 @@
 //!
 //! These bindings use the {{ scheme.implementation }} version from [PQClean][pqc]
 //!
-//! # Examples
+//! # Example
 //! ```
-{% if type == "kem" %}//! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
+{% if type == "kem" %}
+//! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(pk);
 //! let ss2 = decapsulate(ct, sk);
 //! assert!(ss1 == ss2);
+{% else %}
+//! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
+//! let message = vec![0, 1, 2, 3, 4, 5];
+//! let (pk, sk) = keypair();
+//! let sm = sign(&message, &sk);
+//! let verifiedmsg = open(&sm, &pk).unwrap();
+//! assert!(verifiedmsg == message);
 {% endif %}
 //! ```
 //!
