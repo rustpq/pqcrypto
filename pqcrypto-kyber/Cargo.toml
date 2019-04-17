@@ -1,7 +1,7 @@
 [package]
 name = "pqcrypto-kyber"
 description = "Post-Quantum Key-Encapsulation Mechanism kyber"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"

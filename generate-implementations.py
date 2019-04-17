@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Generates the implementations based on ``implementations.yaml``"""
 
 import yaml
@@ -62,6 +63,8 @@ def generate_scheme(name, type, properties):
 
     render_template(
         target_dir, 'Cargo.toml', 'scheme/Cargo.toml.j2',
+        traits_version=implementations['traits_version'],
+        internals_version=implementations['internals_version'],
         name=name,
         type=type,
         version=properties['version'],
@@ -105,7 +108,7 @@ def generate_scheme(name, type, properties):
 
 
 def generate_pqcrypto_crate(implementations):
-    version = implementations['version']
+    version = implementations['pqcrypto_version']
     target_dir = 'pqcrypto'
     shutil.rmtree(target_dir)
     os.makedirs(os.path.join(target_dir, 'src'))
@@ -113,6 +116,7 @@ def generate_pqcrypto_crate(implementations):
     render_template(
         target_dir, 'Cargo.toml', "pqcrypto/Cargo.toml.j2",
         version=version,
+        traits_version=implementations['traits_version'],
         kems=implementations['kems'],
         signs=implementations['signs'],
     )

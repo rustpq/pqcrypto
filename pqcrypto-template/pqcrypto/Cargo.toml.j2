@@ -11,7 +11,7 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
-pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.2.0" }
+pqcrypto-traits = { path = "../pqcrypto-traits", version = "{{ traits_version }}" }
 {% for (name, props) in kems.items()|list + signs.items()|list %}
 pqcrypto-{{ name }} = { path = "../pqcrypto-{{ name }}", version = "{{ props.version }}" }
 {% endfor %}
