@@ -11,7 +11,7 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
-pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.1.0" }
+pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.2.0" }
 pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.1.2" }
 pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.1.2" }
 pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.1.0" }
