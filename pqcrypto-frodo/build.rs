@@ -14,6 +14,9 @@ fn main() {
     let target_frodokem640shake_dir = Path::new("pqclean/crypto_kem/frodokem640shake/clean");
     let scheme_frodokem640shake_files =
         glob::glob(target_frodokem640shake_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_frodokem640aes_dir = Path::new("pqclean/crypto_kem/frodokem640aes/clean");
+    let scheme_frodokem640aes_files =
+        glob::glob(target_frodokem640aes_dir.join("*.c").to_str().unwrap()).unwrap();
     let target_frodokem976aes_dir = Path::new("pqclean/crypto_kem/frodokem976aes/clean");
     let scheme_frodokem976aes_files =
         glob::glob(target_frodokem976aes_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -29,10 +32,17 @@ fn main() {
     cc::Build::new()
         .include("pqclean/common")
         .flag("-std=c99")
+        .flag("-O3")
         .files(common_files.into_iter())
         .include(target_frodokem640shake_dir)
         .files(
             scheme_frodokem640shake_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        )
+        .include(target_frodokem640aes_dir)
+        .files(
+            scheme_frodokem640aes_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )

@@ -13,7 +13,7 @@ use libc::c_int;
 {% set metadata = metadatas[scheme.name] %}
 {% set implementation_data = metadata['implementations']|selectattr('name', 'eq', scheme.implementation)|first %}
 {% set NS_NAME = [scheme.name|namespaceize, scheme.implementation|namespaceize]|join('_') %}
-pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES: usize = {{ implementation_data['length-secret-key'] }};
+pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES: usize = {{ metadata['length-secret-key'] }};
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['length-public-key'] }};
 {% if type == "kem" %}
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES: usize = {{ metadata['length-ciphertext'] }};

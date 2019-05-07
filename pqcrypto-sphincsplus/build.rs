@@ -23,6 +23,7 @@ fn main() {
     cc::Build::new()
         .include("pqclean/common")
         .flag("-std=c99")
+        .flag("-O3")
         .files(common_files.into_iter())
         .include(target_sphincsshake256128fsimple_dir)
         .files(

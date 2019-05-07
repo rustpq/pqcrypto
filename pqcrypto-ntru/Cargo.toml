@@ -1,12 +1,12 @@
 [package]
 name = "pqcrypto-ntru"
 description = "Post-Quantum Key-Encapsulation Mechanism ntru"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"
-repository = "https://github.com/rustpq/pqclean/"
+repository = "https://github.com/rustpq/pqcrypto/"
 keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 

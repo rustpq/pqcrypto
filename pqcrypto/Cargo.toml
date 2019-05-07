@@ -1,18 +1,18 @@
 [package]
 name = "pqcrypto"
 description = "Post-Quantum cryptographic primitives"
-version = "0.3.1"
+version = "0.4.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"
-repository = "https://github.com/rustpq/pqclean/"
+repository = "https://github.com/rustpq/pqcrypto/"
 keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.2.0" }
-pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.1.3" }
-pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.1.3" }
-pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.1.0" }
+pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.2.0" }
+pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.2.0" }
+pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.2.0" }
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.2.0" }
