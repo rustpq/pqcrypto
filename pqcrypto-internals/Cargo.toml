@@ -4,6 +4,7 @@ description = "Provides safe API functions to the PQCRYPTO traits"
 version = "0.1.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
+repository = "https://github.com/rustpq/pqcrypto/"
 license = "CC0-1.0"
 
 [dependencies]
