@@ -1,12 +1,12 @@
 ---
 
-pqcrypto_version: 0.4.0
+pqcrypto_version: 0.4.1
 traits_version: 0.2.0
 internals_version: 0.1.0
 
 kems:
   kyber:
-    version: 0.2.0
+    version: 0.2.1
     schemes:
       - name: kyber512
         implementation: clean
@@ -15,7 +15,7 @@ kems:
       - name: kyber1024
         implementation: clean
   frodo:
-    version: 0.2.0
+    version: 0.2.1
     notes: |
       Frodo needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make sure it has
       enough stack space in threads.
@@ -33,7 +33,7 @@ kems:
       - name: frodokem1344shake
         implementation: clean
   ntru:
-    version: 0.2.0
+    version: 0.2.1
     schemes:
       - name: ntruhps2048509
         implementation: clean
@@ -46,9 +46,78 @@ kems:
 
 signs:
   sphincsplus:
-    version: 0.2.0
+    version: 0.3.0
     schemes:
+      - name: sphincs-haraka-128s-simple
+        implementation: clean
+      - name: sphincs-haraka-128s-robust
+        implementation: clean
+      - name: sphincs-haraka-128f-simple
+        implementation: clean
+      - name: sphincs-haraka-128f-robust
+        implementation: clean
+      - name: sphincs-haraka-192s-simple
+        implementation: clean
+      - name: sphincs-haraka-192s-robust
+        implementation: clean
+      - name: sphincs-haraka-192f-simple
+        implementation: clean
+      - name: sphincs-haraka-192f-robust
+        implementation: clean
+      - name: sphincs-haraka-256s-simple
+        implementation: clean
+      - name: sphincs-haraka-256s-robust
+        implementation: clean
+      - name: sphincs-haraka-256f-simple
+        implementation: clean
+      - name: sphincs-haraka-256f-robust
+        implementation: clean
+      - name: sphincs-shake256-128s-simple
+        implementation: clean
+      - name: sphincs-shake256-128s-robust
+        implementation: clean
       - name: sphincs-shake256-128f-simple
         implementation: clean
-
+      - name: sphincs-shake256-128f-robust
+        implementation: clean
+      - name: sphincs-shake256-192s-simple
+        implementation: clean
+      - name: sphincs-shake256-192s-robust
+        implementation: clean
+      - name: sphincs-shake256-192f-simple
+        implementation: clean
+      - name: sphincs-shake256-192f-robust
+        implementation: clean
+      - name: sphincs-shake256-256s-simple
+        implementation: clean
+      - name: sphincs-shake256-256s-robust
+        implementation: clean
+      - name: sphincs-shake256-256f-simple
+        implementation: clean
+      - name: sphincs-shake256-256f-robust
+        implementation: clean
+      - name: sphincs-sha256-128s-simple
+        implementation: clean
+      - name: sphincs-sha256-128s-robust
+        implementation: clean
+      - name: sphincs-sha256-128f-simple
+        implementation: clean
+      - name: sphincs-sha256-128f-robust
+        implementation: clean
+      - name: sphincs-sha256-192s-simple
+        implementation: clean
+      - name: sphincs-sha256-192s-robust
+        implementation: clean
+      - name: sphincs-sha256-192f-simple
+        implementation: clean
+      - name: sphincs-sha256-192f-robust
+        implementation: clean
+      - name: sphincs-sha256-256s-simple
+        implementation: clean
+      - name: sphincs-sha256-256s-robust
+        implementation: clean
+      - name: sphincs-sha256-256f-simple
+        implementation: clean
+      - name: sphincs-sha256-256f-robust
+        implementation: clean
 #  vim: set ft=yaml ts=2 sw=2 tw=0 et :

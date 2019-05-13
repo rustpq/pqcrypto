@@ -53,6 +53,4 @@ fn main() {
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
         .compile("libntru.a");
-
-    println!("cargo:rustc-link-lib=pqcrypto_internals");
 }

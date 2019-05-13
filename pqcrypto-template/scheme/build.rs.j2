@@ -26,6 +26,4 @@ fn main() {
         .files(scheme_{{ scheme.name|nameize }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
         {% endfor %}
         .compile("lib{{ name }}.a");
-
-    println!("cargo:rustc-link-lib=pqcrypto_internals");
 }
