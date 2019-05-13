@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.4.1
+pqcrypto_version: 0.4.2
 traits_version: 0.2.0
 internals_version: 0.1.0
 
@@ -46,7 +46,7 @@ kems:
 
 signs:
   sphincsplus:
-    version: 0.3.0
+    version: 0.3.1
     schemes:
       - name: sphincs-haraka-128s-simple
         implementation: clean
@@ -120,4 +120,5 @@ signs:
         implementation: clean
       - name: sphincs-sha256-256f-robust
         implementation: clean
+
 #  vim: set ft=yaml ts=2 sw=2 tw=0 et :

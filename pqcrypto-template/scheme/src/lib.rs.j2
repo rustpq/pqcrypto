@@ -33,6 +33,10 @@ pub use crate::{{ scheme_name }}::{
     shared_secret_bytes as {{ scheme_name }}_shared_secret_bytes,
     {% else %}
     signature_bytes as {{ scheme_name }}_signature_bytes,
+    sign as {{ scheme_name }}_sign,
+    open as {{ scheme_name }}_open,
+    detached_sign as {{ scheme_name }}_detached_sign,
+    verify_detached_signature as {{ scheme_name }}_verify_detached_signature,
     {% endif %}
 };
 {% endfor %}
