@@ -46,7 +46,9 @@ kems:
 
 signs:
   sphincsplus:
-    version: 0.3.1
+    version: 0.3.2
+    notes: |
+      The SHA2 and Haraka versions are not thread safe!
     schemes:
       - name: sphincs-haraka-128s-simple
         implementation: clean

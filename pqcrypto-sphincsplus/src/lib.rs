@@ -42,6 +42,8 @@
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
+//! # Notes
+//! The SHA2 and Haraka versions are not thread safe!
 
 pub mod ffi;
 

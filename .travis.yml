@@ -7,3 +7,7 @@ rust:
   - stable
   - beta
   - nightly
+
+script:
+  - cargo build
+  - cargo test -- --test-threads 1
