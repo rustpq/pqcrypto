@@ -21,3 +21,7 @@ libc = "0.2.0"
 [build-dependencies]
 cc = { version = "1.0" }
 glob = "0.3.0"
+
+[badges]
+travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
+maintenance = { status = "actively-maintained" }

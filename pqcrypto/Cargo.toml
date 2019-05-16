@@ -17,3 +17,7 @@ pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.2.2" }
 pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.2.2" }
 pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.2.2" }
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.3.2" }
+
+[badges]
+travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
+maintenance = { status = "actively-maintained" }
