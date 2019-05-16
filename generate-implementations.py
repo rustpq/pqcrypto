@@ -106,6 +106,14 @@ def generate_scheme(name, type, properties):
         schemes=properties['schemes'],
     )
 
+    render_template(
+        target_dir, 'README.md', 'scheme/README.md.j2',
+        name=name,
+        type=type,
+        notes=properties.get('notes', None),
+        schemes=properties['schemes'],
+    )
+
 
 def generate_pqcrypto_crate(implementations):
     version = implementations['pqcrypto_version']
@@ -122,6 +130,11 @@ def generate_pqcrypto_crate(implementations):
     )
     render_template(
         target_dir, 'src/lib.rs', 'pqcrypto/src/lib.rs.j2',
+        kems=implementations['kems'],
+        signs=implementations['signs'],
+    )
+    render_template(
+        target_dir, 'README.md', 'pqcrypto/README.md.j2',
         kems=implementations['kems'],
         signs=implementations['signs'],
     )

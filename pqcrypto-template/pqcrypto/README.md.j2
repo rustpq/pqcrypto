@@ -1,0 +1,14 @@
+# Bindings to Post-Quantum cryptographic algorithms
+
+This superproject contains the following cryptographic algorithms:
+
+## Key-Encapsulation Mechanisms
+
+{% for (name, props) in kems.items()|list %}
+* [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}})
+{% endfor %}
+
+## Signature Schemes
+{% for (name, props) in signs.items()|list %}
+* [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}})
+{% endfor %}

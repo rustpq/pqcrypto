@@ -1,12 +1,12 @@
 ---
 
-pqcrypto_version: 0.4.2
+pqcrypto_version: 0.4.3
 traits_version: 0.2.0
 internals_version: 0.1.0
 
 kems:
   kyber:
-    version: 0.2.1
+    version: 0.2.2
     schemes:
       - name: kyber512
         implementation: clean
@@ -15,7 +15,7 @@ kems:
       - name: kyber1024
         implementation: clean
   frodo:
-    version: 0.2.1
+    version: 0.2.2
     notes: |
       Frodo needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make sure it has
       enough stack space in threads.
@@ -33,7 +33,7 @@ kems:
       - name: frodokem1344shake
         implementation: clean
   ntru:
-    version: 0.2.1
+    version: 0.2.2
     schemes:
       - name: ntruhps2048509
         implementation: clean

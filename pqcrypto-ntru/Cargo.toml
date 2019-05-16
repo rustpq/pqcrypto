@@ -1,7 +1,8 @@
 [package]
 name = "pqcrypto-ntru"
 description = "Post-Quantum Key-Encapsulation Mechanism ntru"
-version = "0.2.1"
+readme = "README.md"
+version = "0.2.2"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"

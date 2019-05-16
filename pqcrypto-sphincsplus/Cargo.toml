@@ -1,7 +1,8 @@
 [package]
 name = "pqcrypto-sphincsplus"
 description = "Post-Quantum Signature Scheme sphincsplus"
-version = "0.3.1"
+readme = "README.md"
+version = "0.3.2"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"

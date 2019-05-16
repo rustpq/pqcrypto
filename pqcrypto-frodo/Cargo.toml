@@ -1,7 +1,8 @@
 [package]
 name = "pqcrypto-frodo"
 description = "Post-Quantum Key-Encapsulation Mechanism frodo"
-version = "0.2.1"
+readme = "README.md"
+version = "0.2.2"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"

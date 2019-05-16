@@ -1,7 +1,8 @@
 [package]
 name = "pqcrypto"
 description = "Post-Quantum cryptographic primitives"
-version = "0.4.2"
+readme = "README.md"
+version = "0.4.3"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -12,7 +13,7 @@ categories = ["cryptography"]
 
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.2.0" }
-pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.2.1" }
-pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.2.1" }
-pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.2.1" }
-pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.3.1" }
+pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.2.2" }
+pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.2.2" }
+pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.2.2" }
+pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.3.2" }

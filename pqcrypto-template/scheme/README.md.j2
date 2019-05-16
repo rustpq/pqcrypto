@@ -1,0 +1,12 @@
+# {{ name }}
+
+This crate contains bindings to the C implementations of the following schemes, from [PQClean][pqc].
+
+{% for scheme in schemes %} * ``{{ scheme.name }}`` - ``{{ scheme.implementation }}``
+{% endfor %}
+
+{% if notes %}# Notes
+{{ notes }}
+{% endif %}
+
+[pqc]: https://github.com/PQClean/PQClean/
