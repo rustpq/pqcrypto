@@ -14,6 +14,7 @@ publish pqcrypto-kyber
 publish pqcrypto-frodo
 publish pqcrypto-ntru
 publish pqcrypto-sphincsplus
+publish pqcrypto-mqdss
 
 echo "Waiting a little bit for the packages to settle on crates.io"
 
