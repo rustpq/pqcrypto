@@ -57,10 +57,20 @@ mod tests {
     use sha3::{digest::ExtendableOutput, digest::Input, Shake128};
 
     #[test]
+    fn test_sizes() {
+        assert_eq!(std::mem::size_of::<Sha3256IncState>(), 352, "sha3-256");
+        assert_eq!(std::mem::size_of::<Sha3512IncState>(), 288, "sha3-512");
+        assert_eq!(std::mem::size_of::<Shake128State>(), 216, "shake128State");
+        assert_eq!(std::mem::size_of::<Shake128IncState>(), 384, "shake128IncState");
+        assert_eq!(std::mem::size_of::<Shake256State>(), 216, "Shake256State");
+        assert_eq!(std::mem::size_of::<Shake256IncState>(), 352, "Shake256IncState");
+    }
+
+    #[test]
     fn test_shake128_inc_api() {
         use digest::XofReader;
 
-        let mut state: Shake128IncState = Shake128IncState::Absorb(std::ptr::null_mut());
+        let mut state: Shake128IncState = unsafe { std::mem::uninitialized() };
         let state_ptr = &mut state as *mut Shake128IncState;
         let input = b"hello world";
         let mut output1 = [0u8; 32];

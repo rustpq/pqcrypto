@@ -12,30 +12,29 @@
  * The state for the hash function
  */
 typedef struct {
-  void *state;
+  uint8_t __state[120];
 } sha224ctx;
 
 /**
  * The state for the hash function
  */
 typedef struct {
-  void *state;
+  uint8_t __state[120];
 } sha256ctx;
 
 /**
  * The state for the hash function
  */
 typedef struct {
-  void *state;
+  uint8_t __state[224];
 } sha384ctx;
 
 /**
  * The state for the hash function
  */
 typedef struct {
-  void *state;
+  uint8_t __state[224];
 } sha512ctx;
-
 
 
 /**

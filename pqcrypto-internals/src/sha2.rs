@@ -44,6 +44,14 @@ mod tests {
     use super::*;
 
     #[test]
+    fn test_size() {
+        assert_eq!(std::mem::size_of::<Sha224IncState>(), 120, "sha224");
+        assert_eq!(std::mem::size_of::<Sha256IncState>(), 120, "sha256");
+        assert_eq!(std::mem::size_of::<Sha384IncState>(), 224, "sha384");
+        assert_eq!(std::mem::size_of::<Sha512IncState>(), 224, "sha512");
+    }
+
+    #[test]
     fn test_sha256() {
         use digest::Digest;
         let input = b"hello world";
@@ -63,7 +71,7 @@ mod tests {
     fn test_sha256_inc_api() {
         use digest::Digest;
         let mut state: Sha256IncState = Sha256IncState {
-            state: std::ptr::null_mut(),
+            state: None
         };
         let state_ptr = &mut state as *mut Sha256IncState;
         let input = b"hello world";

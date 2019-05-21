@@ -13,69 +13,36 @@
  * XOF state for the ``_absorb`` and ``_squeezeblocks`` functions.
  */
 typedef struct {
-  void *state;
+  uint8_t __state[216];
 } shake128ctx;
 
 /**
  * Incremental XOF state
  */
-typedef enum {
-  S128Absorb,
-  S128Squeeze,
-} shake128incctx_Tag;
 
 typedef struct {
-  void *_0;
-} S128Absorb_Body;
-
-typedef struct {
-  void *_0;
-} S128Squeeze_Body;
-
-typedef struct {
-  shake128incctx_Tag tag;
-  union {
-    S128Absorb_Body absorb;
-    S128Squeeze_Body squeeze;
-  };
+  uint8_t __state[384];
 } shake128incctx;
 
 /**
  * XOF state for the ``_absorb`` and ``_squeezeblocks`` functions.
  */
 typedef struct {
-  void *state;
+  uint8_t __state[216];
 } shake256ctx;
 
 /**
  * Incremental XOF state
  */
-typedef enum {
-  S256Absorb,
-  S256Squeeze,
-} shake256incctx_Tag;
-
 typedef struct {
-  void *_0;
-} S256Absorb_Body;
-
-typedef struct {
-  void *_0;
-} S256Squeeze_Body;
-
-typedef struct {
-  shake256incctx_Tag tag;
-  union {
-    S256Absorb_Body absorb;
-    S256Squeeze_Body squeeze;
-  };
+  uint8_t __state[352];
 } shake256incctx;
 
 /**
  * The state for the hash function
  */
 typedef struct {
-  void *state;
+  uint8_t __state[352];
 } sha3_256incctx;
 
 /**
@@ -83,6 +50,7 @@ typedef struct {
  */
 typedef struct {
   void *state;
+  uint8_t __state[288];
 } sha3_512incctx;
 
 

@@ -6,9 +6,7 @@ use std::path::Path;
 fn main() {
     let common_dir = Path::new("pqclean/common");
     let common_files = [
-        common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
-        common_dir.join("sha2.c"),
     ];
 
     let target_sphincsharaka128ssimple_dir =
@@ -336,6 +334,7 @@ fn main() {
     )
     .unwrap();
     cc::Build::new()
+        .include("../pqcrypto-internals/include")
         .include("pqclean/common")
         .flag("-std=c99")
         .flag("-O3")

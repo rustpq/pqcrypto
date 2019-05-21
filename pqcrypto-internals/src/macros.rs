@@ -7,8 +7,9 @@ macro_rules! implement_hash {
      $name_state: ident, $hash: ident, $output_bytes: expr) => {
         /// The state for the hash function
         #[repr(C)]
+        #[derive(Clone)]
         pub struct $name_state {
-            state: *mut libc::c_void,
+            state: Option<$hash>,
         }
 
         /// Directly obtain the digest of input
@@ -34,8 +35,7 @@ macro_rules! implement_hash {
         #[no_mangle]
         pub unsafe extern "C" fn $name_inc_init(state: *mut $name_state) {
             use std::default::Default;
-            let hash_state = Box::new($hash::default());
-            (*state).state = Box::into_raw(hash_state) as *mut libc::c_void;
+            (*state).state = Some($hash::default());
         }
 
         /// Add 64-bytes blocks to the state
@@ -46,9 +46,9 @@ macro_rules! implement_hash {
             inlen: libc::size_t,
         ) {
             use digest::Digest;
-            let digest = (*state).state as *mut $hash;
+            let digest = (*state).state.as_mut().unwrap();
             let input: &[u8] = std::slice::from_raw_parts(inblocks, (inlen as usize) * 64);
-            (*digest).input(input);
+            (digest).input(input);
         }
 
         /// Finalize the state and obtain the hash result.
@@ -62,8 +62,7 @@ macro_rules! implement_hash {
             inlen: libc::size_t,
         ) {
             use digest::Digest;
-            let digest = std::mem::replace(&mut (*state).state, std::ptr::null_mut());
-            let mut digest = Box::from_raw(digest as *mut $hash);
+            let mut digest = (&mut (*state).state).take().unwrap();
             let input: &[u8] = std::slice::from_raw_parts(inbytes, inlen as usize);
             digest.input(input);
             let mut out_slice = std::slice::from_raw_parts_mut(out, $output_bytes);
@@ -81,26 +80,26 @@ macro_rules! implement_xof {
         /// XOF state for the ``_absorb`` and ``_squeezeblocks`` functions.
         #[repr(C)]
         pub struct $state_name {
-            state: *mut libc::c_void,
+            reader: Sha3XofReader,
         }
 
         /// Incremental XOF state
         #[repr(C)]
         pub enum $inc_state_name {
-            Absorb(*mut libc::c_void),
-            Squeeze(*mut libc::c_void),
+            Absorb($xof),
+            Squeeze(Sha3XofReader),
         }
 
         impl $inc_state_name {
-            unsafe fn get_absorb(&self) -> *mut $xof {
+            unsafe fn get_absorb(&mut self) -> &mut $xof {
                 match self {
-                    $inc_state_name::Absorb(state) => (*state) as *mut $xof,
+                    $inc_state_name::Absorb(ref mut state) => state,
                     _ => std::process::abort(),
                 }
             }
-            unsafe fn get_squeeze(&self) -> *mut Sha3XofReader {
+            unsafe fn get_squeeze(&mut self) -> &mut Sha3XofReader {
                 match self {
-                    $inc_state_name::Squeeze(state) => (*state) as *mut Sha3XofReader,
+                    $inc_state_name::Squeeze(ref mut reader) => reader,
                     _ => std::process::abort(),
                 }
             }
@@ -131,8 +130,8 @@ macro_rules! implement_xof {
         pub unsafe extern "C" fn $name_absorb(state: *mut $state_name, input: *const libc::uint8_t, input_len: libc::size_t) {
             use sha3::digest::{Input, ExtendableOutput};
             let input = std::slice::from_raw_parts(input, input_len as usize);
-            let xof_state = Box::into_raw(Box::new($xof::default().chain(input).xof_result())) as *mut libc::c_void;
-            (*state).state = xof_state;
+            let xof_state = $xof::default().chain(input).xof_result();
+            (*state).reader = xof_state;
         }
 
         /// Squeeze out output from the XOF which already absorbed things through ``_absorb``.
@@ -140,15 +139,13 @@ macro_rules! implement_xof {
         pub unsafe extern "C" fn $name_squeezeblocks(output: *mut libc::uint8_t, nblocks: libc::size_t, state: *mut $state_name) {
             use digest::XofReader;
             let mut output = std::slice::from_raw_parts_mut(output, $rate * nblocks as usize);
-            let xofreader = (*state).state as *mut Sha3XofReader;
-            (*xofreader).read(&mut output);
+            (*state).reader.read(&mut output);
         }
 
         /// Initialize the incremental XOF state
         #[no_mangle]
         pub unsafe extern "C" fn $name_inc_init(state: *mut $inc_state_name) {
-            let hash_state = Box::new($xof::default());
-            (*state) = $inc_state_name::Absorb(Box::into_raw(hash_state) as *mut libc::c_void);
+            (*state) = $inc_state_name::Absorb($xof::default());
         }
 
         /// Absorb ``input`` into the XOF state
@@ -161,7 +158,7 @@ macro_rules! implement_xof {
             use sha2::digest::Input;
             let digest = (*state).get_absorb();
             let input: &[u8] = std::slice::from_raw_parts(input, inlen as usize);
-            (*digest).input(input);
+            digest.input(input);
         }
 
         /// Finalize the XOF state to prepare for squeezing.
@@ -169,12 +166,7 @@ macro_rules! implement_xof {
         #[no_mangle]
         pub unsafe extern "C" fn $name_inc_finalize(state: *mut $inc_state_name) {
             use digest::ExtendableOutput;
-            let digest =
-                std::mem::replace(&mut (*state).get_absorb(), std::ptr::null_mut()) as *mut $xof;
-            let digest = Box::from_raw(digest);
-            *state = $inc_state_name::Squeeze(
-                Box::into_raw(Box::new(digest.xof_result())) as *mut libc::c_void
-            );
+            *state = $inc_state_name::Squeeze((*state).get_absorb().clone().xof_result());
         }
 
         /// Squeeze out ``outlen`` bytes
