@@ -22,4 +22,3 @@ mod test {
         randombytes(buf.as_mut_ptr(), 100);
     }
 }
-
