@@ -24,4 +24,4 @@ glob = "0.3.0"
 
 [badges]
 travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
-maintenance = { status = "actively-maintained" }
+maintenance = { status = "actively-developed" }
