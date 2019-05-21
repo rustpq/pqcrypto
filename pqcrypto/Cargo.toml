@@ -2,7 +2,7 @@
 name = "pqcrypto"
 description = "Post-Quantum cryptographic primitives"
 readme = "README.md"
-version = "0.4.3"
+version = "0.5.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
