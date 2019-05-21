@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.4.3
+pqcrypto_version: 0.5.0
 traits_version: 0.2.0
 internals_version: 0.1.0
 
@@ -45,6 +45,13 @@ kems:
         implementation: clean
 
 signs:
+  mqdss:
+    version: 0.1.0
+    schemes:
+      - name: mqdss-48
+        implementation: clean
+      - name: mqdss-64
+        implementation: clean
   sphincsplus:
     version: 0.3.2
     notes: |

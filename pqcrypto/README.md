@@ -9,4 +9,5 @@ This superproject contains the following cryptographic algorithms:
 * [``pqcrypto-ntru``](https://crates.io/crates/pqcrypto-ntru)
 
 ## Signature Schemes
+* [``pqcrypto-mqdss``](https://crates.io/crates/pqcrypto-mqdss)
 * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus)

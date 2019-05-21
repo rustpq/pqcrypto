@@ -12,5 +12,6 @@ pub mod kem {
 }
 
 pub mod sign {
+    pub use pqcrypto_mqdss::*;
     pub use pqcrypto_sphincsplus::*;
 }
