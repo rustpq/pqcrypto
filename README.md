@@ -1,5 +1,8 @@
 # Bindings to quantum-safe cryptographic libraries
 
+[![dependency status](https://deps.rs/repo/github/rustpq/pqcrypto/status.svg)](https://deps.rs/repo/github/rustpq/pqcrypto)
+
+
 This repository contains bindings to C implementations of cryptographic algorithms part of the [NIST competition][nist].
 These bindings are generated based on the [PQClean][pqclean] project, which aims to collect 'clean' implementations of cryptographic algorithms.
 
