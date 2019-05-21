@@ -17,5 +17,5 @@ The file `implementations.yaml` controls the version numbers and included varian
 See the [documentation of the master project on docs.rs][docsrs].
 
 [nist]: https://nist.gov/pqcrypto
-[pqc]: https://github.com/pqclean/pqclean/
+[pqclean]: https://github.com/pqclean/pqclean/
 [docsrs]: https://docs.rs/pqcrypto/
