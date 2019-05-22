@@ -5,8 +5,8 @@ use rand::prelude::*;
 
 #[no_mangle]
 /// Fills buf with xlen random bytes
-pub extern "C" fn randombytes(buf: *mut libc::uint8_t, xlen: libc::size_t) -> libc::c_int {
-    let mut buf = unsafe { std::slice::from_raw_parts_mut(buf, xlen as usize) };
+pub unsafe extern "C" fn randombytes(buf: *mut libc::uint8_t, xlen: libc::size_t) -> libc::c_int {
+    let mut buf = std::slice::from_raw_parts_mut(buf, xlen as usize);
     thread_rng().fill_bytes(&mut buf);
     0
 }
