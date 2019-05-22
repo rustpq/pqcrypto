@@ -80,19 +80,15 @@ extern "C" {
 #[cfg(test)]
 mod test_ntruhps2048509_clean {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk: [u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut ct: [u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_CIPHERTEXTBYTES] =
-                mem::uninitialized();
-            let mut ss1: [u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
-            let mut ss2: [u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -122,19 +118,15 @@ mod test_ntruhps2048509_clean {
 #[cfg(test)]
 mod test_ntruhps2048677_clean {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk: [u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut ct: [u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_CIPHERTEXTBYTES] =
-                mem::uninitialized();
-            let mut ss1: [u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
-            let mut ss2: [u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -164,19 +156,15 @@ mod test_ntruhps2048677_clean {
 #[cfg(test)]
 mod test_ntruhps4096821_clean {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk: [u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut ct: [u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_CIPHERTEXTBYTES] =
-                mem::uninitialized();
-            let mut ss1: [u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
-            let mut ss2: [u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -206,19 +194,15 @@ mod test_ntruhps4096821_clean {
 #[cfg(test)]
 mod test_ntruhrss701_clean {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk: [u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut ct: [u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_CIPHERTEXTBYTES] =
-                mem::uninitialized();
-            let mut ss1: [u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
-            let mut ss2: [u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,

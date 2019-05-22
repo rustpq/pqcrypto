@@ -15,8 +15,6 @@
 
 // This file is generated.
 
-use std::mem;
-
 use crate::ffi;
 use pqcrypto_traits::kem as primitive;
 
@@ -32,7 +30,7 @@ macro_rules! simple_struct {
             ///
             /// Internal use only!
             fn new() -> Self {
-                $type(unsafe { mem::uninitialized() })
+                $type([0u8; $size])
             }
         }
 
@@ -45,7 +43,7 @@ macro_rules! simple_struct {
 
             /// Construct this object from a byte slice
             fn from_bytes(bytes: &[u8]) -> Self {
-                let mut array: [u8; $size] = unsafe { mem::uninitialized() };
+                let mut array = [0u8; $size];
                 array.copy_from_slice(bytes);
                 $type(array)
             }

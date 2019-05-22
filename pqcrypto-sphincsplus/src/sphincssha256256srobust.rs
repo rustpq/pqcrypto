@@ -16,8 +16,6 @@
 
 // This file is generated.
 
-use std::mem;
-
 use crate::ffi;
 use pqcrypto_traits::sign as primitive;
 
@@ -33,7 +31,7 @@ macro_rules! simple_struct {
             ///
             /// Internal use only!
             fn new() -> Self {
-                $type(unsafe { mem::uninitialized() })
+                $type([0u8; $size])
             }
         }
 
@@ -46,7 +44,7 @@ macro_rules! simple_struct {
 
             /// Construct this object from a byte slice
             fn from_bytes(bytes: &[u8]) -> Self {
-                let mut array: [u8; $size] = unsafe { mem::uninitialized() };
+                let mut array = [0u8; $size];
                 array.copy_from_slice(bytes);
                 $type(array)
             }
@@ -81,7 +79,10 @@ pub struct DetachedSignature(
 
 impl DetachedSignature {
     fn new() -> Self {
-        DetachedSignature(unsafe { mem::uninitialized() }, 0)
+        DetachedSignature(
+            [0u8; ffi::PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_BYTES],
+            0,
+        )
     }
 }
 
@@ -95,8 +96,7 @@ impl primitive::DetachedSignature for DetachedSignature {
     #[inline]
     fn from_bytes(bytes: &[u8]) -> Self {
         debug_assert!(bytes.len() <= ffi::PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_BYTES);
-        let mut array: [u8; ffi::PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_BYTES] =
-            unsafe { mem::uninitialized() };
+        let mut array = [0u8; ffi::PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_BYTES];
         array.copy_from_slice(bytes);
         DetachedSignature(array, bytes.len())
     }

@@ -83,7 +83,6 @@ extern "C" {
 mod test_mqdss48_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -92,13 +91,11 @@ mod test_mqdss48_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_PUBLICKEYBYTES] = mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_SECRETKEYBYTES] = mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_MQDSS48_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_MQDSS48_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -196,7 +193,6 @@ mod test_mqdss48_clean {
 mod test_mqdss64_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -205,13 +201,11 @@ mod test_mqdss64_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_PUBLICKEYBYTES] = mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_SECRETKEYBYTES] = mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_MQDSS64_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_MQDSS64_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(

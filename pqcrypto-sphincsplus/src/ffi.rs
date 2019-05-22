@@ -1313,7 +1313,6 @@ extern "C" {
 mod test_sphincsharaka128ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -1322,16 +1321,11 @@ mod test_sphincsharaka128ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -1437,7 +1431,6 @@ mod test_sphincsharaka128ssimple_clean {
 mod test_sphincsharaka128srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -1446,16 +1439,11 @@ mod test_sphincsharaka128srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -1561,7 +1549,6 @@ mod test_sphincsharaka128srobust_clean {
 mod test_sphincsharaka128fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -1570,16 +1557,11 @@ mod test_sphincsharaka128fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -1685,7 +1667,6 @@ mod test_sphincsharaka128fsimple_clean {
 mod test_sphincsharaka128frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -1694,16 +1675,11 @@ mod test_sphincsharaka128frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -1809,7 +1785,6 @@ mod test_sphincsharaka128frobust_clean {
 mod test_sphincsharaka192ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -1818,16 +1793,11 @@ mod test_sphincsharaka192ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -1933,7 +1903,6 @@ mod test_sphincsharaka192ssimple_clean {
 mod test_sphincsharaka192srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -1942,16 +1911,11 @@ mod test_sphincsharaka192srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2057,7 +2021,6 @@ mod test_sphincsharaka192srobust_clean {
 mod test_sphincsharaka192fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2066,16 +2029,11 @@ mod test_sphincsharaka192fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2181,7 +2139,6 @@ mod test_sphincsharaka192fsimple_clean {
 mod test_sphincsharaka192frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2190,16 +2147,11 @@ mod test_sphincsharaka192frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2305,7 +2257,6 @@ mod test_sphincsharaka192frobust_clean {
 mod test_sphincsharaka256ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2314,16 +2265,11 @@ mod test_sphincsharaka256ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2429,7 +2375,6 @@ mod test_sphincsharaka256ssimple_clean {
 mod test_sphincsharaka256srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2438,16 +2383,11 @@ mod test_sphincsharaka256srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2553,7 +2493,6 @@ mod test_sphincsharaka256srobust_clean {
 mod test_sphincsharaka256fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2562,16 +2501,11 @@ mod test_sphincsharaka256fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2677,7 +2611,6 @@ mod test_sphincsharaka256fsimple_clean {
 mod test_sphincsharaka256frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2686,16 +2619,11 @@ mod test_sphincsharaka256frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2801,7 +2729,6 @@ mod test_sphincsharaka256frobust_clean {
 mod test_sphincsshake256128ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2810,16 +2737,11 @@ mod test_sphincsshake256128ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -2925,7 +2847,6 @@ mod test_sphincsshake256128ssimple_clean {
 mod test_sphincsshake256128srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -2934,16 +2855,11 @@ mod test_sphincsshake256128srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3049,7 +2965,6 @@ mod test_sphincsshake256128srobust_clean {
 mod test_sphincsshake256128fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3058,16 +2973,11 @@ mod test_sphincsshake256128fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3173,7 +3083,6 @@ mod test_sphincsshake256128fsimple_clean {
 mod test_sphincsshake256128frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3182,16 +3091,11 @@ mod test_sphincsshake256128frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3297,7 +3201,6 @@ mod test_sphincsshake256128frobust_clean {
 mod test_sphincsshake256192ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3306,16 +3209,11 @@ mod test_sphincsshake256192ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3421,7 +3319,6 @@ mod test_sphincsshake256192ssimple_clean {
 mod test_sphincsshake256192srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3430,16 +3327,11 @@ mod test_sphincsshake256192srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3545,7 +3437,6 @@ mod test_sphincsshake256192srobust_clean {
 mod test_sphincsshake256192fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3554,16 +3445,11 @@ mod test_sphincsshake256192fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3669,7 +3555,6 @@ mod test_sphincsshake256192fsimple_clean {
 mod test_sphincsshake256192frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3678,16 +3563,11 @@ mod test_sphincsshake256192frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3793,7 +3673,6 @@ mod test_sphincsshake256192frobust_clean {
 mod test_sphincsshake256256ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3802,16 +3681,11 @@ mod test_sphincsshake256256ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -3917,7 +3791,6 @@ mod test_sphincsshake256256ssimple_clean {
 mod test_sphincsshake256256srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -3926,16 +3799,11 @@ mod test_sphincsshake256256srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4041,7 +3909,6 @@ mod test_sphincsshake256256srobust_clean {
 mod test_sphincsshake256256fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4050,16 +3917,11 @@ mod test_sphincsshake256256fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4165,7 +4027,6 @@ mod test_sphincsshake256256fsimple_clean {
 mod test_sphincsshake256256frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4174,16 +4035,11 @@ mod test_sphincsshake256256frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4289,7 +4145,6 @@ mod test_sphincsshake256256frobust_clean {
 mod test_sphincssha256128ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4298,16 +4153,11 @@ mod test_sphincssha256128ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4413,7 +4263,6 @@ mod test_sphincssha256128ssimple_clean {
 mod test_sphincssha256128srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4422,16 +4271,11 @@ mod test_sphincssha256128srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4537,7 +4381,6 @@ mod test_sphincssha256128srobust_clean {
 mod test_sphincssha256128fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4546,16 +4389,11 @@ mod test_sphincssha256128fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4661,7 +4499,6 @@ mod test_sphincssha256128fsimple_clean {
 mod test_sphincssha256128frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4670,16 +4507,11 @@ mod test_sphincssha256128frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4785,7 +4617,6 @@ mod test_sphincssha256128frobust_clean {
 mod test_sphincssha256192ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4794,16 +4625,11 @@ mod test_sphincssha256192ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -4909,7 +4735,6 @@ mod test_sphincssha256192ssimple_clean {
 mod test_sphincssha256192srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -4918,16 +4743,11 @@ mod test_sphincssha256192srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -5033,7 +4853,6 @@ mod test_sphincssha256192srobust_clean {
 mod test_sphincssha256192fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -5042,16 +4861,11 @@ mod test_sphincssha256192fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -5157,7 +4971,6 @@ mod test_sphincssha256192fsimple_clean {
 mod test_sphincssha256192frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -5166,16 +4979,11 @@ mod test_sphincssha256192frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -5281,7 +5089,6 @@ mod test_sphincssha256192frobust_clean {
 mod test_sphincssha256256ssimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -5290,16 +5097,11 @@ mod test_sphincssha256256ssimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -5405,7 +5207,6 @@ mod test_sphincssha256256ssimple_clean {
 mod test_sphincssha256256srobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -5414,16 +5215,11 @@ mod test_sphincssha256256srobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -5529,7 +5325,6 @@ mod test_sphincssha256256srobust_clean {
 mod test_sphincssha256256fsimple_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -5538,16 +5333,11 @@ mod test_sphincssha256256fsimple_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -5653,7 +5443,6 @@ mod test_sphincssha256256fsimple_clean {
 mod test_sphincssha256256frobust_clean {
     use super::*;
     use rand::prelude::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
@@ -5662,16 +5451,11 @@ mod test_sphincssha256256frobust_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk: [u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut pk_alt: [u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES] =
-                mem::uninitialized();
-            let mut sk_alt: [u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES] =
-                mem::uninitialized();
-            let mut detached_sig: [u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_BYTES] =
-                mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = [0u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = [0u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = [0u8; PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;

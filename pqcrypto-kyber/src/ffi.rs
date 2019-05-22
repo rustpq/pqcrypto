@@ -53,16 +53,15 @@ extern "C" {
 #[cfg(test)]
 mod test_kyber512_clean {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk: [u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_PUBLICKEYBYTES] = mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_SECRETKEYBYTES] = mem::uninitialized();
-            let mut ct: [u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_CIPHERTEXTBYTES] = mem::uninitialized();
-            let mut ss1: [u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
-            let mut ss2: [u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -88,16 +87,15 @@ mod test_kyber512_clean {
 #[cfg(test)]
 mod test_kyber768_clean {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk: [u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES] = mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES] = mem::uninitialized();
-            let mut ct: [u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES] = mem::uninitialized();
-            let mut ss1: [u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
-            let mut ss2: [u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -123,16 +121,15 @@ mod test_kyber768_clean {
 #[cfg(test)]
 mod test_kyber1024_clean {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk: [u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES] = mem::uninitialized();
-            let mut sk: [u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES] = mem::uninitialized();
-            let mut ct: [u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES] = mem::uninitialized();
-            let mut ss1: [u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
-            let mut ss2: [u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES] = mem::uninitialized();
+            let mut pk = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
