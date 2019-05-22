@@ -18,6 +18,7 @@
 
 use crate::ffi;
 use pqcrypto_traits::sign as primitive;
+use pqcrypto_traits::{Error, Result};
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
@@ -43,10 +44,18 @@ macro_rules! simple_struct {
             }
 
             /// Construct this object from a byte slice
-            fn from_bytes(bytes: &[u8]) -> Self {
-                let mut array = [0u8; $size];
-                array.copy_from_slice(bytes);
-                $type(array)
+            fn from_bytes(bytes: &[u8]) -> Result<Self> {
+                if bytes.len() != $size {
+                    Err(Error::BadLength {
+                        name: stringify!($type),
+                        actual: bytes.len(),
+                        expected: $size,
+                    })
+                } else {
+                    let mut array = [0u8; $size];
+                    array.copy_from_slice(bytes);
+                    Ok($type(array))
+                }
             }
         }
 
@@ -77,6 +86,7 @@ pub struct DetachedSignature(
     usize,
 );
 
+// for internal use
 impl DetachedSignature {
     fn new() -> Self {
         DetachedSignature(
@@ -94,11 +104,19 @@ impl primitive::DetachedSignature for DetachedSignature {
     }
 
     #[inline]
-    fn from_bytes(bytes: &[u8]) -> Self {
-        debug_assert!(bytes.len() <= ffi::PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_BYTES);
+    fn from_bytes(bytes: &[u8]) -> Result<Self> {
+        let actual = bytes.len();
+        let expected = ffi::PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_BYTES;
+        if actual > expected {
+            return Err(Error::BadLength {
+                name: "DetachedSignature",
+                actual,
+                expected,
+            });
+        }
         let mut array = [0u8; ffi::PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_CRYPTO_BYTES];
         array.copy_from_slice(bytes);
-        DetachedSignature(array, bytes.len())
+        Ok(DetachedSignature(array, actual))
     }
 }
 
@@ -113,8 +131,8 @@ impl primitive::SignedMessage for SignedMessage {
 
     /// Construct this object from a byte slice
     #[inline]
-    fn from_bytes(bytes: &[u8]) -> Self {
-        SignedMessage(bytes.to_vec())
+    fn from_bytes(bytes: &[u8]) -> Result<Self> {
+        Ok(SignedMessage(bytes.to_vec()))
     }
 }
 
@@ -176,7 +194,10 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
 }
 
 #[must_use]
-pub fn open(sm: &SignedMessage, pk: &PublicKey) -> Result<Vec<u8>, primitive::VerificationError> {
+pub fn open(
+    sm: &SignedMessage,
+    pk: &PublicKey,
+) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
     let mut m: Vec<u8> = Vec::with_capacity(sm.len());
     let mut mlen: usize = 0;
     match unsafe {
@@ -216,7 +237,7 @@ pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],
     pk: &PublicKey,
-) -> Result<(), primitive::VerificationError> {
+) -> std::result::Result<(), primitive::VerificationError> {
     let res = unsafe {
         ffi::PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_crypto_sign_verify(
             sig.0.as_ptr(),

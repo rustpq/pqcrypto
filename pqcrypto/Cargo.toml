@@ -2,7 +2,7 @@
 name = "pqcrypto"
 description = "Post-Quantum cryptographic primitives"
 readme = "README.md"
-version = "0.5.1"
+version = "0.6.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -12,12 +12,12 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
-pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.2.0" }
-pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.2.3" }
-pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.2.3" }
-pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.2.3" }
-pqcrypto-mqdss = { path = "../pqcrypto-mqdss", version = "0.1.1" }
-pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.3.3" }
+pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.0" }
+pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.3.0" }
+pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.3.0" }
+pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.3.0" }
+pqcrypto-mqdss = { path = "../pqcrypto-mqdss", version = "0.2.0" }
+pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.4.0" }
 
 [badges]
 travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }

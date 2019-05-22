@@ -17,6 +17,7 @@
 
 use crate::ffi;
 use pqcrypto_traits::kem as primitive;
+use pqcrypto_traits::{Error, Result};
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
@@ -42,10 +43,18 @@ macro_rules! simple_struct {
             }
 
             /// Construct this object from a byte slice
-            fn from_bytes(bytes: &[u8]) -> Self {
-                let mut array = [0u8; $size];
-                array.copy_from_slice(bytes);
-                $type(array)
+            fn from_bytes(bytes: &[u8]) -> Result<Self> {
+                if bytes.len() != $size {
+                    Err(Error::BadLength {
+                        name: stringify!($type),
+                        actual: bytes.len(),
+                        expected: $size,
+                    })
+                } else {
+                    let mut array = [0u8; $size];
+                    array.copy_from_slice(bytes);
+                    Ok($type(array))
+                }
             }
         }
 

@@ -1,27 +1,29 @@
+use crate::Result;
+
 pub trait PublicKey {
     fn as_bytes(&self) -> &[u8];
-    fn from_bytes(bytes: &[u8]) -> Self
+    fn from_bytes(bytes: &[u8]) -> Result<Self>
     where
         Self: Sized;
 }
 
 pub trait SecretKey {
     fn as_bytes(&self) -> &[u8];
-    fn from_bytes(bytes: &[u8]) -> Self
+    fn from_bytes(bytes: &[u8]) -> Result<Self>
     where
         Self: Sized;
 }
 
 pub trait SignedMessage {
     fn as_bytes(&self) -> &[u8];
-    fn from_bytes(bytes: &[u8]) -> Self
+    fn from_bytes(bytes: &[u8]) -> Result<Self>
     where
         Self: Sized;
 }
 
 pub trait DetachedSignature {
     fn as_bytes(&self) -> &[u8];
-    fn from_bytes(bytes: &[u8]) -> Self
+    fn from_bytes(bytes: &[u8]) -> Result<Self>
     where
         Self: Sized;
 }
@@ -38,7 +40,9 @@ impl std::fmt::Display for VerificationError {
         match self {
             VerificationError::InvalidSignature => write!(f, "error: verification failed"),
             VerificationError::UnknownVerificationError => write!(f, "unknown error"),
-            VerificationError::__NonExhaustive => unreachable!("Should never have been constructed"),
+            VerificationError::__NonExhaustive => {
+                unreachable!("Should never have been constructed")
+            }
         }
     }
 }
