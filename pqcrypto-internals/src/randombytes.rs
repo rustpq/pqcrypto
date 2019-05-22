@@ -14,11 +14,12 @@ pub unsafe extern "C" fn randombytes(buf: *mut libc::uint8_t, xlen: libc::size_t
 #[cfg(test)]
 mod test {
     use super::*;
-    use std::mem;
 
     #[test]
     fn test_randombytes() {
-        let mut buf: [libc::uint8_t; 100] = unsafe { mem::uninitialized() };
-        randombytes(buf.as_mut_ptr(), 100);
+        unsafe {
+            let mut buf = [0u8 as libc::uint8_t; 100];
+            randombytes(buf.as_mut_ptr(), 100);
+        }
     }
 }
