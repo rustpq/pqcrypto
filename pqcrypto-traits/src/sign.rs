@@ -30,4 +30,17 @@ pub trait DetachedSignature {
 pub enum VerificationError {
     InvalidSignature,
     UnknownVerificationError,
+    __NonExhaustive,
 }
+
+impl std::fmt::Display for VerificationError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::result::Result<(), std::fmt::Error> {
+        match self {
+            VerificationError::InvalidSignature => write!(f, "error: verification failed"),
+            VerificationError::UnknownVerificationError => write!(f, "unknown error"),
+            VerificationError::__NonExhaustive => unreachable!("Should never have been constructed"),
+        }
+    }
+}
+
+impl std::error::Error for VerificationError {}
