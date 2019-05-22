@@ -1,7 +1,7 @@
 use std::fs::{self, File};
 use std::io::prelude::*;
 
-use pqcrypto::traits::sign::{SecretKey as _, DetachedSignature as _};
+use pqcrypto::prelude::*;
 use pqcrypto::sign::sphincsharaka128frobust::*;
 
 fn parseargs() -> (String, String, String) {

@@ -6,10 +6,10 @@
 pub use pqcrypto_traits as traits;
 
 pub mod prelude {
-    use pqcrypto_traits::kem::{
+    pub use pqcrypto_traits::kem::{
         Ciphertext as _, PublicKey as _, SecretKey as _, SharedSecret as _,
     };
-    use pqcrypto_traits::sign::{
+    pub use pqcrypto_traits::sign::{
         DetachedSignature as _, PublicKey as _, SecretKey as _, SignedMessage as _,
     };
 }

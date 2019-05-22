@@ -2,7 +2,7 @@ use std::fs::{self, File};
 use std::io::prelude::*;
 
 use pqcrypto::sign::sphincsharaka128frobust::*;
-use pqcrypto::traits::sign::{DetachedSignature as _, SecretKey as _};
+use pqcrypto::prelude::*;
 
 fn parseargs() -> (String, String, String) {
     let args: Vec<String> = std::env::args().collect();

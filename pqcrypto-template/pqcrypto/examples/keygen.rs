@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-use pqcrypto::traits::sign::*;
+use pqcrypto::prelude::*;
 use pqcrypto::sign::sphincsharaka128frobust::*;
 
 
