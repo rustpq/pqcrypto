@@ -16,6 +16,8 @@
 //! Frodo needs a lot of stack space, specify env variable
 //! `RUST_MIN_STACK` to make sure it has enough stack space in threads.
 
+#![allow(clippy::len_without_is_empty)]
+
 pub mod ffi;
 
 pub mod frodokem1344aes;

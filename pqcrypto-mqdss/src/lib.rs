@@ -9,6 +9,8 @@
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
 
+#![allow(clippy::len_without_is_empty)]
+
 pub mod ffi;
 
 pub mod mqdss48;

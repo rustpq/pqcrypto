@@ -45,6 +45,8 @@
 //! # Notes
 //! The SHA2 and Haraka versions are not thread safe!
 
+#![allow(clippy::len_without_is_empty)]
+
 pub mod ffi;
 
 pub mod sphincsharaka128frobust;
