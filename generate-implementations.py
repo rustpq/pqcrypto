@@ -138,6 +138,10 @@ def generate_pqcrypto_crate(implementations):
         kems=implementations['kems'],
         signs=implementations['signs'],
     )
+    shutil.copytree(
+        "pqcrypto-template/pqcrypto/examples",
+        os.path.join(target_dir, "examples")
+    )
 
 
 def generate_cargo_workspace(implementations):

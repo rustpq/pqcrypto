@@ -5,6 +5,21 @@
 /// [pqclean]: https://github.com/PQClean/PQClean/
 pub use pqcrypto_traits as traits;
 
+pub mod prelude {
+    use pqcrypto_traits::sign::{
+        SecretKey as _,
+        PublicKey as _,
+        SignedMessage as _,
+        DetachedSignature as _,
+    };
+    use pqcrypto_traits::kem::{
+        Ciphertext as _,
+        PublicKey as _,
+        SecretKey as _,
+        SharedSecret as _,
+    };
+}
+
 pub mod kem {
     {% for kem in kems.keys() %}
     pub use pqcrypto_{{ kem }}::*;
