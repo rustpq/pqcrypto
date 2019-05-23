@@ -103,7 +103,7 @@ impl primitive::DetachedSignature for DetachedSignature {
             });
         }
         let mut array = [0u8; ffi::PQCLEAN_MQDSS64_CLEAN_CRYPTO_BYTES];
-        array.copy_from_slice(bytes);
+        array[..bytes.len()].copy_from_slice(bytes);
         Ok(DetachedSignature(array, actual))
     }
 }
