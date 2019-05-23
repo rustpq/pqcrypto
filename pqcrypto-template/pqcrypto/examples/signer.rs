@@ -12,11 +12,11 @@ fn parseargs() -> (String, String, String) {
     (args[1].clone(), args[2].clone(), args[3].clone())
 }
 
-fn main() -> std::io::Result<()> {
+fn main() -> Result<(), Box<std::error::Error>> {
     let (sk_filename, in_filename, sig_filename) = parseargs();
     let mut sigfile= File::create(sig_filename)?;
 
-    let sk = SecretKey::from_bytes(&fs::read(sk_filename)?);
+    let sk = SecretKey::from_bytes(&fs::read(sk_filename)?)?;
     let signature = detached_sign(&fs::read(in_filename)?, &sk);
 
     sigfile.write_all(signature.as_bytes())?;
