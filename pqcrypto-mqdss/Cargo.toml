@@ -2,7 +2,7 @@
 name = "pqcrypto-mqdss"
 description = "Post-Quantum Signature Scheme mqdss"
 readme = "README.md"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"

@@ -1,12 +1,11 @@
 ---
 
-pqcrypto_version: 0.6.0
+pqcrypto_version: 0.6.1
 traits_version: 0.3.0
-internals_version: 0.1.0
 
 kems:
   kyber:
-    version: 0.3.0
+    version: 0.3.1
     schemes:
       - name: kyber512
         implementation: clean
@@ -33,7 +32,7 @@ kems:
       - name: frodokem1344shake
         implementation: clean
   ntru:
-    version: 0.3.0
+    version: 0.3.1
     schemes:
       - name: ntruhps2048509
         implementation: clean
@@ -46,14 +45,14 @@ kems:
 
 signs:
   mqdss:
-    version: 0.2.0
+    version: 0.2.1
     schemes:
       - name: mqdss-48
         implementation: clean
       - name: mqdss-64
         implementation: clean
   sphincsplus:
-    version: 0.4.0
+    version: 0.4.1
     notes: |
       The SHA2 and Haraka versions are not thread safe!
     schemes:
