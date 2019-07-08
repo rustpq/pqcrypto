@@ -10,14 +10,14 @@ import shutil
 
 def read_yaml():
     with open('implementations.yaml', 'r') as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
 
 
 def read_scheme_metadata(type, scheme_name):
     metadata_path = os.path.join(
         'pqclean', f'crypto_{type}', scheme_name, 'META.yml')
     with open(metadata_path) as f:
-        metadata = yaml.load(f)
+        metadata = yaml.safe_load(f)
 
     return metadata
 
@@ -64,7 +64,7 @@ def generate_scheme(name, type, properties):
     render_template(
         target_dir, 'Cargo.toml', 'scheme/Cargo.toml.j2',
         traits_version=implementations['traits_version'],
-        internals_version=implementations['internals_version'],
+        # internals_version=implementations['internals_version'],
         name=name,
         type=type,
         version=properties['version'],

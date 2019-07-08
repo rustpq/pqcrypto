@@ -152,7 +152,6 @@ pub const PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1
 pub const PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 64;
 pub const PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_CRYPTO_BYTES: usize = 49216;
 
-#[link(name = "pqcrypto_internals")]
 #[link(name = "sphincsplus")]
 extern "C" {
     pub fn PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_crypto_sign_keypair(

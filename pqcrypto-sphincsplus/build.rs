@@ -9,6 +9,7 @@ fn main() {
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
         common_dir.join("sha2.c"),
+        common_dir.join("randombytes.c"),
     ];
 
     let target_sphincsharaka128ssimple_dir =

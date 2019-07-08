@@ -38,7 +38,6 @@ pub const PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 21520;
 pub const PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 21632;
 pub const PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[link(name = "pqcrypto_internals")]
 #[link(name = "frodo")]
 extern "C" {
     pub fn PQCLEAN_FRODOKEM640SHAKE_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;

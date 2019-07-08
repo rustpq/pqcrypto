@@ -16,7 +16,6 @@ pub const PQCLEAN_MQDSS64_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 24;
 pub const PQCLEAN_MQDSS64_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 64;
 pub const PQCLEAN_MQDSS64_CLEAN_CRYPTO_BYTES: usize = 43728;
 
-#[link(name = "pqcrypto_internals")]
 #[link(name = "mqdss")]
 extern "C" {
     pub fn PQCLEAN_MQDSS48_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;

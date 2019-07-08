@@ -23,7 +23,6 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES: usize = {{ metadata['length-signat
 {% endif %}
 {% endfor %}
 
-#[link(name = "pqcrypto_internals")]
 #[link(name = "{{ name }}")]
 extern "C" {
 {% for scheme in schemes %}
