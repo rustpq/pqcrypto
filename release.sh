@@ -10,6 +10,8 @@ publish() {
 
 
 publish pqcrypto-traits
+sleep 10
+echo "Waiting a little bit for the pqcrypto-traits package to settle on crates.io"
 publish pqcrypto-kyber
 publish pqcrypto-frodo
 publish pqcrypto-ntru
