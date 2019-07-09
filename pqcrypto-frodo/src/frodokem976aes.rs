@@ -7,7 +7,7 @@
 //! use pqcrypto_frodo::frodokem976aes::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
-//! let ss2 = decapsulate(ct, sk);
+//! let ss2 = decapsulate(&ct, &sk);
 //! assert!(ss1 == ss2);
 //! ```
 //!

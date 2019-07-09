@@ -2,6 +2,8 @@
 
 ## 2019-07-09
 * Make ``encapsulate`` and ``decapsulate`` take references.
+* Add Dilithium
+* Add SABER
 
 ## 2019-07-08
 * Remove ``pqcrypto-internals``

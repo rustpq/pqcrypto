@@ -21,9 +21,11 @@ pub mod kem {
     };
     pub use pqcrypto_kyber::{kyber1024, kyber512, kyber768};
     pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
+    pub use pqcrypto_saber::{firesaber, lightsaber, saber};
 }
 
 pub mod sign {
+    pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium4};
     pub use pqcrypto_mqdss::{mqdss48, mqdss64};
     pub use pqcrypto_sphincsplus::{
         sphincsharaka128frobust, sphincsharaka128fsimple, sphincsharaka128srobust,
