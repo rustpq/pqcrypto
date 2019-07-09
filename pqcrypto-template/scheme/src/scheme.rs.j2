@@ -7,7 +7,7 @@
 {% if type == "kem" %}
 //! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
 //! let (pk, sk) = keypair();
-//! let (ss1, ct) = encapsulate(pk);
+//! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(ct, sk);
 //! assert!(ss1 == ss2);
 {% else %}
@@ -198,7 +198,7 @@ pub fn keypair() -> (PublicKey, SecretKey) {
 
 {% if type == "kem" %}
 /// Encapsulate to a {{ scheme.name }} public key
-pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
+pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ss = SharedSecret::new();
     let mut ct = Ciphertext::new();
 
@@ -217,7 +217,7 @@ pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
 }
 
 /// Decapsulate the received {{ scheme.name }} ciphertext
-pub fn decapsulate(ct: Ciphertext, sk: SecretKey) -> SharedSecret {
+pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
         unsafe {
@@ -311,8 +311,8 @@ mod test {
     #[test]
     pub fn test_kem() {
         let (pk, sk) = keypair();
-        let (ss1, ct) = encapsulate(pk);
-        let ss2 = decapsulate(ct, sk);
+        let (ss1, ct) = encapsulate(&pk);
+        let ss2 = decapsulate(&ct, &sk);
         assert!(ss1.0 == ss2.0, "Difference in shared secrets!");
     }
 {% else %}

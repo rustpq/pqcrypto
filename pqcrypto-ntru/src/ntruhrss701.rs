@@ -6,7 +6,7 @@
 //! ```
 //! use pqcrypto_ntru::ntruhrss701::*;
 //! let (pk, sk) = keypair();
-//! let (ss1, ct) = encapsulate(pk);
+//! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(ct, sk);
 //! assert!(ss1 == ss2);
 //! ```
@@ -119,7 +119,7 @@ pub fn keypair() -> (PublicKey, SecretKey) {
 }
 
 /// Encapsulate to a ntruhrss701 public key
-pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
+pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ss = SharedSecret::new();
     let mut ct = Ciphertext::new();
 
@@ -138,7 +138,7 @@ pub fn encapsulate(pk: PublicKey) -> (SharedSecret, Ciphertext) {
 }
 
 /// Decapsulate the received ntruhrss701 ciphertext
-pub fn decapsulate(ct: Ciphertext, sk: SecretKey) -> SharedSecret {
+pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
         unsafe {
@@ -160,8 +160,8 @@ mod test {
     #[test]
     pub fn test_kem() {
         let (pk, sk) = keypair();
-        let (ss1, ct) = encapsulate(pk);
-        let ss2 = decapsulate(ct, sk);
+        let (ss1, ct) = encapsulate(&pk);
+        let ss2 = decapsulate(&ct, &sk);
         assert!(ss1.0 == ss2.0, "Difference in shared secrets!");
     }
 }

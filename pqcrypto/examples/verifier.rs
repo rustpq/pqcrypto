@@ -11,7 +11,7 @@ fn parseargs() -> (String, String, String) {
     (args[1].clone(), args[2].clone(), args[3].clone())
 }
 
-fn main() -> Result<(), Box<std::error::Error>> {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (pk_filename, in_filename, sig_filename) = parseargs();
     let pk = PublicKey::from_bytes(&fs::read(pk_filename)?)?;
     let msg = &fs::read(in_filename)?;
