@@ -22,12 +22,20 @@ pub mod prelude {
 
 pub mod kem {
     {% for kem in kems.keys() %}
-    pub use pqcrypto_{{ kem }}::*;
+    pub use pqcrypto_{{ kem }}::{
+        {% for scheme in kems[kem]['schemes'] %}
+        {{ scheme['name']|nameize }},
+        {% endfor %}
+    };
     {% endfor %}
 }
 
 pub mod sign {
     {% for sign in signs.keys() %}
-    pub use pqcrypto_{{ sign }}::*;
+    pub use pqcrypto_{{ sign }}::{
+        {% for scheme in signs[sign]['schemes'] %}
+        {{ scheme['name']|nameize }},
+        {% endfor %}
+    };
     {% endfor %}
 }
