@@ -34,7 +34,7 @@ use pqcrypto_traits::sign as primitive;
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
-        #[derive(Clone)]
+        #[derive(Clone, Copy)]
         pub struct $type([u8; $size]);
 
         impl $type {
@@ -91,7 +91,7 @@ simple_struct!(
 );
 simple_struct!(SharedSecret, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
 {% else %}
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct DetachedSignature([u8; ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES], usize);
 
 // for internal use

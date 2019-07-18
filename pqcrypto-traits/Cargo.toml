@@ -1,6 +1,6 @@
 [package]
 name = "pqcrypto-traits"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 description = "Shared traits for post-quantum cryptographic primitives"

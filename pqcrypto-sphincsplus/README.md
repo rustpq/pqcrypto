@@ -39,8 +39,5 @@ This crate contains bindings to the C implementations of the following schemes, 
  * ``sphincs-sha256-256f-simple`` - ``clean``
  * ``sphincs-sha256-256f-robust`` - ``clean``
 
-# Notes
-The SHA2 and Haraka versions are not thread safe!
-
 
 [pqc]: https://github.com/PQClean/PQClean/

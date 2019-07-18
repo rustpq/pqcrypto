@@ -12,34 +12,35 @@ fn main() {
         common_dir.join("randombytes.c"),
     ];
 
-    let target_firesaber_dir = Path::new("pqclean/crypto_kem/firesaber/clean");
-    let scheme_firesaber_files =
-        glob::glob(target_firesaber_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_lightsaber_dir = Path::new("pqclean/crypto_kem/lightsaber/clean");
-    let scheme_lightsaber_files =
-        glob::glob(target_lightsaber_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_saber_dir = Path::new("pqclean/crypto_kem/saber/clean");
-    let scheme_saber_files = glob::glob(target_saber_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_firesaber_clean_dir = Path::new("pqclean/crypto_kem/firesaber/clean");
+    let scheme_firesaber_clean_files =
+        glob::glob(target_firesaber_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_lightsaber_clean_dir = Path::new("pqclean/crypto_kem/lightsaber/clean");
+    let scheme_lightsaber_clean_files =
+        glob::glob(target_lightsaber_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_saber_clean_dir = Path::new("pqclean/crypto_kem/saber/clean");
+    let scheme_saber_clean_files =
+        glob::glob(target_saber_clean_dir.join("*.c").to_str().unwrap()).unwrap();
     cc::Build::new()
         .include("pqclean/common")
         .flag("-std=c99")
         .flag("-O3")
         .files(common_files.into_iter())
-        .include(target_firesaber_dir)
+        .include(target_firesaber_clean_dir)
         .files(
-            scheme_firesaber_files
+            scheme_firesaber_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_lightsaber_dir)
+        .include(target_lightsaber_clean_dir)
         .files(
-            scheme_lightsaber_files
+            scheme_lightsaber_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_saber_dir)
+        .include(target_saber_clean_dir)
         .files(
-            scheme_saber_files
+            scheme_saber_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )

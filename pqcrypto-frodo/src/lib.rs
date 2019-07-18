@@ -3,18 +3,20 @@
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
-//! * frodokem640shake - clean
-//! * frodokem640aes - clean
-//! * frodokem976aes - clean
-//! * frodokem976shake - clean
-//! * frodokem1344aes - clean
-//! * frodokem1344shake - clean
+//! * frodokem640shake - opt
+//! * frodokem640aes - opt
+//! * frodokem976aes - opt
+//! * frodokem976shake - opt
+//! * frodokem1344aes - opt
+//! * frodokem1344shake - opt
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
 //! # Notes
-//! Frodo needs a lot of stack space, specify env variable
-//! `RUST_MIN_STACK` to make sure it has enough stack space in threads.
+//! If you use it via the FFI interface: The clean implementation of Frodo
+//! needs a lot of stack space, specify env variable `RUST_MIN_STACK` to
+//! make sure it has enough stack space in threads.  This is not relevant
+//! for the 'normal' api methods.
 
 #![allow(clippy::len_without_is_empty)]
 

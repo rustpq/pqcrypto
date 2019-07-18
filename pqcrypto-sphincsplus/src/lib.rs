@@ -42,8 +42,6 @@
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
-//! # Notes
-//! The SHA2 and Haraka versions are not thread safe!
 
 #![allow(clippy::len_without_is_empty)]
 

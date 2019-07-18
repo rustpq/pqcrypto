@@ -22,7 +22,7 @@ use pqcrypto_traits::{Error, Result};
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
-        #[derive(Clone)]
+        #[derive(Clone, Copy)]
         pub struct $type([u8; $size]);
 
         impl $type {
@@ -80,7 +80,7 @@ simple_struct!(
     SecretKey,
     ffi::PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_SECRETKEYBYTES
 );
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct DetachedSignature(
     [u8; ffi::PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_CRYPTO_BYTES],
     usize,

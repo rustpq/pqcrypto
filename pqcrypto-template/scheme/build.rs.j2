@@ -14,8 +14,10 @@ fn main() {
     ];
 
     {% for scheme in schemes %}
-    let target_{{ scheme.name|nameize }}_dir = Path::new("pqclean/crypto_{{ type }}/{{ scheme.name }}/{{ scheme.implementation }}");
-    let scheme_{{ scheme.name|nameize }}_files = glob::glob(target_{{scheme.name|nameize}}_dir.join("*.c").to_str().unwrap()).unwrap();
+    {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
+    let target_{{ scheme.name|nameize }}_{{ implementation }}_dir = Path::new("pqclean/crypto_{{ type }}/{{ scheme.name }}/{{ implementation }}");
+    let scheme_{{ scheme.name|nameize }}_{{ implementation }}_files = glob::glob(target_{{scheme.name|nameize}}_{{ implementation }}_dir.join("*.c").to_str().unwrap()).unwrap();
+    {% endfor %}
     {% endfor %}
     cc::Build::new()
         .include("pqclean/common")
@@ -23,8 +25,10 @@ fn main() {
         .flag("-O3")
         .files(common_files.into_iter())
         {% for scheme in schemes %}
-        .include(target_{{ scheme.name|nameize }}_dir)
-        .files(scheme_{{ scheme.name|nameize }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
+        {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
+        .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)
+        .files(scheme_{{ scheme.name|nameize }}_{{ implementation }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
+        {% endfor %}
         {% endfor %}
         .compile("lib{{ name }}.a");
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2019-07-18
+* Update PQClean implementations
+  * SPHINCS+ is now thread-safe.
+  * Frodo now uses ``opt`` implementation by default.
+* Allow for multiple implementations in the ``ffi`` interface.
+
 ## 2019-07-09
 * Make ``encapsulate`` and ``decapsulate`` take references.
 * Add Dilithium

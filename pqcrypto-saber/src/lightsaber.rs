@@ -21,7 +21,7 @@ use pqcrypto_traits::{Error, Result};
 
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
-        #[derive(Clone)]
+        #[derive(Clone, Copy)]
         pub struct $type([u8; $size]);
 
         impl $type {

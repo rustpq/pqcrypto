@@ -5,7 +5,7 @@ traits_version: 0.3.0
 
 kems:
   kyber:
-    version: 0.4.0
+    version: 0.4.1
     schemes:
       - name: kyber512
         implementation: clean
@@ -14,25 +14,40 @@ kems:
       - name: kyber1024
         implementation: clean
   frodo:
-    version: 0.4.0
+    version: 0.4.1
     notes: |
-      Frodo needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make sure it has
-      enough stack space in threads.
+      If you use it via the FFI interface: The clean implementation of Frodo
+      needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
+      sure it has enough stack space in threads.
+
+      This is not relevant for the 'normal' api methods.
     schemes:
       - name: frodokem640shake
-        implementation: clean
+        implementation: opt
+        alt_implementations:
+          - clean
       - name: frodokem640aes
-        implementation: clean
+        implementation: opt
+        alt_implementations:
+          - clean
       - name: frodokem976aes
-        implementation: clean
+        implementation: opt
+        alt_implementations:
+          - clean
       - name: frodokem976shake
-        implementation: clean
+        implementation: opt
+        alt_implementations:
+          - clean
       - name: frodokem1344aes
-        implementation: clean
+        implementation: opt
+        alt_implementations:
+          - clean
       - name: frodokem1344shake
-        implementation: clean
+        implementation: opt
+        alt_implementations:
+          - clean
   ntru:
-    version: 0.4.0
+    version: 0.4.1
     schemes:
       - name: ntruhps2048509
         implementation: clean
@@ -43,7 +58,7 @@ kems:
       - name: ntruhrss701
         implementation: clean
   saber:
-    version: 0.1.0
+    version: 0.1.1
     schemes:
       - name: firesaber
         implementation: clean
@@ -54,14 +69,14 @@ kems:
 
 signs:
   mqdss:
-    version: 0.2.1
+    version: 0.2.2
     schemes:
       - name: mqdss-48
         implementation: clean
       - name: mqdss-64
         implementation: clean
   dilithium:
-    version: 0.1.0
+    version: 0.1.1
     schemes:
       - name: dilithium2
         implementation: clean
@@ -70,9 +85,7 @@ signs:
       - name: dilithium4
         implementation: clean
   sphincsplus:
-    version: 0.4.1
-    notes: |
-      The SHA2 and Haraka versions are not thread safe!
+    version: 0.4.2
     schemes:
       - name: sphincs-haraka-128s-simple
         implementation: clean

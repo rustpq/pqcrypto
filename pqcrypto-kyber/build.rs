@@ -12,35 +12,35 @@ fn main() {
         common_dir.join("randombytes.c"),
     ];
 
-    let target_kyber512_dir = Path::new("pqclean/crypto_kem/kyber512/clean");
-    let scheme_kyber512_files =
-        glob::glob(target_kyber512_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_kyber768_dir = Path::new("pqclean/crypto_kem/kyber768/clean");
-    let scheme_kyber768_files =
-        glob::glob(target_kyber768_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_kyber1024_dir = Path::new("pqclean/crypto_kem/kyber1024/clean");
-    let scheme_kyber1024_files =
-        glob::glob(target_kyber1024_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_kyber512_clean_dir = Path::new("pqclean/crypto_kem/kyber512/clean");
+    let scheme_kyber512_clean_files =
+        glob::glob(target_kyber512_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_kyber768_clean_dir = Path::new("pqclean/crypto_kem/kyber768/clean");
+    let scheme_kyber768_clean_files =
+        glob::glob(target_kyber768_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_kyber1024_clean_dir = Path::new("pqclean/crypto_kem/kyber1024/clean");
+    let scheme_kyber1024_clean_files =
+        glob::glob(target_kyber1024_clean_dir.join("*.c").to_str().unwrap()).unwrap();
     cc::Build::new()
         .include("pqclean/common")
         .flag("-std=c99")
         .flag("-O3")
         .files(common_files.into_iter())
-        .include(target_kyber512_dir)
+        .include(target_kyber512_clean_dir)
         .files(
-            scheme_kyber512_files
+            scheme_kyber512_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_kyber768_dir)
+        .include(target_kyber768_clean_dir)
         .files(
-            scheme_kyber768_files
+            scheme_kyber768_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_kyber1024_dir)
+        .include(target_kyber1024_clean_dir)
         .files(
-            scheme_kyber1024_files
+            scheme_kyber1024_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
