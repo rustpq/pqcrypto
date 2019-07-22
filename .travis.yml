@@ -10,4 +10,4 @@ rust:
 
 script:
   - cargo build
-  - cargo test -- --test-threads 1
+  - cargo test --all
