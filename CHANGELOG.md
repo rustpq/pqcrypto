@@ -1,5 +1,9 @@
 # Changelog
 
+## 2019-07-22
+
+* Update `rand` crate to `0.7.0`
+
 ## 2019-07-18
 * Update PQClean implementations
   * SPHINCS+ is now thread-safe.
