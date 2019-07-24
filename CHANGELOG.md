@@ -1,5 +1,11 @@
 # Changelog
 
+## 2019-07-24
+
+* Ditch ``pqcrypto-internals``
+* Update PQClean
+* Package Falcon
+
 ## 2019-07-22
 
 * Update `rand` crate to `0.7.0`
