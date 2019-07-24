@@ -156,7 +156,10 @@ mod test_falcon512_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(smlen, PQCLEAN_FALCON512_CLEAN_CRYPTO_BYTES);
+            assert!(
+                smlen <= PQCLEAN_FALCON512_CLEAN_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
             assert_eq!(
                 0,
                 PQCLEAN_FALCON512_CLEAN_crypto_sign_verify(
@@ -269,7 +272,10 @@ mod test_falcon1024_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(smlen, PQCLEAN_FALCON1024_CLEAN_CRYPTO_BYTES);
+            assert!(
+                smlen <= PQCLEAN_FALCON1024_CLEAN_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
             assert_eq!(
                 0,
                 PQCLEAN_FALCON1024_CLEAN_crypto_sign_verify(

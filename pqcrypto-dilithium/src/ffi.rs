@@ -189,7 +189,10 @@ mod test_dilithium2_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(smlen, PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES);
+            assert!(
+                smlen <= PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
             assert_eq!(
                 0,
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_verify(
@@ -302,7 +305,10 @@ mod test_dilithium3_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(smlen, PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES);
+            assert!(
+                smlen <= PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
             assert_eq!(
                 0,
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_verify(
@@ -415,7 +421,10 @@ mod test_dilithium4_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(smlen, PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES);
+            assert!(
+                smlen <= PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
             assert_eq!(
                 0,
                 PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_verify(

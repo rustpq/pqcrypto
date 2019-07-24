@@ -132,9 +132,7 @@ impl primitive::SignedMessage for SignedMessage {
 
 impl SignedMessage {
     pub fn len(&self) -> usize {
-        let len = self.0.len();
-        debug_assert!(len > signature_bytes());
-        len
+        self.0.len()
     }
 }
 

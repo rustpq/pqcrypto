@@ -150,7 +150,8 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
                     msg.as_ptr(), msg.len(),
                     sk.as_ptr())
             );
-            assert_eq!(smlen, PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
+            assert!(smlen <= PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES,
+                    "Signed message length should be ≤ CRYPTO_BYTES");
             assert_eq!(
                 0,
                 PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
