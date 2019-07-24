@@ -12,4 +12,5 @@ This superproject contains the following cryptographic algorithms:
 ## Signature Schemes
 * [``pqcrypto-mqdss``](https://crates.io/crates/pqcrypto-mqdss)
 * [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium)
+* [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon)
 * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus)

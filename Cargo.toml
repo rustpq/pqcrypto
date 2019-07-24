@@ -9,5 +9,6 @@ members=[
     "pqcrypto-saber",
     "pqcrypto-mqdss",
     "pqcrypto-dilithium",
+    "pqcrypto-falcon",
     "pqcrypto-sphincsplus",
 ]

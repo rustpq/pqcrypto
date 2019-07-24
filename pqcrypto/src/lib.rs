@@ -26,6 +26,7 @@ pub mod kem {
 
 pub mod sign {
     pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium4};
+    pub use pqcrypto_falcon::{falcon1024, falcon512};
     pub use pqcrypto_mqdss::{mqdss48, mqdss64};
     pub use pqcrypto_sphincsplus::{
         sphincsharaka128frobust, sphincsharaka128fsimple, sphincsharaka128srobust,
