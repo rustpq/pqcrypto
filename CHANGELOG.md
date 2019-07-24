@@ -5,6 +5,7 @@
 * Ditch ``pqcrypto-internals``
 * Update PQClean
 * Package Falcon
+* Make nicer docs and READMEs
 
 ## 2019-07-22
 

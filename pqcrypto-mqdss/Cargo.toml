@@ -12,7 +12,7 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
-pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.3.0"}
+pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.3.1"}
 libc = "0.2.0"
 
 [dev-dependencies]

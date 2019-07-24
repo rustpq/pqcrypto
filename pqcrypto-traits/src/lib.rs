@@ -1,5 +1,9 @@
+/// Supporting Traits for the pqcrypto crates.
+
+/// Convenience wrapper for Result
 pub type Result<T> = std::result::Result<T, Error>;
 
+/// Errors that may arise when constructing keys or signatures.
 #[derive(Clone, Copy, Debug)]
 pub enum Error {
     BadLength {
