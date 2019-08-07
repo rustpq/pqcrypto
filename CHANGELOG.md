@@ -10,6 +10,7 @@
 * Package Rainbow
     * The ``clean`` implementations are currently known to have undefined behaviour.
       See https://github.com/PQClean/PQClean/issues/220
+* Hide a internal enum variable from ``pqcrypto_traits::sign::VerificationError``
 
 ## 2019-07-24
 

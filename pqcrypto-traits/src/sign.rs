@@ -46,6 +46,7 @@ pub trait DetachedSignature {
 pub enum VerificationError {
     InvalidSignature,
     UnknownVerificationError,
+    #[doc(hidden)]
     __NonExhaustive,
 }
 
