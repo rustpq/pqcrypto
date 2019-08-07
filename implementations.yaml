@@ -85,14 +85,14 @@ signs:
       - name: dilithium4
         implementation: clean
   falcon:
-    version: 0.1.0
+    version: 0.1.1
     schemes:
       - name: falcon-512
         implementation: clean
       - name: falcon-1024
         implementation: clean
   sphincsplus:
-    version: 0.4.2
+    version: 0.4.3
     schemes:
       - name: sphincs-haraka-128s-simple
         implementation: clean
