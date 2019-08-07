@@ -85,7 +85,7 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
                 0,
                 PQCLEAN_{{ NS_NAME }}_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
     {% endif %}

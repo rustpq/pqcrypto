@@ -78,7 +78,7 @@ mod test_firesaber_clean {
                 0,
                 PQCLEAN_FIRESABER_CLEAN_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -112,7 +112,7 @@ mod test_lightsaber_clean {
                 0,
                 PQCLEAN_LIGHTSABER_CLEAN_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -142,7 +142,7 @@ mod test_saber_clean {
                 0,
                 PQCLEAN_SABER_CLEAN_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 

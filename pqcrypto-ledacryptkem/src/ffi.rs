@@ -93,7 +93,7 @@ mod test_ledakemlt12_leaktime {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -131,7 +131,7 @@ mod test_ledakemlt32_leaktime {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -169,7 +169,7 @@ mod test_ledakemlt52_leaktime {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 

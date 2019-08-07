@@ -162,6 +162,6 @@ mod test {
         let (pk, sk) = keypair();
         let (ss1, ct) = encapsulate(&pk);
         let ss2 = decapsulate(&ct, &sk);
-        assert!(ss1.0 == ss2.0, "Difference in shared secrets!");
+        assert_eq!(&ss1.0[..], &ss2.0[..], "Difference in shared secrets!");
     }
 }

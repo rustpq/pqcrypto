@@ -78,7 +78,7 @@ mod test_kyber512_clean {
                 0,
                 PQCLEAN_KYBER512_CLEAN_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -112,7 +112,7 @@ mod test_kyber768_clean {
                 0,
                 PQCLEAN_KYBER768_CLEAN_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -146,7 +146,7 @@ mod test_kyber1024_clean {
                 0,
                 PQCLEAN_KYBER1024_CLEAN_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 

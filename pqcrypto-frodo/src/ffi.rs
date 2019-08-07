@@ -231,7 +231,7 @@ mod test_frodokem640shake_opt {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -269,7 +269,7 @@ mod test_frodokem640shake_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -307,7 +307,7 @@ mod test_frodokem640aes_opt {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -345,7 +345,7 @@ mod test_frodokem640aes_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -383,7 +383,7 @@ mod test_frodokem976aes_opt {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -421,7 +421,7 @@ mod test_frodokem976aes_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -459,7 +459,7 @@ mod test_frodokem976shake_opt {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -497,7 +497,7 @@ mod test_frodokem976shake_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -535,7 +535,7 @@ mod test_frodokem1344aes_opt {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -573,7 +573,7 @@ mod test_frodokem1344aes_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -611,7 +611,7 @@ mod test_frodokem1344shake_opt {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
@@ -652,7 +652,7 @@ mod test_frodokem1344shake_clean {
                     sk.as_ptr()
                 )
             );
-            assert_eq!(ss1, ss2);
+            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
 
