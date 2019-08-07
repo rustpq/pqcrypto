@@ -19,11 +19,15 @@ fn main() {
     let scheme_{{ scheme.name|nameize }}_{{ implementation }}_files = glob::glob(target_{{scheme.name|nameize}}_{{ implementation }}_dir.join("*.c").to_str().unwrap()).unwrap();
     {% endfor %}
     {% endfor %}
-    cc::Build::new()
-        .include("pqclean/common")
+    let mut builder = cc::Build::new();
+    builder.include("pqclean/common")
         .flag("-std=c99")
-        .flag("-O3")
-        .files(common_files.into_iter())
+        .flag("-O3");
+    #[cfg(debug_assertions)]
+    {
+        builder.flag("-g3");
+    }
+    builder.files(common_files.into_iter())
         {% for scheme in schemes %}
         {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
         .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)

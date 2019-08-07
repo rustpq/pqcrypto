@@ -39,10 +39,16 @@ fn main() {
     let target_ntruhrss701_clean_dir = Path::new("pqclean/crypto_kem/ntruhrss701/clean");
     let scheme_ntruhrss701_clean_files =
         glob::glob(target_ntruhrss701_clean_dir.join("*.c").to_str().unwrap()).unwrap();
-    cc::Build::new()
+    let mut builder = cc::Build::new();
+    builder
         .include("pqclean/common")
         .flag("-std=c99")
-        .flag("-O3")
+        .flag("-O3");
+    #[cfg(debug_assertions)]
+    {
+        builder.flag("-g3");
+    }
+    builder
         .files(common_files.into_iter())
         .include(target_ntruhps2048509_clean_dir)
         .files(
