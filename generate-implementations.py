@@ -23,7 +23,7 @@ def read_scheme_metadata(type, scheme_name):
 
 
 def nameize(value):
-    return re.sub(r'[^a-z0-9]', '', value)
+    return re.sub(r'[^a-zA-Z0-9]', '', value).lower()
 
 
 def render_template(target_dir, target_file, template_file, **templ_vars):
