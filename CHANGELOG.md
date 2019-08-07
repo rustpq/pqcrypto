@@ -1,5 +1,16 @@
 # Changelog
 
+## 2019-08-07
+
+* Update PQClean upstream
+* Update FALCON from PQClean
+* Update SPHINCS+ from PQClean
+* Package LEDAcryptKEM
+    * **Warning:** The LEDAcryptKEM implementations currently packaged are known to have timing side-channel vulnerabilities.
+* Package Rainbow
+    * The ``clean`` implementations are currently known to have undefined behaviour.
+      See https://github.com/PQClean/PQClean/issues/220
+
 ## 2019-07-24
 
 * Ditch ``pqcrypto-internals``

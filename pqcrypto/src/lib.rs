@@ -20,6 +20,7 @@ pub mod kem {
         frodokem976shake,
     };
     pub use pqcrypto_kyber::{kyber1024, kyber512, kyber768};
+    pub use pqcrypto_ledacryptkem::{ledakemlt12, ledakemlt32, ledakemlt52};
     pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
     pub use pqcrypto_saber::{firesaber, lightsaber, saber};
 }
@@ -28,6 +29,11 @@ pub mod sign {
     pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium4};
     pub use pqcrypto_falcon::{falcon1024, falcon512};
     pub use pqcrypto_mqdss::{mqdss48, mqdss64};
+    pub use pqcrypto_rainbow::{
+        rainbowaclassic, rainbowacyclic, rainbowacycliccompressed, rainbowcclassic,
+        rainbowcclassic, rainbowccyclic, rainbowccyclic, rainbowccycliccompressed,
+        rainbowccycliccompressed,
+    };
     pub use pqcrypto_sphincsplus::{
         sphincsharaka128frobust, sphincsharaka128fsimple, sphincsharaka128srobust,
         sphincsharaka128ssimple, sphincsharaka192frobust, sphincsharaka192fsimple,

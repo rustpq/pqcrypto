@@ -7,8 +7,10 @@ members=[
     "pqcrypto-frodo",
     "pqcrypto-ntru",
     "pqcrypto-saber",
+    "pqcrypto-ledacryptkem",
     "pqcrypto-mqdss",
     "pqcrypto-dilithium",
     "pqcrypto-falcon",
+    "pqcrypto-rainbow",
     "pqcrypto-sphincsplus",
 ]

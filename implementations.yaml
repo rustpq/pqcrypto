@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.6.2
+pqcrypto_version: 0.6.3
 traits_version: 0.3.1
 
 kems:
@@ -66,6 +66,20 @@ kems:
         implementation: clean
       - name: saber
         implementation: clean
+  ledacryptkem:
+    notes: |
+      This implementation is not constant-time!
+      This means that it is not secure.
+
+      This crate may remove the ``leaktime`` implementation at any point.
+    version: 0.0.1
+    schemes:
+      - name: ledakemlt12
+        implementation: leaktime
+      - name: ledakemlt32
+        implementation: leaktime
+      - name: ledakemlt52
+        implementation: leaktime
 
 signs:
   mqdss:
@@ -90,6 +104,29 @@ signs:
       - name: falcon-512
         implementation: clean
       - name: falcon-1024
+        implementation: clean
+  rainbow:
+    notes: |
+      The underlying ``clean`` implementions currently contain undefined behaviour, so they may crash!
+    version: 0.0.1
+    schemes:
+      - name: rainbowIIIc-classic
+        implementation: clean
+      - name: rainbowIIIc-cyclic
+        implementation: clean
+      - name: rainbowIIIc-cyclic-compressed
+        implementation: clean
+      - name: rainbowIa-classic
+        implementation: clean
+      - name: rainbowIa-cyclic
+        implementation: clean
+      - name: rainbowIa-cyclic-compressed
+        implementation: clean
+      - name: rainbowVc-classic
+        implementation: clean
+      - name: rainbowVc-cyclic
+        implementation: clean
+      - name: rainbowVc-cyclic-compressed
         implementation: clean
   sphincsplus:
     version: 0.4.3
