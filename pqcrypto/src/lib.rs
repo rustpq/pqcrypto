@@ -30,9 +30,9 @@ pub mod sign {
     pub use pqcrypto_falcon::{falcon1024, falcon512};
     pub use pqcrypto_mqdss::{mqdss48, mqdss64};
     pub use pqcrypto_rainbow::{
-        rainbowaclassic, rainbowacyclic, rainbowacycliccompressed, rainbowcclassic,
-        rainbowcclassic, rainbowccyclic, rainbowccyclic, rainbowccycliccompressed,
-        rainbowccycliccompressed,
+        rainbowiaclassic, rainbowiacyclic, rainbowiacycliccompressed, rainbowiiicclassic,
+        rainbowiiiccyclic, rainbowiiiccycliccompressed, rainbowvcclassic, rainbowvccyclic,
+        rainbowvccycliccompressed,
     };
     pub use pqcrypto_sphincsplus::{
         sphincsharaka128frobust, sphincsharaka128fsimple, sphincsharaka128srobust,

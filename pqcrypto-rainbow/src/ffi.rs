@@ -319,7 +319,7 @@ extern "C" {
 }
 
 #[cfg(test)]
-mod test_rainbowcclassic_clean {
+mod test_rainbowiiicclassic_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -439,7 +439,7 @@ mod test_rainbowcclassic_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowccyclic_clean {
+mod test_rainbowiiiccyclic_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -559,7 +559,7 @@ mod test_rainbowccyclic_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowccycliccompressed_clean {
+mod test_rainbowiiiccycliccompressed_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -680,7 +680,7 @@ mod test_rainbowccycliccompressed_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowaclassic_clean {
+mod test_rainbowiaclassic_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -800,7 +800,7 @@ mod test_rainbowaclassic_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowacyclic_clean {
+mod test_rainbowiacyclic_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -917,7 +917,7 @@ mod test_rainbowacyclic_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowacycliccompressed_clean {
+mod test_rainbowiacycliccompressed_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -1038,7 +1038,7 @@ mod test_rainbowacycliccompressed_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowcclassic_clean {
+mod test_rainbowvcclassic_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -1158,7 +1158,7 @@ mod test_rainbowcclassic_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowccyclic_clean {
+mod test_rainbowvccyclic_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -1275,7 +1275,7 @@ mod test_rainbowccyclic_clean {
     }
 }
 #[cfg(test)]
-mod test_rainbowccycliccompressed_clean {
+mod test_rainbowvccycliccompressed_clean {
     use super::*;
     use rand::prelude::*;
 

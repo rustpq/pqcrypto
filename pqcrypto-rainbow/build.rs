@@ -12,77 +12,80 @@ fn main() {
         common_dir.join("randombytes.c"),
     ];
 
-    let target_rainbowcclassic_clean_dir =
+    let target_rainbowiiicclassic_clean_dir =
         Path::new("pqclean/crypto_sign/rainbowIIIc-classic/clean");
-    let scheme_rainbowcclassic_clean_files = glob::glob(
-        target_rainbowcclassic_clean_dir
+    let scheme_rainbowiiicclassic_clean_files = glob::glob(
+        target_rainbowiiicclassic_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowccyclic_clean_dir = Path::new("pqclean/crypto_sign/rainbowIIIc-cyclic/clean");
-    let scheme_rainbowccyclic_clean_files = glob::glob(
-        target_rainbowccyclic_clean_dir
+    let target_rainbowiiiccyclic_clean_dir =
+        Path::new("pqclean/crypto_sign/rainbowIIIc-cyclic/clean");
+    let scheme_rainbowiiiccyclic_clean_files = glob::glob(
+        target_rainbowiiiccyclic_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowccycliccompressed_clean_dir =
+    let target_rainbowiiiccycliccompressed_clean_dir =
         Path::new("pqclean/crypto_sign/rainbowIIIc-cyclic-compressed/clean");
-    let scheme_rainbowccycliccompressed_clean_files = glob::glob(
-        target_rainbowccycliccompressed_clean_dir
+    let scheme_rainbowiiiccycliccompressed_clean_files = glob::glob(
+        target_rainbowiiiccycliccompressed_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowaclassic_clean_dir = Path::new("pqclean/crypto_sign/rainbowIa-classic/clean");
-    let scheme_rainbowaclassic_clean_files = glob::glob(
-        target_rainbowaclassic_clean_dir
+    let target_rainbowiaclassic_clean_dir =
+        Path::new("pqclean/crypto_sign/rainbowIa-classic/clean");
+    let scheme_rainbowiaclassic_clean_files = glob::glob(
+        target_rainbowiaclassic_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowacyclic_clean_dir = Path::new("pqclean/crypto_sign/rainbowIa-cyclic/clean");
-    let scheme_rainbowacyclic_clean_files = glob::glob(
-        target_rainbowacyclic_clean_dir
+    let target_rainbowiacyclic_clean_dir = Path::new("pqclean/crypto_sign/rainbowIa-cyclic/clean");
+    let scheme_rainbowiacyclic_clean_files = glob::glob(
+        target_rainbowiacyclic_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowacycliccompressed_clean_dir =
+    let target_rainbowiacycliccompressed_clean_dir =
         Path::new("pqclean/crypto_sign/rainbowIa-cyclic-compressed/clean");
-    let scheme_rainbowacycliccompressed_clean_files = glob::glob(
-        target_rainbowacycliccompressed_clean_dir
+    let scheme_rainbowiacycliccompressed_clean_files = glob::glob(
+        target_rainbowiacycliccompressed_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowcclassic_clean_dir = Path::new("pqclean/crypto_sign/rainbowVc-classic/clean");
-    let scheme_rainbowcclassic_clean_files = glob::glob(
-        target_rainbowcclassic_clean_dir
+    let target_rainbowvcclassic_clean_dir =
+        Path::new("pqclean/crypto_sign/rainbowVc-classic/clean");
+    let scheme_rainbowvcclassic_clean_files = glob::glob(
+        target_rainbowvcclassic_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowccyclic_clean_dir = Path::new("pqclean/crypto_sign/rainbowVc-cyclic/clean");
-    let scheme_rainbowccyclic_clean_files = glob::glob(
-        target_rainbowccyclic_clean_dir
+    let target_rainbowvccyclic_clean_dir = Path::new("pqclean/crypto_sign/rainbowVc-cyclic/clean");
+    let scheme_rainbowvccyclic_clean_files = glob::glob(
+        target_rainbowvccyclic_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
     )
     .unwrap();
-    let target_rainbowccycliccompressed_clean_dir =
+    let target_rainbowvccycliccompressed_clean_dir =
         Path::new("pqclean/crypto_sign/rainbowVc-cyclic-compressed/clean");
-    let scheme_rainbowccycliccompressed_clean_files = glob::glob(
-        target_rainbowccycliccompressed_clean_dir
+    let scheme_rainbowvccycliccompressed_clean_files = glob::glob(
+        target_rainbowvccycliccompressed_clean_dir
             .join("*.c")
             .to_str()
             .unwrap(),
@@ -93,57 +96,57 @@ fn main() {
         .flag("-std=c99")
         .flag("-O3")
         .files(common_files.into_iter())
-        .include(target_rainbowcclassic_clean_dir)
+        .include(target_rainbowiiicclassic_clean_dir)
         .files(
-            scheme_rainbowcclassic_clean_files
+            scheme_rainbowiiicclassic_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowccyclic_clean_dir)
+        .include(target_rainbowiiiccyclic_clean_dir)
         .files(
-            scheme_rainbowccyclic_clean_files
+            scheme_rainbowiiiccyclic_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowccycliccompressed_clean_dir)
+        .include(target_rainbowiiiccycliccompressed_clean_dir)
         .files(
-            scheme_rainbowccycliccompressed_clean_files
+            scheme_rainbowiiiccycliccompressed_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowaclassic_clean_dir)
+        .include(target_rainbowiaclassic_clean_dir)
         .files(
-            scheme_rainbowaclassic_clean_files
+            scheme_rainbowiaclassic_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowacyclic_clean_dir)
+        .include(target_rainbowiacyclic_clean_dir)
         .files(
-            scheme_rainbowacyclic_clean_files
+            scheme_rainbowiacyclic_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowacycliccompressed_clean_dir)
+        .include(target_rainbowiacycliccompressed_clean_dir)
         .files(
-            scheme_rainbowacycliccompressed_clean_files
+            scheme_rainbowiacycliccompressed_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowcclassic_clean_dir)
+        .include(target_rainbowvcclassic_clean_dir)
         .files(
-            scheme_rainbowcclassic_clean_files
+            scheme_rainbowvcclassic_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowccyclic_clean_dir)
+        .include(target_rainbowvccyclic_clean_dir)
         .files(
-            scheme_rainbowccyclic_clean_files
+            scheme_rainbowvccyclic_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
-        .include(target_rainbowccycliccompressed_clean_dir)
+        .include(target_rainbowvccycliccompressed_clean_dir)
         .files(
-            scheme_rainbowccycliccompressed_clean_files
+            scheme_rainbowvccycliccompressed_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         )
