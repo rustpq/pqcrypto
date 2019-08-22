@@ -4,14 +4,6 @@ extern crate glob;
 use std::path::Path;
 
 fn main() {
-    let common_dir = Path::new("pqclean/common");
-    let common_files = [
-        common_dir.join("fips202.c"),
-        common_dir.join("aes.c"),
-        common_dir.join("sha2.c"),
-        common_dir.join("randombytes.c"),
-    ];
-
     let target_sphincsharaka128ssimple_clean_dir =
         Path::new("pqclean/crypto_sign/sphincs-haraka-128s-simple/clean");
     let scheme_sphincsharaka128ssimple_clean_files = glob::glob(
@@ -337,14 +329,20 @@ fn main() {
     )
     .unwrap();
     let mut builder = cc::Build::new();
-    builder
-        .include("pqclean/common")
-        .flag("-std=c99")
-        .flag("-O3");
+    builder.include("pqclean/common").flag("-std=c99");
+
     #[cfg(debug_assertions)]
     {
         builder.flag("-g3");
     }
+    let common_dir = Path::new("pqclean/common");
+    let common_files = [
+        common_dir.join("fips202.c"),
+        common_dir.join("aes.c"),
+        common_dir.join("sha2.c"),
+        common_dir.join("randombytes.c"),
+    ];
+
     builder
         .files(common_files.into_iter())
         .include(target_sphincsharaka128ssimple_clean_dir)

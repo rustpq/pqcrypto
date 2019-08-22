@@ -18,7 +18,6 @@ This super-crate contains the following cryptographic algorithms:
 * [``pqcrypto-mqdss``](https://crates.io/crates/pqcrypto-mqdss)
 * [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium)
 * [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon)
-* [``pqcrypto-rainbow``](https://crates.io/crates/pqcrypto-rainbow)
 * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus)
 
 ## License

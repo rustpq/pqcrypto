@@ -1,5 +1,10 @@
 # Changelog
 
+## 2019-08-22
+
+* Update PQClean upstream
+* Support upcoming AVX2 implementations from PQClean
+
 ## 2019-08-07
 
 * Update PQClean upstream

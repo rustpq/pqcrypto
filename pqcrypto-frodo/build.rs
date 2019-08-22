@@ -4,14 +4,6 @@ extern crate glob;
 use std::path::Path;
 
 fn main() {
-    let common_dir = Path::new("pqclean/common");
-    let common_files = [
-        common_dir.join("fips202.c"),
-        common_dir.join("aes.c"),
-        common_dir.join("sha2.c"),
-        common_dir.join("randombytes.c"),
-    ];
-
     let target_frodokem640shake_opt_dir = Path::new("pqclean/crypto_kem/frodokem640shake/opt");
     let scheme_frodokem640shake_opt_files = glob::glob(
         target_frodokem640shake_opt_dir
@@ -95,14 +87,20 @@ fn main() {
     )
     .unwrap();
     let mut builder = cc::Build::new();
-    builder
-        .include("pqclean/common")
-        .flag("-std=c99")
-        .flag("-O3");
+    builder.include("pqclean/common").flag("-std=c99");
+
     #[cfg(debug_assertions)]
     {
         builder.flag("-g3");
     }
+    let common_dir = Path::new("pqclean/common");
+    let common_files = [
+        common_dir.join("fips202.c"),
+        common_dir.join("aes.c"),
+        common_dir.join("sha2.c"),
+        common_dir.join("randombytes.c"),
+    ];
+
     builder
         .files(common_files.into_iter())
         .include(target_frodokem640shake_opt_dir)

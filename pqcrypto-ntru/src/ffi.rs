@@ -41,6 +41,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_NTRUHPS2048677_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NTRUHPS2048677_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -52,6 +53,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_NTRUHPS4096821_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NTRUHPS4096821_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -63,6 +65,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_NTRUHRSS701_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NTRUHRSS701_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -74,6 +77,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(test)]

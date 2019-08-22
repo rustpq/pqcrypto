@@ -20,6 +20,8 @@ publish pqcrypto-mqdss
 publish pqcrypto-saber
 publish pqcrypto-dilithium
 publish pqcrypto-falcon
+publish pqcrypto-rainbow
+publish pqcrypto-ledacryptkem
 
 echo "Waiting a little bit for the packages to settle on crates.io"
 

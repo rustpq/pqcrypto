@@ -4,6 +4,19 @@ extern crate glob;
 use std::path::Path;
 
 fn main() {
+    let target_falcon512_clean_dir = Path::new("pqclean/crypto_sign/falcon-512/clean");
+    let scheme_falcon512_clean_files =
+        glob::glob(target_falcon512_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    let target_falcon1024_clean_dir = Path::new("pqclean/crypto_sign/falcon-1024/clean");
+    let scheme_falcon1024_clean_files =
+        glob::glob(target_falcon1024_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    let mut builder = cc::Build::new();
+    builder.include("pqclean/common").flag("-std=c99");
+
+    #[cfg(debug_assertions)]
+    {
+        builder.flag("-g3");
+    }
     let common_dir = Path::new("pqclean/common");
     let common_files = [
         common_dir.join("fips202.c"),
@@ -12,21 +25,6 @@ fn main() {
         common_dir.join("randombytes.c"),
     ];
 
-    let target_falcon512_clean_dir = Path::new("pqclean/crypto_sign/falcon-512/clean");
-    let scheme_falcon512_clean_files =
-        glob::glob(target_falcon512_clean_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_falcon1024_clean_dir = Path::new("pqclean/crypto_sign/falcon-1024/clean");
-    let scheme_falcon1024_clean_files =
-        glob::glob(target_falcon1024_clean_dir.join("*.c").to_str().unwrap()).unwrap();
-    let mut builder = cc::Build::new();
-    builder
-        .include("pqclean/common")
-        .flag("-std=c99")
-        .flag("-O3");
-    #[cfg(debug_assertions)]
-    {
-        builder.flag("-g3");
-    }
     builder
         .files(common_files.into_iter())
         .include(target_falcon512_clean_dir)

@@ -3,36 +3,61 @@ extern crate glob;
 
 use std::path::Path;
 
+{% set globals = namespace(have_avx2=False) %}
 
 fn main() {
-    let common_dir = Path::new("pqclean/common");
-    let common_files = [
-        common_dir.join("fips202.c"),
-        common_dir.join("aes.c"),
-        common_dir.join("sha2.c"),
-        common_dir.join("randombytes.c"),
-    ];
-
     {% for scheme in schemes %}
     {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
     let target_{{ scheme.name|nameize }}_{{ implementation }}_dir = Path::new("pqclean/crypto_{{ type }}/{{ scheme.name }}/{{ implementation }}");
     let scheme_{{ scheme.name|nameize }}_{{ implementation }}_files = glob::glob(target_{{scheme.name|nameize}}_{{ implementation }}_dir.join("*.c").to_str().unwrap()).unwrap();
     {% endfor %}
+    {# Do we have an AVX2 version? #}
+    {% if 'avx2_implementation' in scheme %}
+    {% set implementation = scheme.avx2_implementation %}
+    {% set globals.have_avx2 = True %}
+    let target_{{ scheme.name|nameize }}_{{ implementation }}_dir = Path::new("pqclean/crypto_{{ type }}/{{ scheme.name }}/{{ implementation }}");
+    let scheme_{{ scheme.name|nameize }}_{{ implementation }}_files = glob::glob(target_{{scheme.name|nameize}}_{{ implementation }}_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+    {% endif %}
     {% endfor %}
     let mut builder = cc::Build::new();
     builder.include("pqclean/common")
-        .flag("-std=c99")
-        .flag("-O3");
+    {% if globals.have_avx2 %}
+        .flag("-mavx2")
+        .flag("-mbmi2")
+    {% endif %}
+        .flag("-std=c99");
+
     #[cfg(debug_assertions)]
     {
         builder.flag("-g3");
     }
+    let common_dir = Path::new("pqclean/common");
+    {% if globals.have_avx2 %}
+    let keccak4x_dir = common_dir.join("keccak4x");
+    {% endif %}
+    let common_files = [
+        common_dir.join("fips202.c"),
+        common_dir.join("aes.c"),
+        common_dir.join("sha2.c"),
+        common_dir.join("randombytes.c"),
+    {% if globals.have_avx2 %}
+        keccak4x_dir.join("KeccakP-1600-times4-SIMD256.c"),
+    {% endif %}
+    ];
+
+
+
     builder.files(common_files.into_iter())
         {% for scheme in schemes %}
         {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
         .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)
         .files(scheme_{{ scheme.name|nameize }}_{{ implementation }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
         {% endfor %}
+        {% if 'avx2_implementation' in scheme %}
+        {% set implementation = scheme.avx2_implementation %}
+        .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)
+        .files(scheme_{{ scheme.name|nameize }}_{{ implementation }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
+        {% endif %}
         {% endfor %}
         .compile("lib{{ name }}.a");
 }

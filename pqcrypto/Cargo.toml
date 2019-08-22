@@ -21,7 +21,6 @@ pqcrypto-ledacryptkem = { path = "../pqcrypto-ledacryptkem", version = "0.0.1" }
 pqcrypto-mqdss = { path = "../pqcrypto-mqdss", version = "0.2.2" }
 pqcrypto-dilithium = { path = "../pqcrypto-dilithium", version = "0.1.1" }
 pqcrypto-falcon = { path = "../pqcrypto-falcon", version = "0.1.1" }
-pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.0.1" }
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.4.3" }
 
 [badges]

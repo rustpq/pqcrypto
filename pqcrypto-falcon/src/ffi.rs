@@ -47,6 +47,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_FALCON1024_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FALCON1024_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -76,6 +77,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(test)]

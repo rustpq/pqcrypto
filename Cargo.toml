@@ -11,6 +11,5 @@ members=[
     "pqcrypto-mqdss",
     "pqcrypto-dilithium",
     "pqcrypto-falcon",
-    "pqcrypto-rainbow",
     "pqcrypto-sphincsplus",
 ]

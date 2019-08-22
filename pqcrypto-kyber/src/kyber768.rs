@@ -101,6 +101,11 @@ pub const fn shared_secret_bytes() -> usize {
 
 /// Generate a kyber768 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
+    keypair_portable()
+}
+
+#[inline]
+fn keypair_portable() -> (PublicKey, SecretKey) {
     let mut pk = PublicKey::new();
     let mut sk = SecretKey::new();
     assert_eq!(
@@ -114,6 +119,11 @@ pub fn keypair() -> (PublicKey, SecretKey) {
 
 /// Encapsulate to a kyber768 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
+    encapsulate_portable(pk)
+}
+
+#[inline]
+fn encapsulate_portable(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ss = SharedSecret::new();
     let mut ct = Ciphertext::new();
 
@@ -133,6 +143,11 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 
 /// Decapsulate the received kyber768 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
+    decapsulate_portable(ct, sk)
+}
+
+#[inline]
+fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
         unsafe {

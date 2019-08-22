@@ -86,6 +86,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_FRODOKEM640AES_OPT_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FRODOKEM640AES_OPT_crypto_kem_enc(
         ct: *mut u8,
@@ -108,6 +109,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_FRODOKEM976AES_OPT_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FRODOKEM976AES_OPT_crypto_kem_enc(
         ct: *mut u8,
@@ -130,6 +132,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_enc(
         ct: *mut u8,
@@ -152,6 +155,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_FRODOKEM1344AES_OPT_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FRODOKEM1344AES_OPT_crypto_kem_enc(
         ct: *mut u8,
@@ -174,6 +178,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_FRODOKEM1344SHAKE_OPT_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FRODOKEM1344SHAKE_OPT_crypto_kem_enc(
         ct: *mut u8,
@@ -196,6 +201,7 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(test)]
