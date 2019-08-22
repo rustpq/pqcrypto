@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CARGO=~/git/cargo/target/debug/cargo
+CARGO="cargo +nightly"
 
 publish() {
     pushd $1
