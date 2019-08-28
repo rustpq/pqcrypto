@@ -39,38 +39,34 @@ fn main() {
         builder.flag("-g3");
     }
     let common_dir = Path::new("pqclean/common");
-    let common_files = [
+
+    let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
         common_dir.join("sha2.c"),
         common_dir.join("randombytes.c"),
     ];
 
-    builder
-        .files(common_files.into_iter())
-        .include(target_ntruhps2048509_clean_dir)
-        .files(
-            scheme_ntruhps2048509_clean_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .include(target_ntruhps2048677_clean_dir)
-        .files(
-            scheme_ntruhps2048677_clean_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .include(target_ntruhps4096821_clean_dir)
-        .files(
-            scheme_ntruhps4096821_clean_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .include(target_ntruhrss701_clean_dir)
-        .files(
-            scheme_ntruhrss701_clean_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .compile("libntru.a");
+    builder.files(common_files.into_iter());
+    builder.include(target_ntruhps2048509_clean_dir).files(
+        scheme_ntruhps2048509_clean_files
+            .into_iter()
+            .map(|p| p.unwrap().to_string_lossy().into_owned()),
+    );
+    builder.include(target_ntruhps2048677_clean_dir).files(
+        scheme_ntruhps2048677_clean_files
+            .into_iter()
+            .map(|p| p.unwrap().to_string_lossy().into_owned()),
+    );
+    builder.include(target_ntruhps4096821_clean_dir).files(
+        scheme_ntruhps4096821_clean_files
+            .into_iter()
+            .map(|p| p.unwrap().to_string_lossy().into_owned()),
+    );
+    builder.include(target_ntruhrss701_clean_dir).files(
+        scheme_ntruhrss701_clean_files
+            .into_iter()
+            .map(|p| p.unwrap().to_string_lossy().into_owned()),
+    );
+    builder.compile("libntru.a");
 }

@@ -24,6 +24,7 @@ fn main() {
     {% if globals.have_avx2 %}
         .flag("-mavx2")
         .flag("-mbmi2")
+        .flag("-mpopcnt")
     {% endif %}
         .flag("-std=c99");
 
@@ -32,32 +33,49 @@ fn main() {
         builder.flag("-g3");
     }
     let common_dir = Path::new("pqclean/common");
+
     {% if globals.have_avx2 %}
+    #[allow(unused_variables)]
     let keccak4x_dir = common_dir.join("keccak4x");
     {% endif %}
-    let common_files = [
+
+    {% if globals.have_avx2 %}
+    #[allow(unused_mut)]
+    let mut common_files = vec![
+    {% else %}
+    let common_files = vec![
+    {% endif %}
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
         common_dir.join("sha2.c"),
         common_dir.join("randombytes.c"),
-    {% if globals.have_avx2 %}
-        keccak4x_dir.join("KeccakP-1600-times4-SIMD256.c"),
-    {% endif %}
     ];
 
+    {% if globals.have_avx2 %}
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    {
+        common_files.append(keccak4x_dir.join("KeccakP-1600-times4-SIMD256.c"));
+    }
+    {% endif %}
 
 
-    builder.files(common_files.into_iter())
+    builder.files(common_files.into_iter());
         {% for scheme in schemes %}
         {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
+    builder
         .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)
-        .files(scheme_{{ scheme.name|nameize }}_{{ implementation }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
+        .files(scheme_{{ scheme.name|nameize }}_{{ implementation }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()));
         {% endfor %}
         {% if 'avx2_implementation' in scheme %}
         {% set implementation = scheme.avx2_implementation %}
-        .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)
-        .files(scheme_{{ scheme.name|nameize }}_{{ implementation }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
+        #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+        {
+            builder
+            .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)
+            .files(scheme_{{ scheme.name|nameize }}_{{ implementation }}_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()));
+        }
         {% endif %}
         {% endfor %}
+    builder
         .compile("lib{{ name }}.a");
 }

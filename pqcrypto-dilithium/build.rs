@@ -21,32 +21,29 @@ fn main() {
         builder.flag("-g3");
     }
     let common_dir = Path::new("pqclean/common");
-    let common_files = [
+
+    let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
         common_dir.join("sha2.c"),
         common_dir.join("randombytes.c"),
     ];
 
-    builder
-        .files(common_files.into_iter())
-        .include(target_dilithium2_clean_dir)
-        .files(
-            scheme_dilithium2_clean_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .include(target_dilithium3_clean_dir)
-        .files(
-            scheme_dilithium3_clean_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .include(target_dilithium4_clean_dir)
-        .files(
-            scheme_dilithium4_clean_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .compile("libdilithium.a");
+    builder.files(common_files.into_iter());
+    builder.include(target_dilithium2_clean_dir).files(
+        scheme_dilithium2_clean_files
+            .into_iter()
+            .map(|p| p.unwrap().to_string_lossy().into_owned()),
+    );
+    builder.include(target_dilithium3_clean_dir).files(
+        scheme_dilithium3_clean_files
+            .into_iter()
+            .map(|p| p.unwrap().to_string_lossy().into_owned()),
+    );
+    builder.include(target_dilithium4_clean_dir).files(
+        scheme_dilithium4_clean_files
+            .into_iter()
+            .map(|p| p.unwrap().to_string_lossy().into_owned()),
+    );
+    builder.compile("libdilithium.a");
 }

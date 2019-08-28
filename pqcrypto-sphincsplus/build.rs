@@ -336,230 +336,266 @@ fn main() {
         builder.flag("-g3");
     }
     let common_dir = Path::new("pqclean/common");
-    let common_files = [
+
+    let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
         common_dir.join("sha2.c"),
         common_dir.join("randombytes.c"),
     ];
 
+    builder.files(common_files.into_iter());
     builder
-        .files(common_files.into_iter())
         .include(target_sphincsharaka128ssimple_clean_dir)
         .files(
             scheme_sphincsharaka128ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka128srobust_clean_dir)
         .files(
             scheme_sphincsharaka128srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka128fsimple_clean_dir)
         .files(
             scheme_sphincsharaka128fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka128frobust_clean_dir)
         .files(
             scheme_sphincsharaka128frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka192ssimple_clean_dir)
         .files(
             scheme_sphincsharaka192ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka192srobust_clean_dir)
         .files(
             scheme_sphincsharaka192srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka192fsimple_clean_dir)
         .files(
             scheme_sphincsharaka192fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka192frobust_clean_dir)
         .files(
             scheme_sphincsharaka192frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka256ssimple_clean_dir)
         .files(
             scheme_sphincsharaka256ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka256srobust_clean_dir)
         .files(
             scheme_sphincsharaka256srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka256fsimple_clean_dir)
         .files(
             scheme_sphincsharaka256fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsharaka256frobust_clean_dir)
         .files(
             scheme_sphincsharaka256frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256128ssimple_clean_dir)
         .files(
             scheme_sphincsshake256128ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256128srobust_clean_dir)
         .files(
             scheme_sphincsshake256128srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256128fsimple_clean_dir)
         .files(
             scheme_sphincsshake256128fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256128frobust_clean_dir)
         .files(
             scheme_sphincsshake256128frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256192ssimple_clean_dir)
         .files(
             scheme_sphincsshake256192ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256192srobust_clean_dir)
         .files(
             scheme_sphincsshake256192srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256192fsimple_clean_dir)
         .files(
             scheme_sphincsshake256192fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256192frobust_clean_dir)
         .files(
             scheme_sphincsshake256192frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256256ssimple_clean_dir)
         .files(
             scheme_sphincsshake256256ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256256srobust_clean_dir)
         .files(
             scheme_sphincsshake256256srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256256fsimple_clean_dir)
         .files(
             scheme_sphincsshake256256fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincsshake256256frobust_clean_dir)
         .files(
             scheme_sphincsshake256256frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256128ssimple_clean_dir)
         .files(
             scheme_sphincssha256128ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256128srobust_clean_dir)
         .files(
             scheme_sphincssha256128srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256128fsimple_clean_dir)
         .files(
             scheme_sphincssha256128fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256128frobust_clean_dir)
         .files(
             scheme_sphincssha256128frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256192ssimple_clean_dir)
         .files(
             scheme_sphincssha256192ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256192srobust_clean_dir)
         .files(
             scheme_sphincssha256192srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256192fsimple_clean_dir)
         .files(
             scheme_sphincssha256192fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256192frobust_clean_dir)
         .files(
             scheme_sphincssha256192frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256256ssimple_clean_dir)
         .files(
             scheme_sphincssha256256ssimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256256srobust_clean_dir)
         .files(
             scheme_sphincssha256256srobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256256fsimple_clean_dir)
         .files(
             scheme_sphincssha256256fsimple_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
+        );
+    builder
         .include(target_sphincssha256256frobust_clean_dir)
         .files(
             scheme_sphincssha256256frobust_clean_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        )
-        .compile("libsphincsplus.a");
+        );
+    builder.compile("libsphincsplus.a");
 }
