@@ -1,11 +1,11 @@
 ---
 
-pqcrypto_version: 0.6.3
+pqcrypto_version: 0.7.0
 traits_version: 0.3.2
 
 kems:
   kyber:
-    version: 0.4.1
+    version: 0.5.0
     schemes:
       - name: kyber512
         implementation: clean
@@ -75,7 +75,7 @@ kems:
       This means that it is not secure.
 
       This crate may remove the ``leaktime`` implementation at any point.
-    version: 0.0.1
+    version: 0.0.2
     schemes:
       - name: ledakemlt12
         implementation: leaktime
