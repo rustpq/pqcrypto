@@ -107,6 +107,12 @@ pub const fn shared_secret_bytes() -> usize {
 
 /// Generate a kyber1024 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { keypair_avx2() };
+        }
+    }
     keypair_portable()
 }
 
@@ -122,9 +128,27 @@ fn keypair_portable() -> (PublicKey, SecretKey) {
     );
     (pk, sk)
 }
+#[target_feature(enable = "avx2")]
+#[inline]
+unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
+    let mut pk = PublicKey::new();
+    let mut sk = SecretKey::new();
+    assert_eq!(
+        ffi::PQCLEAN_KYBER1024_AVX2_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()),
+        0
+    );
+    (pk, sk)
+}
 
 /// Encapsulate to a kyber1024 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { encapsulate_avx2(pk) };
+        }
+    }
+
     encapsulate_portable(pk)
 }
 
@@ -147,8 +171,32 @@ fn encapsulate_portable(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     (ss, ct)
 }
 
+#[target_feature(enable = "avx2")]
+#[inline]
+unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
+    let mut ss = SharedSecret::new();
+    let mut ct = Ciphertext::new();
+
+    assert_eq!(
+        ffi::PQCLEAN_KYBER1024_AVX2_crypto_kem_enc(
+            ct.0.as_mut_ptr(),
+            ss.0.as_mut_ptr(),
+            pk.0.as_ptr(),
+        ),
+        0,
+    );
+
+    (ss, ct)
+}
+
 /// Decapsulate the received kyber1024 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { decapsulate_avx2(ct, sk) };
+        }
+    }
     decapsulate_portable(ct, sk)
 }
 
@@ -163,6 +211,17 @@ fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
                 sk.0.as_ptr(),
             )
         },
+        0
+    );
+    ss
+}
+
+#[inline]
+#[target_feature(enable = "avx2")]
+unsafe fn decapsulate_avx2(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
+    let mut ss = SharedSecret::new();
+    assert_eq!(
+        ffi::PQCLEAN_KYBER1024_AVX2_crypto_kem_dec(ss.0.as_mut_ptr(), ct.0.as_ptr(), sk.0.as_ptr(),),
         0
     );
     ss

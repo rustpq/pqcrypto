@@ -21,11 +21,6 @@ fn main() {
     {% endfor %}
     let mut builder = cc::Build::new();
     builder.include("pqclean/common")
-    {% if globals.have_avx2 %}
-        .flag("-mavx2")
-        .flag("-mbmi2")
-        .flag("-mpopcnt")
-    {% endif %}
         .flag("-std=c99");
 
     #[cfg(debug_assertions)]
@@ -54,6 +49,10 @@ fn main() {
     {% if globals.have_avx2 %}
     #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     {
+        builder
+            .flag("-mavx2")
+            .flag("-mbmi2")
+            .flag("-mpopcnt");
         common_files.append(keccak4x_dir.join("KeccakP-1600-times4-SIMD256.c"));
     }
     {% endif %}

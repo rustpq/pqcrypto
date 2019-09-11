@@ -9,13 +9,13 @@ kems:
     schemes:
       - name: kyber512
         implementation: clean
-        #avx2_implementation: avx2
+        avx2_implementation: avx2
       - name: kyber768
         implementation: clean
-        #avx2_implementation: avx2
+        avx2_implementation: avx2
       - name: kyber1024
         implementation: clean
-        #avx2_implementation: avx2
+        avx2_implementation: avx2
   frodo:
     version: 0.4.1
     notes: |
