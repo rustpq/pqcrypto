@@ -5,6 +5,8 @@
 * Update FALCON implementations, as they were insecure.
   See [IACR ePrint report 2019/893](https://eprint.iacr.org/2019/893).
 
+* Support Kyber AVX2 implementations (this may break Windows support).
+
 ## 2019-08-22
 
 * Update PQClean upstream

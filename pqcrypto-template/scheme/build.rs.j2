@@ -53,7 +53,7 @@ fn main() {
             .flag("-mavx2")
             .flag("-mbmi2")
             .flag("-mpopcnt");
-        common_files.append(keccak4x_dir.join("KeccakP-1600-times4-SIMD256.c"));
+        common_files.push(keccak4x_dir.join("KeccakP-1600-times4-SIMD256.c"));
     }
     {% endif %}
 

@@ -31,8 +31,8 @@ fn main() {
     }
     let common_dir = Path::new("pqclean/common");
 
-    #[allow(unused_variables,unused_mut)]
-    let mut keccak4x_dir = common_dir.join("keccak4x");
+    #[allow(unused_variables)]
+    let keccak4x_dir = common_dir.join("keccak4x");
 
     #[allow(unused_mut)]
     let mut common_files = vec![
