@@ -34,7 +34,7 @@ methods only.
     * ``clean`` (included as ``ffi`` only)
 
 # Notes
-If you use it via the FFI interface: The clean implementation of Frodo
+If you use it via the FFI interface: The ``clean`` implementation of Frodo
 needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
 sure it has enough stack space in threads.
 

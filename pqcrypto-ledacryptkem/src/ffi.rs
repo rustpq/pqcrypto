@@ -99,7 +99,6 @@ mod test_ledakemlt12_leaktime {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_ledakemlt32_leaktime {
@@ -137,7 +136,6 @@ mod test_ledakemlt32_leaktime {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_ledakemlt52_leaktime {
@@ -175,5 +173,4 @@ mod test_ledakemlt52_leaktime {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }

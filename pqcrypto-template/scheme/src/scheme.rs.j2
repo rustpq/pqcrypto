@@ -183,7 +183,7 @@ pub const fn signature_bytes() -> usize {
 /// Generate a {{ scheme.name }} keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
 {% if 'avx2_implementation' in scheme %}
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { keypair_avx2() };
@@ -231,7 +231,7 @@ unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
 /// Encapsulate to a {{ scheme.name }} public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 {% if 'avx2_implementation' in scheme %}
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { encapsulate_avx2(pk) };
@@ -284,7 +284,7 @@ unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 /// Decapsulate the received {{ scheme.name }} ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { decapsulate_avx2(ct, sk) };
@@ -333,7 +333,7 @@ unsafe fn decapsulate_avx2(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
 /// Sign the message and return the signed message.
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { sign_avx2(msg, sk) };
@@ -383,7 +383,7 @@ unsafe fn sign_avx2(msg: &[u8], sk: &SecretKey) -> SignedMessage {
 #[must_use]
 pub fn open(sm: &SignedMessage, pk: &PublicKey) -> std::result::Result<Vec<u8>,primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { open_avx2(sm, pk) };
@@ -469,7 +469,7 @@ unsafe fn detached_sign_avx2(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
 #[must_use]
 pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> std::result::Result<(), primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { verify_detached_signature_avx2(sig, msg, pk) };

@@ -20,6 +20,12 @@ methods only.
     * ``clean`` (default)
  * ``kyber1024``
     * ``clean`` (default)
+ * ``kyber512-90s``
+    * ``clean`` (default)
+ * ``kyber768-90s``
+    * ``clean`` (default)
+ * ``kyber1024-90s``
+    * ``clean`` (default)
 
 
 ## License

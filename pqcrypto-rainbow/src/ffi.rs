@@ -75,6 +75,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -104,6 +105,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_crypto_sign_keypair(
         pk: *mut u8,
         sk: *mut u8,
@@ -136,6 +138,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWIACLASSIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_RAINBOWIACLASSIC_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -165,6 +168,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWIACYCLIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_RAINBOWIACYCLIC_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -194,6 +198,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_crypto_sign_keypair(
         pk: *mut u8,
         sk: *mut u8,
@@ -226,6 +231,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWVCCLASSIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_RAINBOWVCCLASSIC_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -255,6 +261,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWVCCYCLIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_RAINBOWVCCYCLIC_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -284,6 +291,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
     pub fn PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_crypto_sign_keypair(
         pk: *mut u8,
         sk: *mut u8,
@@ -316,6 +324,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(test)]

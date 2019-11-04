@@ -116,7 +116,6 @@ mod test_ntruhps2048509_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_ntruhps2048677_clean {
@@ -154,7 +153,6 @@ mod test_ntruhps2048677_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_ntruhps4096821_clean {
@@ -192,7 +190,6 @@ mod test_ntruhps4096821_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_ntruhrss701_clean {
@@ -230,5 +227,4 @@ mod test_ntruhrss701_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }

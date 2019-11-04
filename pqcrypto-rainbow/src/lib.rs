@@ -15,9 +15,6 @@
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
-//! # Notes
-//! The underlying ``clean`` implementions currently contain undefined
-//! behaviour, so they may crash!
 
 #![allow(clippy::len_without_is_empty)]
 

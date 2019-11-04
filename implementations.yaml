@@ -1,11 +1,11 @@
 ---
 
-pqcrypto_version: 0.7.0
+pqcrypto_version: 0.8.0
 traits_version: 0.3.2
 
 kems:
   kyber:
-    version: 0.5.0
+    version: 0.6.0
     schemes:
       - name: kyber512
         implementation: clean
@@ -16,10 +16,19 @@ kems:
       - name: kyber1024
         implementation: clean
         avx2_implementation: avx2
+      - name: kyber512-90s
+        implementation: clean
+        avx2_implementation: avx2
+      - name: kyber768-90s
+        implementation: clean
+        avx2_implementation: avx2
+      - name: kyber1024-90s
+        implementation: clean
+        avx2_implementation: avx2
   frodo:
     version: 0.4.1
     notes: |
-      If you use it via the FFI interface: The clean implementation of Frodo
+      If you use it via the FFI interface: The ``clean`` implementation of Frodo
       needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
       sure it has enough stack space in threads.
 
@@ -83,6 +92,27 @@ kems:
         implementation: leaktime
       - name: ledakemlt52
         implementation: leaktime
+  threebears:
+    version: 0.1.0
+    schemes:
+      - name: babybear
+        implementation: clean
+      - name: mamabear
+        implementation: clean
+      - name: papabear
+        implementation: clean
+  newhope:
+    version: 0.1.0
+    schemes:
+      - name: newhope1024cpa
+        implementation: clean
+      - name: newhope1024cca
+        implementation: clean
+      - name: newhope512cpa
+        implementation: clean
+      - name: newhope512cca
+        implementation: clean
+
 
 signs:
   mqdss:
@@ -108,29 +138,34 @@ signs:
         implementation: clean
       - name: falcon-1024
         implementation: clean
-#  rainbow:
-#    notes: |
-#      The underlying ``clean`` implementions currently contain undefined behaviour, so they may crash!
-#    version: 0.0.1
-#    schemes:
-#      - name: rainbowIIIc-classic
-#        implementation: clean
-#      - name: rainbowIIIc-cyclic
-#        implementation: clean
-#      - name: rainbowIIIc-cyclic-compressed
-#        implementation: clean
-#      - name: rainbowIa-classic
-#        implementation: clean
-#      - name: rainbowIa-cyclic
-#        implementation: clean
-#      - name: rainbowIa-cyclic-compressed
-#        implementation: clean
-#      - name: rainbowVc-classic
-#        implementation: clean
-#      - name: rainbowVc-cyclic
-#        implementation: clean
-#      - name: rainbowVc-cyclic-compressed
-#        implementation: clean
+  qtesla:
+    version: 0.1.0
+    schemes:
+      - name: qtesla-p-I
+        implementation: clean
+      - name: qtesla-p-III
+        implementation: clean
+  rainbow:
+    version: 0.1.0
+    schemes:
+      - name: rainbowIIIc-classic
+        implementation: clean
+      - name: rainbowIIIc-cyclic
+        implementation: clean
+      - name: rainbowIIIc-cyclic-compressed
+        implementation: clean
+      - name: rainbowIa-classic
+        implementation: clean
+      - name: rainbowIa-cyclic
+        implementation: clean
+      - name: rainbowIa-cyclic-compressed
+        implementation: clean
+      - name: rainbowVc-classic
+        implementation: clean
+      - name: rainbowVc-cyclic
+        implementation: clean
+      - name: rainbowVc-cyclic-compressed
+        implementation: clean
   sphincsplus:
     version: 0.4.3
     schemes:

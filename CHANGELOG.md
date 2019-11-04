@@ -1,5 +1,13 @@
 # Changelog
 
+## 2019-11-04
+
+* Add Kyber-90s (with AVX2)
+* Add NEWHOPE
+* Add qTESLA
+* Release fixed version of Rainbow
+* Don't try to build AVX2 versions of code on Windows
+
 ## 2019-09-24
 
 * Update FALCON implementations, as they were insecure.

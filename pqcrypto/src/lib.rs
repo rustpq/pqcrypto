@@ -19,16 +19,26 @@ pub mod kem {
         frodokem1344aes, frodokem1344shake, frodokem640aes, frodokem640shake, frodokem976aes,
         frodokem976shake,
     };
-    pub use pqcrypto_kyber::{kyber1024, kyber512, kyber768};
+    pub use pqcrypto_kyber::{
+        kyber1024, kyber102490s, kyber512, kyber51290s, kyber768, kyber76890s,
+    };
     pub use pqcrypto_ledacryptkem::{ledakemlt12, ledakemlt32, ledakemlt52};
+    pub use pqcrypto_newhope::{newhope1024cca, newhope1024cpa, newhope512cca, newhope512cpa};
     pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
     pub use pqcrypto_saber::{firesaber, lightsaber, saber};
+    pub use pqcrypto_threebears::{babybear, mamabear, papabear};
 }
 
 pub mod sign {
     pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium4};
     pub use pqcrypto_falcon::{falcon1024, falcon512};
     pub use pqcrypto_mqdss::{mqdss48, mqdss64};
+    pub use pqcrypto_qtesla::{qteslapi, qteslapiii};
+    pub use pqcrypto_rainbow::{
+        rainbowiaclassic, rainbowiacyclic, rainbowiacycliccompressed, rainbowiiicclassic,
+        rainbowiiiccyclic, rainbowiiiccycliccompressed, rainbowvcclassic, rainbowvccyclic,
+        rainbowvccycliccompressed,
+    };
     pub use pqcrypto_sphincsplus::{
         sphincsharaka128frobust, sphincsharaka128fsimple, sphincsharaka128srobust,
         sphincsharaka128ssimple, sphincsharaka192frobust, sphincsharaka192fsimple,

@@ -156,6 +156,11 @@ pub const fn signature_bytes() -> usize {
 
 /// Generate a rainbowIIIc-classic keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
+    keypair_portable()
+}
+
+#[inline]
+fn keypair_portable() -> (PublicKey, SecretKey) {
     let mut pk = PublicKey::new();
     let mut sk = SecretKey::new();
     assert_eq!(
@@ -170,7 +175,13 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     (pk, sk)
 }
 
+/// Sign the message and return the signed message.
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
+    sign_portable(msg, sk)
+}
+
+#[inline]
+fn sign_portable(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     let max_len = msg.len() + signature_bytes();
     let mut signed_msg = Vec::with_capacity(max_len);
     let mut smlen: usize = 0;
@@ -190,6 +201,14 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
 
 #[must_use]
 pub fn open(
+    sm: &SignedMessage,
+    pk: &PublicKey,
+) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
+    open_portable(sm, pk)
+}
+
+#[inline]
+fn open_portable(
     sm: &SignedMessage,
     pk: &PublicKey,
 ) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
@@ -214,6 +233,11 @@ pub fn open(
 }
 
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
+    detached_sign_portable(msg, sk)
+}
+
+#[inline]
+fn detached_sign_portable(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     let mut sig = DetachedSignature::new();
     unsafe {
         ffi::PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_crypto_sign_signature(
@@ -229,6 +253,14 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
 
 #[must_use]
 pub fn verify_detached_signature(
+    sig: &DetachedSignature,
+    msg: &[u8],
+    pk: &PublicKey,
+) -> std::result::Result<(), primitive::VerificationError> {
+    verify_detached_signature_portable(sig, msg, pk)
+}
+
+fn verify_detached_signature_portable(
     sig: &DetachedSignature,
     msg: &[u8],
     pk: &PublicKey,

@@ -33,9 +33,6 @@ methods only.
  * ``rainbowVc-cyclic-compressed``
     * ``clean`` (default)
 
-# Notes
-The underlying ``clean`` implementions currently contain undefined behaviour, so they may crash!
-
 
 ## License
 

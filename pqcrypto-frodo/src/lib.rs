@@ -13,10 +13,10 @@
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
 //! # Notes
-//! If you use it via the FFI interface: The clean implementation of Frodo
-//! needs a lot of stack space, specify env variable `RUST_MIN_STACK` to
-//! make sure it has enough stack space in threads.  This is not relevant
-//! for the 'normal' api methods.
+//! If you use it via the FFI interface: The ``clean`` implementation of
+//! Frodo needs a lot of stack space, specify env variable
+//! `RUST_MIN_STACK` to make sure it has enough stack space in threads.
+//! This is not relevant for the 'normal' api methods.
 
 #![allow(clippy::len_without_is_empty)]
 

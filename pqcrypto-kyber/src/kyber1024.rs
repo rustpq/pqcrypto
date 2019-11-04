@@ -107,7 +107,7 @@ pub const fn shared_secret_bytes() -> usize {
 
 /// Generate a kyber1024 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { keypair_avx2() };
@@ -142,7 +142,7 @@ unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
 
 /// Encapsulate to a kyber1024 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { encapsulate_avx2(pk) };
@@ -191,7 +191,7 @@ unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 
 /// Decapsulate the received kyber1024 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { decapsulate_avx2(ct, sk) };

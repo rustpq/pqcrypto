@@ -240,7 +240,6 @@ mod test_frodokem640shake_opt {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem640shake_clean {
@@ -278,7 +277,6 @@ mod test_frodokem640shake_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem640aes_opt {
@@ -316,7 +314,6 @@ mod test_frodokem640aes_opt {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem640aes_clean {
@@ -354,7 +351,6 @@ mod test_frodokem640aes_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem976aes_opt {
@@ -392,7 +388,6 @@ mod test_frodokem976aes_opt {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem976aes_clean {
@@ -430,7 +425,6 @@ mod test_frodokem976aes_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem976shake_opt {
@@ -468,7 +462,6 @@ mod test_frodokem976shake_opt {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem976shake_clean {
@@ -506,7 +499,6 @@ mod test_frodokem976shake_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem1344aes_opt {
@@ -544,7 +536,6 @@ mod test_frodokem1344aes_opt {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem1344aes_clean {
@@ -582,7 +573,6 @@ mod test_frodokem1344aes_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem1344shake_opt {
@@ -620,7 +610,6 @@ mod test_frodokem1344shake_opt {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_frodokem1344shake_clean {
@@ -661,5 +650,4 @@ mod test_frodokem1344shake_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }

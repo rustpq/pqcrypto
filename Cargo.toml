@@ -8,8 +8,12 @@ members=[
     "pqcrypto-ntru",
     "pqcrypto-saber",
     "pqcrypto-ledacryptkem",
+    "pqcrypto-threebears",
+    "pqcrypto-newhope",
     "pqcrypto-mqdss",
     "pqcrypto-dilithium",
     "pqcrypto-falcon",
+    "pqcrypto-qtesla",
+    "pqcrypto-rainbow",
     "pqcrypto-sphincsplus",
 ]

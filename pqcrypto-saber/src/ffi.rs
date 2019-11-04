@@ -84,7 +84,6 @@ mod test_firesaber_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_lightsaber_clean {
@@ -118,7 +117,6 @@ mod test_lightsaber_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }
 #[cfg(test)]
 mod test_saber_clean {
@@ -148,5 +146,4 @@ mod test_saber_clean {
             assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
         }
     }
-
 }

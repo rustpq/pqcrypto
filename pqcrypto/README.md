@@ -13,11 +13,15 @@ This super-crate contains the following cryptographic algorithms:
 * [``pqcrypto-ntru``](https://crates.io/crates/pqcrypto-ntru)
 * [``pqcrypto-saber``](https://crates.io/crates/pqcrypto-saber)
 * [``pqcrypto-ledacryptkem``](https://crates.io/crates/pqcrypto-ledacryptkem)
+* [``pqcrypto-threebears``](https://crates.io/crates/pqcrypto-threebears)
+* [``pqcrypto-newhope``](https://crates.io/crates/pqcrypto-newhope)
 
 ## Signature Schemes
 * [``pqcrypto-mqdss``](https://crates.io/crates/pqcrypto-mqdss)
 * [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium)
 * [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon)
+* [``pqcrypto-qtesla``](https://crates.io/crates/pqcrypto-qtesla)
+* [``pqcrypto-rainbow``](https://crates.io/crates/pqcrypto-rainbow)
 * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus)
 
 ## License

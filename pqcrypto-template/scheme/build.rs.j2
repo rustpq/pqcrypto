@@ -47,7 +47,7 @@ fn main() {
     ];
 
     {% if globals.have_avx2 %}
-    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
         builder
             .flag("-mavx2")
@@ -67,7 +67,7 @@ fn main() {
         {% endfor %}
         {% if 'avx2_implementation' in scheme %}
         {% set implementation = scheme.avx2_implementation %}
-        #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+        #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
         {
             builder
             .include(target_{{ scheme.name|nameize }}_{{ implementation }}_dir)
