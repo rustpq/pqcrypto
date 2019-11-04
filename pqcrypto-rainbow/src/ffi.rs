@@ -388,15 +388,14 @@ mod test_rainbowiiicclassic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -423,26 +422,24 @@ mod test_rainbowiiicclassic_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -508,15 +505,14 @@ mod test_rainbowiiiccyclic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -543,26 +539,24 @@ mod test_rainbowiiiccyclic_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -629,15 +623,14 @@ mod test_rainbowiiiccycliccompressed_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -664,26 +657,24 @@ mod test_rainbowiiiccycliccompressed_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -749,15 +740,14 @@ mod test_rainbowiaclassic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACLASSIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -784,26 +774,24 @@ mod test_rainbowiaclassic_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -866,15 +854,14 @@ mod test_rainbowiacyclic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACYCLIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -901,26 +888,24 @@ mod test_rainbowiacyclic_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACYCLIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACYCLIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -987,15 +972,14 @@ mod test_rainbowiacycliccompressed_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1022,26 +1006,24 @@ mod test_rainbowiacycliccompressed_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -1107,15 +1089,14 @@ mod test_rainbowvcclassic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCLASSIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1142,26 +1123,24 @@ mod test_rainbowvcclassic_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -1224,15 +1203,14 @@ mod test_rainbowvccyclic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCYCLIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1259,26 +1237,24 @@ mod test_rainbowvccyclic_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCYCLIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCYCLIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -1345,15 +1321,14 @@ mod test_rainbowvccycliccompressed_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1380,26 +1355,24 @@ mod test_rainbowvccycliccompressed_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }

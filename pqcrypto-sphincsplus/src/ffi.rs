@@ -1406,15 +1406,14 @@ mod test_sphincsharaka128ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1441,26 +1440,24 @@ mod test_sphincsharaka128ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -1527,15 +1524,14 @@ mod test_sphincsharaka128srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1562,26 +1558,24 @@ mod test_sphincsharaka128srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -1648,15 +1642,14 @@ mod test_sphincsharaka128fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1683,26 +1676,24 @@ mod test_sphincsharaka128fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -1769,15 +1760,14 @@ mod test_sphincsharaka128frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1804,26 +1794,24 @@ mod test_sphincsharaka128frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA128FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -1890,15 +1878,14 @@ mod test_sphincsharaka192ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -1925,26 +1912,24 @@ mod test_sphincsharaka192ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2011,15 +1996,14 @@ mod test_sphincsharaka192srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2046,26 +2030,24 @@ mod test_sphincsharaka192srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2132,15 +2114,14 @@ mod test_sphincsharaka192fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2167,26 +2148,24 @@ mod test_sphincsharaka192fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2253,15 +2232,14 @@ mod test_sphincsharaka192frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2288,26 +2266,24 @@ mod test_sphincsharaka192frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA192FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2374,15 +2350,14 @@ mod test_sphincsharaka256ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2409,26 +2384,24 @@ mod test_sphincsharaka256ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2495,15 +2468,14 @@ mod test_sphincsharaka256srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2530,26 +2502,24 @@ mod test_sphincsharaka256srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2616,15 +2586,14 @@ mod test_sphincsharaka256fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2651,26 +2620,24 @@ mod test_sphincsharaka256fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2737,15 +2704,14 @@ mod test_sphincsharaka256frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2772,26 +2738,24 @@ mod test_sphincsharaka256frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSHARAKA256FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2858,15 +2822,14 @@ mod test_sphincsshake256128ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -2893,26 +2856,24 @@ mod test_sphincsshake256128ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -2979,15 +2940,14 @@ mod test_sphincsshake256128srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3014,26 +2974,24 @@ mod test_sphincsshake256128srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3100,15 +3058,14 @@ mod test_sphincsshake256128fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3135,26 +3092,24 @@ mod test_sphincsshake256128fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3221,15 +3176,14 @@ mod test_sphincsshake256128frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3256,26 +3210,24 @@ mod test_sphincsshake256128frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256128FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3342,15 +3294,14 @@ mod test_sphincsshake256192ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3377,26 +3328,24 @@ mod test_sphincsshake256192ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3463,15 +3412,14 @@ mod test_sphincsshake256192srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3498,26 +3446,24 @@ mod test_sphincsshake256192srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3584,15 +3530,14 @@ mod test_sphincsshake256192fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3619,26 +3564,24 @@ mod test_sphincsshake256192fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3705,15 +3648,14 @@ mod test_sphincsshake256192frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3740,26 +3682,24 @@ mod test_sphincsshake256192frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256192FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3826,15 +3766,14 @@ mod test_sphincsshake256256ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3861,26 +3800,24 @@ mod test_sphincsshake256256ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -3947,15 +3884,14 @@ mod test_sphincsshake256256srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -3982,26 +3918,24 @@ mod test_sphincsshake256256srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4068,15 +4002,14 @@ mod test_sphincsshake256256fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4103,26 +4036,24 @@ mod test_sphincsshake256256fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4189,15 +4120,14 @@ mod test_sphincsshake256256frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4224,26 +4154,24 @@ mod test_sphincsshake256256frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHAKE256256FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4310,15 +4238,14 @@ mod test_sphincssha256128ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4345,26 +4272,24 @@ mod test_sphincssha256128ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4431,15 +4356,14 @@ mod test_sphincssha256128srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4466,26 +4390,24 @@ mod test_sphincssha256128srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4552,15 +4474,14 @@ mod test_sphincssha256128fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4587,26 +4508,24 @@ mod test_sphincssha256128fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4673,15 +4592,14 @@ mod test_sphincssha256128frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4708,26 +4626,24 @@ mod test_sphincssha256128frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256128FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4794,15 +4710,14 @@ mod test_sphincssha256192ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4829,26 +4744,24 @@ mod test_sphincssha256192ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -4915,15 +4828,14 @@ mod test_sphincssha256192srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -4950,26 +4862,24 @@ mod test_sphincssha256192srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -5036,15 +4946,14 @@ mod test_sphincssha256192fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -5071,26 +4980,24 @@ mod test_sphincssha256192fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -5157,15 +5064,14 @@ mod test_sphincssha256192frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -5192,26 +5098,24 @@ mod test_sphincssha256192frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256192FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -5278,15 +5182,14 @@ mod test_sphincssha256256ssimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -5313,26 +5216,24 @@ mod test_sphincssha256256ssimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256SSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -5399,15 +5300,14 @@ mod test_sphincssha256256srobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -5434,26 +5334,24 @@ mod test_sphincssha256256srobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256SROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -5520,15 +5418,14 @@ mod test_sphincssha256256fsimple_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -5555,26 +5452,24 @@ mod test_sphincssha256256fsimple_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256FSIMPLE_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -5641,15 +5536,14 @@ mod test_sphincssha256256frobust_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -5676,26 +5570,24 @@ mod test_sphincssha256256frobust_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_SPHINCSSHA256256FROBUST_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }

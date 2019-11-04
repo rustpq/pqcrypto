@@ -171,15 +171,14 @@ mod test_dilithium2_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -206,26 +205,24 @@ mod test_dilithium2_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -287,15 +284,14 @@ mod test_dilithium3_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -322,26 +318,24 @@ mod test_dilithium3_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -403,15 +397,14 @@ mod test_dilithium4_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -438,26 +431,24 @@ mod test_dilithium4_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }

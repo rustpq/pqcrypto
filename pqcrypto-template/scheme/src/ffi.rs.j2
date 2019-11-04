@@ -182,13 +182,12 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
                 0,
                 PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_{{ NS_NAME }}_crypto_sign_open(
                     unpacked_m.as_mut_ptr(), &mut mlen as *mut usize,
                     sm.as_ptr(), sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -207,20 +206,18 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
                     msg.as_ptr(), msg.len(),
                     pk.as_ptr())
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
                     detached_sig.as_ptr(), smlen,
                     msg.as_ptr(), msg.len(),
-                    pk_alt.as_ptr())
+                    pk_alt.as_ptr()) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
                     detached_sig.as_ptr(), smlen,
                     msg.as_ptr(), msg.len()-1,
-                    pk.as_ptr())
+                    pk.as_ptr()) < 0
             );
         }
     }

@@ -134,15 +134,14 @@ mod test_mqdss48_clean {
                 0,
                 PQCLEAN_MQDSS48_CLEAN_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_MQDSS48_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -169,26 +168,24 @@ mod test_mqdss48_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_MQDSS48_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_MQDSS48_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }
@@ -247,15 +244,14 @@ mod test_mqdss64_clean {
                 0,
                 PQCLEAN_MQDSS64_CLEAN_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_MQDSS64_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
             assert_eq!(
@@ -282,26 +278,24 @@ mod test_mqdss64_clean {
                     pk.as_ptr()
                 )
             );
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_MQDSS64_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ) < 0
             );
 
-            assert_eq!(
-                -1,
+            assert!(
                 PQCLEAN_MQDSS64_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ) < 0
             );
         }
     }

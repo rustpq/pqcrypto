@@ -73,6 +73,7 @@ fn main() {
         common_dir.join("aes.c"),
         common_dir.join("sha2.c"),
         common_dir.join("randombytes.c"),
+        common_dir.join("sp800-185.c"),
     ];
 
     #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]

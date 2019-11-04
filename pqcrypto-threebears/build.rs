@@ -27,6 +27,7 @@ fn main() {
         common_dir.join("aes.c"),
         common_dir.join("sha2.c"),
         common_dir.join("randombytes.c"),
+        common_dir.join("sp800-185.c"),
     ];
 
     builder.files(common_files.into_iter());
