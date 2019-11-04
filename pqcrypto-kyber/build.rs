@@ -78,7 +78,11 @@ fn main() {
 
     #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        builder.flag("-mavx2").flag("-mbmi2").flag("-mpopcnt");
+        builder
+            .flag("-mavx2")
+            .flag("-mbmi2")
+            .flag("-maes")
+            .flag("-mpopcnt");
         common_files.push(keccak4x_dir.join("KeccakP-1600-times4-SIMD256.c"));
     }
 
