@@ -3,7 +3,8 @@
 //! These bindings use the {{ scheme.implementation }} version from [PQClean][pqc]
 //!
 //! # Example
-//! ```
+//! ```{% if not scheme.doctest|default(true) %}no_run{% endif %}
+
 {% if type == "kem" %}
 //! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
 //! let (pk, sk) = keypair();

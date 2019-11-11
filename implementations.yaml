@@ -167,8 +167,10 @@ signs:
         implementation: clean
       - name: rainbowVc-classic
         implementation: clean
+        doctest: no
       - name: rainbowVc-cyclic
         implementation: clean
+        doctest: no
       - name: rainbowVc-cyclic-compressed
         implementation: clean
   sphincsplus:

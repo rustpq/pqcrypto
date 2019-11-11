@@ -3,7 +3,7 @@
 //! These bindings use the clean version from [PQClean][pqc]
 //!
 //! # Example
-//! ```
+//! ```no_run
 //! use pqcrypto_rainbow::rainbowvcclassic::*;
 //! let message = vec![0, 1, 2, 3, 4, 5];
 //! let (pk, sk) = keypair();
