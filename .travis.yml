@@ -2,7 +2,7 @@ language: rust
 
 env:
   global:
-    - RUST_MIN_STACK=8192000
+    - RUST_MIN_STACK=81920000
     - RUSTFLAGS="-C link-args=-Wl,-zstack-size=8000000"
     - RUSTDOCFLAGS="-C link-args=-Wl,-zstack-size=8000000"
   jobs:
