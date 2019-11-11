@@ -5,6 +5,10 @@ env:
     - RUST_MIN_STACK=8192000
     - RUSTFLAGS="-C link-args=-Wl,-zstack-size=8000000"
     - RUSTDOCFLAGS="-C link-args=-Wl,-zstack-size=8000000"
+  jobs:
+    - CC=gcc
+    - CC=clang
+
 
 os:
  - linux
