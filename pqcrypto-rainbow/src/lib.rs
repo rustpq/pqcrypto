@@ -16,9 +16,8 @@
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
 //! # Notes
-//! This implementation requires a lot of stack space. You may need to
-//! compile with ``RUSTFLAGS="-C link-args=-Wl,-zstack-size=8000000"`` to
-//! run rainbowVc.
+//! This implementation requires a lot of stack space. You need to specify
+//! ``RUST_MIN_STACK=800000000``, probably.
 
 #![allow(clippy::len_without_is_empty)]
 
