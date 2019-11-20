@@ -3,6 +3,7 @@
 ## 2019-11-20
 
 * Update Rainbow implementations to mitigate [``memcopy`` bug][pqclean/250] ([#5][#5])
+* Don't try to compile Kyber-AVX2 on MacOS
 
 [#5]: https://github.com/rustpq/pqcrypto/issues/5
 [pqclean/250]: https://github.com/pqclean/pqclean/pull/250

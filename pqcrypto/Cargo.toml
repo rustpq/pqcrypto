@@ -13,7 +13,7 @@ categories = ["cryptography"]
 
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.2" }
-pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.6.0" }
+pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.6.1" }
 pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.4.1" }
 pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.4.1" }
 pqcrypto-saber = { path = "../pqcrypto-saber", version = "0.1.1" }
@@ -24,7 +24,7 @@ pqcrypto-mqdss = { path = "../pqcrypto-mqdss", version = "0.2.2" }
 pqcrypto-dilithium = { path = "../pqcrypto-dilithium", version = "0.1.1" }
 pqcrypto-falcon = { path = "../pqcrypto-falcon", version = "0.2.0" }
 pqcrypto-qtesla = { path = "../pqcrypto-qtesla", version = "0.1.0" }
-pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.1.0" }
+pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.1.1" }
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.4.3" }
 
 [badges]

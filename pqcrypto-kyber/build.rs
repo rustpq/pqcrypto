@@ -76,7 +76,11 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
+    #[cfg(all(
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
     {
         builder
             .flag("-mavx2")
@@ -92,7 +96,11 @@ fn main() {
             .into_iter()
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
-    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
+    #[cfg(all(
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
     {
         builder.include(target_kyber512_avx2_dir).files(
             scheme_kyber512_avx2_files
@@ -105,7 +113,11 @@ fn main() {
             .into_iter()
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
-    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
+    #[cfg(all(
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
     {
         builder.include(target_kyber768_avx2_dir).files(
             scheme_kyber768_avx2_files
@@ -118,7 +130,11 @@ fn main() {
             .into_iter()
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
-    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
+    #[cfg(all(
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
     {
         builder.include(target_kyber1024_avx2_dir).files(
             scheme_kyber1024_avx2_files
@@ -131,7 +147,11 @@ fn main() {
             .into_iter()
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
-    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
+    #[cfg(all(
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
     {
         builder.include(target_kyber51290s_avx2_dir).files(
             scheme_kyber51290s_avx2_files
@@ -144,7 +164,11 @@ fn main() {
             .into_iter()
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
-    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
+    #[cfg(all(
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
     {
         builder.include(target_kyber76890s_avx2_dir).files(
             scheme_kyber76890s_avx2_files
@@ -157,7 +181,11 @@ fn main() {
             .into_iter()
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
-    #[cfg(all(not(target_os = "windows"), target_arch = "x86_64"))]
+    #[cfg(all(
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
     {
         builder.include(target_kyber102490s_avx2_dir).files(
             scheme_kyber102490s_avx2_files
