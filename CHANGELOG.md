@@ -1,10 +1,18 @@
 # Changelog
 
+## 2019-11-20
+
+* Update Rainbow implementations to mitigate [``memcopy`` bug][pqclean/250] ([#5][#5])
+
+[#5]: https://github.com/rustpq/pqcrypto/issues/5
+[pqclean/250]: https://github.com/pqclean/pqclean/pull/250
+
 ## 2019-11-04
 
 * Add Kyber-90s (with AVX2)
 * Add NEWHOPE
 * Add qTESLA
+* Add Threebears
 * Release fixed version of Rainbow
 * Don't try to build AVX2 versions of code on Windows
 

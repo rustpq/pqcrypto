@@ -146,7 +146,7 @@ signs:
       - name: qtesla-p-III
         implementation: clean
   rainbow:
-    version: 0.1.0
+    version: 0.1.1
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.

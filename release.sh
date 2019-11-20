@@ -22,6 +22,9 @@ publish pqcrypto-dilithium
 publish pqcrypto-falcon
 publish pqcrypto-rainbow
 publish pqcrypto-ledacryptkem
+publish pqcrypto-newhope
+publish pqcrypto-qtesla
+publish pqcrypto-threebears
 
 echo "Waiting a little bit for the packages to settle on crates.io"
 
