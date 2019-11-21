@@ -107,11 +107,7 @@ pub const fn shared_secret_bytes() -> usize {
 
 /// Generate a kyber1024 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    #[cfg(all(
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(enable_avx2)]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { keypair_avx2() };
@@ -132,6 +128,7 @@ fn keypair_portable() -> (PublicKey, SecretKey) {
     );
     (pk, sk)
 }
+#[cfg(enable_avx2)]
 #[target_feature(enable = "avx2")]
 #[inline]
 unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
@@ -146,11 +143,7 @@ unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
 
 /// Encapsulate to a kyber1024 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    #[cfg(all(
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(enable_avx2)]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { encapsulate_avx2(pk) };
@@ -179,6 +172,7 @@ fn encapsulate_portable(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     (ss, ct)
 }
 
+#[cfg(enable_avx2)]
 #[target_feature(enable = "avx2")]
 #[inline]
 unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
@@ -199,11 +193,7 @@ unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 
 /// Decapsulate the received kyber1024 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    #[cfg(all(
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(enable_avx2)]
     {
         if is_x86_feature_detected!("avx2") {
             return unsafe { decapsulate_avx2(ct, sk) };
@@ -228,8 +218,9 @@ fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     ss
 }
 
-#[inline]
+#[cfg(enable_avx2)]
 #[target_feature(enable = "avx2")]
+#[inline]
 unsafe fn decapsulate_avx2(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(

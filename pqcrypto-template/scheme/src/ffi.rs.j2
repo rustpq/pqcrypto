@@ -27,17 +27,17 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES: usize = {{ metadata['length-signat
 {% set implementation = scheme.avx2_implementation %}
 {% set implementation_data = metadata['implementations']|selectattr('name', 'eq', implementation)|first %}
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
-#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+#[cfg(enable_avx2)]
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES: usize = {{ metadata['length-secret-key'] }};
-#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+#[cfg(enable_avx2)]
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['length-public-key'] }};
 {% if type == "kem" %}
-#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+#[cfg(enable_avx2)]
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES: usize = {{ metadata['length-ciphertext'] }};
-#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+#[cfg(enable_avx2)]
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES: usize = {{ metadata['length-shared-secret'] }};
 {% else %}
-#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+#[cfg(enable_avx2)]
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES: usize = {{ metadata['length-signature'] }};
 {% endif %}
 {% endif %}
@@ -69,28 +69,28 @@ extern "C" {
 {% if 'avx2_implementation' in scheme %}
     {% if type == "kem" %}
     {% set NS_NAME = [scheme.name|namespaceize, scheme.avx2_implementation|namespaceize]|join('_') %}
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8) -> c_int;
 
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
     {% else %}
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign(sm: *mut u8, smlen: *mut usize, msg: *const u8, len: usize, sk: *const u8) -> c_int;
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_open(m: *mut u8, mlen: *mut usize, sm: *const u8, smlen: usize, pk: *const u8) -> c_int;
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_signature(sig: *mut u8, siglen: *mut usize, m: *const u8, mlen: usize, sk: *const u8) -> c_int;
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(sig: *const u8, siglen: usize, m: *const u8, mlen: usize, pk: *const u8) -> c_int;
     {% endif %}
 {% endif %}
@@ -228,7 +228,7 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
 {% set implementation = scheme.avx2_implementation %}
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
 #[cfg(test)]
-#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+#[cfg(enable_avx2)]
 mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
     use super::*;
 {% if type == "sign" %}

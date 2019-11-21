@@ -7,25 +7,33 @@ fn main() {
     let target_kyber512_clean_dir = Path::new("pqclean/crypto_kem/kyber512/clean");
     let scheme_kyber512_clean_files =
         glob::glob(target_kyber512_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    #[allow(unused_variables)]
     let target_kyber512_avx2_dir = Path::new("pqclean/crypto_kem/kyber512/avx2");
+    #[allow(unused_variables)]
     let scheme_kyber512_avx2_files =
         glob::glob(target_kyber512_avx2_dir.join("*.[csS]").to_str().unwrap()).unwrap();
     let target_kyber768_clean_dir = Path::new("pqclean/crypto_kem/kyber768/clean");
     let scheme_kyber768_clean_files =
         glob::glob(target_kyber768_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    #[allow(unused_variables)]
     let target_kyber768_avx2_dir = Path::new("pqclean/crypto_kem/kyber768/avx2");
+    #[allow(unused_variables)]
     let scheme_kyber768_avx2_files =
         glob::glob(target_kyber768_avx2_dir.join("*.[csS]").to_str().unwrap()).unwrap();
     let target_kyber1024_clean_dir = Path::new("pqclean/crypto_kem/kyber1024/clean");
     let scheme_kyber1024_clean_files =
         glob::glob(target_kyber1024_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    #[allow(unused_variables)]
     let target_kyber1024_avx2_dir = Path::new("pqclean/crypto_kem/kyber1024/avx2");
+    #[allow(unused_variables)]
     let scheme_kyber1024_avx2_files =
         glob::glob(target_kyber1024_avx2_dir.join("*.[csS]").to_str().unwrap()).unwrap();
     let target_kyber51290s_clean_dir = Path::new("pqclean/crypto_kem/kyber512-90s/clean");
     let scheme_kyber51290s_clean_files =
         glob::glob(target_kyber51290s_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    #[allow(unused_variables)]
     let target_kyber51290s_avx2_dir = Path::new("pqclean/crypto_kem/kyber512-90s/avx2");
+    #[allow(unused_variables)]
     let scheme_kyber51290s_avx2_files = glob::glob(
         target_kyber51290s_avx2_dir
             .join("*.[csS]")
@@ -36,7 +44,9 @@ fn main() {
     let target_kyber76890s_clean_dir = Path::new("pqclean/crypto_kem/kyber768-90s/clean");
     let scheme_kyber76890s_clean_files =
         glob::glob(target_kyber76890s_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    #[allow(unused_variables)]
     let target_kyber76890s_avx2_dir = Path::new("pqclean/crypto_kem/kyber768-90s/avx2");
+    #[allow(unused_variables)]
     let scheme_kyber76890s_avx2_files = glob::glob(
         target_kyber76890s_avx2_dir
             .join("*.[csS]")
@@ -47,7 +57,9 @@ fn main() {
     let target_kyber102490s_clean_dir = Path::new("pqclean/crypto_kem/kyber1024-90s/clean");
     let scheme_kyber102490s_clean_files =
         glob::glob(target_kyber102490s_clean_dir.join("*.c").to_str().unwrap()).unwrap();
+    #[allow(unused_variables)]
     let target_kyber102490s_avx2_dir = Path::new("pqclean/crypto_kem/kyber1024-90s/avx2");
+    #[allow(unused_variables)]
     let scheme_kyber102490s_avx2_files = glob::glob(
         target_kyber102490s_avx2_dir
             .join("*.[csS]")
@@ -77,6 +89,7 @@ fn main() {
     ];
 
     #[cfg(all(
+        not(disable_avx2),
         not(target_os = "windows"),
         not(target_os = "macos"),
         target_arch = "x86_64"
@@ -97,6 +110,7 @@ fn main() {
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
     #[cfg(all(
+        not(disable_avx2),
         not(target_os = "windows"),
         not(target_os = "macos"),
         target_arch = "x86_64"
@@ -114,6 +128,7 @@ fn main() {
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
     #[cfg(all(
+        not(disable_avx2),
         not(target_os = "windows"),
         not(target_os = "macos"),
         target_arch = "x86_64"
@@ -131,6 +146,7 @@ fn main() {
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
     #[cfg(all(
+        not(disable_avx2),
         not(target_os = "windows"),
         not(target_os = "macos"),
         target_arch = "x86_64"
@@ -148,6 +164,7 @@ fn main() {
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
     #[cfg(all(
+        not(disable_avx2),
         not(target_os = "windows"),
         not(target_os = "macos"),
         target_arch = "x86_64"
@@ -165,6 +182,7 @@ fn main() {
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
     #[cfg(all(
+        not(disable_avx2),
         not(target_os = "windows"),
         not(target_os = "macos"),
         target_arch = "x86_64"
@@ -182,6 +200,7 @@ fn main() {
             .map(|p| p.unwrap().to_string_lossy().into_owned()),
     );
     #[cfg(all(
+        not(disable_avx2),
         not(target_os = "windows"),
         not(target_os = "macos"),
         target_arch = "x86_64"
@@ -194,4 +213,15 @@ fn main() {
         );
     }
     builder.compile("libkyber.a");
+
+    // Print enableing flag for AVX2 implementation
+    #[cfg(all(
+        not(disable_avx2),
+        not(target_os = "windows"),
+        not(target_os = "macos"),
+        target_arch = "x86_64"
+    ))]
+    {
+        println!("rustc-cfg=enable_avx2");
+    }
 }
