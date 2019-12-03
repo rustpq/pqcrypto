@@ -2,7 +2,7 @@
 name = "pqcrypto-kyber"
 description = "Post-Quantum Key-Encapsulation Mechanism kyber"
 readme = "README.md"
-version = "0.6.1"
+version = "0.6.2"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
