@@ -432,7 +432,7 @@ unsafe fn open_avx2(sm: &SignedMessage, pk: &PublicKey) -> std::result::Result<V
         )
     {
         0 => {
-            unsafe { m.set_len(mlen) };
+            m.set_len(mlen);
             Ok(m)
         },
           -1 => Err(primitive::VerificationError::InvalidSignature),
@@ -442,6 +442,15 @@ unsafe fn open_avx2(sm: &SignedMessage, pk: &PublicKey) -> std::result::Result<V
 {% endif %}
 
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
+    {% if 'avx2_implementation' in scheme %}
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { detached_sign_avx2(msg, sk) };
+        }
+    }
+    {% endif %}
+
     detached_sign_portable(msg, sk)
 }
 
@@ -508,7 +517,7 @@ fn verify_detached_signature_portable(sig: &DetachedSignature, msg: &[u8], pk: &
 #[cfg(enable_avx2)]
 #[target_feature(enable = "avx2")]
 #[inline]
-fn verify_detached_signature_avx2(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> std::result::Result<(), primitive::VerificationError> {
+unsafe fn verify_detached_signature_avx2(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> std::result::Result<(), primitive::VerificationError> {
     let res = ffi::PQCLEAN_{{ AVX2_NAME }}_crypto_sign_verify(
             sig.0.as_ptr(),
             sig.1,

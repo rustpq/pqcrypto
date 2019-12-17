@@ -5,7 +5,7 @@ traits_version: 0.3.2
 
 kems:
   kyber:
-    version: 0.6.2
+    version: 0.6.3
     schemes:
       - name: kyber512
         implementation: clean
