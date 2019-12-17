@@ -86,7 +86,7 @@ fn main() {
     // Print enableing flag for AVX2 implementation
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
     {
-        println!("rustc-cfg=enable_avx2");
+        println!("cargo:rustc-cfg=enable_avx2");
     }
     {% endif %}
 }

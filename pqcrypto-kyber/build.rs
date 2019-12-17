@@ -222,6 +222,6 @@ fn main() {
         target_arch = "x86_64"
     ))]
     {
-        println!("rustc-cfg=enable_avx2");
+        println!("cargo:rustc-cfg=enable_avx2");
     }
 }

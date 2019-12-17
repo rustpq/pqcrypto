@@ -67,8 +67,8 @@ extern "C" {
 
 {# AVX2 variants #}
 {% if 'avx2_implementation' in scheme %}
-    {% if type == "kem" %}
     {% set NS_NAME = [scheme.name|namespaceize, scheme.avx2_implementation|namespaceize]|join('_') %}
+    {% if type == "kem" %}
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
