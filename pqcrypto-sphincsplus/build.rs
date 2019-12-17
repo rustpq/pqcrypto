@@ -723,12 +723,7 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .flag("-mavx2")
@@ -746,12 +741,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka128ssimple_aesni_dir)
@@ -775,12 +765,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka128fsimple_aesni_dir)
@@ -797,12 +782,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka128frobust_aesni_dir)
@@ -819,12 +799,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka192ssimple_aesni_dir)
@@ -841,12 +816,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka192srobust_aesni_dir)
@@ -863,12 +833,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka192fsimple_aesni_dir)
@@ -885,12 +850,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka192frobust_aesni_dir)
@@ -907,12 +867,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka256ssimple_aesni_dir)
@@ -929,12 +884,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka256srobust_aesni_dir)
@@ -951,12 +901,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka256fsimple_aesni_dir)
@@ -973,12 +918,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsharaka256frobust_aesni_dir)
@@ -995,12 +935,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256128ssimple_avx2_dir)
@@ -1017,12 +952,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256128srobust_avx2_dir)
@@ -1039,12 +969,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256128fsimple_avx2_dir)
@@ -1061,12 +986,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256128frobust_avx2_dir)
@@ -1083,12 +1003,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256192ssimple_avx2_dir)
@@ -1105,12 +1020,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256192srobust_avx2_dir)
@@ -1127,12 +1037,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256192fsimple_avx2_dir)
@@ -1156,12 +1061,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256256ssimple_avx2_dir)
@@ -1178,12 +1078,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256256srobust_avx2_dir)
@@ -1200,12 +1095,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256256fsimple_avx2_dir)
@@ -1222,12 +1112,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincsshake256256frobust_avx2_dir)
@@ -1244,12 +1129,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256128ssimple_avx2_dir)
@@ -1266,12 +1146,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256128srobust_avx2_dir)
@@ -1288,12 +1163,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256128fsimple_avx2_dir)
@@ -1310,12 +1180,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256128frobust_avx2_dir)
@@ -1332,12 +1197,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256192ssimple_avx2_dir)
@@ -1354,12 +1214,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256192srobust_avx2_dir)
@@ -1376,12 +1231,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256192fsimple_avx2_dir)
@@ -1398,12 +1248,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256192frobust_avx2_dir)
@@ -1420,12 +1265,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256256ssimple_avx2_dir)
@@ -1442,12 +1282,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256256srobust_avx2_dir)
@@ -1464,12 +1299,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256256fsimple_avx2_dir)
@@ -1486,12 +1316,7 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
         builder
             .include(target_sphincssha256256frobust_avx2_dir)
