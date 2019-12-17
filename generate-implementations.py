@@ -8,6 +8,9 @@ import re
 import shutil
 
 
+DEFAULT_AVX2_GUARD = 'cfg(all(not(disable_avx2), target_arch = "x86_64"))'
+
+
 def read_yaml():
     with open('implementations.yaml', 'r') as f:
         return yaml.safe_load(f)
@@ -75,6 +78,7 @@ def generate_scheme(name, type, properties):
         name=name,
         type=type,
         schemes=properties['schemes'],
+        avx2_guard=properties.get('avx2_guard', DEFAULT_AVX2_GUARD)
     )
 
     metadatas = dict()

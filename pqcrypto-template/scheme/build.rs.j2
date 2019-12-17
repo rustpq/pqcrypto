@@ -84,7 +84,7 @@ fn main() {
 
     {% if globals.have_avx2 %}
     // Print enableing flag for AVX2 implementation
-    #[cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))]
+    #[{{ avx2_guard }}]
     {
         println!("cargo:rustc-cfg=enable_avx2");
     }

@@ -159,6 +159,12 @@ pub const fn signature_bytes() -> usize {
 
 /// Generate a sphincs-haraka-256f-robust keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { keypair_avx2() };
+        }
+    }
     keypair_portable()
 }
 
@@ -177,9 +183,31 @@ fn keypair_portable() -> (PublicKey, SecretKey) {
     );
     (pk, sk)
 }
+#[cfg(enable_avx2)]
+#[target_feature(enable = "avx2")]
+#[inline]
+unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
+    let mut pk = PublicKey::new();
+    let mut sk = SecretKey::new();
+    assert_eq!(
+        ffi::PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_keypair(
+            pk.0.as_mut_ptr(),
+            sk.0.as_mut_ptr()
+        ),
+        0
+    );
+    (pk, sk)
+}
 
 /// Sign the message and return the signed message.
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { sign_avx2(msg, sk) };
+        }
+    }
+
     sign_portable(msg, sk)
 }
 
@@ -202,11 +230,37 @@ fn sign_portable(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     SignedMessage(signed_msg)
 }
 
+#[cfg(enable_avx2)]
+#[target_feature(enable = "avx2")]
+#[inline]
+unsafe fn sign_avx2(msg: &[u8], sk: &SecretKey) -> SignedMessage {
+    let max_len = msg.len() + signature_bytes();
+    let mut signed_msg = Vec::with_capacity(max_len);
+    let mut smlen: usize = 0;
+    ffi::PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign(
+        signed_msg.as_mut_ptr(),
+        &mut smlen as *mut usize,
+        msg.as_ptr(),
+        msg.len(),
+        sk.0.as_ptr(),
+    );
+    debug_assert!(smlen <= max_len, "exceeded Vec capacity");
+    signed_msg.set_len(smlen);
+
+    SignedMessage(signed_msg)
+}
+
 #[must_use]
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
 ) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { open_avx2(sm, pk) };
+        }
+    }
     open_portable(sm, pk)
 }
 
@@ -235,7 +289,39 @@ fn open_portable(
     }
 }
 
+#[cfg(enable_avx2)]
+#[target_feature(enable = "avx2")]
+#[inline]
+unsafe fn open_avx2(
+    sm: &SignedMessage,
+    pk: &PublicKey,
+) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
+    let mut m: Vec<u8> = Vec::with_capacity(sm.len());
+    let mut mlen: usize = 0;
+    match ffi::PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_open(
+        m.as_mut_ptr(),
+        &mut mlen as *mut usize,
+        sm.0.as_ptr(),
+        sm.len(),
+        pk.0.as_ptr(),
+    ) {
+        0 => {
+            m.set_len(mlen);
+            Ok(m)
+        }
+        -1 => Err(primitive::VerificationError::InvalidSignature),
+        _ => Err(primitive::VerificationError::UnknownVerificationError),
+    }
+}
+
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { detached_sign_avx2(msg, sk) };
+        }
+    }
+
     detached_sign_portable(msg, sk)
 }
 
@@ -254,12 +340,34 @@ fn detached_sign_portable(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     sig
 }
 
+#[cfg(enable_avx2)]
+#[target_feature(enable = "avx2")]
+#[inline]
+unsafe fn detached_sign_avx2(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
+    let mut sig = DetachedSignature::new();
+    ffi::PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_signature(
+        sig.0.as_mut_ptr(),
+        &mut sig.1 as *mut usize,
+        msg.as_ptr(),
+        msg.len(),
+        sk.0.as_ptr(),
+    );
+    sig
+}
+
 #[must_use]
 pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],
     pk: &PublicKey,
 ) -> std::result::Result<(), primitive::VerificationError> {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { verify_detached_signature_avx2(sig, msg, pk) };
+        }
+    }
+
     verify_detached_signature_portable(sig, msg, pk)
 }
 
@@ -277,6 +385,28 @@ fn verify_detached_signature_portable(
             pk.0.as_ptr(),
         )
     };
+    match res {
+        0 => Ok(()),
+        -1 => Err(primitive::VerificationError::InvalidSignature),
+        _ => Err(primitive::VerificationError::UnknownVerificationError),
+    }
+}
+
+#[cfg(enable_avx2)]
+#[target_feature(enable = "avx2")]
+#[inline]
+unsafe fn verify_detached_signature_avx2(
+    sig: &DetachedSignature,
+    msg: &[u8],
+    pk: &PublicKey,
+) -> std::result::Result<(), primitive::VerificationError> {
+    let res = ffi::PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_verify(
+        sig.0.as_ptr(),
+        sig.1,
+        msg.as_ptr(),
+        msg.len(),
+        pk.0.as_ptr(),
+    );
     match res {
         0 => Ok(()),
         -1 => Err(primitive::VerificationError::InvalidSignature),

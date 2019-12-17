@@ -6,6 +6,7 @@ traits_version: 0.3.2
 kems:
   kyber:
     version: 0.6.3
+    avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))'
     schemes:
       - name: kyber512
         implementation: clean
@@ -124,6 +125,7 @@ signs:
         implementation: clean
   dilithium:
     version: 0.2.0
+    avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))'
     schemes:
       - name: dilithium2
         implementation: clean
@@ -179,75 +181,109 @@ signs:
     schemes:
       - name: sphincs-haraka-128s-simple
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-128s-robust
         implementation: clean
       - name: sphincs-haraka-128f-simple
+        avx2_implementation: aesni
         implementation: clean
       - name: sphincs-haraka-128f-robust
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-192s-simple
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-192s-robust
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-192f-simple
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-192f-robust
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-256s-simple
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-256s-robust
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-256f-simple
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-haraka-256f-robust
         implementation: clean
+        avx2_implementation: aesni
       - name: sphincs-shake256-128s-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-128s-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-128f-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-128f-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-192s-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-192s-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-192f-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-192f-robust
         implementation: clean
       - name: sphincs-shake256-256s-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-256s-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-256f-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-shake256-256f-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-128s-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-128s-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-128f-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-128f-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-192s-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-192s-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-192f-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-192f-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-256s-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-256s-robust
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-256f-simple
         implementation: clean
+        avx2_implementation: avx2
       - name: sphincs-sha256-256f-robust
         implementation: clean
+        avx2_implementation: avx2
 
 #  vim: set ft=yaml ts=2 sw=2 tw=0 et :

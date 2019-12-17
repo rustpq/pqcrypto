@@ -5,8 +5,19 @@ env:
     - RUST_MIN_STACK=81920000
   jobs:
     - CC=gcc
-    - CC=clang
+    - CC=clang-9
 
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-bionic-9 main'
+        key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+    packages:
+      - clang-9
+  homebrew:
+    packages:
+      - llvm
 
 os:
  - linux
