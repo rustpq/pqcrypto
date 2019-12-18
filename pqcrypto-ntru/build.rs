@@ -4,42 +4,7 @@ extern crate glob;
 use std::path::Path;
 
 fn main() {
-    let target_ntruhps2048509_clean_dir = Path::new("pqclean/crypto_kem/ntruhps2048509/clean");
-    let scheme_ntruhps2048509_clean_files = glob::glob(
-        target_ntruhps2048509_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_ntruhps2048677_clean_dir = Path::new("pqclean/crypto_kem/ntruhps2048677/clean");
-    let scheme_ntruhps2048677_clean_files = glob::glob(
-        target_ntruhps2048677_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_ntruhps4096821_clean_dir = Path::new("pqclean/crypto_kem/ntruhps4096821/clean");
-    let scheme_ntruhps4096821_clean_files = glob::glob(
-        target_ntruhps4096821_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_ntruhrss701_clean_dir = Path::new("pqclean/crypto_kem/ntruhrss701/clean");
-    let scheme_ntruhrss701_clean_files =
-        glob::glob(target_ntruhrss701_clean_dir.join("*.c").to_str().unwrap()).unwrap();
-    let mut builder = cc::Build::new();
-    builder.include("pqclean/common").flag("-std=c99");
-
-    #[cfg(debug_assertions)]
-    {
-        builder.flag("-g3");
-    }
     let common_dir = Path::new("pqclean/common");
-
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -48,26 +13,73 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    builder.files(common_files.into_iter());
-    builder.include(target_ntruhps2048509_clean_dir).files(
-        scheme_ntruhps2048509_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_ntruhps2048677_clean_dir).files(
-        scheme_ntruhps2048677_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_ntruhps4096821_clean_dir).files(
-        scheme_ntruhps4096821_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_ntruhrss701_clean_dir).files(
-        scheme_ntruhrss701_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.compile("libntru.a");
+    cc::Build::new()
+        .flag("-std=c99")
+        .include("pqclean/common")
+        .files(common_files.into_iter())
+        .compile("pqclean_common");
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/ntruhps2048509/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("ntruhps2048509_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/ntruhps2048677/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("ntruhps2048677_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/ntruhps4096821/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("ntruhps4096821_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/ntruhrss701/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("ntruhrss701_clean");
+    }
 }

@@ -15,10 +15,13 @@ Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
  * ``dilithium2``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``dilithium3``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``dilithium4``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
 
 

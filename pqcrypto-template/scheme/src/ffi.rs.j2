@@ -43,10 +43,10 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES: usize = {{ metadata['length-signat
 {% endif %}
 {% endfor %}
 
-#[link(name = "{{ name }}")]
-extern "C" {
 {% for scheme in schemes %}
 {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
+#[link(name = "{{ scheme.name }}_{{ implementation }}")]
+extern "C" {
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
 {% if type == "kem" %}
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -63,10 +63,13 @@ extern "C" {
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_signature(sig: *mut u8, siglen: *mut usize, m: *const u8, mlen: usize, sk: *const u8) -> c_int;
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(sig: *const u8, siglen: usize, m: *const u8, mlen: usize, pk: *const u8) -> c_int;
 {% endif %}
+}
 {% endfor %}
 
 {# AVX2 variants #}
 {% if 'avx2_implementation' in scheme %}
+#[link(name = "{{ scheme.name }}_{{ scheme.avx2_implementation }}")]
+extern "C" {
     {% set NS_NAME = [scheme.name|namespaceize, scheme.avx2_implementation|namespaceize]|join('_') %}
     {% if type == "kem" %}
     #[cfg(enable_avx2)]
@@ -93,9 +96,9 @@ extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(sig: *const u8, siglen: usize, m: *const u8, mlen: usize, pk: *const u8) -> c_int;
     {% endif %}
+}
 {% endif %}
 {% endfor %}
-}
 
 {% for scheme in schemes %}
 {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}

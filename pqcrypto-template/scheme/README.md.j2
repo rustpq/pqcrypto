@@ -15,6 +15,9 @@ Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
 {% for scheme in schemes %} * ``{{ scheme.name }}``
+{% if 'avx2_implementation' in scheme %}
+    * ``{{ scheme.avx2_implementation }}`` (if supported)
+{% endif %}
     * ``{{ scheme.implementation }}`` (default)
 {% for implementation in scheme.alt_implementations|default([]) %}
     * ``{{ implementation }}`` (included as ``ffi`` only)

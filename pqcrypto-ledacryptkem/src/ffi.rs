@@ -23,7 +23,7 @@ pub const PQCLEAN_LEDAKEMLT52_LEAKTIME_CRYPTO_PUBLICKEYBYTES: usize = 19040;
 pub const PQCLEAN_LEDAKEMLT52_LEAKTIME_CRYPTO_CIPHERTEXTBYTES: usize = 19080;
 pub const PQCLEAN_LEDAKEMLT52_LEAKTIME_CRYPTO_BYTES: usize = 64;
 
-#[link(name = "ledacryptkem")]
+#[link(name = "ledakemlt12_leaktime")]
 extern "C" {
     pub fn PQCLEAN_LEDAKEMLT12_LEAKTIME_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_LEDAKEMLT12_LEAKTIME_crypto_kem_enc(
@@ -36,7 +36,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "ledakemlt32_leaktime")]
+extern "C" {
     pub fn PQCLEAN_LEDAKEMLT32_LEAKTIME_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_LEDAKEMLT32_LEAKTIME_crypto_kem_enc(
         ct: *mut u8,
@@ -48,7 +51,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "ledakemlt52_leaktime")]
+extern "C" {
     pub fn PQCLEAN_LEDAKEMLT52_LEAKTIME_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_LEDAKEMLT52_LEAKTIME_crypto_kem_enc(
         ct: *mut u8,
@@ -60,7 +66,6 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
-
 }
 
 #[cfg(test)]

@@ -5,7 +5,7 @@ traits_version: 0.3.2
 
 kems:
   kyber:
-    version: 0.6.3
+    version: 0.6.4
     avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))'
     schemes:
       - name: kyber512
@@ -27,7 +27,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   frodo:
-    version: 0.4.1
+    version: 0.4.2
     notes: |
       If you use it via the FFI interface: The ``clean`` implementation of Frodo
       needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
@@ -60,7 +60,7 @@ kems:
         alt_implementations:
           - clean
   ntru:
-    version: 0.4.1
+    version: 0.4.2
     schemes:
       - name: ntruhps2048509
         implementation: clean
@@ -71,7 +71,7 @@ kems:
       - name: ntruhrss701
         implementation: clean
   saber:
-    version: 0.1.1
+    version: 0.1.2
     schemes:
       - name: firesaber
         implementation: clean
@@ -85,7 +85,7 @@ kems:
       This means that it is not secure.
 
       This crate may remove the ``leaktime`` implementation at any point.
-    version: 0.0.2
+    version: 0.0.3
     schemes:
       - name: ledakemlt12
         implementation: leaktime
@@ -94,7 +94,7 @@ kems:
       - name: ledakemlt52
         implementation: leaktime
   threebears:
-    version: 0.1.0
+    version: 0.1.1
     schemes:
       - name: babybear
         implementation: clean
@@ -103,7 +103,7 @@ kems:
       - name: papabear
         implementation: clean
   newhope:
-    version: 0.1.0
+    version: 0.1.1
     schemes:
       - name: newhope1024cpa
         implementation: clean
@@ -117,14 +117,14 @@ kems:
 
 signs:
   mqdss:
-    version: 0.2.2
+    version: 0.2.3
     schemes:
       - name: mqdss-48
         implementation: clean
       - name: mqdss-64
         implementation: clean
   dilithium:
-    version: 0.2.0
+    version: 0.2.1
     avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))'
     schemes:
       - name: dilithium2
@@ -137,21 +137,21 @@ signs:
         implementation: clean
         avx2_implementation: avx2
   falcon:
-    version: 0.2.0
+    version: 0.2.1
     schemes:
       - name: falcon-512
         implementation: clean
       - name: falcon-1024
         implementation: clean
   qtesla:
-    version: 0.1.0
+    version: 0.1.1
     schemes:
       - name: qtesla-p-I
         implementation: clean
       - name: qtesla-p-III
         implementation: clean
   rainbow:
-    version: 0.1.1
+    version: 0.1.2
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
@@ -177,7 +177,7 @@ signs:
       - name: rainbowVc-cyclic-compressed
         implementation: clean
   sphincsplus:
-    version: 0.4.3
+    version: 0.5.0
     schemes:
       - name: sphincs-haraka-128s-simple
         implementation: clean

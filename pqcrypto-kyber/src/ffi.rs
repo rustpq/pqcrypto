@@ -86,7 +86,7 @@ pub const PQCLEAN_KYBER102490S_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 1568;
 #[cfg(enable_avx2)]
 pub const PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES: usize = 32;
 
-#[link(name = "kyber")]
+#[link(name = "kyber512_clean")]
 extern "C" {
     pub fn PQCLEAN_KYBER512_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_KYBER512_CLEAN_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8) -> c_int;
@@ -95,7 +95,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "kyber512_avx2")]
+extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER512_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
@@ -105,6 +108,9 @@ extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER512_AVX2_crypto_kem_dec(ss: *mut u8, ct: *const u8, sk: *const u8)
         -> c_int;
+}
+#[link(name = "kyber768_clean")]
+extern "C" {
     pub fn PQCLEAN_KYBER768_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_KYBER768_CLEAN_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8) -> c_int;
     pub fn PQCLEAN_KYBER768_CLEAN_crypto_kem_dec(
@@ -112,7 +118,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "kyber768_avx2")]
+extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER768_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
@@ -122,6 +131,9 @@ extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER768_AVX2_crypto_kem_dec(ss: *mut u8, ct: *const u8, sk: *const u8)
         -> c_int;
+}
+#[link(name = "kyber1024_clean")]
+extern "C" {
     pub fn PQCLEAN_KYBER1024_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_KYBER1024_CLEAN_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8)
         -> c_int;
@@ -130,7 +142,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "kyber1024_avx2")]
+extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER1024_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
@@ -143,6 +158,9 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
+#[link(name = "kyber512-90s_clean")]
+extern "C" {
     pub fn PQCLEAN_KYBER51290S_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_KYBER51290S_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -154,7 +172,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "kyber512-90s_avx2")]
+extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER51290S_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
@@ -171,6 +192,9 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
+#[link(name = "kyber768-90s_clean")]
+extern "C" {
     pub fn PQCLEAN_KYBER76890S_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_KYBER76890S_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -182,7 +206,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "kyber768-90s_avx2")]
+extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER76890S_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
@@ -199,6 +226,9 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
+#[link(name = "kyber1024-90s_clean")]
+extern "C" {
     pub fn PQCLEAN_KYBER102490S_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_KYBER102490S_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -210,7 +240,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "kyber1024-90s_avx2")]
+extern "C" {
     #[cfg(enable_avx2)]
     pub fn PQCLEAN_KYBER102490S_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
 
@@ -272,32 +305,32 @@ mod test_kyber512_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        #[target_feature(enable = "avx2")]
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
-
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER512_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER512_AVX2_crypto_kem_enc(
-                    ct.as_mut_ptr(),
-                    ss1.as_mut_ptr(),
-                    pk.as_ptr()
-                )
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER512_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
-            );
-            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
+            run_test_ffi();
         }
+    }
+
+    #[target_feature(enable = "avx2")]
+    unsafe fn run_test_ffi() {
+        let mut pk = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
+        let mut ss2 = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
+
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER512_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER512_AVX2_crypto_kem_enc(ct.as_mut_ptr(), ss1.as_mut_ptr(), pk.as_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER512_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
+        );
+        assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
     }
 }
 #[cfg(test)]
@@ -343,32 +376,32 @@ mod test_kyber768_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        #[target_feature(enable = "avx2")]
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
-
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER768_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER768_AVX2_crypto_kem_enc(
-                    ct.as_mut_ptr(),
-                    ss1.as_mut_ptr(),
-                    pk.as_ptr()
-                )
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER768_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
-            );
-            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
+            run_test_ffi();
         }
+    }
+
+    #[target_feature(enable = "avx2")]
+    unsafe fn run_test_ffi() {
+        let mut pk = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
+        let mut ss2 = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
+
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER768_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER768_AVX2_crypto_kem_enc(ct.as_mut_ptr(), ss1.as_mut_ptr(), pk.as_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER768_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
+        );
+        assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
     }
 }
 #[cfg(test)]
@@ -414,32 +447,32 @@ mod test_kyber1024_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        #[target_feature(enable = "avx2")]
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
-
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER1024_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER1024_AVX2_crypto_kem_enc(
-                    ct.as_mut_ptr(),
-                    ss1.as_mut_ptr(),
-                    pk.as_ptr()
-                )
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER1024_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
-            );
-            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
+            run_test_ffi();
         }
+    }
+
+    #[target_feature(enable = "avx2")]
+    unsafe fn run_test_ffi() {
+        let mut pk = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
+        let mut ss2 = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
+
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER1024_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER1024_AVX2_crypto_kem_enc(ct.as_mut_ptr(), ss1.as_mut_ptr(), pk.as_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER1024_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
+        );
+        assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
     }
 }
 #[cfg(test)]
@@ -489,32 +522,32 @@ mod test_kyber51290s_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        #[target_feature(enable = "avx2")]
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
-
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER51290S_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER51290S_AVX2_crypto_kem_enc(
-                    ct.as_mut_ptr(),
-                    ss1.as_mut_ptr(),
-                    pk.as_ptr()
-                )
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER51290S_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
-            );
-            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
+            run_test_ffi();
         }
+    }
+
+    #[target_feature(enable = "avx2")]
+    unsafe fn run_test_ffi() {
+        let mut pk = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
+        let mut ss2 = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
+
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER51290S_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER51290S_AVX2_crypto_kem_enc(ct.as_mut_ptr(), ss1.as_mut_ptr(), pk.as_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER51290S_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
+        );
+        assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
     }
 }
 #[cfg(test)]
@@ -564,32 +597,32 @@ mod test_kyber76890s_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        #[target_feature(enable = "avx2")]
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
-
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER76890S_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER76890S_AVX2_crypto_kem_enc(
-                    ct.as_mut_ptr(),
-                    ss1.as_mut_ptr(),
-                    pk.as_ptr()
-                )
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER76890S_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
-            );
-            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
+            run_test_ffi();
         }
+    }
+
+    #[target_feature(enable = "avx2")]
+    unsafe fn run_test_ffi() {
+        let mut pk = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
+        let mut ss2 = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
+
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER76890S_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER76890S_AVX2_crypto_kem_enc(ct.as_mut_ptr(), ss1.as_mut_ptr(), pk.as_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER76890S_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
+        );
+        assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
     }
 }
 #[cfg(test)]
@@ -639,35 +672,35 @@ mod test_kyber102490s_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        #[target_feature(enable = "avx2")]
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
-
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER102490S_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER102490S_AVX2_crypto_kem_enc(
-                    ct.as_mut_ptr(),
-                    ss1.as_mut_ptr(),
-                    pk.as_ptr()
-                )
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_KYBER102490S_AVX2_crypto_kem_dec(
-                    ss2.as_mut_ptr(),
-                    ct.as_ptr(),
-                    sk.as_ptr()
-                )
-            );
-            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
+            run_test_ffi();
         }
+    }
+
+    #[target_feature(enable = "avx2")]
+    unsafe fn run_test_ffi() {
+        let mut pk = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
+        let mut ss2 = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
+
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER102490S_AVX2_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER102490S_AVX2_crypto_kem_enc(
+                ct.as_mut_ptr(),
+                ss1.as_mut_ptr(),
+                pk.as_ptr()
+            )
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_KYBER102490S_AVX2_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
+        );
+        assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
     }
 }

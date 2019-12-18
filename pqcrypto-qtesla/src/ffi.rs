@@ -16,7 +16,7 @@ pub const PQCLEAN_QTESLAPIII_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 12352;
 pub const PQCLEAN_QTESLAPIII_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 38432;
 pub const PQCLEAN_QTESLAPIII_CLEAN_CRYPTO_BYTES: usize = 5664;
 
-#[link(name = "qtesla")]
+#[link(name = "qtesla-p-I_clean")]
 extern "C" {
     pub fn PQCLEAN_QTESLAPI_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_QTESLAPI_CLEAN_crypto_sign(
@@ -47,7 +47,10 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "qtesla-p-III_clean")]
+extern "C" {
     pub fn PQCLEAN_QTESLAPIII_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_QTESLAPIII_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -77,7 +80,6 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
-
 }
 
 #[cfg(test)]

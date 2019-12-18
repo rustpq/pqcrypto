@@ -28,7 +28,7 @@ pub const PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1138;
 pub const PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1138;
 pub const PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[link(name = "ntru")]
+#[link(name = "ntruhps2048509_clean")]
 extern "C" {
     pub fn PQCLEAN_NTRUHPS2048509_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NTRUHPS2048509_CLEAN_crypto_kem_enc(
@@ -41,7 +41,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "ntruhps2048677_clean")]
+extern "C" {
     pub fn PQCLEAN_NTRUHPS2048677_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NTRUHPS2048677_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -53,7 +56,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "ntruhps4096821_clean")]
+extern "C" {
     pub fn PQCLEAN_NTRUHPS4096821_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NTRUHPS4096821_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -65,7 +71,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "ntruhrss701_clean")]
+extern "C" {
     pub fn PQCLEAN_NTRUHRSS701_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NTRUHRSS701_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -77,7 +86,6 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
-
 }
 
 #[cfg(test)]

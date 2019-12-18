@@ -23,7 +23,7 @@ pub const PQCLEAN_SABER_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 992;
 pub const PQCLEAN_SABER_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1088;
 pub const PQCLEAN_SABER_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[link(name = "saber")]
+#[link(name = "firesaber_clean")]
 extern "C" {
     pub fn PQCLEAN_FIRESABER_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FIRESABER_CLEAN_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8)
@@ -33,7 +33,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "lightsaber_clean")]
+extern "C" {
     pub fn PQCLEAN_LIGHTSABER_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_LIGHTSABER_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -45,11 +48,13 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "saber_clean")]
+extern "C" {
     pub fn PQCLEAN_SABER_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_SABER_CLEAN_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8) -> c_int;
     pub fn PQCLEAN_SABER_CLEAN_crypto_kem_dec(ss: *mut u8, ct: *const u8, sk: *const u8) -> c_int;
-
 }
 
 #[cfg(test)]

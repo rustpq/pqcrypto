@@ -28,7 +28,7 @@ pub const PQCLEAN_NEWHOPE512CCA_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 928;
 pub const PQCLEAN_NEWHOPE512CCA_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1120;
 pub const PQCLEAN_NEWHOPE512CCA_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[link(name = "newhope")]
+#[link(name = "newhope1024cpa_clean")]
 extern "C" {
     pub fn PQCLEAN_NEWHOPE1024CPA_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NEWHOPE1024CPA_CLEAN_crypto_kem_enc(
@@ -41,7 +41,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "newhope1024cca_clean")]
+extern "C" {
     pub fn PQCLEAN_NEWHOPE1024CCA_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NEWHOPE1024CCA_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -53,7 +56,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "newhope512cpa_clean")]
+extern "C" {
     pub fn PQCLEAN_NEWHOPE512CPA_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NEWHOPE512CPA_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -65,7 +71,10 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "newhope512cca_clean")]
+extern "C" {
     pub fn PQCLEAN_NEWHOPE512CCA_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_NEWHOPE512CCA_CLEAN_crypto_kem_enc(
         ct: *mut u8,
@@ -77,7 +86,6 @@ extern "C" {
         ct: *const u8,
         sk: *const u8,
     ) -> c_int;
-
 }
 
 #[cfg(test)]

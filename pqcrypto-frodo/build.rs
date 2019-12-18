@@ -4,97 +4,7 @@ extern crate glob;
 use std::path::Path;
 
 fn main() {
-    let target_frodokem640shake_opt_dir = Path::new("pqclean/crypto_kem/frodokem640shake/opt");
-    let scheme_frodokem640shake_opt_files = glob::glob(
-        target_frodokem640shake_opt_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem640shake_clean_dir = Path::new("pqclean/crypto_kem/frodokem640shake/clean");
-    let scheme_frodokem640shake_clean_files = glob::glob(
-        target_frodokem640shake_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem640aes_opt_dir = Path::new("pqclean/crypto_kem/frodokem640aes/opt");
-    let scheme_frodokem640aes_opt_files =
-        glob::glob(target_frodokem640aes_opt_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_frodokem640aes_clean_dir = Path::new("pqclean/crypto_kem/frodokem640aes/clean");
-    let scheme_frodokem640aes_clean_files = glob::glob(
-        target_frodokem640aes_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem976aes_opt_dir = Path::new("pqclean/crypto_kem/frodokem976aes/opt");
-    let scheme_frodokem976aes_opt_files =
-        glob::glob(target_frodokem976aes_opt_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_frodokem976aes_clean_dir = Path::new("pqclean/crypto_kem/frodokem976aes/clean");
-    let scheme_frodokem976aes_clean_files = glob::glob(
-        target_frodokem976aes_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem976shake_opt_dir = Path::new("pqclean/crypto_kem/frodokem976shake/opt");
-    let scheme_frodokem976shake_opt_files = glob::glob(
-        target_frodokem976shake_opt_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem976shake_clean_dir = Path::new("pqclean/crypto_kem/frodokem976shake/clean");
-    let scheme_frodokem976shake_clean_files = glob::glob(
-        target_frodokem976shake_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem1344aes_opt_dir = Path::new("pqclean/crypto_kem/frodokem1344aes/opt");
-    let scheme_frodokem1344aes_opt_files =
-        glob::glob(target_frodokem1344aes_opt_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_frodokem1344aes_clean_dir = Path::new("pqclean/crypto_kem/frodokem1344aes/clean");
-    let scheme_frodokem1344aes_clean_files = glob::glob(
-        target_frodokem1344aes_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem1344shake_opt_dir = Path::new("pqclean/crypto_kem/frodokem1344shake/opt");
-    let scheme_frodokem1344shake_opt_files = glob::glob(
-        target_frodokem1344shake_opt_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let target_frodokem1344shake_clean_dir =
-        Path::new("pqclean/crypto_kem/frodokem1344shake/clean");
-    let scheme_frodokem1344shake_clean_files = glob::glob(
-        target_frodokem1344shake_clean_dir
-            .join("*.c")
-            .to_str()
-            .unwrap(),
-    )
-    .unwrap();
-    let mut builder = cc::Build::new();
-    builder.include("pqclean/common").flag("-std=c99");
-
-    #[cfg(debug_assertions)]
-    {
-        builder.flag("-g3");
-    }
     let common_dir = Path::new("pqclean/common");
-
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -103,66 +13,195 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    builder.files(common_files.into_iter());
-    builder.include(target_frodokem640shake_opt_dir).files(
-        scheme_frodokem640shake_opt_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem640shake_clean_dir).files(
-        scheme_frodokem640shake_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem640aes_opt_dir).files(
-        scheme_frodokem640aes_opt_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem640aes_clean_dir).files(
-        scheme_frodokem640aes_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem976aes_opt_dir).files(
-        scheme_frodokem976aes_opt_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem976aes_clean_dir).files(
-        scheme_frodokem976aes_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem976shake_opt_dir).files(
-        scheme_frodokem976shake_opt_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem976shake_clean_dir).files(
-        scheme_frodokem976shake_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem1344aes_opt_dir).files(
-        scheme_frodokem1344aes_opt_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem1344aes_clean_dir).files(
-        scheme_frodokem1344aes_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem1344shake_opt_dir).files(
-        scheme_frodokem1344shake_opt_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_frodokem1344shake_clean_dir).files(
-        scheme_frodokem1344shake_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.compile("libfrodo.a");
+    cc::Build::new()
+        .flag("-std=c99")
+        .include("pqclean/common")
+        .files(common_files.into_iter())
+        .compile("pqclean_common");
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem640shake/opt");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem640shake_opt");
+    }
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem640shake/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem640shake_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem640aes/opt");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem640aes_opt");
+    }
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem640aes/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem640aes_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem976aes/opt");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem976aes_opt");
+    }
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem976aes/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem976aes_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem976shake/opt");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem976shake_opt");
+    }
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem976shake/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem976shake_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem1344aes/opt");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem1344aes_opt");
+    }
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem1344aes/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem1344aes_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem1344shake/opt");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem1344shake_opt");
+    }
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/frodokem1344shake/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("frodokem1344shake_clean");
+    }
 }

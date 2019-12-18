@@ -16,7 +16,7 @@ pub const PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2305;
 pub const PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1793;
 pub const PQCLEAN_FALCON1024_CLEAN_CRYPTO_BYTES: usize = 1330;
 
-#[link(name = "falcon")]
+#[link(name = "falcon-512_clean")]
 extern "C" {
     pub fn PQCLEAN_FALCON512_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FALCON512_CLEAN_crypto_sign(
@@ -47,7 +47,10 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+}
 
+#[link(name = "falcon-1024_clean")]
+extern "C" {
     pub fn PQCLEAN_FALCON1024_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     pub fn PQCLEAN_FALCON1024_CLEAN_crypto_sign(
         sm: *mut u8,
@@ -77,7 +80,6 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
-
 }
 
 #[cfg(test)]

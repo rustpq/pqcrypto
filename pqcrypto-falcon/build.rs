@@ -4,21 +4,7 @@ extern crate glob;
 use std::path::Path;
 
 fn main() {
-    let target_falcon512_clean_dir = Path::new("pqclean/crypto_sign/falcon-512/clean");
-    let scheme_falcon512_clean_files =
-        glob::glob(target_falcon512_clean_dir.join("*.c").to_str().unwrap()).unwrap();
-    let target_falcon1024_clean_dir = Path::new("pqclean/crypto_sign/falcon-1024/clean");
-    let scheme_falcon1024_clean_files =
-        glob::glob(target_falcon1024_clean_dir.join("*.c").to_str().unwrap()).unwrap();
-    let mut builder = cc::Build::new();
-    builder.include("pqclean/common").flag("-std=c99");
-
-    #[cfg(debug_assertions)]
-    {
-        builder.flag("-g3");
-    }
     let common_dir = Path::new("pqclean/common");
-
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -27,16 +13,41 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    builder.files(common_files.into_iter());
-    builder.include(target_falcon512_clean_dir).files(
-        scheme_falcon512_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.include(target_falcon1024_clean_dir).files(
-        scheme_falcon1024_clean_files
-            .into_iter()
-            .map(|p| p.unwrap().to_string_lossy().into_owned()),
-    );
-    builder.compile("libfalcon.a");
+    cc::Build::new()
+        .flag("-std=c99")
+        .include("pqclean/common")
+        .files(common_files.into_iter())
+        .compile("pqclean_common");
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_sign/falcon-512/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("falcon-512_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_sign/falcon-1024/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("falcon-1024_clean");
+    }
 }

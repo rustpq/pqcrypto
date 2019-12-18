@@ -15,16 +15,22 @@ Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
  * ``kyber512``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``kyber768``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``kyber1024``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``kyber512-90s``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``kyber768-90s``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``kyber1024-90s``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
 
 
