@@ -64,6 +64,11 @@ def generate_scheme(name, type, properties):
     except FileExistsError:
         pass
 
+    for scheme in properties['schemes']:
+        if 'avx2_implementation' in scheme:
+            if 'avx2_feature' not in scheme:
+                scheme['avx2_feature'] = 'avx2'
+
     render_template(
         target_dir, 'Cargo.toml', 'scheme/Cargo.toml.j2',
         traits_version=implementations['traits_version'],

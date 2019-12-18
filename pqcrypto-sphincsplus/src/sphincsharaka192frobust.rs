@@ -161,7 +161,7 @@ pub const fn signature_bytes() -> usize {
 pub fn keypair() -> (PublicKey, SecretKey) {
     #[cfg(enable_avx2)]
     {
-        if is_x86_feature_detected!("avx2") {
+        if is_x86_feature_detected!("aes") {
             return unsafe { keypair_avx2() };
         }
     }
@@ -184,7 +184,7 @@ fn keypair_portable() -> (PublicKey, SecretKey) {
     (pk, sk)
 }
 #[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
+#[target_feature(enable = "aes")]
 #[inline]
 unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
     let mut pk = PublicKey::new();
@@ -203,7 +203,7 @@ unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     #[cfg(enable_avx2)]
     {
-        if is_x86_feature_detected!("avx2") {
+        if is_x86_feature_detected!("aes") {
             return unsafe { sign_avx2(msg, sk) };
         }
     }
@@ -231,7 +231,7 @@ fn sign_portable(msg: &[u8], sk: &SecretKey) -> SignedMessage {
 }
 
 #[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
+#[target_feature(enable = "aes")]
 #[inline]
 unsafe fn sign_avx2(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     let max_len = msg.len() + signature_bytes();
@@ -257,7 +257,7 @@ pub fn open(
 ) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
     #[cfg(enable_avx2)]
     {
-        if is_x86_feature_detected!("avx2") {
+        if is_x86_feature_detected!("aes") {
             return unsafe { open_avx2(sm, pk) };
         }
     }
@@ -290,7 +290,7 @@ fn open_portable(
 }
 
 #[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
+#[target_feature(enable = "aes")]
 #[inline]
 unsafe fn open_avx2(
     sm: &SignedMessage,
@@ -317,7 +317,7 @@ unsafe fn open_avx2(
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     #[cfg(enable_avx2)]
     {
-        if is_x86_feature_detected!("avx2") {
+        if is_x86_feature_detected!("aes") {
             return unsafe { detached_sign_avx2(msg, sk) };
         }
     }
@@ -341,7 +341,7 @@ fn detached_sign_portable(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
 }
 
 #[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
+#[target_feature(enable = "aes")]
 #[inline]
 unsafe fn detached_sign_avx2(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     let mut sig = DetachedSignature::new();
@@ -363,7 +363,7 @@ pub fn verify_detached_signature(
 ) -> std::result::Result<(), primitive::VerificationError> {
     #[cfg(enable_avx2)]
     {
-        if is_x86_feature_detected!("avx2") {
+        if is_x86_feature_detected!("aes") {
             return unsafe { verify_detached_signature_avx2(sig, msg, pk) };
         }
     }
@@ -393,7 +393,7 @@ fn verify_detached_signature_portable(
 }
 
 #[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
+#[target_feature(enable = "aes")]
 #[inline]
 unsafe fn verify_detached_signature_avx2(
     sig: &DetachedSignature,

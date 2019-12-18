@@ -2932,10 +2932,10 @@ mod test_sphincsharaka128ssimple_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -3294,10 +3294,10 @@ mod test_sphincsharaka128fsimple_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -3538,10 +3538,10 @@ mod test_sphincsharaka128frobust_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -3782,10 +3782,10 @@ mod test_sphincsharaka192ssimple_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -4026,10 +4026,10 @@ mod test_sphincsharaka192srobust_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -4270,10 +4270,10 @@ mod test_sphincsharaka192fsimple_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -4514,10 +4514,10 @@ mod test_sphincsharaka192frobust_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -4758,10 +4758,10 @@ mod test_sphincsharaka256ssimple_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -5002,10 +5002,10 @@ mod test_sphincsharaka256srobust_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -5246,10 +5246,10 @@ mod test_sphincsharaka256fsimple_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -5490,10 +5490,10 @@ mod test_sphincsharaka256frobust_aesni {
 
     #[test]
     fn test_ffi() {
-        if !is_x86_feature_detected!("avx2") {
+        if !is_x86_feature_detected!("aes") {
             return;
         }
-        #[target_feature(enable = "avx2")]
+        #[target_feature(enable = "aes")]
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;

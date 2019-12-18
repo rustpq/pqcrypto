@@ -182,38 +182,49 @@ signs:
       - name: sphincs-haraka-128s-simple
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-128s-robust
         implementation: clean
       - name: sphincs-haraka-128f-simple
         avx2_implementation: aesni
+        avx2_feature: 'aes'
         implementation: clean
       - name: sphincs-haraka-128f-robust
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-192s-simple
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-192s-robust
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-192f-simple
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-192f-robust
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-256s-simple
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-256s-robust
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-256f-simple
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-haraka-256f-robust
         implementation: clean
         avx2_implementation: aesni
+        avx2_feature: 'aes'
       - name: sphincs-shake256-128s-simple
         implementation: clean
         avx2_implementation: avx2
