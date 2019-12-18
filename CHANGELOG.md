@@ -1,5 +1,11 @@
 # Changelog
 
+## 2019-12-18
+
+* Include SPHINCS+ AVX2 and AESNI implementations
+* Refactor build system to separately build all the implementations.
+* Somewhere since the last version we also included Dilithium AVX2 implementations.
+
 ## 2019-11-20
 
 * Update Rainbow implementations to mitigate [``memcopy`` bug][pqclean/250] ([#5][#5])
