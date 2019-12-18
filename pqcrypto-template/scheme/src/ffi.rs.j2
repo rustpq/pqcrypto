@@ -241,32 +241,34 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
         if !is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return;
         }
-        #[target_feature(enable = "{{ scheme.avx2_feature }}")]
-        unsafe {
-            let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+        unsafe { run_test_ffi(); }
+    }
 
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_kem_enc(
-                    ct.as_mut_ptr(),
-                    ss1.as_mut_ptr(),
-                    pk.as_ptr()
-                )
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
-            );
-            assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
-        }
+    #[target_feature(enable = "{{ scheme.avx2_feature }}")]
+    unsafe fn run_test_ffi() {
+        let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+        let mut ct = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+        let mut ss2 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_kem_enc(
+                ct.as_mut_ptr(),
+                ss1.as_mut_ptr(),
+                pk.as_ptr()
+            )
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_kem_dec(ss2.as_mut_ptr(), ct.as_ptr(), sk.as_ptr())
+        );
+        assert_eq!(&ss1[..], &ss2[..], "Shared secrets should be equal");
     }
     {% endif %}
 
@@ -276,89 +278,91 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
         if !is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return;
         }
-        #[target_feature(enable = "{{ scheme.avx2_feature }}")]
-        unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+        unsafe { run_test_ffi() };
+    }
 
-            let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
-            let mut sm = Vec::with_capacity(mlen + PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
-            let mut smlen = 0;
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-            );
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign(
-                    sm.as_mut_ptr(), &mut smlen as *mut usize,
-                    msg.as_ptr(), mlen, sk.as_ptr())
-            );
-            sm.set_len(smlen);
+    #[target_feature(enable = "{{ scheme.avx2_feature }}")]
+    unsafe fn run_test_ffi() {
+        let mut rng = rand::thread_rng();
+        let mut mlen: usize = rng.gen::<u16>() as usize;
+        let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_open(
-                    unpacked_m.as_mut_ptr(), &mut mlen as *mut usize,
-                    sm.as_ptr(), sm.len(),
-                    pk.as_ptr()
-                )
-            );
-            unpacked_m.set_len(mlen);
-            assert_eq!(unpacked_m, msg);
+        let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+        let mut pk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+        let mut sk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+        let mut detached_sig = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+        let mut sm = Vec::with_capacity(mlen + PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
+        let mut smlen = 0;
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+        );
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign(
+                sm.as_mut_ptr(), &mut smlen as *mut usize,
+                msg.as_ptr(), mlen, sk.as_ptr())
+        );
+        sm.set_len(smlen);
 
-            // check verification fails with wrong pk
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
-            );
-            assert_eq!(
-                -1,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_open(
-                    unpacked_m.as_mut_ptr(), &mut mlen as *mut usize,
-                    sm.as_ptr(), sm.len(),
-                    pk_alt.as_ptr()
-                )
-            );
+        let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_open(
+                unpacked_m.as_mut_ptr(), &mut mlen as *mut usize,
+                sm.as_ptr(), sm.len(),
+                pk.as_ptr()
+            )
+        );
+        unpacked_m.set_len(mlen);
+        assert_eq!(unpacked_m, msg);
 
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_signature(
-                    detached_sig.as_mut_ptr(), &mut smlen as *mut usize,
-                    msg.as_ptr(), msg.len(),
-                    sk.as_ptr())
-            );
-            assert!(smlen <= PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES,
-                    "Signed message length should be ≤ CRYPTO_BYTES");
-            assert_eq!(
-                0,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
-                    detached_sig.as_ptr(), smlen,
-                    msg.as_ptr(), msg.len(),
-                    pk.as_ptr())
-            );
-            assert_eq!(
-                -1,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
-                    detached_sig.as_ptr(), smlen,
-                    msg.as_ptr(), msg.len(),
-                    pk_alt.as_ptr())
-            );
+        // check verification fails with wrong pk
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
+        );
+        assert_eq!(
+            -1,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_open(
+                unpacked_m.as_mut_ptr(), &mut mlen as *mut usize,
+                sm.as_ptr(), sm.len(),
+                pk_alt.as_ptr()
+            )
+        );
 
-            assert_eq!(
-                -1,
-                PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
-                    detached_sig.as_ptr(), smlen,
-                    msg.as_ptr(), msg.len()-1,
-                    pk.as_ptr())
-            );
-        }
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_signature(
+                detached_sig.as_mut_ptr(), &mut smlen as *mut usize,
+                msg.as_ptr(), msg.len(),
+                sk.as_ptr())
+        );
+        assert!(smlen <= PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES");
+        assert_eq!(
+            0,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
+                detached_sig.as_ptr(), smlen,
+                msg.as_ptr(), msg.len(),
+                pk.as_ptr())
+        );
+        assert_eq!(
+            -1,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
+                detached_sig.as_ptr(), smlen,
+                msg.as_ptr(), msg.len(),
+                pk_alt.as_ptr())
+        );
+
+        assert_eq!(
+            -1,
+            PQCLEAN_{{ NS_NAME }}_crypto_sign_verify(
+                detached_sig.as_ptr(), smlen,
+                msg.as_ptr(), msg.len()-1,
+                pk.as_ptr())
+        );
     }
     {% endif %}
 }
