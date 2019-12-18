@@ -1,7 +1,7 @@
 # falcon
 
 This crate contains bindings to the C implementations of the following schemes,
-from [PQClean][pqc].
+from [PQClean][pqclean].
 
 This project packages Post-Quantum cryptographic algorithms that participate in
 the [NIST PQC standardization effort][nistpqc]. It is currently a collection of
@@ -28,5 +28,5 @@ MIT or Apache 2.0 licenses, at your choice.
 The implementations we link to are not, however. Please see the [PQClean][pqclean]
 project for the appropriate licenses.
 
-[pqc]: https://github.com/PQClean/PQClean/
+[pqclean]: https://github.com/PQClean/PQClean/
 [nistpqc]: https://nist.gov/pqc/

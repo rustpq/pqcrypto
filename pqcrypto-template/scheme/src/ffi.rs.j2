@@ -68,6 +68,7 @@ extern "C" {
 
 {# AVX2 variants #}
 {% if 'avx2_implementation' in scheme %}
+#[cfg(enable_avx2)]
 #[link(name = "{{ scheme.name }}_{{ scheme.avx2_implementation }}")]
 extern "C" {
     {% set NS_NAME = [scheme.name|namespaceize, scheme.avx2_implementation|namespaceize]|join('_') %}

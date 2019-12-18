@@ -392,6 +392,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-128s-simple_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -504,6 +505,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-128f-simple_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -580,6 +582,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-128f-robust_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -656,6 +659,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-192s-simple_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -732,6 +736,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-192s-robust_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -808,6 +813,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-192f-simple_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -884,6 +890,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-192f-robust_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -960,6 +967,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-256s-simple_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1036,6 +1044,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-256s-robust_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1112,6 +1121,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-256f-simple_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1188,6 +1198,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-haraka-256f-robust_aesni")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1264,6 +1275,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-128s-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1340,6 +1352,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-128s-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1416,6 +1429,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-128f-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1492,6 +1506,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-128f-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1568,6 +1583,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-192s-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1644,6 +1660,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-192s-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1720,6 +1737,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-192f-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1832,6 +1850,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-256s-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1908,6 +1927,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-256s-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -1984,6 +2004,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-256f-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2060,6 +2081,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-shake256-256f-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2136,6 +2158,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-128s-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2212,6 +2235,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-128s-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2288,6 +2312,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-128f-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2364,6 +2389,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-128f-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2440,6 +2466,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-192s-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2516,6 +2543,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-192s-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2592,6 +2620,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-192f-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2668,6 +2697,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-192f-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2744,6 +2774,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-256s-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2820,6 +2851,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-256s-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2896,6 +2928,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-256f-simple_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -2972,6 +3005,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "sphincs-sha256-256f-robust_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]

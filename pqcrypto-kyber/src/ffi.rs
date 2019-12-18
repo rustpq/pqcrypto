@@ -97,6 +97,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "kyber512_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -120,6 +121,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "kyber768_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -144,6 +146,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "kyber1024_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -174,6 +177,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "kyber512-90s_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -208,6 +212,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "kyber768-90s_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -242,6 +247,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "kyber1024-90s_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]

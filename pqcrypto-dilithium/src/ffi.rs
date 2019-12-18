@@ -71,6 +71,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "dilithium2_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -141,6 +142,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "dilithium3_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
@@ -211,6 +213,7 @@ extern "C" {
     ) -> c_int;
 }
 
+#[cfg(enable_avx2)]
 #[link(name = "dilithium4_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
