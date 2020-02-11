@@ -30,7 +30,9 @@ pub mod kem {
     pub use pqcrypto_newhope::{newhope1024cca, newhope1024cpa, newhope512cca, newhope512cpa};
     pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
     pub use pqcrypto_saber::{firesaber, lightsaber, saber};
-    pub use pqcrypto_threebears::{babybear, mamabear, papabear};
+    pub use pqcrypto_threebears::{
+        babybear, babybearephem, mamabear, mamabearephem, papabear, papabearephem,
+    };
 }
 
 pub mod sign {

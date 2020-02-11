@@ -18,7 +18,7 @@ pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.4.2" }
 pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.4.2" }
 pqcrypto-saber = { path = "../pqcrypto-saber", version = "0.1.2" }
 pqcrypto-ledacryptkem = { path = "../pqcrypto-ledacryptkem", version = "0.0.3" }
-pqcrypto-threebears = { path = "../pqcrypto-threebears", version = "0.1.1" }
+pqcrypto-threebears = { path = "../pqcrypto-threebears", version = "0.2.0" }
 pqcrypto-classicmceliece = { path = "../pqcrypto-classicmceliece", version = "0.1.0" }
 pqcrypto-newhope = { path = "../pqcrypto-newhope", version = "0.1.1" }
 pqcrypto-mqdss = { path = "../pqcrypto-mqdss", version = "0.2.3" }

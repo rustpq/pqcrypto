@@ -4,6 +4,7 @@
 
 * Add Classic McEliece
 * Support MacOS for Dilithium AVX2
+* Add ephemeral versions (CPA secure) of Threebears
 
 ## 2019-12-18
 

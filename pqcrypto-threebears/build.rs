@@ -66,4 +66,52 @@ fn main() {
             );
         builder.compile("papabear_clean");
     }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/papabear-ephem/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("papabear-ephem_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/mamabear-ephem/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("mamabear-ephem_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir = Path::new("pqclean/crypto_kem/babybear-ephem/clean");
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder
+            .flag("-std=c99")
+            .include("pqclean/common")
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile("babybear-ephem_clean");
+    }
 }

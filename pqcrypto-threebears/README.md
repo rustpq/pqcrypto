@@ -20,6 +20,12 @@ methods only.
     * ``clean`` (default)
  * ``papabear``
     * ``clean`` (default)
+ * ``papabear-ephem``
+    * ``clean`` (default)
+ * ``mamabear-ephem``
+    * ``clean`` (default)
+ * ``babybear-ephem``
+    * ``clean`` (default)
 
 
 ## License

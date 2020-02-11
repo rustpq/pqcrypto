@@ -94,13 +94,19 @@ kems:
       - name: ledakemlt52
         implementation: leaktime
   threebears:
-    version: 0.1.1
+    version: 0.2.0
     schemes:
       - name: babybear
         implementation: clean
       - name: mamabear
         implementation: clean
       - name: papabear
+        implementation: clean
+      - name: papabear-ephem
+        implementation: clean
+      - name: mamabear-ephem
+        implementation: clean
+      - name: babybear-ephem
         implementation: clean
   classicmceliece:
     version: 0.1.0
