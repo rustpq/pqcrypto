@@ -188,8 +188,8 @@ signs:
       - name: mqdss-64
         implementation: clean
   dilithium:
-    version: 0.2.1
-    avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))'
+    version: 0.3.0
+    avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))'
     schemes:
       - name: dilithium2
         implementation: clean

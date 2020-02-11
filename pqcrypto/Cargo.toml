@@ -22,7 +22,7 @@ pqcrypto-threebears = { path = "../pqcrypto-threebears", version = "0.1.1" }
 pqcrypto-classicmceliece = { path = "../pqcrypto-classicmceliece", version = "0.1.0" }
 pqcrypto-newhope = { path = "../pqcrypto-newhope", version = "0.1.1" }
 pqcrypto-mqdss = { path = "../pqcrypto-mqdss", version = "0.2.3" }
-pqcrypto-dilithium = { path = "../pqcrypto-dilithium", version = "0.2.1" }
+pqcrypto-dilithium = { path = "../pqcrypto-dilithium", version = "0.3.0" }
 pqcrypto-falcon = { path = "../pqcrypto-falcon", version = "0.2.1" }
 pqcrypto-qtesla = { path = "../pqcrypto-qtesla", version = "0.1.1" }
 pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.1.2" }

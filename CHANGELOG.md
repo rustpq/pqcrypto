@@ -3,6 +3,7 @@
 # 2020-02-11
 
 * Add Classic McEliece
+* Support MacOS for Dilithium AVX2
 
 ## 2019-12-18
 

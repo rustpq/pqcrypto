@@ -35,12 +35,7 @@ fn main() {
         builder.compile("dilithium2_clean");
     }
 
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
         let target_dir = Path::new("pqclean/crypto_sign/dilithium2/avx2");
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -85,12 +80,7 @@ fn main() {
         builder.compile("dilithium3_clean");
     }
 
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
         let target_dir = Path::new("pqclean/crypto_sign/dilithium3/avx2");
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -135,12 +125,7 @@ fn main() {
         builder.compile("dilithium4_clean");
     }
 
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
         let target_dir = Path::new("pqclean/crypto_sign/dilithium4/avx2");
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -171,12 +156,7 @@ fn main() {
     }
 
     // Print enableing flag for AVX2 implementation
-    #[cfg(all(
-        not(disable_avx2),
-        not(target_os = "windows"),
-        not(target_os = "macos"),
-        target_arch = "x86_64"
-    ))]
+    #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
         println!("cargo:rustc-cfg=enable_avx2");
     }
