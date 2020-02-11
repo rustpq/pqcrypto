@@ -15,55 +15,45 @@ Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
  * ``mceliece348864``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece348864f``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece460896``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece460896f``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece6688128``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece6688128f``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece6960119``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece6960119f``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece8192128``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
  * ``mceliece8192128f``
-    * ``avx2`` (if supported)
+    * ``avx`` (if supported)
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
-    * ``sse`` (included as ``ffi`` only)
 
 
 ## License

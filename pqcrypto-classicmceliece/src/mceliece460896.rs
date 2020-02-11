@@ -135,7 +135,7 @@ unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
     let mut pk = PublicKey::new();
     let mut sk = SecretKey::new();
     assert_eq!(
-        ffi::PQCLEAN_MCELIECE460896_AVX2_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()),
+        ffi::PQCLEAN_MCELIECE460896_AVX_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()),
         0
     );
     (pk, sk)
@@ -180,7 +180,7 @@ unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ct = Ciphertext::new();
 
     assert_eq!(
-        ffi::PQCLEAN_MCELIECE460896_AVX2_crypto_kem_enc(
+        ffi::PQCLEAN_MCELIECE460896_AVX_crypto_kem_enc(
             ct.0.as_mut_ptr(),
             ss.0.as_mut_ptr(),
             pk.0.as_ptr(),
@@ -224,7 +224,7 @@ fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
 unsafe fn decapsulate_avx2(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
-        ffi::PQCLEAN_MCELIECE460896_AVX2_crypto_kem_dec(
+        ffi::PQCLEAN_MCELIECE460896_AVX_crypto_kem_dec(
             ss.0.as_mut_ptr(),
             ct.0.as_ptr(),
             sk.0.as_ptr(),

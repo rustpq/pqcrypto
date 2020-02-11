@@ -114,64 +114,54 @@ kems:
     schemes:
       - name: mceliece348864
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece348864f
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece460896
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece460896f
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece6688128
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece6688128f
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece6960119
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece6960119f
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece8192128
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
       - name: mceliece8192128f
         implementation: vec
-        avx2_implementation: avx2
+        avx2_implementation: avx
         alt_implementations:
           - clean
-          - sse
   newhope:
     version: 0.1.1
     schemes:
