@@ -243,11 +243,11 @@ mod test_frodokem640shake_opt {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -280,11 +280,11 @@ mod test_frodokem640shake_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -317,11 +317,11 @@ mod test_frodokem640aes_opt {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -354,11 +354,11 @@ mod test_frodokem640aes_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -391,11 +391,11 @@ mod test_frodokem976aes_opt {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -428,11 +428,11 @@ mod test_frodokem976aes_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -465,11 +465,11 @@ mod test_frodokem976shake_opt {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -502,11 +502,11 @@ mod test_frodokem976shake_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -539,11 +539,11 @@ mod test_frodokem1344aes_opt {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -576,11 +576,11 @@ mod test_frodokem1344aes_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -613,11 +613,11 @@ mod test_frodokem1344shake_opt {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -650,11 +650,11 @@ mod test_frodokem1344shake_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,

@@ -676,11 +676,11 @@ mod test_mceliece348864_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE348864_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -713,11 +713,11 @@ mod test_mceliece348864_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -760,11 +760,11 @@ mod test_mceliece348864_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE348864_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -792,11 +792,11 @@ mod test_mceliece348864f_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE348864F_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -829,11 +829,11 @@ mod test_mceliece348864f_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE348864F_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -876,11 +876,11 @@ mod test_mceliece348864f_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE348864F_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -908,11 +908,11 @@ mod test_mceliece460896_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE460896_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -945,11 +945,11 @@ mod test_mceliece460896_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE460896_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -992,11 +992,11 @@ mod test_mceliece460896_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE460896_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -1024,11 +1024,11 @@ mod test_mceliece460896f_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE460896F_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1061,11 +1061,11 @@ mod test_mceliece460896f_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE460896F_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1108,11 +1108,11 @@ mod test_mceliece460896f_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE460896F_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -1140,11 +1140,11 @@ mod test_mceliece6688128_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6688128_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1177,11 +1177,11 @@ mod test_mceliece6688128_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6688128_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1224,11 +1224,11 @@ mod test_mceliece6688128_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6688128_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -1256,11 +1256,11 @@ mod test_mceliece6688128f_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6688128F_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1293,11 +1293,11 @@ mod test_mceliece6688128f_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6688128F_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1340,11 +1340,11 @@ mod test_mceliece6688128f_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6688128F_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -1372,11 +1372,11 @@ mod test_mceliece6960119_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6960119_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1409,11 +1409,11 @@ mod test_mceliece6960119_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6960119_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1456,11 +1456,11 @@ mod test_mceliece6960119_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6960119_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -1488,11 +1488,11 @@ mod test_mceliece6960119f_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6960119F_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1525,11 +1525,11 @@ mod test_mceliece6960119f_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6960119F_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1572,11 +1572,11 @@ mod test_mceliece6960119f_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE6960119F_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -1604,11 +1604,11 @@ mod test_mceliece8192128_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE8192128_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1641,11 +1641,11 @@ mod test_mceliece8192128_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE8192128_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1688,11 +1688,11 @@ mod test_mceliece8192128_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE8192128_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -1720,11 +1720,11 @@ mod test_mceliece8192128f_vec {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1757,11 +1757,11 @@ mod test_mceliece8192128f_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -1804,11 +1804,11 @@ mod test_mceliece8192128f_avx {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_MCELIECE8192128F_AVX_CRYPTO_BYTES];
 
         assert_eq!(
             0,

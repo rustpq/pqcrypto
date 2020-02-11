@@ -123,11 +123,11 @@ mod test_babybear_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_BABYBEAR_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -156,11 +156,11 @@ mod test_mamabear_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MAMABEAR_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -189,11 +189,11 @@ mod test_papabear_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_PAPABEAR_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -222,11 +222,11 @@ mod test_papabearephem_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_PAPABEAREPHEM_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -259,11 +259,11 @@ mod test_mamabearephem_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_MAMABEAREPHEM_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -296,11 +296,11 @@ mod test_babybearephem_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_BABYBEAREPHEM_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,

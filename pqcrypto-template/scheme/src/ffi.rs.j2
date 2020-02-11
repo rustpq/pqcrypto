@@ -115,11 +115,11 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -150,11 +150,11 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -250,11 +250,11 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
 
     #[target_feature(enable = "{{ scheme.avx2_feature }}")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -291,11 +291,11 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
         let mut mlen: usize = rng.gen::<u16>() as usize;
         let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-        let mut pk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = [0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+        let mut pk_alt = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
+        let mut sk_alt = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
+        let mut detached_sig = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES];
         let mut sm = Vec::with_capacity(mlen + PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
         let mut smlen = 0;
         assert_eq!(

@@ -95,11 +95,11 @@ mod test_ntruhps2048509_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -132,11 +132,11 @@ mod test_ntruhps2048677_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -169,11 +169,11 @@ mod test_ntruhps4096821_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -206,11 +206,11 @@ mod test_ntruhrss701_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,

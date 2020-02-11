@@ -264,11 +264,11 @@ mod test_dilithium2_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -385,11 +385,11 @@ mod test_dilithium2_avx2 {
         let mut mlen: usize = rng.gen::<u16>() as usize;
         let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-        let mut pk = [0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = [0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = [0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = [0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES];
         let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES);
         let mut smlen = 0;
         assert_eq!(
@@ -497,11 +497,11 @@ mod test_dilithium3_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -618,11 +618,11 @@ mod test_dilithium3_avx2 {
         let mut mlen: usize = rng.gen::<u16>() as usize;
         let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-        let mut pk = [0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = [0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = [0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = [0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES];
         let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES);
         let mut smlen = 0;
         assert_eq!(
@@ -730,11 +730,11 @@ mod test_dilithium4_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -851,11 +851,11 @@ mod test_dilithium4_avx2 {
         let mut mlen: usize = rng.gen::<u16>() as usize;
         let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-        let mut pk = [0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = [0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = [0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = [0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES];
         let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES);
         let mut smlen = 0;
         assert_eq!(

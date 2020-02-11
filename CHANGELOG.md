@@ -5,6 +5,7 @@
 * Add Classic McEliece
 * Support MacOS for Dilithium AVX2
 * Add ephemeral versions (CPA secure) of Threebears
+* Put buffers in tests on the heap
 
 ## 2019-12-18
 

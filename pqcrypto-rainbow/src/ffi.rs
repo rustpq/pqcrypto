@@ -362,11 +362,11 @@ mod test_rainbowiiicclassic_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_RAINBOWIIICCLASSIC_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -479,11 +479,11 @@ mod test_rainbowiiiccyclic_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_RAINBOWIIICCYCLIC_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -596,11 +596,14 @@ mod test_rainbowiiiccycliccompressed_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt =
+                vec![0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt =
+                vec![0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig =
+                vec![0u8; PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_RAINBOWIIICCYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -714,11 +717,11 @@ mod test_rainbowiaclassic_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_RAINBOWIACLASSIC_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -831,11 +834,11 @@ mod test_rainbowiacyclic_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_RAINBOWIACYCLIC_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -945,11 +948,13 @@ mod test_rainbowiacycliccompressed_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt =
+                vec![0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt =
+                vec![0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_RAINBOWIACYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
@@ -1063,11 +1068,11 @@ mod test_rainbowvcclassic_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_RAINBOWVCCLASSIC_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -1180,11 +1185,11 @@ mod test_rainbowvccyclic_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_RAINBOWVCCYCLIC_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
@@ -1294,11 +1299,13 @@ mod test_rainbowvccycliccompressed_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = [0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = [0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = [0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = [0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt =
+                vec![0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt =
+                vec![0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES];
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_RAINBOWVCCYCLICCOMPRESSED_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;

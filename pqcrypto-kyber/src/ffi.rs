@@ -275,11 +275,11 @@ mod test_kyber512_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_KYBER512_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -318,11 +318,11 @@ mod test_kyber512_avx2 {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_KYBER512_AVX2_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -346,11 +346,11 @@ mod test_kyber768_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_KYBER768_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -389,11 +389,11 @@ mod test_kyber768_avx2 {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_KYBER768_AVX2_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -417,11 +417,11 @@ mod test_kyber1024_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_KYBER1024_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -460,11 +460,11 @@ mod test_kyber1024_avx2 {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_KYBER1024_AVX2_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -488,11 +488,11 @@ mod test_kyber51290s_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_KYBER51290S_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -535,11 +535,11 @@ mod test_kyber51290s_avx2 {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_KYBER51290S_AVX2_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -563,11 +563,11 @@ mod test_kyber76890s_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_KYBER76890S_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -610,11 +610,11 @@ mod test_kyber76890s_avx2 {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_KYBER76890S_AVX2_CRYPTO_BYTES];
 
         assert_eq!(
             0,
@@ -638,11 +638,11 @@ mod test_kyber102490s_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut pk = [0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = [0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut ct = [0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-            let mut ss1 = [0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_BYTES];
-            let mut ss2 = [0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_BYTES];
+            let mut pk = vec![0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut ct = vec![0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+            let mut ss1 = vec![0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_BYTES];
+            let mut ss2 = vec![0u8; PQCLEAN_KYBER102490S_CLEAN_CRYPTO_BYTES];
 
             assert_eq!(
                 0,
@@ -685,11 +685,11 @@ mod test_kyber102490s_avx2 {
 
     #[target_feature(enable = "avx2")]
     unsafe fn run_test_ffi() {
-        let mut pk = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut ct = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_CIPHERTEXTBYTES];
-        let mut ss1 = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
-        let mut ss2 = [0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
+        let mut pk = vec![0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut ct = vec![0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_CIPHERTEXTBYTES];
+        let mut ss1 = vec![0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
+        let mut ss2 = vec![0u8; PQCLEAN_KYBER102490S_AVX2_CRYPTO_BYTES];
 
         assert_eq!(
             0,
