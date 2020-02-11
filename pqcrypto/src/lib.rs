@@ -15,6 +15,10 @@ pub mod prelude {
 }
 
 pub mod kem {
+    pub use pqcrypto_classicmceliece::{
+        mceliece348864, mceliece348864f, mceliece460896, mceliece460896f, mceliece6688128,
+        mceliece6688128f, mceliece6960119, mceliece6960119f, mceliece8192128, mceliece8192128f,
+    };
     pub use pqcrypto_frodo::{
         frodokem1344aes, frodokem1344shake, frodokem640aes, frodokem640shake, frodokem976aes,
         frodokem976shake,

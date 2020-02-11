@@ -1,5 +1,9 @@
 # Changelog
 
+# 2020-02-11
+
+* Add Classic McEliece
+
 ## 2019-12-18
 
 * Include SPHINCS+ AVX2 and AESNI implementations

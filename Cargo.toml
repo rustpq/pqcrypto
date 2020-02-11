@@ -9,6 +9,7 @@ members=[
     "pqcrypto-saber",
     "pqcrypto-ledacryptkem",
     "pqcrypto-threebears",
+    "pqcrypto-classicmceliece",
     "pqcrypto-newhope",
     "pqcrypto-mqdss",
     "pqcrypto-dilithium",
