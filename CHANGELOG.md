@@ -1,5 +1,12 @@
 # Changelog
 
+# 2020-03-27
+
+* Update implementations to PQClean latest versions
+  * Kyber
+  * Dilithium
+  * Falcon
+
 # 2020-02-11
 
 * Add Classic McEliece

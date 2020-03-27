@@ -2,7 +2,7 @@
 name = "pqcrypto-falcon"
 description = "Post-Quantum Signature Scheme falcon"
 readme = "README.md"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
