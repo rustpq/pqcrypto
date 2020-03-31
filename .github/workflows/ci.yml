@@ -11,6 +11,9 @@ jobs:
           - stable
           - beta
           - nightly
+    env:
+      # 20 MiB stack
+      RUST_MIN_STACK: 20971520
 
     steps:
       - uses: actions/checkout@v2
