@@ -2,6 +2,7 @@
 
 pqcrypto_version: 0.9.1
 traits_version: 0.3.2
+internals_version: 0.2.0
 
 kems:
   kyber:

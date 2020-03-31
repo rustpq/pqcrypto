@@ -3,6 +3,7 @@
 members=[
     "pqcrypto",
     "pqcrypto-traits",
+    "pqcrypto-internals",
     "pqcrypto-kyber",
     "pqcrypto-frodo",
     "pqcrypto-ntru",

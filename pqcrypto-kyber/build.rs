@@ -8,8 +8,6 @@ fn main() {
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
-        common_dir.join("sha2.c"),
-        common_dir.join("randombytes.c"),
         common_dir.join("sp800-185.c"),
     ];
 
@@ -19,12 +17,16 @@ fn main() {
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
+    // Link in pqcrypto_internals
+    println!("cargo:rustc-link-lib=pqcrypto_internals");
+
     {
         let mut builder = cc::Build::new();
         let target_dir = Path::new("pqclean/crypto_kem/kyber512/clean");
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -51,6 +53,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -76,6 +79,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -102,6 +106,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -127,6 +132,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -153,6 +159,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -178,6 +185,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -204,6 +212,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -229,6 +238,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -255,6 +265,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -280,6 +291,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(
@@ -306,6 +318,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
+            .include("include")
             .include("pqclean/common")
             .include(target_dir)
             .files(

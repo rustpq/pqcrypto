@@ -1,0 +1,22 @@
+language = "C"
+include_guard = "PQCLEAN_INTERNALS"
+
+[parse]
+parse_deps = false
+clean = true
+
+[parse.expand]
+crates = ["pqcrypto-internals", "sha2", "sha3", "digest"]
+
+[export.rename]
+"Sha224IncState" = "sha224ctx"
+"Sha256IncState" = "sha256ctx"
+"Sha384IncState" = "sha384ctx"
+"Sha512IncState" = "sha512ctx"
+"Shake128IncState" = "shake128incctx"
+"Shake128State" = "shake128ctx"
+"Shake256IncState" = "shake256incctx"
+"Shake256State" = "shake256ctx"
+"Sha3256IncState" = "sha3_256ctx"
+"Sha3512IncState" = "sha3_512ctx"
+

@@ -61,6 +61,9 @@ def generate_scheme(name, type, properties):
         os.symlink(os.path.join('..', 'pqclean'),
                    os.path.join(target_dir, 'pqclean'),
                    target_is_directory=True)
+        os.symlink(os.path.join('..', 'pqcrypto-internals', 'include'),
+                   os.path.join(target_dir, 'include'),
+                   target_is_directory=True)
     except FileExistsError:
         pass
 
@@ -72,7 +75,7 @@ def generate_scheme(name, type, properties):
     render_template(
         target_dir, 'Cargo.toml', 'scheme/Cargo.toml.j2',
         traits_version=implementations['traits_version'],
-        # internals_version=implementations['internals_version'],
+        internals_version=implementations['internals_version'],
         name=name,
         type=type,
         version=properties['version'],
