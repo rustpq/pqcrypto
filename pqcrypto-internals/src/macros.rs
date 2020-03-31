@@ -99,6 +99,7 @@ macro_rules! implement_hash {
         #[cfg(test)]
         mod $test_mod {
             use super::*;
+            #[cfg(benchmark)]
             use test;
 
             /// Test copying and releasing the copy.
@@ -119,6 +120,7 @@ macro_rules! implement_hash {
                 };
             }
 
+            #[cfg(benchmark)]
             #[bench]
             fn measure_hash(b: &mut test::Bencher) {
                 let input = [0u8; 128];

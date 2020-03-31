@@ -1,5 +1,6 @@
-#![feature(test)]
+#![cfg_attr(benchmark,feature(test))]
 
+#![cfg(all(test, benchmark))]
 extern crate test;
 
 mod macros;
