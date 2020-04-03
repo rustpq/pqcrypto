@@ -23,6 +23,9 @@ pub mod kem {
         frodokem1344aes, frodokem1344shake, frodokem640aes, frodokem640shake, frodokem976aes,
         frodokem976shake,
     };
+    pub use pqcrypto_hqc::{
+        hqc1281cca2, hqc1921cca2, hqc1922cca2, hqc2561cca2, hqc2562cca2, hqc2563cca2,
+    };
     pub use pqcrypto_kyber::{
         kyber1024, kyber102490s, kyber512, kyber51290s, kyber768, kyber76890s,
     };

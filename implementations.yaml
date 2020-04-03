@@ -173,6 +173,26 @@ kems:
         implementation: clean
       - name: newhope512cca
         implementation: clean
+  hqc:
+    version: 0.0.1
+    notes: |
+      This implementation is not constant-time!
+      This means that it is not secure.
+
+      This crate may remove the ``leaktime`` implementation at any point.
+    schemes:
+      - name: hqc-128-1-cca2
+        implementation: leaktime
+      - name: hqc-192-1-cca2
+        implementation: leaktime
+      - name: hqc-192-2-cca2
+        implementation: leaktime
+      - name: hqc-256-1-cca2
+        implementation: leaktime
+      - name: hqc-256-2-cca2
+        implementation: leaktime
+      - name: hqc-256-3-cca2
+        implementation: leaktime
 
 
 signs:

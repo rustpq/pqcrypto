@@ -1,5 +1,9 @@
 # Changelog
 
+# 2020-04-03
+
+* Add HQC
+
 # 2020-03-27
 
 * Update implementations to PQClean latest versions

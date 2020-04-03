@@ -16,6 +16,7 @@ This super-crate contains the following cryptographic algorithms:
 * [``pqcrypto-threebears``](https://crates.io/crates/pqcrypto-threebears)
 * [``pqcrypto-classicmceliece``](https://crates.io/crates/pqcrypto-classicmceliece)
 * [``pqcrypto-newhope``](https://crates.io/crates/pqcrypto-newhope)
+* [``pqcrypto-hqc``](https://crates.io/crates/pqcrypto-hqc)
 
 ## Signature Schemes
 * [``pqcrypto-mqdss``](https://crates.io/crates/pqcrypto-mqdss)

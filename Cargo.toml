@@ -11,6 +11,7 @@ members=[
     "pqcrypto-threebears",
     "pqcrypto-classicmceliece",
     "pqcrypto-newhope",
+    "pqcrypto-hqc",
     "pqcrypto-mqdss",
     "pqcrypto-dilithium",
     "pqcrypto-falcon",
