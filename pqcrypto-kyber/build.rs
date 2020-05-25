@@ -1,10 +1,10 @@
 extern crate cc;
 extern crate glob;
 
-use std::path::Path;
+use std::path::PathBuf;
 
 fn main() {
-    let common_dir = Path::new("pqclean").join("common");
+    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,20 +15,19 @@ fn main() {
 
     cc::Build::new()
         .flag("-std=c99")
-        .include(common_dir)
+        .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber512")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -45,10 +44,9 @@ fn main() {
         target_arch = "x86_64"
     ))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber512")
-            .join("avx2");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512", "avx2"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -57,7 +55,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -70,7 +68,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -78,14 +76,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber768")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -102,10 +99,9 @@ fn main() {
         target_arch = "x86_64"
     ))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber768")
-            .join("avx2");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768", "avx2"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -114,7 +110,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -127,7 +123,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -135,14 +131,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber1024")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -159,10 +154,9 @@ fn main() {
         target_arch = "x86_64"
     ))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber1024")
-            .join("avx2");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024", "avx2"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -171,7 +165,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -184,7 +178,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -192,14 +186,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber512-90s")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512-90s", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -216,10 +209,9 @@ fn main() {
         target_arch = "x86_64"
     ))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber512-90s")
-            .join("avx2");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512-90s", "avx2"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -228,7 +220,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -241,7 +233,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -249,14 +241,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber768-90s")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768-90s", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -273,10 +264,9 @@ fn main() {
         target_arch = "x86_64"
     ))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber768-90s")
-            .join("avx2");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768-90s", "avx2"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -285,7 +275,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -298,7 +288,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -306,14 +296,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber1024-90s")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024-90s", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -330,10 +319,9 @@ fn main() {
         target_arch = "x86_64"
     ))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("kyber1024-90s")
-            .join("avx2");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024-90s", "avx2"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -342,7 +330,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -355,7 +343,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )

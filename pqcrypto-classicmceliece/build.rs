@@ -1,10 +1,10 @@
 extern crate cc;
 extern crate glob;
 
-use std::path::Path;
+use std::path::PathBuf;
 
 fn main() {
-    let common_dir = Path::new("pqclean").join("common");
+    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,20 +15,19 @@ fn main() {
 
     cc::Build::new()
         .flag("-std=c99")
-        .include(common_dir)
+        .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece348864")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece348864", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -39,14 +38,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece348864")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece348864", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -58,10 +56,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece348864")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece348864", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -70,7 +67,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -83,7 +80,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -91,14 +88,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece348864f")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece348864f", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -109,14 +105,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece348864f")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece348864f", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -128,10 +123,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece348864f")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece348864f", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -140,7 +134,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -153,7 +147,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -161,14 +155,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece460896")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece460896", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -179,14 +172,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece460896")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece460896", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -198,10 +190,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece460896")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece460896", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -210,7 +201,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -223,7 +214,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -231,14 +222,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece460896f")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece460896f", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -249,14 +239,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece460896f")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece460896f", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -268,10 +257,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece460896f")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece460896f", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -280,7 +268,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -293,7 +281,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -301,14 +289,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6688128")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6688128", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -319,14 +306,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6688128")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6688128", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -338,10 +324,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6688128")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6688128", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -350,7 +335,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -363,7 +348,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -371,14 +356,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6688128f")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6688128f", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -389,14 +373,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6688128f")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6688128f", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -408,10 +391,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6688128f")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6688128f", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -420,7 +402,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -433,7 +415,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -441,14 +423,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6960119")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6960119", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -459,14 +440,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6960119")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6960119", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -478,10 +458,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6960119")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6960119", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -490,7 +469,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -503,7 +482,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -511,14 +490,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6960119f")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6960119f", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -529,14 +507,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6960119f")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6960119f", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -548,10 +525,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece6960119f")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece6960119f", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -560,7 +536,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -573,7 +549,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -581,14 +557,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece8192128")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece8192128", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -599,14 +574,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece8192128")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece8192128", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -618,10 +592,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece8192128")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece8192128", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -630,7 +603,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -643,7 +616,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -651,14 +624,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece8192128f")
-            .join("vec");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece8192128f", "vec"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -669,14 +641,13 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece8192128f")
-            .join("clean");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece8192128f", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -688,10 +659,9 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_kem")
-            .join("mceliece8192128f")
-            .join("avx");
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "mceliece8192128f", "avx"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -700,7 +670,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -713,7 +683,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )

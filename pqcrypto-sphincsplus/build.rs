@@ -1,10 +1,10 @@
 extern crate cc;
 extern crate glob;
 
-use std::path::Path;
+use std::path::PathBuf;
 
 fn main() {
-    let common_dir = Path::new("pqclean").join("common");
+    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,20 +15,24 @@ fn main() {
 
     cc::Build::new()
         .flag("-std=c99")
-        .include(common_dir)
+        .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-128s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-128s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -40,10 +44,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-128s-simple")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-128s-simple",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -52,7 +60,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -65,7 +73,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -73,14 +81,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-128s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-128s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -92,14 +104,18 @@ fn main() {
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-128f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-128f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -111,10 +127,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-128f-simple")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-128f-simple",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -123,7 +143,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -136,7 +156,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -144,14 +164,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-128f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-128f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -163,10 +187,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-128f-robust")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-128f-robust",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -175,7 +203,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -188,7 +216,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -196,14 +224,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -215,10 +247,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192s-simple")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192s-simple",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -227,7 +263,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -240,7 +276,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -248,14 +284,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -267,10 +307,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192s-robust")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192s-robust",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -279,7 +323,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -292,7 +336,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -300,14 +344,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -319,10 +367,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192f-simple")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192f-simple",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -331,7 +383,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -344,7 +396,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -352,14 +404,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -371,10 +427,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-192f-robust")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-192f-robust",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -383,7 +443,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -396,7 +456,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -404,14 +464,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -423,10 +487,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256s-simple")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256s-simple",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -435,7 +503,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -448,7 +516,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -456,14 +524,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -475,10 +547,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256s-robust")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256s-robust",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -487,7 +563,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -500,7 +576,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -508,14 +584,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -527,10 +607,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256f-simple")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256f-simple",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -539,7 +623,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -552,7 +636,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -560,14 +644,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -579,10 +667,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-haraka-256f-robust")
-            .join("aesni");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-haraka-256f-robust",
+            "aesni",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -591,7 +683,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -604,7 +696,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -612,14 +704,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -631,10 +727,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128s-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128s-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -643,7 +743,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -656,7 +756,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -664,14 +764,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -683,10 +787,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128s-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128s-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -695,7 +803,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -708,7 +816,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -716,14 +824,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -735,10 +847,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128f-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128f-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -747,7 +863,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -760,7 +876,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -768,14 +884,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -787,10 +907,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-128f-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-128f-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -799,7 +923,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -812,7 +936,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -820,14 +944,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-192s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-192s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -839,10 +967,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-192s-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-192s-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -851,7 +983,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -864,7 +996,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -872,14 +1004,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-192s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-192s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -891,10 +1027,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-192s-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-192s-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -903,7 +1043,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -916,7 +1056,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -924,14 +1064,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-192f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-192f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -943,10 +1087,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-192f-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-192f-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -955,7 +1103,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -968,7 +1116,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -976,14 +1124,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-192f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-192f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -995,14 +1147,18 @@ fn main() {
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1014,10 +1170,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256s-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256s-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1026,7 +1186,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1039,7 +1199,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1047,14 +1207,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1066,10 +1230,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256s-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256s-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1078,7 +1246,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1091,7 +1259,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1099,14 +1267,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1118,10 +1290,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256f-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256f-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1130,7 +1306,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1143,7 +1319,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1151,14 +1327,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1170,10 +1350,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-shake256-256f-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-shake256-256f-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1182,7 +1366,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1195,7 +1379,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1203,14 +1387,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1222,10 +1410,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128s-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128s-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1234,7 +1426,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1247,7 +1439,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1255,14 +1447,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1274,10 +1470,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128s-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128s-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1286,7 +1486,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1299,7 +1499,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1307,14 +1507,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1326,10 +1530,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128f-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128f-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1338,7 +1546,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1351,7 +1559,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1359,14 +1567,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1378,10 +1590,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-128f-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-128f-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1390,7 +1606,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1403,7 +1619,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1411,14 +1627,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1430,10 +1650,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192s-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192s-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1442,7 +1666,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1455,7 +1679,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1463,14 +1687,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1482,10 +1710,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192s-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192s-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1494,7 +1726,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1507,7 +1739,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1515,14 +1747,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1534,10 +1770,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192f-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192f-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1546,7 +1786,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1559,7 +1799,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1567,14 +1807,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1586,10 +1830,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-192f-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-192f-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1598,7 +1846,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1611,7 +1859,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1619,14 +1867,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256s-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256s-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1638,10 +1890,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256s-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256s-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1650,7 +1906,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1663,7 +1919,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1671,14 +1927,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256s-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256s-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1690,10 +1950,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256s-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256s-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1702,7 +1966,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1715,7 +1979,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1723,14 +1987,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256f-simple")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256f-simple",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1742,10 +2010,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256f-simple")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256f-simple",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1754,7 +2026,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1767,7 +2039,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
@@ -1775,14 +2047,18 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256f-robust")
-            .join("clean");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256f-robust",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1794,10 +2070,14 @@ fn main() {
 
     #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
     {
-        let target_dir = Path::new("pqclean")
-            .join("crypto_sign")
-            .join("sphincs-sha256-256f-robust")
-            .join("avx2");
+        let target_dir: PathBuf = [
+            "pqclean",
+            "crypto_sign",
+            "sphincs-sha256-256f-robust",
+            "avx2",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -1806,7 +2086,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include(common_dir)
+            .include(&common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -1819,7 +2099,7 @@ fn main() {
             .flag("-std=c99")
             .flag("-mavx2")
             .file(
-                common_dir
+                &common_dir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
