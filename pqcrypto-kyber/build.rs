@@ -14,7 +14,6 @@ fn main() {
     ];
 
     cc::Build::new()
-        .flag("-std=c99")
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -25,15 +24,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("kyber512_clean");
     }
 
@@ -48,13 +43,21 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -64,15 +67,28 @@ fn main() {
             )
             .compile("kyber512_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -80,15 +96,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("kyber768_clean");
     }
 
@@ -103,13 +115,21 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -119,15 +139,28 @@ fn main() {
             )
             .compile("kyber768_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -135,15 +168,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("kyber1024_clean");
     }
 
@@ -158,13 +187,21 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -174,15 +211,28 @@ fn main() {
             )
             .compile("kyber1024_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -190,15 +240,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("kyber512-90s_clean");
     }
 
@@ -213,13 +259,21 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -229,15 +283,28 @@ fn main() {
             )
             .compile("kyber512-90s_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -245,15 +312,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("kyber768-90s_clean");
     }
 
@@ -268,13 +331,21 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -284,15 +355,28 @@ fn main() {
             )
             .compile("kyber768-90s_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -300,15 +384,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("kyber1024-90s_clean");
     }
 
@@ -323,13 +403,21 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -339,15 +427,28 @@ fn main() {
             )
             .compile("kyber1024-90s_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
 
     // Print enableing flag for AVX2 implementation

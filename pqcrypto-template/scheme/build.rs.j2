@@ -16,7 +16,6 @@ fn main() {
     ];
 
     cc::Build::new()
-        .flag("-std=c99")
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -27,8 +26,7 @@ fn main() {
         let mut builder = cc::Build::new();
         let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.flag("-std=c99")
-               .include(&common_dir)
+        builder.include(&common_dir)
                .include(target_dir)
                .files(scheme_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()));
         builder.compile("{{ scheme.name }}_{{ implementation }}");
@@ -43,23 +41,38 @@ fn main() {
     {
         let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder.flag("-mavx2")
             .flag("-mbmi2")
             .flag("-mbmi")
             .flag("-maes")
-            .flag("-mpopcnt")
-            .include(&common_dir)
+            .flag("-mpopcnt");
+        }
+        builder.include(&common_dir)
             .include(target_dir)
             .files(scheme_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
             .compile("{{ scheme.name }}_{{ implementation }}");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(&common_dir.join("keccak4x").join("KeccakP-1600-times4-SIMD256.c"))
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(&common_dir.join("keccak4x").join("KeccakP-1600-times4-SIMD256.c"))
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(&common_dir.join("keccak4x").join("KeccakP-1600-times4-SIMD256.c"))
+                .compile("keccak4x");
+        }
 
     }
     {% endif %}

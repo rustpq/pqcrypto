@@ -14,7 +14,6 @@ fn main() {
     ];
 
     cc::Build::new()
-        .flag("-std=c99")
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -25,15 +24,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("ledakemlt12_leaktime");
     }
 
@@ -43,15 +38,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("ledakemlt32_leaktime");
     }
 
@@ -61,15 +52,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("ledakemlt52_leaktime");
     }
 }

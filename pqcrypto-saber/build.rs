@@ -14,7 +14,6 @@ fn main() {
     ];
 
     cc::Build::new()
-        .flag("-std=c99")
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -25,15 +24,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("firesaber_clean");
     }
 
@@ -43,15 +38,11 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("lightsaber_clean");
     }
 
@@ -59,15 +50,11 @@ fn main() {
         let mut builder = cc::Build::new();
         let target_dir: PathBuf = ["pqclean", "crypto_kem", "saber", "clean"].iter().collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("saber_clean");
     }
 }

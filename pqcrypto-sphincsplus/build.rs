@@ -14,7 +14,6 @@ fn main() {
     ];
 
     cc::Build::new()
-        .flag("-std=c99")
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -30,15 +29,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-128s-simple_clean");
     }
 
@@ -53,13 +48,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -69,15 +72,28 @@ fn main() {
             )
             .compile("sphincs-haraka-128s-simple_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -90,15 +106,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-128s-robust_clean");
     }
 
@@ -113,15 +125,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-128f-simple_clean");
     }
 
@@ -136,13 +144,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -152,15 +168,28 @@ fn main() {
             )
             .compile("sphincs-haraka-128f-simple_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -173,15 +202,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-128f-robust_clean");
     }
 
@@ -196,13 +221,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -212,15 +245,28 @@ fn main() {
             )
             .compile("sphincs-haraka-128f-robust_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -233,15 +279,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-192s-simple_clean");
     }
 
@@ -256,13 +298,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -272,15 +322,28 @@ fn main() {
             )
             .compile("sphincs-haraka-192s-simple_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -293,15 +356,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-192s-robust_clean");
     }
 
@@ -316,13 +375,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -332,15 +399,28 @@ fn main() {
             )
             .compile("sphincs-haraka-192s-robust_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -353,15 +433,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-192f-simple_clean");
     }
 
@@ -376,13 +452,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -392,15 +476,28 @@ fn main() {
             )
             .compile("sphincs-haraka-192f-simple_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -413,15 +510,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-192f-robust_clean");
     }
 
@@ -436,13 +529,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -452,15 +553,28 @@ fn main() {
             )
             .compile("sphincs-haraka-192f-robust_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -473,15 +587,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-256s-simple_clean");
     }
 
@@ -496,13 +606,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -512,15 +630,28 @@ fn main() {
             )
             .compile("sphincs-haraka-256s-simple_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -533,15 +664,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-256s-robust_clean");
     }
 
@@ -556,13 +683,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -572,15 +707,28 @@ fn main() {
             )
             .compile("sphincs-haraka-256s-robust_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -593,15 +741,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-256f-simple_clean");
     }
 
@@ -616,13 +760,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -632,15 +784,28 @@ fn main() {
             )
             .compile("sphincs-haraka-256f-simple_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -653,15 +818,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-haraka-256f-robust_clean");
     }
 
@@ -676,13 +837,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -692,15 +861,28 @@ fn main() {
             )
             .compile("sphincs-haraka-256f-robust_aesni");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -713,15 +895,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-128s-simple_clean");
     }
 
@@ -736,13 +914,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -752,15 +938,28 @@ fn main() {
             )
             .compile("sphincs-shake256-128s-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -773,15 +972,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-128s-robust_clean");
     }
 
@@ -796,13 +991,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -812,15 +1015,28 @@ fn main() {
             )
             .compile("sphincs-shake256-128s-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -833,15 +1049,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-128f-simple_clean");
     }
 
@@ -856,13 +1068,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -872,15 +1092,28 @@ fn main() {
             )
             .compile("sphincs-shake256-128f-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -893,15 +1126,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-128f-robust_clean");
     }
 
@@ -916,13 +1145,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -932,15 +1169,28 @@ fn main() {
             )
             .compile("sphincs-shake256-128f-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -953,15 +1203,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-192s-simple_clean");
     }
 
@@ -976,13 +1222,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -992,15 +1246,28 @@ fn main() {
             )
             .compile("sphincs-shake256-192s-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1013,15 +1280,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-192s-robust_clean");
     }
 
@@ -1036,13 +1299,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1052,15 +1323,28 @@ fn main() {
             )
             .compile("sphincs-shake256-192s-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1073,15 +1357,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-192f-simple_clean");
     }
 
@@ -1096,13 +1376,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1112,15 +1400,28 @@ fn main() {
             )
             .compile("sphincs-shake256-192f-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1133,15 +1434,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-192f-robust_clean");
     }
 
@@ -1156,15 +1453,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-256s-simple_clean");
     }
 
@@ -1179,13 +1472,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1195,15 +1496,28 @@ fn main() {
             )
             .compile("sphincs-shake256-256s-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1216,15 +1530,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-256s-robust_clean");
     }
 
@@ -1239,13 +1549,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1255,15 +1573,28 @@ fn main() {
             )
             .compile("sphincs-shake256-256s-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1276,15 +1607,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-256f-simple_clean");
     }
 
@@ -1299,13 +1626,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1315,15 +1650,28 @@ fn main() {
             )
             .compile("sphincs-shake256-256f-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1336,15 +1684,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-shake256-256f-robust_clean");
     }
 
@@ -1359,13 +1703,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1375,15 +1727,28 @@ fn main() {
             )
             .compile("sphincs-shake256-256f-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1396,15 +1761,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-128s-simple_clean");
     }
 
@@ -1419,13 +1780,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1435,15 +1804,28 @@ fn main() {
             )
             .compile("sphincs-sha256-128s-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1456,15 +1838,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-128s-robust_clean");
     }
 
@@ -1479,13 +1857,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1495,15 +1881,28 @@ fn main() {
             )
             .compile("sphincs-sha256-128s-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1516,15 +1915,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-128f-simple_clean");
     }
 
@@ -1539,13 +1934,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1555,15 +1958,28 @@ fn main() {
             )
             .compile("sphincs-sha256-128f-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1576,15 +1992,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-128f-robust_clean");
     }
 
@@ -1599,13 +2011,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1615,15 +2035,28 @@ fn main() {
             )
             .compile("sphincs-sha256-128f-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1636,15 +2069,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-192s-simple_clean");
     }
 
@@ -1659,13 +2088,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1675,15 +2112,28 @@ fn main() {
             )
             .compile("sphincs-sha256-192s-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1696,15 +2146,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-192s-robust_clean");
     }
 
@@ -1719,13 +2165,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1735,15 +2189,28 @@ fn main() {
             )
             .compile("sphincs-sha256-192s-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1756,15 +2223,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-192f-simple_clean");
     }
 
@@ -1779,13 +2242,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1795,15 +2266,28 @@ fn main() {
             )
             .compile("sphincs-sha256-192f-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1816,15 +2300,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-192f-robust_clean");
     }
 
@@ -1839,13 +2319,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1855,15 +2343,28 @@ fn main() {
             )
             .compile("sphincs-sha256-192f-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1876,15 +2377,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-256s-simple_clean");
     }
 
@@ -1899,13 +2396,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1915,15 +2420,28 @@ fn main() {
             )
             .compile("sphincs-sha256-256s-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1936,15 +2454,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-256s-robust_clean");
     }
 
@@ -1959,13 +2473,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -1975,15 +2497,28 @@ fn main() {
             )
             .compile("sphincs-sha256-256s-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -1996,15 +2531,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-256f-simple_clean");
     }
 
@@ -2019,13 +2550,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -2035,15 +2574,28 @@ fn main() {
             )
             .compile("sphincs-sha256-256f-simple_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
     {
         let mut builder = cc::Build::new();
@@ -2056,15 +2608,11 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder
-            .flag("-std=c99")
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
         builder.compile("sphincs-sha256-256f-robust_clean");
     }
 
@@ -2079,13 +2627,21 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
+        let mut builder = cc::Build::new();
+        #[cfg(windows)]
+        {
+            builder.flag("/arch:AVX2");
+        }
+        #[cfg(not(windows))]
+        {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt");
+        }
+        builder
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -2095,15 +2651,28 @@ fn main() {
             )
             .compile("sphincs-sha256-256f-robust_avx2");
 
-        cc::Build::new()
-            .flag("-std=c99")
-            .flag("-mavx2")
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
+        #[cfg(not(windows))]
+        {
+            cc::Build::new()
+                .flag("-mavx2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
+        #[cfg(windows)]
+        {
+            cc::Build::new()
+                .flag("/arch:AVX2")
+                .file(
+                    &common_dir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+        }
     }
 
     // Print enableing flag for AVX2 implementation
