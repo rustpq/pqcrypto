@@ -6,7 +6,7 @@ use std::path::Path;
 {% set globals = namespace(have_avx2=False) %}
 
 fn main() {
-    let common_dir = Path::new("pqclean/common");
+    let common_dir = Path::new("pqclean").join("common");
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -17,7 +17,7 @@ fn main() {
 
     cc::Build::new()
         .flag("-std=c99")
-        .include("pqclean/common")
+        .include(common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
@@ -25,10 +25,10 @@ fn main() {
     {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean/crypto_{{ type }}/{{ scheme.name }}/{{ implementation }}");
+        let target_dir = Path::new("pqclean").join("crypto_{{ type }}").join("{{ scheme.name }}").join("{{ implementation }}");
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.flag("-std=c99")
-               .include("pqclean/common")
+               .include(common_dir)
                .include(target_dir)
                .files(scheme_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()));
         builder.compile("{{ scheme.name }}_{{ implementation }}");
@@ -41,7 +41,7 @@ fn main() {
     {% set globals.have_avx2 = True %}
     #[{{ avx2_guard }}]
     {
-        let target_dir = Path::new("pqclean/crypto_{{ type }}/{{ scheme.name }}/{{ implementation }}");
+        let target_dir = Path::new("pqclean").join("crypto_{{ type }}").join("{{ scheme.name }}").join("{{ implementation }}");
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         cc::Build::new()
             .flag("-std=c99")
@@ -50,7 +50,7 @@ fn main() {
             .flag("-mbmi")
             .flag("-maes")
             .flag("-mpopcnt")
-            .include("pqclean/common")
+            .include(common_dir)
             .include(target_dir)
             .files(scheme_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
             .compile("{{ scheme.name }}_{{ implementation }}");

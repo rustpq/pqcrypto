@@ -4,7 +4,7 @@ extern crate glob;
 use std::path::Path;
 
 fn main() {
-    let common_dir = Path::new("pqclean/common");
+    let common_dir = Path::new("pqclean").join("common");
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,17 +15,20 @@ fn main() {
 
     cc::Build::new()
         .flag("-std=c99")
-        .include("pqclean/common")
+        .include(common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean/crypto_kem/firesaber/clean");
+        let target_dir = Path::new("pqclean")
+            .join("crypto_kem")
+            .join("firesaber")
+            .join("clean");
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include("pqclean/common")
+            .include(common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -37,11 +40,14 @@ fn main() {
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean/crypto_kem/lightsaber/clean");
+        let target_dir = Path::new("pqclean")
+            .join("crypto_kem")
+            .join("lightsaber")
+            .join("clean");
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include("pqclean/common")
+            .include(common_dir)
             .include(target_dir)
             .files(
                 scheme_files
@@ -53,11 +59,14 @@ fn main() {
 
     {
         let mut builder = cc::Build::new();
-        let target_dir = Path::new("pqclean/crypto_kem/saber/clean");
+        let target_dir = Path::new("pqclean")
+            .join("crypto_kem")
+            .join("saber")
+            .join("clean");
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder
             .flag("-std=c99")
-            .include("pqclean/common")
+            .include(common_dir)
             .include(target_dir)
             .files(
                 scheme_files

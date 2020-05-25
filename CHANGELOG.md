@@ -1,5 +1,9 @@
 # Changelog
 
+# 2020-05-25
+
+* Make paths more resilient to windows
+
 # 2020-04-03
 
 * Add HQC
