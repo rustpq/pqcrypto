@@ -3,6 +3,7 @@
 # 2020-06-22
 
 * Update FrodoKEM implementations to fix timing side channel
+* Update MQDSS
 
 # 2020-05-25
 

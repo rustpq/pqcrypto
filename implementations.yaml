@@ -197,7 +197,7 @@ kems:
 
 signs:
   mqdss:
-    version: 0.2.3
+    version: 0.3.0
     schemes:
       - name: mqdss-48
         implementation: clean
