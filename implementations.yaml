@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.10.0
+pqcrypto_version: 0.10.1
 traits_version: 0.3.2
 
 kems:
@@ -27,7 +27,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   frodo:
-    version: 0.4.2
+    version: 0.4.3
     notes: |
       If you use it via the FFI interface: The ``clean`` implementation of Frodo
       needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make

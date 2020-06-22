@@ -1,5 +1,9 @@
 # Changelog
 
+# 2020-06-22
+
+* Update FrodoKEM implementations to fix timing side channel
+
 # 2020-05-25
 
 * Make paths more resilient to windows

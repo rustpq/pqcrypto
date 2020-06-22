@@ -14,7 +14,7 @@ categories = ["cryptography"]
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.2" }
 pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.6.5" }
-pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.4.2" }
+pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.4.3" }
 pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.4.2" }
 pqcrypto-saber = { path = "../pqcrypto-saber", version = "0.1.3" }
 pqcrypto-ledacryptkem = { path = "../pqcrypto-ledacryptkem", version = "0.0.3" }
