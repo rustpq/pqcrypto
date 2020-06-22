@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.10.1
+pqcrypto_version: 0.11.0
 traits_version: 0.3.2
 
 kems:
