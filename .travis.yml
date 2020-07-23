@@ -32,5 +32,5 @@ rust:
   - nightly
 
 script:
-  - cargo build
-  - cargo test --all
+  - cargo build --all-features
+  - cargo test --all --all-features
