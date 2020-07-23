@@ -15,6 +15,12 @@ categories = ["cryptography"]
 pqcrypto-traits = {path = "../pqcrypto-traits", version = "{{ traits_version }}"}
 libc = "0.2.0"
 
+{% if insecure %}
+[features]
+default = []
+cryptographically-insecure = []
+{% endif %}
+
 [dev-dependencies]
 {% if type == "sign" %}
 rand = "0.7.0"

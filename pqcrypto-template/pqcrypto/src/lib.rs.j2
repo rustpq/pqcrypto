@@ -22,6 +22,7 @@ pub mod prelude {
 
 pub mod kem {
     {% for kem in kems.keys() %}
+    #[cfg(feature = "pqcrypto-{{kem}}")]
     pub use pqcrypto_{{ kem }}::{
         {% for scheme in kems[kem]['schemes'] %}
         {{ scheme['name']|nameize }},
@@ -32,6 +33,7 @@ pub mod kem {
 
 pub mod sign {
     {% for sign in signs.keys() %}
+    #[cfg(feature = "pqcrypto-{{sign}}")]
     pub use pqcrypto_{{ sign }}::{
         {% for scheme in signs[sign]['schemes'] %}
         {{ scheme['name']|nameize }},

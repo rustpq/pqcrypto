@@ -81,10 +81,15 @@ kems:
         implementation: clean
   ledacryptkem:
     notes: |
+      This version of LEDA is insecure
+
+      https://eprint.iacr.org/2020/455
+
       This implementation is not constant-time!
       This means that it is not secure.
 
       This crate may remove the ``leaktime`` implementation at any point.
+    insecure: true
     version: 0.0.3
     schemes:
       - name: ledakemlt12

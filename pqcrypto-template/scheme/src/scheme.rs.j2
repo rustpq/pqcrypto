@@ -1,6 +1,10 @@
 //! {{ scheme.name }}
 //!
 //! These bindings use the {{ scheme.implementation }} version from [PQClean][pqc]
+{% if insecure %}
+//!
+//! **This algorithm has security problems**
+{% endif %}
 //!
 //! # Example
 //! ```{% if not scheme.doctest|default(true) %}no_run{% endif %}
@@ -182,6 +186,9 @@ pub const fn signature_bytes() -> usize {
 {% endif %}
 
 /// Generate a {{ scheme.name }} keypair
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
 pub fn keypair() -> (PublicKey, SecretKey) {
 {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
@@ -231,6 +238,9 @@ unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
 
 {% if type == "kem" %}
 /// Encapsulate to a {{ scheme.name }} public key
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
@@ -285,6 +295,9 @@ unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 {% endif %}
 
 /// Decapsulate the received {{ scheme.name }} ciphertext
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
@@ -335,6 +348,9 @@ unsafe fn decapsulate_avx2(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
 {% else %}
 
 /// Sign the message and return the signed message.
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
@@ -386,6 +402,9 @@ unsafe fn sign_avx2(msg: &[u8], sk: &SecretKey) -> SignedMessage {
 {% endif %}
 
 #[must_use]
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
 pub fn open(sm: &SignedMessage, pk: &PublicKey) -> std::result::Result<Vec<u8>,primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
@@ -441,6 +460,10 @@ unsafe fn open_avx2(sm: &SignedMessage, pk: &PublicKey) -> std::result::Result<V
 }
 {% endif %}
 
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
+/// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
@@ -483,6 +506,10 @@ unsafe fn detached_sign_avx2(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
 {% endif %}
 
 #[must_use]
+/// Verify the detached signature
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
 pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> std::result::Result<(), primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]

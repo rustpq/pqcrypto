@@ -75,6 +75,7 @@ def generate_scheme(name, type, properties):
         # internals_version=implementations['internals_version'],
         name=name,
         type=type,
+        insecure=properties.get('insecure', False),
         version=properties['version'],
     )
 
@@ -92,6 +93,7 @@ def generate_scheme(name, type, properties):
 
     render_template(
         target_dir, 'src/ffi.rs', 'scheme/src/ffi.rs.j2',
+        insecure=properties.get('insecure', False),
         type=type,
         name=name,
         metadatas=metadatas,
@@ -104,6 +106,7 @@ def generate_scheme(name, type, properties):
             "scheme/src/scheme.rs.j2",
             type=type,
             name=name,
+            insecure=properties.get('insecure', False),
             scheme=scheme,
         )
 
@@ -111,6 +114,7 @@ def generate_scheme(name, type, properties):
         target_dir, 'src/lib.rs', 'scheme/src/lib.rs.j2',
         name=name,
         type=type,
+        insecure=properties.get('insecure', False),
         notes=properties.get('notes', None),
         schemes=properties['schemes'],
     )
@@ -119,6 +123,7 @@ def generate_scheme(name, type, properties):
         target_dir, 'README.md', 'scheme/README.md.j2',
         name=name,
         type=type,
+        insecure=properties.get('insecure', False),
         notes=properties.get('notes', None),
         schemes=properties['schemes'],
     )

@@ -15,9 +15,11 @@
 {% endif %}
 
 #![allow(clippy::len_without_is_empty)]
+{% if insecure %}
+#![cfg_attr(not(feature = "cryptographically-insecure"), deny(deprecated))]
+{% endif %}
 
 pub mod ffi;
-
 {% for scheme in schemes %}
 pub mod {{ scheme.name|nameize }};
 {% endfor %}

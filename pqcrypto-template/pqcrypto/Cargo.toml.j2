@@ -14,8 +14,12 @@ categories = ["cryptography"]
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "{{ traits_version }}" }
 {% for (name, props) in kems.items()|list + signs.items()|list %}
-pqcrypto-{{ name }} = { path = "../pqcrypto-{{ name }}", version = "{{ props.version }}" }
+pqcrypto-{{ name }} = { path = "../pqcrypto-{{ name }}", version = "{{ props.version }}", optional = true }
 {% endfor %}
+
+[features]
+default = [{% for (name, props) in kems.items()|list + signs.items()|list %}{% if not props.insecure|default(False) %}"pqcrypto-{{name}}",{% endif %}{% endfor %}]
+cryptographically-insecure = [{% for (name, props) in kems.items()|list + signs.items()|list %}{% if props.insecure|default(False) %}"pqcrypto-{{name}}/cryptographically-insecure",{% endif %}{% endfor %}]
 
 [badges]
 travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
