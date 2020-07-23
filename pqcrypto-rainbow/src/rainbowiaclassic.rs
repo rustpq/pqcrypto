@@ -232,6 +232,7 @@ fn open_portable(
     }
 }
 
+/// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     detached_sign_portable(msg, sk)
 }
@@ -252,6 +253,7 @@ fn detached_sign_portable(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
 }
 
 #[must_use]
+/// Verify the detached signature
 pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],

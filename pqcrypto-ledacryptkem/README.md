@@ -1,5 +1,10 @@
 # ledacryptkem
 
+    This (implementation of an) cryptographic algorithm is insecure.
+    This crate will only compile if you enable the "cryptographically-insecure" feature.
+
+    Only use this crate and algorithm for research and educational purposes.
+
 This crate contains bindings to the C implementations of the following schemes,
 from [PQClean][pqclean].
 
@@ -22,6 +27,10 @@ methods only.
     * ``leaktime`` (default)
 
 # Notes
+This version of LEDA is insecure
+
+https://eprint.iacr.org/2020/455
+
 This implementation is not constant-time!
 This means that it is not secure.
 

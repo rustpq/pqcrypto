@@ -2,6 +2,8 @@
 //!
 //! These bindings use the leaktime version from [PQClean][pqc]
 //!
+//! **This algorithm has security problems**
+//!
 //! # Example
 //! ```
 //! use pqcrypto_ledacryptkem::ledakemlt52::*;
@@ -106,6 +108,7 @@ pub const fn shared_secret_bytes() -> usize {
 }
 
 /// Generate a ledakemlt52 keypair
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn keypair() -> (PublicKey, SecretKey) {
     keypair_portable()
 }
@@ -127,6 +130,7 @@ fn keypair_portable() -> (PublicKey, SecretKey) {
 }
 
 /// Encapsulate to a ledakemlt52 public key
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     encapsulate_portable(pk)
 }
@@ -151,6 +155,7 @@ fn encapsulate_portable(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 }
 
 /// Decapsulate the received ledakemlt52 ciphertext
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     decapsulate_portable(ct, sk)
 }

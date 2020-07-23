@@ -10,14 +10,15 @@
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
 //! # Notes
+//! This version of LEDA is insecure  https://eprint.iacr.org/2020/455
 //! This implementation is not constant-time! This means that it is not
 //! secure.  This crate may remove the ``leaktime`` implementation at any
 //! point.
 
 #![allow(clippy::len_without_is_empty)]
+#![cfg_attr(not(feature = "cryptographically-insecure"), deny(deprecated))]
 
 pub mod ffi;
-
 pub mod ledakemlt12;
 pub mod ledakemlt32;
 pub mod ledakemlt52;

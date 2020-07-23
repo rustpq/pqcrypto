@@ -11,10 +11,9 @@
 
 #![allow(clippy::len_without_is_empty)]
 
-pub mod ffi;
-
 pub mod falcon1024;
 pub mod falcon512;
+pub mod ffi;
 
 pub use crate::falcon1024::{
     detached_sign as falcon1024_detached_sign, keypair as falcon1024_keypair,

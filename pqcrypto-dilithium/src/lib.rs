@@ -12,11 +12,10 @@
 
 #![allow(clippy::len_without_is_empty)]
 
-pub mod ffi;
-
 pub mod dilithium2;
 pub mod dilithium3;
 pub mod dilithium4;
+pub mod ffi;
 
 pub use crate::dilithium2::{
     detached_sign as dilithium2_detached_sign, keypair as dilithium2_keypair,

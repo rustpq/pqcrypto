@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.11.0
+pqcrypto_version: 0.11.1
 traits_version: 0.3.2
 
 kems:
@@ -90,7 +90,7 @@ kems:
 
       This crate may remove the ``leaktime`` implementation at any point.
     insecure: true
-    version: 0.0.3
+    version: 0.0.4
     schemes:
       - name: ledakemlt12
         implementation: leaktime

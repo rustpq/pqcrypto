@@ -20,7 +20,6 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-
 pub mod hqc1281cca2;
 pub mod hqc1921cca2;
 pub mod hqc1922cca2;

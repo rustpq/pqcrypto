@@ -14,7 +14,6 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-
 pub mod ntruhps2048509;
 pub mod ntruhps2048677;
 pub mod ntruhps4096821;

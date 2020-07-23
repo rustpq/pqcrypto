@@ -14,7 +14,6 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-
 pub mod newhope1024cca;
 pub mod newhope1024cpa;
 pub mod newhope512cca;

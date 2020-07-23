@@ -16,7 +16,6 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-
 pub mod kyber1024;
 pub mod kyber102490s;
 pub mod kyber512;

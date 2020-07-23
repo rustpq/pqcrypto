@@ -302,6 +302,7 @@ unsafe fn open_avx2(
     }
 }
 
+/// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     #[cfg(enable_avx2)]
     {
@@ -344,6 +345,7 @@ unsafe fn detached_sign_avx2(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
 }
 
 #[must_use]
+/// Verify the detached signature
 pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],

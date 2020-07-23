@@ -15,10 +15,9 @@
 
 #![allow(clippy::len_without_is_empty)]
 
-pub mod ffi;
-
 pub mod babybear;
 pub mod babybearephem;
+pub mod ffi;
 pub mod mamabear;
 pub mod mamabearephem;
 pub mod papabear;

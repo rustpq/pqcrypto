@@ -21,7 +21,6 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-
 pub mod frodokem1344aes;
 pub mod frodokem1344shake;
 pub mod frodokem640aes;

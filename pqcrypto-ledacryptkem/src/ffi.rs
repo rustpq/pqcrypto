@@ -10,27 +10,42 @@
 // Find the templates in pqcrypto-template
 use libc::c_int;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT12_LEAKTIME_CRYPTO_SECRETKEYBYTES: usize = 50;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT12_LEAKTIME_CRYPTO_PUBLICKEYBYTES: usize = 6520;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT12_LEAKTIME_CRYPTO_CIPHERTEXTBYTES: usize = 6544;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT12_LEAKTIME_CRYPTO_BYTES: usize = 32;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT32_LEAKTIME_CRYPTO_SECRETKEYBYTES: usize = 66;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT32_LEAKTIME_CRYPTO_PUBLICKEYBYTES: usize = 12032;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT32_LEAKTIME_CRYPTO_CIPHERTEXTBYTES: usize = 12064;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT32_LEAKTIME_CRYPTO_BYTES: usize = 48;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT52_LEAKTIME_CRYPTO_SECRETKEYBYTES: usize = 82;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT52_LEAKTIME_CRYPTO_PUBLICKEYBYTES: usize = 19040;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT52_LEAKTIME_CRYPTO_CIPHERTEXTBYTES: usize = 19080;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_LEDAKEMLT52_LEAKTIME_CRYPTO_BYTES: usize = 64;
 
 #[link(name = "ledakemlt12_leaktime")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT12_LEAKTIME_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT12_LEAKTIME_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT12_LEAKTIME_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -40,12 +55,15 @@ extern "C" {
 
 #[link(name = "ledakemlt32_leaktime")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT32_LEAKTIME_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT32_LEAKTIME_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT32_LEAKTIME_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -55,12 +73,15 @@ extern "C" {
 
 #[link(name = "ledakemlt52_leaktime")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT52_LEAKTIME_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT52_LEAKTIME_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_LEDAKEMLT52_LEAKTIME_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,

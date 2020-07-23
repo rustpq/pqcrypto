@@ -20,7 +20,6 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-
 pub mod mceliece348864;
 pub mod mceliece348864f;
 pub mod mceliece460896;

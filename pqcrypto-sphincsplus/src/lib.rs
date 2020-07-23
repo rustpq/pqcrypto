@@ -46,7 +46,6 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-
 pub mod sphincsharaka128frobust;
 pub mod sphincsharaka128fsimple;
 pub mod sphincsharaka128srobust;
