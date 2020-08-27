@@ -108,31 +108,37 @@ kems:
         alt_implementations:
           - clean
       - name: mceliece6688128
+        doctest: no
         implementation: vec
         avx2_implementation: avx
         alt_implementations:
           - clean
       - name: mceliece6688128f
+        doctest: no
         implementation: vec
         avx2_implementation: avx
         alt_implementations:
           - clean
       - name: mceliece6960119
+        doctest: no
         implementation: vec
         avx2_implementation: avx
         alt_implementations:
           - clean
       - name: mceliece6960119f
+        doctest: no
         implementation: vec
         avx2_implementation: avx
         alt_implementations:
           - clean
       - name: mceliece8192128
+        doctest: no
         implementation: vec
         avx2_implementation: avx
         alt_implementations:
           - clean
       - name: mceliece8192128f
+        doctest: no
         implementation: vec
         avx2_implementation: avx
         alt_implementations:
