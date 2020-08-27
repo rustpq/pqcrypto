@@ -1,5 +1,11 @@
 # Changelog
 
+# 2020-08-27
+
+* :alert: **Removed non-round-3 implementations**
+* Update NTRU
+* Small update in Saber code
+
 # 2020-06-22
 
 * Update FrodoKEM implementations to fix timing side channel

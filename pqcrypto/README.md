@@ -16,9 +16,9 @@ This super-crate contains the following cryptographic algorithms:
 
 ## Key-Encapsulation Mechanisms
 
-* [``pqcrypto-kyber``](https://crates.io/crates/pqcrypto-kyber) * [``pqcrypto-frodo``](https://crates.io/crates/pqcrypto-frodo) * [``pqcrypto-ntru``](https://crates.io/crates/pqcrypto-ntru) * [``pqcrypto-saber``](https://crates.io/crates/pqcrypto-saber) * [``pqcrypto-ledacryptkem``](https://crates.io/crates/pqcrypto-ledacryptkem) (insecure, disabled by default)* [``pqcrypto-threebears``](https://crates.io/crates/pqcrypto-threebears) * [``pqcrypto-classicmceliece``](https://crates.io/crates/pqcrypto-classicmceliece) * [``pqcrypto-newhope``](https://crates.io/crates/pqcrypto-newhope) * [``pqcrypto-hqc``](https://crates.io/crates/pqcrypto-hqc) 
+* [``pqcrypto-kyber``](https://crates.io/crates/pqcrypto-kyber) * [``pqcrypto-frodo``](https://crates.io/crates/pqcrypto-frodo) * [``pqcrypto-ntru``](https://crates.io/crates/pqcrypto-ntru) * [``pqcrypto-saber``](https://crates.io/crates/pqcrypto-saber) * [``pqcrypto-classicmceliece``](https://crates.io/crates/pqcrypto-classicmceliece) * [``pqcrypto-hqc``](https://crates.io/crates/pqcrypto-hqc)
 ## Signature Schemes
-* [``pqcrypto-mqdss``](https://crates.io/crates/pqcrypto-mqdss) * [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium) * [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon) * [``pqcrypto-qtesla``](https://crates.io/crates/pqcrypto-qtesla) * [``pqcrypto-rainbow``](https://crates.io/crates/pqcrypto-rainbow) * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus) 
+* [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium) * [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon) * [``pqcrypto-rainbow``](https://crates.io/crates/pqcrypto-rainbow) * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus)
 ## License
 
 The wrappers and wrapper generation scripts in this project are covered by the

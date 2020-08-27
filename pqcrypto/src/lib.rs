@@ -33,18 +33,10 @@ pub mod kem {
     pub use pqcrypto_kyber::{
         kyber1024, kyber102490s, kyber512, kyber51290s, kyber768, kyber76890s,
     };
-    #[cfg(feature = "pqcrypto-ledacryptkem")]
-    pub use pqcrypto_ledacryptkem::{ledakemlt12, ledakemlt32, ledakemlt52};
-    #[cfg(feature = "pqcrypto-newhope")]
-    pub use pqcrypto_newhope::{newhope1024cca, newhope1024cpa, newhope512cca, newhope512cpa};
     #[cfg(feature = "pqcrypto-ntru")]
     pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
     #[cfg(feature = "pqcrypto-saber")]
     pub use pqcrypto_saber::{firesaber, lightsaber, saber};
-    #[cfg(feature = "pqcrypto-threebears")]
-    pub use pqcrypto_threebears::{
-        babybear, babybearephem, mamabear, mamabearephem, papabear, papabearephem,
-    };
 }
 
 pub mod sign {
@@ -52,10 +44,6 @@ pub mod sign {
     pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium4};
     #[cfg(feature = "pqcrypto-falcon")]
     pub use pqcrypto_falcon::{falcon1024, falcon512};
-    #[cfg(feature = "pqcrypto-mqdss")]
-    pub use pqcrypto_mqdss::{mqdss48, mqdss64};
-    #[cfg(feature = "pqcrypto-qtesla")]
-    pub use pqcrypto_qtesla::{qteslapi, qteslapiii};
     #[cfg(feature = "pqcrypto-rainbow")]
     pub use pqcrypto_rainbow::{
         rainbowiaclassic, rainbowiacyclic, rainbowiacycliccompressed, rainbowiiicclassic,

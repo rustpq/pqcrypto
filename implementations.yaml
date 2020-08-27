@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.11.1
+pqcrypto_version: 0.12.0
 traits_version: 0.3.2
 
 kems:
@@ -60,58 +60,28 @@ kems:
         alt_implementations:
           - clean
   ntru:
-    version: 0.4.2
+    version: 0.5.0
     schemes:
       - name: ntruhps2048509
         implementation: clean
+        avx2_implementation: avx2
       - name: ntruhps2048677
         implementation: clean
+        avx2_implementation: avx2
       - name: ntruhps4096821
         implementation: clean
+        avx2_implementation: avx2
       - name: ntruhrss701
         implementation: clean
+        avx2_implementation: avx2
   saber:
-    version: 0.1.3
+    version: 0.1.4
     schemes:
       - name: firesaber
         implementation: clean
       - name: lightsaber
         implementation: clean
       - name: saber
-        implementation: clean
-  ledacryptkem:
-    notes: |
-      This version of LEDA is insecure
-
-      https://eprint.iacr.org/2020/455
-
-      This implementation is not constant-time!
-      This means that it is not secure.
-
-      This crate may remove the ``leaktime`` implementation at any point.
-    insecure: true
-    version: 0.0.4
-    schemes:
-      - name: ledakemlt12
-        implementation: leaktime
-      - name: ledakemlt32
-        implementation: leaktime
-      - name: ledakemlt52
-        implementation: leaktime
-  threebears:
-    version: 0.2.0
-    schemes:
-      - name: babybear
-        implementation: clean
-      - name: mamabear
-        implementation: clean
-      - name: papabear
-        implementation: clean
-      - name: papabear-ephem
-        implementation: clean
-      - name: mamabear-ephem
-        implementation: clean
-      - name: babybear-ephem
         implementation: clean
   classicmceliece:
     version: 0.1.0
@@ -167,17 +137,6 @@ kems:
         avx2_implementation: avx
         alt_implementations:
           - clean
-  newhope:
-    version: 0.1.2
-    schemes:
-      - name: newhope1024cpa
-        implementation: clean
-      - name: newhope1024cca
-        implementation: clean
-      - name: newhope512cpa
-        implementation: clean
-      - name: newhope512cca
-        implementation: clean
   hqc:
     version: 0.0.1
     notes: |
@@ -201,13 +160,6 @@ kems:
 
 
 signs:
-  mqdss:
-    version: 0.3.0
-    schemes:
-      - name: mqdss-48
-        implementation: clean
-      - name: mqdss-64
-        implementation: clean
   dilithium:
     version: 0.3.1
     avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))'
@@ -227,13 +179,6 @@ signs:
       - name: falcon-512
         implementation: clean
       - name: falcon-1024
-        implementation: clean
-  qtesla:
-    version: 0.1.1
-    schemes:
-      - name: qtesla-p-I
-        implementation: clean
-      - name: qtesla-p-III
         implementation: clean
   rainbow:
     version: 0.1.2
