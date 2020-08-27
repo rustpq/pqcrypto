@@ -3,7 +3,7 @@
 //! These bindings use the vec version from [PQClean][pqc]
 //!
 //! # Example
-//! ```
+//! ```no_run
 //! use pqcrypto_classicmceliece::mceliece6688128::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
