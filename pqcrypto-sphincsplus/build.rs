@@ -1,6 +1,7 @@
 extern crate cc;
 extern crate glob;
 
+use std::env;
 use std::path::PathBuf;
 
 fn main() {
@@ -18,6 +19,12 @@ fn main() {
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
+
+    let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
+    let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    let is_windows = target_os == "windows";
+    let is_macos = target_os == "macos";
 
     {
         let mut builder = cc::Build::new();
@@ -38,8 +45,7 @@ fn main() {
         builder.compile("sphincs-haraka-128s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -50,12 +56,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -73,28 +77,19 @@ fn main() {
             )
             .compile("sphincs-haraka-128s-simple_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -134,8 +129,7 @@ fn main() {
         builder.compile("sphincs-haraka-128f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -146,12 +140,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -169,28 +161,19 @@ fn main() {
             )
             .compile("sphincs-haraka-128f-simple_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -211,8 +194,7 @@ fn main() {
         builder.compile("sphincs-haraka-128f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -223,12 +205,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -246,28 +226,19 @@ fn main() {
             )
             .compile("sphincs-haraka-128f-robust_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -288,8 +259,7 @@ fn main() {
         builder.compile("sphincs-haraka-192s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -300,12 +270,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -323,28 +291,19 @@ fn main() {
             )
             .compile("sphincs-haraka-192s-simple_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -365,8 +324,7 @@ fn main() {
         builder.compile("sphincs-haraka-192s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -377,12 +335,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -400,28 +356,19 @@ fn main() {
             )
             .compile("sphincs-haraka-192s-robust_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -442,8 +389,7 @@ fn main() {
         builder.compile("sphincs-haraka-192f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -454,12 +400,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -477,28 +421,19 @@ fn main() {
             )
             .compile("sphincs-haraka-192f-simple_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -519,8 +454,7 @@ fn main() {
         builder.compile("sphincs-haraka-192f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -531,12 +465,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -554,28 +486,19 @@ fn main() {
             )
             .compile("sphincs-haraka-192f-robust_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -596,8 +519,7 @@ fn main() {
         builder.compile("sphincs-haraka-256s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -608,12 +530,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -631,28 +551,19 @@ fn main() {
             )
             .compile("sphincs-haraka-256s-simple_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -673,8 +584,7 @@ fn main() {
         builder.compile("sphincs-haraka-256s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -685,12 +595,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -708,28 +616,19 @@ fn main() {
             )
             .compile("sphincs-haraka-256s-robust_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -750,8 +649,7 @@ fn main() {
         builder.compile("sphincs-haraka-256f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -762,12 +660,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -785,28 +681,19 @@ fn main() {
             )
             .compile("sphincs-haraka-256f-simple_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -827,8 +714,7 @@ fn main() {
         builder.compile("sphincs-haraka-256f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -839,12 +725,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -862,28 +746,19 @@ fn main() {
             )
             .compile("sphincs-haraka-256f-robust_aesni");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -904,8 +779,7 @@ fn main() {
         builder.compile("sphincs-shake256-128s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -916,12 +790,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -939,28 +811,19 @@ fn main() {
             )
             .compile("sphincs-shake256-128s-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -981,8 +844,7 @@ fn main() {
         builder.compile("sphincs-shake256-128s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -993,12 +855,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1016,28 +876,19 @@ fn main() {
             )
             .compile("sphincs-shake256-128s-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1058,8 +909,7 @@ fn main() {
         builder.compile("sphincs-shake256-128f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1070,12 +920,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1093,28 +941,19 @@ fn main() {
             )
             .compile("sphincs-shake256-128f-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1135,8 +974,7 @@ fn main() {
         builder.compile("sphincs-shake256-128f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1147,12 +985,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1170,28 +1006,19 @@ fn main() {
             )
             .compile("sphincs-shake256-128f-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1212,8 +1039,7 @@ fn main() {
         builder.compile("sphincs-shake256-192s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1224,12 +1050,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1247,28 +1071,19 @@ fn main() {
             )
             .compile("sphincs-shake256-192s-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1289,8 +1104,7 @@ fn main() {
         builder.compile("sphincs-shake256-192s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1301,12 +1115,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1324,28 +1136,19 @@ fn main() {
             )
             .compile("sphincs-shake256-192s-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1366,8 +1169,7 @@ fn main() {
         builder.compile("sphincs-shake256-192f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1378,12 +1180,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1401,28 +1201,19 @@ fn main() {
             )
             .compile("sphincs-shake256-192f-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1462,8 +1253,7 @@ fn main() {
         builder.compile("sphincs-shake256-256s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1474,12 +1264,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1497,28 +1285,19 @@ fn main() {
             )
             .compile("sphincs-shake256-256s-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1539,8 +1318,7 @@ fn main() {
         builder.compile("sphincs-shake256-256s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1551,12 +1329,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1574,28 +1350,19 @@ fn main() {
             )
             .compile("sphincs-shake256-256s-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1616,8 +1383,7 @@ fn main() {
         builder.compile("sphincs-shake256-256f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1628,12 +1394,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1651,28 +1415,19 @@ fn main() {
             )
             .compile("sphincs-shake256-256f-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1693,8 +1448,7 @@ fn main() {
         builder.compile("sphincs-shake256-256f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1705,12 +1459,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1728,28 +1480,19 @@ fn main() {
             )
             .compile("sphincs-shake256-256f-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1770,8 +1513,7 @@ fn main() {
         builder.compile("sphincs-sha256-128s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1782,12 +1524,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1805,28 +1545,19 @@ fn main() {
             )
             .compile("sphincs-sha256-128s-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1847,8 +1578,7 @@ fn main() {
         builder.compile("sphincs-sha256-128s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1859,12 +1589,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1882,28 +1610,19 @@ fn main() {
             )
             .compile("sphincs-sha256-128s-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -1924,8 +1643,7 @@ fn main() {
         builder.compile("sphincs-sha256-128f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -1936,12 +1654,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -1959,28 +1675,19 @@ fn main() {
             )
             .compile("sphincs-sha256-128f-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2001,8 +1708,7 @@ fn main() {
         builder.compile("sphincs-sha256-128f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2013,12 +1719,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2036,28 +1740,19 @@ fn main() {
             )
             .compile("sphincs-sha256-128f-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2078,8 +1773,7 @@ fn main() {
         builder.compile("sphincs-sha256-192s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2090,12 +1784,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2113,28 +1805,19 @@ fn main() {
             )
             .compile("sphincs-sha256-192s-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2155,8 +1838,7 @@ fn main() {
         builder.compile("sphincs-sha256-192s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2167,12 +1849,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2190,28 +1870,19 @@ fn main() {
             )
             .compile("sphincs-sha256-192s-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2232,8 +1903,7 @@ fn main() {
         builder.compile("sphincs-sha256-192f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2244,12 +1914,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2267,28 +1935,19 @@ fn main() {
             )
             .compile("sphincs-sha256-192f-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2309,8 +1968,7 @@ fn main() {
         builder.compile("sphincs-sha256-192f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2321,12 +1979,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2344,28 +2000,19 @@ fn main() {
             )
             .compile("sphincs-sha256-192f-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2386,8 +2033,7 @@ fn main() {
         builder.compile("sphincs-sha256-256s-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2398,12 +2044,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2421,28 +2065,19 @@ fn main() {
             )
             .compile("sphincs-sha256-256s-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2463,8 +2098,7 @@ fn main() {
         builder.compile("sphincs-sha256-256s-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2475,12 +2109,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2498,28 +2130,19 @@ fn main() {
             )
             .compile("sphincs-sha256-256s-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2540,8 +2163,7 @@ fn main() {
         builder.compile("sphincs-sha256-256f-simple_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2552,12 +2174,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2575,28 +2195,19 @@ fn main() {
             )
             .compile("sphincs-sha256-256f-simple_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -2617,8 +2228,7 @@ fn main() {
         builder.compile("sphincs-sha256-256f-robust_clean");
     }
 
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
@@ -2629,12 +2239,10 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else {
             builder
                 .flag("-mavx2")
                 .flag("-mbmi2")
@@ -2652,33 +2260,23 @@ fn main() {
             )
             .compile("sphincs-sha256-256f-robust_avx2");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(
-                    &common_dir
-                        .join("keccak4x")
-                        .join("KeccakP-1600-times4-SIMD256.c"),
-                )
-                .compile("keccak4x");
-        }
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
     }
 
     // Print enableing flag for AVX2 implementation
-    #[cfg(all(not(disable_avx2), target_arch = "x86_64"))]
-    {
+    if avx2_enabled && target_arch == "x86_64" {
         println!("cargo:rustc-cfg=enable_avx2");
     }
 }

@@ -38,3 +38,9 @@ maintenance = { status = "actively-developed" }
 [package.metadata.docs.rs]
 features = ["cryptographically-insecure"]
 {% endif %}
+
+{% if has_avx2 %}
+[features]
+default = ["avx2"]
+avx2 = []
+{% endif %}

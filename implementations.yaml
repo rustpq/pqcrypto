@@ -6,7 +6,7 @@ traits_version: 0.3.2
 kems:
   kyber:
     version: 0.6.5
-    avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), not(target_os = "macos"), target_arch = "x86_64"))'
+    avx2_guard: 'avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64"'
     schemes:
       - name: kyber512
         implementation: clean
@@ -85,7 +85,7 @@ kems:
         implementation: clean
   classicmceliece:
     version: 0.1.0
-    avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))'
+    avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: mceliece348864
         implementation: vec
@@ -168,7 +168,7 @@ kems:
 signs:
   dilithium:
     version: 0.3.1
-    avx2_guard: 'cfg(all(not(disable_avx2), not(target_os = "windows"), target_arch = "x86_64"))'
+    avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: dilithium2
         implementation: clean
