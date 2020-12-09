@@ -1,6 +1,7 @@
 extern crate cc;
 extern crate glob;
 
+use std::env;
 use std::path::PathBuf;
 
 {% set globals = namespace(have_avx2=False) %}
@@ -21,6 +22,12 @@ fn main() {
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
+    let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
+    let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    let is_windows = target_os == "windows";
+    let is_macos = target_os == "macos";
+
     {% for scheme in schemes %}
     {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
     {
@@ -38,17 +45,14 @@ fn main() {
     {% if 'avx2_implementation' in scheme %}
     {% set implementation = scheme.avx2_implementation %}
     {% set globals.have_avx2 = True %}
-    #[{{ avx2_guard }}]
-    {
+    if {{ avx2_guard }} {
         let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
-        #[cfg(windows)]
-        {
+
+        if is_windows {
             builder.flag("/arch:AVX2");
-        }
-        #[cfg(not(windows))]
-        {
+        } else   {
             builder.flag("-mavx2")
             .flag("-mbmi2")
             .flag("-mbmi")
@@ -60,20 +64,16 @@ fn main() {
             .files(scheme_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
             .compile("{{ scheme.name }}_{{ implementation }}");
 
-        #[cfg(not(windows))]
-        {
-            cc::Build::new()
-                .flag("-mavx2")
-                .file(&common_dir.join("keccak4x").join("KeccakP-1600-times4-SIMD256.c"))
-                .compile("keccak4x");
-        }
-        #[cfg(windows)]
-        {
-            cc::Build::new()
-                .flag("/arch:AVX2")
-                .file(&common_dir.join("keccak4x").join("KeccakP-1600-times4-SIMD256.c"))
-                .compile("keccak4x");
-        }
+
+	let mut builder =  cc::Build::new();
+        if is_windows {
+                builder.flag("/arch:AVX2");
+        } else  {
+                builder.flag("-mavx2");
+        };
+        builder
+            .file(&common_dir.join("keccak4x").join("KeccakP-1600-times4-SIMD256.c"))
+            .compile("keccak4x");
 
     }
     {% endif %}
@@ -81,8 +81,7 @@ fn main() {
 
     {% if globals.have_avx2 %}
     // Print enableing flag for AVX2 implementation
-    #[{{ avx2_guard }}]
-    {
+    if {{ avx2_guard }} {
         println!("cargo:rustc-cfg=enable_avx2");
     }
     {% endif %}

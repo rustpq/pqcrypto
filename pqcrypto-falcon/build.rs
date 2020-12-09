@@ -1,6 +1,7 @@
 extern crate cc;
 extern crate glob;
 
+use std::env;
 use std::path::PathBuf;
 
 fn main() {
@@ -18,6 +19,12 @@ fn main() {
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
+
+    let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
+    let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    let is_windows = target_os == "windows";
+    let is_macos = target_os == "macos";
 
     {
         let mut builder = cc::Build::new();

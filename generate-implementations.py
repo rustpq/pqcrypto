@@ -8,7 +8,7 @@ import re
 import shutil
 
 
-DEFAULT_AVX2_GUARD = 'cfg(all(not(disable_avx2), target_arch = "x86_64"))'
+DEFAULT_AVX2_GUARD = 'avx2_enabled && target_arch == "x86_64"'
 
 
 def read_yaml():
@@ -64,8 +64,10 @@ def generate_scheme(name, type, properties):
     except FileExistsError:
         pass
 
+    has_avx2 = False
     for scheme in properties['schemes']:
         if 'avx2_implementation' in scheme:
+            has_avx2 = True
             if 'avx2_feature' not in scheme:
                 scheme['avx2_feature'] = 'avx2'
 
@@ -77,6 +79,7 @@ def generate_scheme(name, type, properties):
         type=type,
         insecure=properties.get('insecure', False),
         version=properties['version'],
+        has_avx2=has_avx2,
     )
 
     render_template(
