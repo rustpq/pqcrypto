@@ -1,11 +1,12 @@
 ---
 
-pqcrypto_version: 0.12.1
+pqcrypto_version: 0.12.2
 traits_version: 0.3.2
 
 kems:
   kyber:
     version: 0.6.5
+    version: 0.6.6
     avx2_guard: 'avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64"'
     schemes:
       - name: kyber512
@@ -27,7 +28,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   frodo:
-    version: 0.4.3
+    version: 0.4.4
     notes: |
       If you use it via the FFI interface: The ``clean`` implementation of Frodo
       needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
@@ -60,7 +61,7 @@ kems:
         alt_implementations:
           - clean
   ntru:
-    version: 0.5.0
+    version: 0.5.1
     schemes:
       - name: ntruhps2048509
         implementation: clean
@@ -84,7 +85,7 @@ kems:
       - name: saber
         implementation: clean
   classicmceliece:
-    version: 0.1.0
+    version: 0.1.1
     avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: mceliece348864
@@ -144,7 +145,7 @@ kems:
         alt_implementations:
           - clean
   hqc:
-    version: 0.0.2
+    version: 0.0.3
     notes: |
       This implementation is not constant-time!
       This means that it is not secure.
@@ -167,7 +168,7 @@ kems:
 
 signs:
   dilithium:
-    version: 0.3.1
+    version: 0.3.2
     avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: dilithium2
@@ -180,14 +181,14 @@ signs:
         implementation: clean
         avx2_implementation: avx2
   falcon:
-    version: 0.2.2
+    version: 0.2.3
     schemes:
       - name: falcon-512
         implementation: clean
       - name: falcon-1024
         implementation: clean
   rainbow:
-    version: 0.1.2
+    version: 0.1.3
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
@@ -213,7 +214,7 @@ signs:
       - name: rainbowVc-cyclic-compressed
         implementation: clean
   sphincsplus:
-    version: 0.5.0
+    version: 0.5.1
     schemes:
       - name: sphincs-haraka-128s-simple
         implementation: clean
