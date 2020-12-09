@@ -2,7 +2,7 @@
 name = "pqcrypto-hqc"
 description = "Post-Quantum Key-Encapsulation Mechanism hqc"
 readme = "README.md"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
