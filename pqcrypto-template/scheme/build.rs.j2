@@ -22,10 +22,15 @@ fn main() {
         .files(common_files.into_iter())
         .compile("pqclean_common");
 
+    #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
+    #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
+    #[allow(unused_variables)]
     let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    #[allow(unused_variables)]
     let is_windows = target_os == "windows";
+    #[allow(unused_variables)]
     let is_macos = target_os == "macos";
 
     {% for scheme in schemes %}
