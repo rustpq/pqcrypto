@@ -69,6 +69,13 @@ macro_rules! simple_struct {
                     .is_ok()
             }
         }
+
+        #[cfg(feature = "zeroize")]
+        impl zeroize::Zeroize for $type {
+            fn zeroize(&mut self) {
+                self.0.iter_mut().for_each(zeroize::Zeroize::zeroize);
+            }
+        }
     };
 }
 

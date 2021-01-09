@@ -18,8 +18,9 @@ pqcrypto-{{ name }} = { path = "../pqcrypto-{{ name }}", version = "{{ props.ver
 {% endfor %}
 
 [features]
-default = [{% for (name, props) in kems.items()|list + signs.items()|list %}{% if not props.insecure|default(False) %}"pqcrypto-{{name}}",{% endif %}{% endfor %}]
+default = [{% for (name, props) in kems.items()|list + signs.items()|list %}{% if not props.insecure|default(False) %}"pqcrypto-{{name}}",{% endif %}{% endfor %}"zeroize"]
 cryptographically-insecure = [{% for (name, props) in kems.items()|list + signs.items()|list %}{% if props.insecure|default(False) %}"pqcrypto-{{name}}/cryptographically-insecure",{% endif %}{% endfor %}]
+zeroize = [{% for (name, props) in kems.items()|list + signs.items()|list %}"pqcrypto-{{ name }}/zeroize",{% endfor %}]
 
 [badges]
 travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }

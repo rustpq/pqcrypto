@@ -14,10 +14,16 @@ categories = ["cryptography"]
 [dependencies]
 pqcrypto-traits = {path = "../pqcrypto-traits", version = "{{ traits_version }}"}
 libc = "0.2.0"
+zeroize = { version = "1.2.0", optional = true }
 
-{% if insecure %}
 [features]
+{% if has_avx2 %}
+default = ["avx2"]
+avx2 = []
+{% else %}
 default = []
+{% endif %}
+{% if insecure %}
 cryptographically-insecure = []
 {% endif %}
 
@@ -37,10 +43,4 @@ maintenance = { status = "actively-developed" }
 {% if insecure %}
 [package.metadata.docs.rs]
 features = ["cryptographically-insecure"]
-{% endif %}
-
-{% if has_avx2 %}
-[features]
-default = ["avx2"]
-avx2 = []
 {% endif %}

@@ -25,8 +25,9 @@ pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.1.3", optional =
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.5.2", optional = true }
 
 [features]
-default = ["pqcrypto-kyber","pqcrypto-frodo","pqcrypto-ntru","pqcrypto-saber","pqcrypto-classicmceliece","pqcrypto-hqc","pqcrypto-dilithium","pqcrypto-falcon","pqcrypto-rainbow","pqcrypto-sphincsplus",]
+default = ["pqcrypto-kyber","pqcrypto-frodo","pqcrypto-ntru","pqcrypto-saber","pqcrypto-classicmceliece","pqcrypto-hqc","pqcrypto-dilithium","pqcrypto-falcon","pqcrypto-rainbow","pqcrypto-sphincsplus","zeroize"]
 cryptographically-insecure = []
+zeroize = ["pqcrypto-kyber/zeroize","pqcrypto-frodo/zeroize","pqcrypto-ntru/zeroize","pqcrypto-saber/zeroize","pqcrypto-classicmceliece/zeroize","pqcrypto-hqc/zeroize","pqcrypto-dilithium/zeroize","pqcrypto-falcon/zeroize","pqcrypto-rainbow/zeroize","pqcrypto-sphincsplus/zeroize",]
 
 [badges]
 travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
