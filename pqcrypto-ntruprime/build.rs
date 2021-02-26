@@ -28,7 +28,7 @@ fn main() {
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "ntrulpr653", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -37,11 +37,11 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("kyber512_clean");
+        builder.compile("ntrulpr653_clean");
     }
 
-    if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512", "avx2"]
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "ntrulpr653", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -67,7 +67,7 @@ fn main() {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
-            .compile("kyber512_avx2");
+            .compile("ntrulpr653_avx2");
 
         let mut builder = cc::Build::new();
         if is_windows {
@@ -85,7 +85,7 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "ntrulpr761", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -94,11 +94,11 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("kyber768_clean");
+        builder.compile("ntrulpr761_clean");
     }
 
-    if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768", "avx2"]
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "ntrulpr761", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -124,7 +124,7 @@ fn main() {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
-            .compile("kyber768_avx2");
+            .compile("ntrulpr761_avx2");
 
         let mut builder = cc::Build::new();
         if is_windows {
@@ -142,7 +142,7 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "ntrulpr857", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -151,11 +151,11 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("kyber1024_clean");
+        builder.compile("ntrulpr857_clean");
     }
 
-    if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024", "avx2"]
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "ntrulpr857", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -181,7 +181,7 @@ fn main() {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
-            .compile("kyber1024_avx2");
+            .compile("ntrulpr857_avx2");
 
         let mut builder = cc::Build::new();
         if is_windows {
@@ -199,7 +199,7 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512-90s", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "sntrup653", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -208,11 +208,11 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("kyber512-90s_clean");
+        builder.compile("sntrup653_clean");
     }
 
-    if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512-90s", "avx2"]
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "sntrup653", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -238,7 +238,7 @@ fn main() {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
-            .compile("kyber512-90s_avx2");
+            .compile("sntrup653_avx2");
 
         let mut builder = cc::Build::new();
         if is_windows {
@@ -256,7 +256,7 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768-90s", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "sntrup761", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -265,11 +265,11 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("kyber768-90s_clean");
+        builder.compile("sntrup761_clean");
     }
 
-    if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768-90s", "avx2"]
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "sntrup761", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -295,7 +295,7 @@ fn main() {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
-            .compile("kyber768-90s_avx2");
+            .compile("sntrup761_avx2");
 
         let mut builder = cc::Build::new();
         if is_windows {
@@ -313,7 +313,7 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024-90s", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "sntrup857", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -322,11 +322,11 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("kyber1024-90s_clean");
+        builder.compile("sntrup857_clean");
     }
 
-    if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024-90s", "avx2"]
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "sntrup857", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -352,7 +352,7 @@ fn main() {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
-            .compile("kyber1024-90s_avx2");
+            .compile("sntrup857_avx2");
 
         let mut builder = cc::Build::new();
         if is_windows {
@@ -370,7 +370,7 @@ fn main() {
     }
 
     // Print enableing flag for AVX2 implementation
-    if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
+    if avx2_enabled && target_arch == "x86_64" {
         println!("cargo:rustc-cfg=enable_avx2");
     }
 }

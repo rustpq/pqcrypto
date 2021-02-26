@@ -1,8 +1,8 @@
 [package]
-name = "pqcrypto-hqc"
-description = "Post-Quantum Key-Encapsulation Mechanism hqc"
+name = "pqcrypto-ntruprime"
+description = "Post-Quantum Key-Encapsulation Mechanism ntruprime"
 readme = "README.md"
-version = "0.0.5"
+version = "0.0.1"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"

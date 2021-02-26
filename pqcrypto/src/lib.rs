@@ -26,29 +26,31 @@ pub mod kem {
         frodokem976shake,
     };
     #[cfg(feature = "pqcrypto-hqc")]
-    pub use pqcrypto_hqc::{
-        hqc1281cca2, hqc1921cca2, hqc1922cca2, hqc2561cca2, hqc2562cca2, hqc2563cca2,
-    };
+    pub use pqcrypto_hqc::{hqcrmrs128, hqcrmrs192, hqcrmrs256};
     #[cfg(feature = "pqcrypto-kyber")]
     pub use pqcrypto_kyber::{
         kyber1024, kyber102490s, kyber512, kyber51290s, kyber768, kyber76890s,
     };
     #[cfg(feature = "pqcrypto-ntru")]
     pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
+    #[cfg(feature = "pqcrypto-ntruprime")]
+    pub use pqcrypto_ntruprime::{
+        ntrulpr653, ntrulpr761, ntrulpr857, sntrup653, sntrup761, sntrup857,
+    };
     #[cfg(feature = "pqcrypto-saber")]
     pub use pqcrypto_saber::{firesaber, lightsaber, saber};
 }
 
 pub mod sign {
     #[cfg(feature = "pqcrypto-dilithium")]
-    pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium4};
+    pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium5};
     #[cfg(feature = "pqcrypto-falcon")]
     pub use pqcrypto_falcon::{falcon1024, falcon512};
     #[cfg(feature = "pqcrypto-rainbow")]
     pub use pqcrypto_rainbow::{
-        rainbowiaclassic, rainbowiacyclic, rainbowiacycliccompressed, rainbowiiicclassic,
-        rainbowiiiccyclic, rainbowiiiccycliccompressed, rainbowvcclassic, rainbowvccyclic,
-        rainbowvccycliccompressed,
+        rainbowicircumzenithal, rainbowiclassic, rainbowicompressed, rainbowiiicircumzenithal,
+        rainbowiiiclassic, rainbowiiicompressed, rainbowvcircumzenithal, rainbowvclassic,
+        rainbowvcompressed,
     };
     #[cfg(feature = "pqcrypto-sphincsplus")]
     pub use pqcrypto_sphincsplus::{

@@ -68,7 +68,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -136,7 +138,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -204,7 +208,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -272,7 +278,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -340,7 +348,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -408,7 +418,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -476,7 +488,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -544,7 +558,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -612,7 +628,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)
@@ -680,7 +698,9 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul")
+                .flag("-msse2");
         }
         builder
             .include(&common_dir)

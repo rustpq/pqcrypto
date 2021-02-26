@@ -15,23 +15,23 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``rainbowIIIc-classic``
+ * ``rainbowI-circumzenithal``
     * ``clean`` (default)
- * ``rainbowIIIc-cyclic``
+ * ``rainbowI-classic``
     * ``clean`` (default)
- * ``rainbowIIIc-cyclic-compressed``
+ * ``rainbowI-compressed``
     * ``clean`` (default)
- * ``rainbowIa-classic``
+ * ``rainbowIII-circumzenithal``
     * ``clean`` (default)
- * ``rainbowIa-cyclic``
+ * ``rainbowIII-classic``
     * ``clean`` (default)
- * ``rainbowIa-cyclic-compressed``
+ * ``rainbowIII-compressed``
     * ``clean`` (default)
- * ``rainbowVc-classic``
+ * ``rainbowV-circumzenithal``
     * ``clean`` (default)
- * ``rainbowVc-cyclic``
+ * ``rainbowV-classic``
     * ``clean`` (default)
- * ``rainbowVc-cyclic-compressed``
+ * ``rainbowV-compressed``
     * ``clean`` (default)
 
 # Notes

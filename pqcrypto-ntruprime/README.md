@@ -1,4 +1,4 @@
-# hqc
+# ntruprime
 
 
 This crate contains bindings to the C implementations of the following schemes,
@@ -15,13 +15,23 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``hqc-rmrs-128``
+ * ``ntrulpr653``
     * ``avx2`` (if supported)
     * ``clean`` (default)
- * ``hqc-rmrs-192``
+ * ``ntrulpr761``
     * ``avx2`` (if supported)
     * ``clean`` (default)
- * ``hqc-rmrs-256``
+ * ``ntrulpr857``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``sntrup653``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``sntrup761``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``sntrup857``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
 
 

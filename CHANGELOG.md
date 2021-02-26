@@ -1,32 +1,41 @@
 # Changelog
 
-# 2020-08-27
+## 2021-02-26
+
+* Add NTRU Prime schemes
+* Change Crystals-Dilithium4 to Crystals-Dilithium5
+* Disable doc-tests for RainbowV because of stack overflow
+* Update HQC to newest schemes
+* Disable AVX2 implementation of HQC-RMRS-256 as there is a bug in "compute_syndromes()" in reed_solomon.c
+* Sort the scheme variants alphabetically in implementations.yaml
+
+## 2020-08-27
 
 * :alert: **Removed non-round-3 implementations**
 * Update NTRU
 * Small update in Saber code
 
-# 2020-06-22
+## 2020-06-22
 
 * Update FrodoKEM implementations to fix timing side channel
 * Update MQDSS
 
-# 2020-05-25
+## 2020-05-25
 
 * Make paths more resilient to windows
 
-# 2020-04-03
+## 2020-04-03
 
 * Add HQC
 
-# 2020-03-27
+## 2020-03-27
 
 * Update implementations to PQClean latest versions
   * Kyber
   * Dilithium
   * Falcon
 
-# 2020-02-11
+## 2020-02-11
 
 * Add Classic McEliece
 * Support MacOS for Dilithium AVX2

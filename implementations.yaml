@@ -35,11 +35,11 @@ kems:
 
       This is not relevant for the 'normal' api methods.
     schemes:
-      - name: frodokem640shake
+      - name: frodokem640aes
         implementation: opt
         alt_implementations:
           - clean
-      - name: frodokem640aes
+      - name: frodokem640shake
         implementation: opt
         alt_implementations:
           - clean
@@ -74,6 +74,27 @@ kems:
       - name: ntruhrss701
         implementation: clean
         avx2_implementation: avx2
+  ntruprime:
+    version: 0.0.1
+    schemes:
+      - name: ntrulpr653
+        implementation: clean
+        avx2_implementation: avx2
+      - name: ntrulpr761
+        implementation: clean
+        avx2_implementation: avx2
+      - name: ntrulpr857
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sntrup653
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sntrup761
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sntrup857
+        implementation: clean
+        avx2_implementation: avx2
   saber:
     version: 0.1.5
     schemes:
@@ -84,7 +105,10 @@ kems:
       - name: saber
         implementation: clean
   classicmceliece:
-    version: 0.1.1
+    version: 0.1.2
+    notes: |
+      This implementation requires a lot of stack space.
+      You need to specify ``RUST_MIN_STACK=800000000``, probably.
     avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: mceliece348864
@@ -144,30 +168,22 @@ kems:
         alt_implementations:
           - clean
   hqc:
-    version: 0.0.4
-    notes: |
-      This implementation is not constant-time!
-      This means that it is not secure.
-
-      This crate may remove the ``leaktime`` implementation at any point.
+    version: 0.0.5
     schemes:
-      - name: hqc-128-1-cca2
-        implementation: leaktime
-      - name: hqc-192-1-cca2
-        implementation: leaktime
-      - name: hqc-192-2-cca2
-        implementation: leaktime
-      - name: hqc-256-1-cca2
-        implementation: leaktime
-      - name: hqc-256-2-cca2
-        implementation: leaktime
-      - name: hqc-256-3-cca2
-        implementation: leaktime
+      - name: hqc-rmrs-128
+        implementation: clean
+        avx2_implementation: avx2
+      - name: hqc-rmrs-192
+        implementation: clean
+        avx2_implementation: avx2
+      - name: hqc-rmrs-256
+        implementation: clean
+        # avx2_implementation: avx2
 
 
 signs:
   dilithium:
-    version: 0.3.3
+    version: 0.3.4
     avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: dilithium2
@@ -176,7 +192,7 @@ signs:
       - name: dilithium3
         implementation: clean
         avx2_implementation: avx2
-      - name: dilithium4
+      - name: dilithium5
         implementation: clean
         avx2_implementation: avx2
   falcon:
@@ -187,57 +203,48 @@ signs:
       - name: falcon-1024
         implementation: clean
   rainbow:
-    version: 0.1.3
+    version: 0.1.4
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
     schemes:
-      - name: rainbowIIIc-classic
+      - name: rainbowI-circumzenithal
         implementation: clean
-      - name: rainbowIIIc-cyclic
+      - name: rainbowI-classic
         implementation: clean
-      - name: rainbowIIIc-cyclic-compressed
+      - name: rainbowI-compressed
         implementation: clean
-      - name: rainbowIa-classic
+      - name: rainbowIII-circumzenithal
         implementation: clean
-      - name: rainbowIa-cyclic
+      - name: rainbowIII-classic
         implementation: clean
-      - name: rainbowIa-cyclic-compressed
+      - name: rainbowIII-compressed
         implementation: clean
-      - name: rainbowVc-classic
+      - name: rainbowV-circumzenithal
+        doctest: no # Doc test fail because of too small stack size
         implementation: clean
-        doctest: no
-      - name: rainbowVc-cyclic
+      - name: rainbowV-classic
+        doctest: no # Doc test fail because of too small stack size
         implementation: clean
-        doctest: no
-      - name: rainbowVc-cyclic-compressed
+      - name: rainbowV-compressed
+        doctest: no # Doc test fail because of too small stack size
         implementation: clean
   sphincsplus:
-    version: 0.5.2
+    version: 0.5.3
     schemes:
-      - name: sphincs-haraka-128s-simple
-        implementation: clean
-        avx2_implementation: aesni
-        avx2_feature: 'aes'
-      - name: sphincs-haraka-128s-robust
-        implementation: clean
-      - name: sphincs-haraka-128f-simple
-        avx2_implementation: aesni
-        avx2_feature: 'aes'
-        implementation: clean
       - name: sphincs-haraka-128f-robust
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
-      - name: sphincs-haraka-192s-simple
+      - name: sphincs-haraka-128f-simple
+        avx2_implementation: aesni
+        avx2_feature: 'aes'
+        implementation: clean
+      - name: sphincs-haraka-128s-robust
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
-      - name: sphincs-haraka-192s-robust
-        implementation: clean
-        avx2_implementation: aesni
-        avx2_feature: 'aes'
-      - name: sphincs-haraka-192f-simple
+      - name: sphincs-haraka-128s-simple
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
@@ -245,15 +252,15 @@ signs:
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
-      - name: sphincs-haraka-256s-simple
+      - name: sphincs-haraka-192f-simple
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
-      - name: sphincs-haraka-256s-robust
+      - name: sphincs-haraka-192s-robust
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
-      - name: sphincs-haraka-256f-simple
+      - name: sphincs-haraka-192s-simple
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
@@ -261,75 +268,88 @@ signs:
         implementation: clean
         avx2_implementation: aesni
         avx2_feature: 'aes'
-      - name: sphincs-shake256-128s-simple
+      - name: sphincs-haraka-256f-simple
         implementation: clean
-        avx2_implementation: avx2
-      - name: sphincs-shake256-128s-robust
+        avx2_implementation: aesni
+        avx2_feature: 'aes'
+      - name: sphincs-haraka-256s-robust
+        implementation: clean
+        avx2_implementation: aesni
+        avx2_feature: 'aes'
+      - name: sphincs-haraka-256s-simple
+        implementation: clean
+        avx2_implementation: aesni
+        avx2_feature: 'aes'
+      - name: sphincs-shake256-128f-robust
         implementation: clean
         avx2_implementation: avx2
       - name: sphincs-shake256-128f-simple
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-shake256-128f-robust
+      - name: sphincs-shake256-128s-robust
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-shake256-192s-simple
+      - name: sphincs-shake256-128s-simple
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-shake256-192s-robust
+      - name: sphincs-shake256-192f-robust
         implementation: clean
         avx2_implementation: avx2
       - name: sphincs-shake256-192f-simple
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-shake256-192f-robust
-        implementation: clean
-      - name: sphincs-shake256-256s-simple
+      - name: sphincs-shake256-192s-robust
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-shake256-256s-robust
-        implementation: clean
-        avx2_implementation: avx2
-      - name: sphincs-shake256-256f-simple
+      - name: sphincs-shake256-192s-simple
         implementation: clean
         avx2_implementation: avx2
       - name: sphincs-shake256-256f-robust
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-128s-simple
+      - name: sphincs-shake256-256f-simple
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-128s-robust
+      - name: sphincs-shake256-256s-robust
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-128f-simple
+      - name: sphincs-shake256-256s-simple
         implementation: clean
         avx2_implementation: avx2
       - name: sphincs-sha256-128f-robust
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-192s-simple
+      - name: sphincs-sha256-128f-simple
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-192s-robust
+      - name: sphincs-sha256-128s-robust
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-192f-simple
+      - name: sphincs-sha256-128s-simple
         implementation: clean
         avx2_implementation: avx2
       - name: sphincs-sha256-192f-robust
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-256s-simple
+      - name: sphincs-sha256-192f-simple
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-256s-robust
+      - name: sphincs-sha256-192s-robust
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sphincs-sha256-192s-simple
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sphincs-sha256-256f-robust
         implementation: clean
         avx2_implementation: avx2
       - name: sphincs-sha256-256f-simple
         implementation: clean
         avx2_implementation: avx2
-      - name: sphincs-sha256-256f-robust
+      - name: sphincs-sha256-256s-robust
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sphincs-sha256-256s-simple
         implementation: clean
         avx2_implementation: avx2
 

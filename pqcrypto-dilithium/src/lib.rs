@@ -5,7 +5,7 @@
 //!
 //! * dilithium2 - clean
 //! * dilithium3 - clean
-//! * dilithium4 - clean
+//! * dilithium5 - clean
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
@@ -14,7 +14,7 @@
 
 pub mod dilithium2;
 pub mod dilithium3;
-pub mod dilithium4;
+pub mod dilithium5;
 pub mod ffi;
 
 pub use crate::dilithium2::{
@@ -31,10 +31,10 @@ pub use crate::dilithium3::{
     signature_bytes as dilithium3_signature_bytes,
     verify_detached_signature as dilithium3_verify_detached_signature,
 };
-pub use crate::dilithium4::{
-    detached_sign as dilithium4_detached_sign, keypair as dilithium4_keypair,
-    open as dilithium4_open, public_key_bytes as dilithium4_public_key_bytes,
-    secret_key_bytes as dilithium4_secret_key_bytes, sign as dilithium4_sign,
-    signature_bytes as dilithium4_signature_bytes,
-    verify_detached_signature as dilithium4_verify_detached_signature,
+pub use crate::dilithium5::{
+    detached_sign as dilithium5_detached_sign, keypair as dilithium5_keypair,
+    open as dilithium5_open, public_key_bytes as dilithium5_public_key_bytes,
+    secret_key_bytes as dilithium5_secret_key_bytes, sign as dilithium5_sign,
+    signature_bytes as dilithium5_signature_bytes,
+    verify_detached_signature as dilithium5_verify_detached_signature,
 };

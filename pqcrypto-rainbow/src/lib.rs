@@ -3,15 +3,15 @@
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
-//! * rainbowIIIc-classic - clean
-//! * rainbowIIIc-cyclic - clean
-//! * rainbowIIIc-cyclic-compressed - clean
-//! * rainbowIa-classic - clean
-//! * rainbowIa-cyclic - clean
-//! * rainbowIa-cyclic-compressed - clean
-//! * rainbowVc-classic - clean
-//! * rainbowVc-cyclic - clean
-//! * rainbowVc-cyclic-compressed - clean
+//! * rainbowI-circumzenithal - clean
+//! * rainbowI-classic - clean
+//! * rainbowI-compressed - clean
+//! * rainbowIII-circumzenithal - clean
+//! * rainbowIII-classic - clean
+//! * rainbowIII-compressed - clean
+//! * rainbowV-circumzenithal - clean
+//! * rainbowV-classic - clean
+//! * rainbowV-compressed - clean
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
@@ -22,82 +22,80 @@
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-pub mod rainbowiaclassic;
-pub mod rainbowiacyclic;
-pub mod rainbowiacycliccompressed;
-pub mod rainbowiiicclassic;
-pub mod rainbowiiiccyclic;
-pub mod rainbowiiiccycliccompressed;
-pub mod rainbowvcclassic;
-pub mod rainbowvccyclic;
-pub mod rainbowvccycliccompressed;
+pub mod rainbowicircumzenithal;
+pub mod rainbowiclassic;
+pub mod rainbowicompressed;
+pub mod rainbowiiicircumzenithal;
+pub mod rainbowiiiclassic;
+pub mod rainbowiiicompressed;
+pub mod rainbowvcircumzenithal;
+pub mod rainbowvclassic;
+pub mod rainbowvcompressed;
 
-pub use crate::rainbowiaclassic::{
-    detached_sign as rainbowiaclassic_detached_sign, keypair as rainbowiaclassic_keypair,
-    open as rainbowiaclassic_open, public_key_bytes as rainbowiaclassic_public_key_bytes,
-    secret_key_bytes as rainbowiaclassic_secret_key_bytes, sign as rainbowiaclassic_sign,
-    signature_bytes as rainbowiaclassic_signature_bytes,
-    verify_detached_signature as rainbowiaclassic_verify_detached_signature,
+pub use crate::rainbowicircumzenithal::{
+    detached_sign as rainbowicircumzenithal_detached_sign,
+    keypair as rainbowicircumzenithal_keypair, open as rainbowicircumzenithal_open,
+    public_key_bytes as rainbowicircumzenithal_public_key_bytes,
+    secret_key_bytes as rainbowicircumzenithal_secret_key_bytes,
+    sign as rainbowicircumzenithal_sign, signature_bytes as rainbowicircumzenithal_signature_bytes,
+    verify_detached_signature as rainbowicircumzenithal_verify_detached_signature,
 };
-pub use crate::rainbowiacyclic::{
-    detached_sign as rainbowiacyclic_detached_sign, keypair as rainbowiacyclic_keypair,
-    open as rainbowiacyclic_open, public_key_bytes as rainbowiacyclic_public_key_bytes,
-    secret_key_bytes as rainbowiacyclic_secret_key_bytes, sign as rainbowiacyclic_sign,
-    signature_bytes as rainbowiacyclic_signature_bytes,
-    verify_detached_signature as rainbowiacyclic_verify_detached_signature,
+pub use crate::rainbowiclassic::{
+    detached_sign as rainbowiclassic_detached_sign, keypair as rainbowiclassic_keypair,
+    open as rainbowiclassic_open, public_key_bytes as rainbowiclassic_public_key_bytes,
+    secret_key_bytes as rainbowiclassic_secret_key_bytes, sign as rainbowiclassic_sign,
+    signature_bytes as rainbowiclassic_signature_bytes,
+    verify_detached_signature as rainbowiclassic_verify_detached_signature,
 };
-pub use crate::rainbowiacycliccompressed::{
-    detached_sign as rainbowiacycliccompressed_detached_sign,
-    keypair as rainbowiacycliccompressed_keypair, open as rainbowiacycliccompressed_open,
-    public_key_bytes as rainbowiacycliccompressed_public_key_bytes,
-    secret_key_bytes as rainbowiacycliccompressed_secret_key_bytes,
-    sign as rainbowiacycliccompressed_sign,
-    signature_bytes as rainbowiacycliccompressed_signature_bytes,
-    verify_detached_signature as rainbowiacycliccompressed_verify_detached_signature,
+pub use crate::rainbowicompressed::{
+    detached_sign as rainbowicompressed_detached_sign, keypair as rainbowicompressed_keypair,
+    open as rainbowicompressed_open, public_key_bytes as rainbowicompressed_public_key_bytes,
+    secret_key_bytes as rainbowicompressed_secret_key_bytes, sign as rainbowicompressed_sign,
+    signature_bytes as rainbowicompressed_signature_bytes,
+    verify_detached_signature as rainbowicompressed_verify_detached_signature,
 };
-pub use crate::rainbowiiicclassic::{
-    detached_sign as rainbowiiicclassic_detached_sign, keypair as rainbowiiicclassic_keypair,
-    open as rainbowiiicclassic_open, public_key_bytes as rainbowiiicclassic_public_key_bytes,
-    secret_key_bytes as rainbowiiicclassic_secret_key_bytes, sign as rainbowiiicclassic_sign,
-    signature_bytes as rainbowiiicclassic_signature_bytes,
-    verify_detached_signature as rainbowiiicclassic_verify_detached_signature,
+pub use crate::rainbowiiicircumzenithal::{
+    detached_sign as rainbowiiicircumzenithal_detached_sign,
+    keypair as rainbowiiicircumzenithal_keypair, open as rainbowiiicircumzenithal_open,
+    public_key_bytes as rainbowiiicircumzenithal_public_key_bytes,
+    secret_key_bytes as rainbowiiicircumzenithal_secret_key_bytes,
+    sign as rainbowiiicircumzenithal_sign,
+    signature_bytes as rainbowiiicircumzenithal_signature_bytes,
+    verify_detached_signature as rainbowiiicircumzenithal_verify_detached_signature,
 };
-pub use crate::rainbowiiiccyclic::{
-    detached_sign as rainbowiiiccyclic_detached_sign, keypair as rainbowiiiccyclic_keypair,
-    open as rainbowiiiccyclic_open, public_key_bytes as rainbowiiiccyclic_public_key_bytes,
-    secret_key_bytes as rainbowiiiccyclic_secret_key_bytes, sign as rainbowiiiccyclic_sign,
-    signature_bytes as rainbowiiiccyclic_signature_bytes,
-    verify_detached_signature as rainbowiiiccyclic_verify_detached_signature,
+pub use crate::rainbowiiiclassic::{
+    detached_sign as rainbowiiiclassic_detached_sign, keypair as rainbowiiiclassic_keypair,
+    open as rainbowiiiclassic_open, public_key_bytes as rainbowiiiclassic_public_key_bytes,
+    secret_key_bytes as rainbowiiiclassic_secret_key_bytes, sign as rainbowiiiclassic_sign,
+    signature_bytes as rainbowiiiclassic_signature_bytes,
+    verify_detached_signature as rainbowiiiclassic_verify_detached_signature,
 };
-pub use crate::rainbowiiiccycliccompressed::{
-    detached_sign as rainbowiiiccycliccompressed_detached_sign,
-    keypair as rainbowiiiccycliccompressed_keypair, open as rainbowiiiccycliccompressed_open,
-    public_key_bytes as rainbowiiiccycliccompressed_public_key_bytes,
-    secret_key_bytes as rainbowiiiccycliccompressed_secret_key_bytes,
-    sign as rainbowiiiccycliccompressed_sign,
-    signature_bytes as rainbowiiiccycliccompressed_signature_bytes,
-    verify_detached_signature as rainbowiiiccycliccompressed_verify_detached_signature,
+pub use crate::rainbowiiicompressed::{
+    detached_sign as rainbowiiicompressed_detached_sign, keypair as rainbowiiicompressed_keypair,
+    open as rainbowiiicompressed_open, public_key_bytes as rainbowiiicompressed_public_key_bytes,
+    secret_key_bytes as rainbowiiicompressed_secret_key_bytes, sign as rainbowiiicompressed_sign,
+    signature_bytes as rainbowiiicompressed_signature_bytes,
+    verify_detached_signature as rainbowiiicompressed_verify_detached_signature,
 };
-pub use crate::rainbowvcclassic::{
-    detached_sign as rainbowvcclassic_detached_sign, keypair as rainbowvcclassic_keypair,
-    open as rainbowvcclassic_open, public_key_bytes as rainbowvcclassic_public_key_bytes,
-    secret_key_bytes as rainbowvcclassic_secret_key_bytes, sign as rainbowvcclassic_sign,
-    signature_bytes as rainbowvcclassic_signature_bytes,
-    verify_detached_signature as rainbowvcclassic_verify_detached_signature,
+pub use crate::rainbowvcircumzenithal::{
+    detached_sign as rainbowvcircumzenithal_detached_sign,
+    keypair as rainbowvcircumzenithal_keypair, open as rainbowvcircumzenithal_open,
+    public_key_bytes as rainbowvcircumzenithal_public_key_bytes,
+    secret_key_bytes as rainbowvcircumzenithal_secret_key_bytes,
+    sign as rainbowvcircumzenithal_sign, signature_bytes as rainbowvcircumzenithal_signature_bytes,
+    verify_detached_signature as rainbowvcircumzenithal_verify_detached_signature,
 };
-pub use crate::rainbowvccyclic::{
-    detached_sign as rainbowvccyclic_detached_sign, keypair as rainbowvccyclic_keypair,
-    open as rainbowvccyclic_open, public_key_bytes as rainbowvccyclic_public_key_bytes,
-    secret_key_bytes as rainbowvccyclic_secret_key_bytes, sign as rainbowvccyclic_sign,
-    signature_bytes as rainbowvccyclic_signature_bytes,
-    verify_detached_signature as rainbowvccyclic_verify_detached_signature,
+pub use crate::rainbowvclassic::{
+    detached_sign as rainbowvclassic_detached_sign, keypair as rainbowvclassic_keypair,
+    open as rainbowvclassic_open, public_key_bytes as rainbowvclassic_public_key_bytes,
+    secret_key_bytes as rainbowvclassic_secret_key_bytes, sign as rainbowvclassic_sign,
+    signature_bytes as rainbowvclassic_signature_bytes,
+    verify_detached_signature as rainbowvclassic_verify_detached_signature,
 };
-pub use crate::rainbowvccycliccompressed::{
-    detached_sign as rainbowvccycliccompressed_detached_sign,
-    keypair as rainbowvccycliccompressed_keypair, open as rainbowvccycliccompressed_open,
-    public_key_bytes as rainbowvccycliccompressed_public_key_bytes,
-    secret_key_bytes as rainbowvccycliccompressed_secret_key_bytes,
-    sign as rainbowvccycliccompressed_sign,
-    signature_bytes as rainbowvccycliccompressed_signature_bytes,
-    verify_detached_signature as rainbowvccycliccompressed_verify_detached_signature,
+pub use crate::rainbowvcompressed::{
+    detached_sign as rainbowvcompressed_detached_sign, keypair as rainbowvcompressed_keypair,
+    open as rainbowvcompressed_open, public_key_bytes as rainbowvcompressed_public_key_bytes,
+    secret_key_bytes as rainbowvcompressed_secret_key_bytes, sign as rainbowvcompressed_sign,
+    signature_bytes as rainbowvcompressed_signature_bytes,
+    verify_detached_signature as rainbowvcompressed_verify_detached_signature,
 };

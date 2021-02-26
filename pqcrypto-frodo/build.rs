@@ -28,33 +28,6 @@ fn main() {
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "frodokem640shake", "opt"]
-            .iter()
-            .collect();
-        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
-        builder.compile("frodokem640shake_opt");
-    }
-    {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "frodokem640shake", "clean"]
-            .iter()
-            .collect();
-        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
-        builder.compile("frodokem640shake_clean");
-    }
-
-    {
-        let mut builder = cc::Build::new();
         let target_dir: PathBuf = ["pqclean", "crypto_kem", "frodokem640aes", "opt"]
             .iter()
             .collect();
@@ -78,6 +51,33 @@ fn main() {
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
         builder.compile("frodokem640aes_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "frodokem640shake", "opt"]
+            .iter()
+            .collect();
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
+        builder.compile("frodokem640shake_opt");
+    }
+    {
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "frodokem640shake", "clean"]
+            .iter()
+            .collect();
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
+        builder.compile("frodokem640shake_clean");
     }
 
     {

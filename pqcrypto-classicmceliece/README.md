@@ -56,6 +56,10 @@ methods only.
     * ``vec`` (default)
     * ``clean`` (included as ``ffi`` only)
 
+# Notes
+This implementation requires a lot of stack space.
+You need to specify ``RUST_MIN_STACK=800000000``, probably.
+
 
 ## License
 

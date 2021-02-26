@@ -3,8 +3,8 @@
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
-//! * frodokem640shake - opt
 //! * frodokem640aes - opt
+//! * frodokem640shake - opt
 //! * frodokem976aes - opt
 //! * frodokem976shake - opt
 //! * frodokem1344aes - opt
