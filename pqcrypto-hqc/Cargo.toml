@@ -2,7 +2,7 @@
 name = "pqcrypto-hqc"
 description = "Post-Quantum Key-Encapsulation Mechanism hqc"
 readme = "README.md"
-version = "0.0.4"
+version = "0.1.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -27,3 +27,6 @@ travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
 maintenance = { status = "actively-developed" }
 
 
+[features]
+default = ["avx2"]
+avx2 = []

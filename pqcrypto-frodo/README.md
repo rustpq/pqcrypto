@@ -15,10 +15,10 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``frodokem640shake``
+ * ``frodokem640aes``
     * ``opt`` (default)
     * ``clean`` (included as ``ffi`` only)
- * ``frodokem640aes``
+ * ``frodokem640shake``
     * ``opt`` (default)
     * ``clean`` (included as ``ffi`` only)
  * ``frodokem976aes``

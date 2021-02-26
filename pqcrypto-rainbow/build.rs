@@ -28,7 +28,7 @@ fn main() {
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIIIc-classic", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-circumzenithal", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -37,12 +37,12 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowIIIc-classic_clean");
+        builder.compile("rainbowI-circumzenithal_clean");
     }
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIIIc-cyclic", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -51,7 +51,21 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowIIIc-cyclic_clean");
+        builder.compile("rainbowI-classic_clean");
+    }
+
+    {
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-compressed", "clean"]
+            .iter()
+            .collect();
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        builder.include(&common_dir).include(target_dir).files(
+            scheme_files
+                .into_iter()
+                .map(|p| p.unwrap().to_string_lossy().into_owned()),
+        );
+        builder.compile("rainbowI-compressed_clean");
     }
 
     {
@@ -59,7 +73,7 @@ fn main() {
         let target_dir: PathBuf = [
             "pqclean",
             "crypto_sign",
-            "rainbowIIIc-cyclic-compressed",
+            "rainbowIII-circumzenithal",
             "clean",
         ]
         .iter()
@@ -70,12 +84,12 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowIIIc-cyclic-compressed_clean");
+        builder.compile("rainbowIII-circumzenithal_clean");
     }
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIa-classic", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIII-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -84,12 +98,12 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowIa-classic_clean");
+        builder.compile("rainbowIII-classic_clean");
     }
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIa-cyclic", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIII-compressed", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -98,31 +112,12 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowIa-cyclic_clean");
+        builder.compile("rainbowIII-compressed_clean");
     }
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = [
-            "pqclean",
-            "crypto_sign",
-            "rainbowIa-cyclic-compressed",
-            "clean",
-        ]
-        .iter()
-        .collect();
-        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
-        builder.compile("rainbowIa-cyclic-compressed_clean");
-    }
-
-    {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowVc-classic", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-circumzenithal", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -131,12 +126,12 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowVc-classic_clean");
+        builder.compile("rainbowV-circumzenithal_clean");
     }
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowVc-cyclic", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -145,25 +140,20 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowVc-cyclic_clean");
+        builder.compile("rainbowV-classic_clean");
     }
 
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = [
-            "pqclean",
-            "crypto_sign",
-            "rainbowVc-cyclic-compressed",
-            "clean",
-        ]
-        .iter()
-        .collect();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-compressed", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.include(&common_dir).include(target_dir).files(
             scheme_files
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("rainbowVc-cyclic-compressed_clean");
+        builder.compile("rainbowV-compressed_clean");
     }
 }

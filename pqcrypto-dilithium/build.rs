@@ -55,7 +55,8 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
         }
         builder
             .include(&common_dir)
@@ -110,7 +111,8 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
         }
         builder
             .include(&common_dir)
@@ -138,7 +140,7 @@ fn main() {
     }
     {
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium4", "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium5", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -147,11 +149,11 @@ fn main() {
                 .into_iter()
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
-        builder.compile("dilithium4_clean");
+        builder.compile("dilithium5_clean");
     }
 
     if avx2_enabled && !is_windows && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium4", "avx2"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium5", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
@@ -165,7 +167,8 @@ fn main() {
                 .flag("-mbmi2")
                 .flag("-mbmi")
                 .flag("-maes")
-                .flag("-mpopcnt");
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
         }
         builder
             .include(&common_dir)
@@ -175,7 +178,7 @@ fn main() {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
-            .compile("dilithium4_avx2");
+            .compile("dilithium5_avx2");
 
         let mut builder = cc::Build::new();
         if is_windows {

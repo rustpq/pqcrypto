@@ -16,6 +16,9 @@
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
+//! # Notes
+//! This implementation requires a lot of stack space. You need to specify
+//! ``RUST_MIN_STACK=800000000``, probably.
 
 #![allow(clippy::len_without_is_empty)]
 

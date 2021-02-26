@@ -21,7 +21,7 @@ methods only.
  * ``dilithium3``
     * ``avx2`` (if supported)
     * ``clean`` (default)
- * ``dilithium4``
+ * ``dilithium5``
     * ``avx2`` (if supported)
     * ``clean`` (default)
 

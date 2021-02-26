@@ -16,10 +16,13 @@ Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
  * ``firesaber``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``lightsaber``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``saber``
+    * ``avx2`` (if supported)
     * ``clean`` (default)
 
 

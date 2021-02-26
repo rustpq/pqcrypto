@@ -5,38 +5,38 @@
 //!
 //!  * dilithium2
 //!  * dilithium3
-//!  * dilithium4
+//!  * dilithium5
 // This file has been generated from PQClean.
 // Find the templates in pqcrypto-template
 use libc::c_int;
 
-pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2800;
-pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1184;
-pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES: usize = 2044;
+pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2528;
+pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1312;
+pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES: usize = 2420;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES: usize = 2800;
+pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES: usize = 2528;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1184;
+pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1312;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES: usize = 2044;
-pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 3504;
-pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1472;
-pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES: usize = 2701;
+pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES: usize = 2420;
+pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 4000;
+pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1952;
+pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES: usize = 3293;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES: usize = 3504;
+pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES: usize = 4000;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1472;
+pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1952;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES: usize = 2701;
-pub const PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 3856;
-pub const PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1760;
-pub const PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES: usize = 3366;
+pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES: usize = 3293;
+pub const PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 4864;
+pub const PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 2592;
+pub const PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_BYTES: usize = 4595;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM4_AVX2_CRYPTO_SECRETKEYBYTES: usize = 3856;
+pub const PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES: usize = 4864;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM4_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1760;
+pub const PQCLEAN_DILITHIUM5_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 2592;
 #[cfg(enable_avx2)]
-pub const PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES: usize = 3366;
+pub const PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES: usize = 4595;
 
 #[link(name = "dilithium2_clean")]
 extern "C" {
@@ -180,31 +180,31 @@ extern "C" {
         pk: *const u8,
     ) -> c_int;
 }
-#[link(name = "dilithium4_clean")]
+#[link(name = "dilithium5_clean")]
 extern "C" {
-    pub fn PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    pub fn PQCLEAN_DILITHIUM4_CLEAN_crypto_sign(
+    pub fn PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    pub fn PQCLEAN_DILITHIUM5_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
         msg: *const u8,
         len: usize,
         sk: *const u8,
     ) -> c_int;
-    pub fn PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_open(
+    pub fn PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
         sm: *const u8,
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
-    pub fn PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_signature(
+    pub fn PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
         m: *const u8,
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
-    pub fn PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_verify(
+    pub fn PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
         m: *const u8,
@@ -214,12 +214,12 @@ extern "C" {
 }
 
 #[cfg(enable_avx2)]
-#[link(name = "dilithium4_avx2")]
+#[link(name = "dilithium5_avx2")]
 extern "C" {
     #[cfg(enable_avx2)]
-    pub fn PQCLEAN_DILITHIUM4_AVX2_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    pub fn PQCLEAN_DILITHIUM5_AVX2_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     #[cfg(enable_avx2)]
-    pub fn PQCLEAN_DILITHIUM4_AVX2_crypto_sign(
+    pub fn PQCLEAN_DILITHIUM5_AVX2_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
         msg: *const u8,
@@ -227,7 +227,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
     #[cfg(enable_avx2)]
-    pub fn PQCLEAN_DILITHIUM4_AVX2_crypto_sign_open(
+    pub fn PQCLEAN_DILITHIUM5_AVX2_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
         sm: *const u8,
@@ -235,7 +235,7 @@ extern "C" {
         pk: *const u8,
     ) -> c_int;
     #[cfg(enable_avx2)]
-    pub fn PQCLEAN_DILITHIUM4_AVX2_crypto_sign_signature(
+    pub fn PQCLEAN_DILITHIUM5_AVX2_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
         m: *const u8,
@@ -243,7 +243,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
     #[cfg(enable_avx2)]
-    pub fn PQCLEAN_DILITHIUM4_AVX2_crypto_sign_verify(
+    pub fn PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
         m: *const u8,
@@ -719,7 +719,7 @@ mod test_dilithium3_avx2 {
     }
 }
 #[cfg(test)]
-mod test_dilithium4_clean {
+mod test_dilithium5_clean {
     use super::*;
     use rand::prelude::*;
 
@@ -730,20 +730,20 @@ mod test_dilithium4_clean {
             let mut mlen: usize = rng.gen::<u16>() as usize;
             let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-            let mut pk = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_PUBLICKEYBYTES];
-            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_SECRETKEYBYTES];
-            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES];
-            let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES);
+            let mut pk = vec![0u8; PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_BYTES];
+            let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
             assert_eq!(
                 0,
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
             );
             assert_eq!(
                 0,
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign(
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
@@ -753,10 +753,10 @@ mod test_dilithium4_clean {
             );
             sm.set_len(smlen);
 
-            let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES);
+            let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_BYTES);
             assert_eq!(
                 0,
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_open(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
@@ -770,13 +770,13 @@ mod test_dilithium4_clean {
             // check verification fails with wrong pk
             assert_eq!(
                 0,
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_keypair(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
                 )
             );
             assert!(
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_open(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
@@ -787,7 +787,7 @@ mod test_dilithium4_clean {
 
             assert_eq!(
                 0,
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_signature(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_signature(
                     detached_sig.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
@@ -796,12 +796,12 @@ mod test_dilithium4_clean {
                 )
             );
             assert!(
-                smlen <= PQCLEAN_DILITHIUM4_CLEAN_CRYPTO_BYTES,
+                smlen <= PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_BYTES,
                 "Signed message length should be ≤ CRYPTO_BYTES"
             );
             assert_eq!(
                 0,
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_verify(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
@@ -810,7 +810,7 @@ mod test_dilithium4_clean {
                 )
             );
             assert!(
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_verify(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
@@ -820,7 +820,7 @@ mod test_dilithium4_clean {
             );
 
             assert!(
-                PQCLEAN_DILITHIUM4_CLEAN_crypto_sign_verify(
+                PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
@@ -833,7 +833,7 @@ mod test_dilithium4_clean {
 }
 #[cfg(test)]
 #[cfg(enable_avx2)]
-mod test_dilithium4_avx2 {
+mod test_dilithium5_avx2 {
     use super::*;
     use rand::prelude::*;
 
@@ -851,20 +851,20 @@ mod test_dilithium4_avx2 {
         let mut mlen: usize = rng.gen::<u16>() as usize;
         let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-        let mut pk = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES];
-        let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES);
+        let mut pk = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_PUBLICKEYBYTES];
+        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES];
+        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES];
+        let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES);
         let mut smlen = 0;
         assert_eq!(
             0,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
         );
         assert_eq!(
             0,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign(
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign(
                 sm.as_mut_ptr(),
                 &mut smlen as *mut usize,
                 msg.as_ptr(),
@@ -874,10 +874,10 @@ mod test_dilithium4_avx2 {
         );
         sm.set_len(smlen);
 
-        let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES);
+        let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES);
         assert_eq!(
             0,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_open(
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_open(
                 unpacked_m.as_mut_ptr(),
                 &mut mlen as *mut usize,
                 sm.as_ptr(),
@@ -891,11 +891,11 @@ mod test_dilithium4_avx2 {
         // check verification fails with wrong pk
         assert_eq!(
             0,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
         );
         assert_eq!(
             -1,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_open(
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_open(
                 unpacked_m.as_mut_ptr(),
                 &mut mlen as *mut usize,
                 sm.as_ptr(),
@@ -906,7 +906,7 @@ mod test_dilithium4_avx2 {
 
         assert_eq!(
             0,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_signature(
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_signature(
                 detached_sig.as_mut_ptr(),
                 &mut smlen as *mut usize,
                 msg.as_ptr(),
@@ -915,12 +915,12 @@ mod test_dilithium4_avx2 {
             )
         );
         assert!(
-            smlen <= PQCLEAN_DILITHIUM4_AVX2_CRYPTO_BYTES,
+            smlen <= PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES,
             "Signed message length should be ≤ CRYPTO_BYTES"
         );
         assert_eq!(
             0,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_verify(
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
                 detached_sig.as_ptr(),
                 smlen,
                 msg.as_ptr(),
@@ -930,7 +930,7 @@ mod test_dilithium4_avx2 {
         );
         assert_eq!(
             -1,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_verify(
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
                 detached_sig.as_ptr(),
                 smlen,
                 msg.as_ptr(),
@@ -941,7 +941,7 @@ mod test_dilithium4_avx2 {
 
         assert_eq!(
             -1,
-            PQCLEAN_DILITHIUM4_AVX2_crypto_sign_verify(
+            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
                 detached_sig.as_ptr(),
                 smlen,
                 msg.as_ptr(),

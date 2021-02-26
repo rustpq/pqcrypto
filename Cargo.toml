@@ -6,6 +6,7 @@ members=[
     "pqcrypto-kyber",
     "pqcrypto-frodo",
     "pqcrypto-ntru",
+    "pqcrypto-ntruprime",
     "pqcrypto-saber",
     "pqcrypto-classicmceliece",
     "pqcrypto-hqc",

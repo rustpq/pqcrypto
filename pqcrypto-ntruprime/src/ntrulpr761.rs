@@ -1,10 +1,10 @@
-//! lightsaber
+//! ntrulpr761
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
 //! # Example
 //! ```
-//! use pqcrypto_saber::lightsaber::*;
+//! use pqcrypto_ntruprime::ntrulpr761::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(&ct, &sk);
@@ -73,39 +73,39 @@ macro_rules! simple_struct {
 
 simple_struct!(
     PublicKey,
-    ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_PUBLICKEYBYTES
 );
 simple_struct!(
     SecretKey,
-    ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_SECRETKEYBYTES
 );
 simple_struct!(
     Ciphertext,
-    ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_CIPHERTEXTBYTES
 );
-simple_struct!(SharedSecret, ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_BYTES);
+simple_struct!(SharedSecret, ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_BYTES);
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes for the encapsulated ciphertext
 pub const fn ciphertext_bytes() -> usize {
-    ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_CIPHERTEXTBYTES
 }
 
 /// Get the number of bytes for the shared secret
 pub const fn shared_secret_bytes() -> usize {
-    ffi::PQCLEAN_LIGHTSABER_CLEAN_CRYPTO_BYTES
+    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_BYTES
 }
 
-/// Generate a lightsaber keypair
+/// Generate a ntrulpr761 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
     #[cfg(enable_avx2)]
     {
@@ -122,7 +122,7 @@ fn keypair_portable() -> (PublicKey, SecretKey) {
     let mut sk = SecretKey::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_LIGHTSABER_CLEAN_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
+            ffi::PQCLEAN_NTRULPR761_CLEAN_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr())
         },
         0
     );
@@ -135,13 +135,13 @@ unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
     let mut pk = PublicKey::new();
     let mut sk = SecretKey::new();
     assert_eq!(
-        ffi::PQCLEAN_LIGHTSABER_AVX2_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()),
+        ffi::PQCLEAN_NTRULPR761_AVX2_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()),
         0
     );
     (pk, sk)
 }
 
-/// Encapsulate to a lightsaber public key
+/// Encapsulate to a ntrulpr761 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     #[cfg(enable_avx2)]
     {
@@ -160,7 +160,7 @@ fn encapsulate_portable(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
 
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_LIGHTSABER_CLEAN_crypto_kem_enc(
+            ffi::PQCLEAN_NTRULPR761_CLEAN_crypto_kem_enc(
                 ct.0.as_mut_ptr(),
                 ss.0.as_mut_ptr(),
                 pk.0.as_ptr(),
@@ -180,7 +180,7 @@ unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     let mut ct = Ciphertext::new();
 
     assert_eq!(
-        ffi::PQCLEAN_LIGHTSABER_AVX2_crypto_kem_enc(
+        ffi::PQCLEAN_NTRULPR761_AVX2_crypto_kem_enc(
             ct.0.as_mut_ptr(),
             ss.0.as_mut_ptr(),
             pk.0.as_ptr(),
@@ -191,7 +191,7 @@ unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     (ss, ct)
 }
 
-/// Decapsulate the received lightsaber ciphertext
+/// Decapsulate the received ntrulpr761 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     #[cfg(enable_avx2)]
     {
@@ -207,7 +207,7 @@ fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
         unsafe {
-            ffi::PQCLEAN_LIGHTSABER_CLEAN_crypto_kem_dec(
+            ffi::PQCLEAN_NTRULPR761_CLEAN_crypto_kem_dec(
                 ss.0.as_mut_ptr(),
                 ct.0.as_ptr(),
                 sk.0.as_ptr(),
@@ -224,7 +224,7 @@ fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
 unsafe fn decapsulate_avx2(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     let mut ss = SharedSecret::new();
     assert_eq!(
-        ffi::PQCLEAN_LIGHTSABER_AVX2_crypto_kem_dec(
+        ffi::PQCLEAN_NTRULPR761_AVX2_crypto_kem_dec(
             ss.0.as_mut_ptr(),
             ct.0.as_ptr(),
             sk.0.as_ptr(),

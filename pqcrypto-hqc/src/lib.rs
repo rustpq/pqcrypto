@@ -3,69 +3,38 @@
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
-//! * hqc-128-1-cca2 - leaktime
-//! * hqc-192-1-cca2 - leaktime
-//! * hqc-192-2-cca2 - leaktime
-//! * hqc-256-1-cca2 - leaktime
-//! * hqc-256-2-cca2 - leaktime
-//! * hqc-256-3-cca2 - leaktime
+//! * hqc-rmrs-128 - clean
+//! * hqc-rmrs-192 - clean
+//! * hqc-rmrs-256 - clean
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
-//! # Notes
-//! This implementation is not constant-time! This means that it is not
-//! secure.  This crate may remove the ``leaktime`` implementation at any
-//! point.
 
 #![allow(clippy::len_without_is_empty)]
 
 pub mod ffi;
-pub mod hqc1281cca2;
-pub mod hqc1921cca2;
-pub mod hqc1922cca2;
-pub mod hqc2561cca2;
-pub mod hqc2562cca2;
-pub mod hqc2563cca2;
+pub mod hqcrmrs128;
+pub mod hqcrmrs192;
+pub mod hqcrmrs256;
 
-pub use crate::hqc1281cca2::{
-    ciphertext_bytes as hqc1281cca2_ciphertext_bytes, decapsulate as hqc1281cca2_decapsulate,
-    encapsulate as hqc1281cca2_encapsulate, keypair as hqc1281cca2_keypair,
-    public_key_bytes as hqc1281cca2_public_key_bytes,
-    secret_key_bytes as hqc1281cca2_secret_key_bytes,
-    shared_secret_bytes as hqc1281cca2_shared_secret_bytes,
+pub use crate::hqcrmrs128::{
+    ciphertext_bytes as hqcrmrs128_ciphertext_bytes, decapsulate as hqcrmrs128_decapsulate,
+    encapsulate as hqcrmrs128_encapsulate, keypair as hqcrmrs128_keypair,
+    public_key_bytes as hqcrmrs128_public_key_bytes,
+    secret_key_bytes as hqcrmrs128_secret_key_bytes,
+    shared_secret_bytes as hqcrmrs128_shared_secret_bytes,
 };
-pub use crate::hqc1921cca2::{
-    ciphertext_bytes as hqc1921cca2_ciphertext_bytes, decapsulate as hqc1921cca2_decapsulate,
-    encapsulate as hqc1921cca2_encapsulate, keypair as hqc1921cca2_keypair,
-    public_key_bytes as hqc1921cca2_public_key_bytes,
-    secret_key_bytes as hqc1921cca2_secret_key_bytes,
-    shared_secret_bytes as hqc1921cca2_shared_secret_bytes,
+pub use crate::hqcrmrs192::{
+    ciphertext_bytes as hqcrmrs192_ciphertext_bytes, decapsulate as hqcrmrs192_decapsulate,
+    encapsulate as hqcrmrs192_encapsulate, keypair as hqcrmrs192_keypair,
+    public_key_bytes as hqcrmrs192_public_key_bytes,
+    secret_key_bytes as hqcrmrs192_secret_key_bytes,
+    shared_secret_bytes as hqcrmrs192_shared_secret_bytes,
 };
-pub use crate::hqc1922cca2::{
-    ciphertext_bytes as hqc1922cca2_ciphertext_bytes, decapsulate as hqc1922cca2_decapsulate,
-    encapsulate as hqc1922cca2_encapsulate, keypair as hqc1922cca2_keypair,
-    public_key_bytes as hqc1922cca2_public_key_bytes,
-    secret_key_bytes as hqc1922cca2_secret_key_bytes,
-    shared_secret_bytes as hqc1922cca2_shared_secret_bytes,
-};
-pub use crate::hqc2561cca2::{
-    ciphertext_bytes as hqc2561cca2_ciphertext_bytes, decapsulate as hqc2561cca2_decapsulate,
-    encapsulate as hqc2561cca2_encapsulate, keypair as hqc2561cca2_keypair,
-    public_key_bytes as hqc2561cca2_public_key_bytes,
-    secret_key_bytes as hqc2561cca2_secret_key_bytes,
-    shared_secret_bytes as hqc2561cca2_shared_secret_bytes,
-};
-pub use crate::hqc2562cca2::{
-    ciphertext_bytes as hqc2562cca2_ciphertext_bytes, decapsulate as hqc2562cca2_decapsulate,
-    encapsulate as hqc2562cca2_encapsulate, keypair as hqc2562cca2_keypair,
-    public_key_bytes as hqc2562cca2_public_key_bytes,
-    secret_key_bytes as hqc2562cca2_secret_key_bytes,
-    shared_secret_bytes as hqc2562cca2_shared_secret_bytes,
-};
-pub use crate::hqc2563cca2::{
-    ciphertext_bytes as hqc2563cca2_ciphertext_bytes, decapsulate as hqc2563cca2_decapsulate,
-    encapsulate as hqc2563cca2_encapsulate, keypair as hqc2563cca2_keypair,
-    public_key_bytes as hqc2563cca2_public_key_bytes,
-    secret_key_bytes as hqc2563cca2_secret_key_bytes,
-    shared_secret_bytes as hqc2563cca2_shared_secret_bytes,
+pub use crate::hqcrmrs256::{
+    ciphertext_bytes as hqcrmrs256_ciphertext_bytes, decapsulate as hqcrmrs256_decapsulate,
+    encapsulate as hqcrmrs256_encapsulate, keypair as hqcrmrs256_keypair,
+    public_key_bytes as hqcrmrs256_public_key_bytes,
+    secret_key_bytes as hqcrmrs256_secret_key_bytes,
+    shared_secret_bytes as hqcrmrs256_shared_secret_bytes,
 };
