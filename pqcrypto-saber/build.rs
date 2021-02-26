@@ -40,6 +40,48 @@ fn main() {
         builder.compile("firesaber_clean");
     }
 
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "firesaber", "avx2"]
+            .iter()
+            .collect();
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        let mut builder = cc::Build::new();
+
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
+        }
+        builder
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            )
+            .compile("firesaber_avx2");
+
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
+    }
     {
         let mut builder = cc::Build::new();
         let target_dir: PathBuf = ["pqclean", "crypto_kem", "lightsaber", "clean"]
@@ -54,6 +96,48 @@ fn main() {
         builder.compile("lightsaber_clean");
     }
 
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "lightsaber", "avx2"]
+            .iter()
+            .collect();
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        let mut builder = cc::Build::new();
+
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
+        }
+        builder
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            )
+            .compile("lightsaber_avx2");
+
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
+    }
     {
         let mut builder = cc::Build::new();
         let target_dir: PathBuf = ["pqclean", "crypto_kem", "saber", "clean"].iter().collect();
@@ -64,5 +148,51 @@ fn main() {
                 .map(|p| p.unwrap().to_string_lossy().into_owned()),
         );
         builder.compile("saber_clean");
+    }
+
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", "saber", "avx2"].iter().collect();
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        let mut builder = cc::Build::new();
+
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
+        }
+        builder
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            )
+            .compile("saber_avx2");
+
+        let mut builder = cc::Build::new();
+        if is_windows {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder.flag("-mavx2");
+        };
+        builder
+            .file(
+                &common_dir
+                    .join("keccak4x")
+                    .join("KeccakP-1600-times4-SIMD256.c"),
+            )
+            .compile("keccak4x");
+    }
+
+    // Print enableing flag for AVX2 implementation
+    if avx2_enabled && target_arch == "x86_64" {
+        println!("cargo:rustc-cfg=enable_avx2");
     }
 }

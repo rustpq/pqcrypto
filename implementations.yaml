@@ -5,7 +5,7 @@ traits_version: 0.3.2
 
 kems:
   kyber:
-    version: 0.6.7
+    version: 0.7.0
     avx2_guard: 'avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64"'
     schemes:
       - name: kyber512
@@ -27,7 +27,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   frodo:
-    version: 0.4.5
+    version: 0.4.6
     notes: |
       If you use it via the FFI interface: The ``clean`` implementation of Frodo
       needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
@@ -60,7 +60,7 @@ kems:
         alt_implementations:
           - clean
   ntru:
-    version: 0.5.2
+    version: 0.5.3
     schemes:
       - name: ntruhps2048509
         implementation: clean
@@ -75,7 +75,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   ntruprime:
-    version: 0.0.1
+    version: 0.1.0
     schemes:
       - name: ntrulpr653
         implementation: clean
@@ -96,14 +96,17 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   saber:
-    version: 0.1.5
+    version: 0.1.6
     schemes:
       - name: firesaber
         implementation: clean
+        avx2_implementation: avx2
       - name: lightsaber
         implementation: clean
+        avx2_implementation: avx2
       - name: saber
         implementation: clean
+        avx2_implementation: avx2
   classicmceliece:
     version: 0.1.2
     notes: |
@@ -168,7 +171,7 @@ kems:
         alt_implementations:
           - clean
   hqc:
-    version: 0.0.5
+    version: 0.1.0
     schemes:
       - name: hqc-rmrs-128
         implementation: clean
@@ -183,7 +186,7 @@ kems:
 
 signs:
   dilithium:
-    version: 0.3.4
+    version: 0.4.0
     avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: dilithium2
@@ -196,14 +199,14 @@ signs:
         implementation: clean
         avx2_implementation: avx2
   falcon:
-    version: 0.2.4
+    version: 0.2.5
     schemes:
       - name: falcon-512
         implementation: clean
       - name: falcon-1024
         implementation: clean
   rainbow:
-    version: 0.1.4
+    version: 0.2.0
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.

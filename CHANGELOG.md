@@ -2,11 +2,20 @@
 
 ## 2021-02-26
 
+* Update CRYSTALS-Kyber schemes to Round 3
+* Update FrodoKEM schemes to Round 3
+* Update NTRU schemes to Round 3
 * Add NTRU Prime schemes
-* Change Crystals-Dilithium4 to Crystals-Dilithium5
-* Disable doc-tests for RainbowV because of stack overflow
-* Update HQC to newest schemes
-* Disable AVX2 implementation of HQC-RMRS-256 as there is a bug in "compute_syndromes()" in reed_solomon.c
+* Update Saber schemes to Round 3
+  * Add AVX2 implementation
+* Update HQC schemes to Round 3
+  * Add polynomial carry-less multiplication flag (pclmul) to compile flags
+  * Disable AVX2 implementation of HQC-RMRS-256 as there is a bug in "compute_syndromes()" in reed_solomon.c
+* Update CRYSTALS-Dilithium schemes to Round 3
+* Update Falcon schemes
+* Update Rainbow schemes to Round 3
+  * Disable doc-tests for RainbowV because of stack overflow
+  * Add stack size notification for Rainbow schemes
 * Sort the scheme variants alphabetically in implementations.yaml
 
 ## 2020-08-27

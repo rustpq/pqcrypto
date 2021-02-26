@@ -2,7 +2,7 @@
 name = "pqcrypto-classicmceliece"
 description = "Post-Quantum Key-Encapsulation Mechanism classicmceliece"
 readme = "README.md"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
