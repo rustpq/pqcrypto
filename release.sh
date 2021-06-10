@@ -15,6 +15,7 @@ echo "Waiting a little bit for the pqcrypto-traits package to settle on crates.i
 publish pqcrypto-kyber
 publish pqcrypto-frodo
 publish pqcrypto-ntru
+publish pqcrypto-ntruprime
 publish pqcrypto-hqc
 publish pqcrypto-sphincsplus
 publish pqcrypto-saber
