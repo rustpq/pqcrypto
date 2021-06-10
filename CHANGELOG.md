@@ -1,5 +1,13 @@
 # Changelog
 
+## 2021-06-10
+
+* Add optional `serde` support
+* HQC bugfixes
+  * Issues still remain, disabled AVX2 implementations of HQC for now.
+* McEliece fixes
+* Round 3 parameters for SPHINCS+
+
 ## 2021-02-26
 
 * Update CRYSTALS-Kyber schemes to Round 3
