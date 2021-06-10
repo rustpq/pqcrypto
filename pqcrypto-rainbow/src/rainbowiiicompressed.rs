@@ -213,7 +213,6 @@ fn sign_portable(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     SignedMessage(signed_msg)
 }
 
-#[must_use]
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
@@ -266,7 +265,6 @@ fn detached_sign_portable(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     sig
 }
 
-#[must_use]
 /// Verify the detached signature
 pub fn verify_detached_signature(
     sig: &DetachedSignature,

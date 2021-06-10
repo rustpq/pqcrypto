@@ -252,7 +252,6 @@ unsafe fn sign_avx2(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     SignedMessage(signed_msg)
 }
 
-#[must_use]
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
@@ -358,7 +357,6 @@ unsafe fn detached_sign_avx2(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     sig
 }
 
-#[must_use]
 /// Verify the detached signature
 pub fn verify_detached_signature(
     sig: &DetachedSignature,

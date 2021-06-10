@@ -416,7 +416,6 @@ unsafe fn sign_avx2(msg: &[u8], sk: &SecretKey) -> SignedMessage {
 }
 {% endif %}
 
-#[must_use]
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
@@ -520,7 +519,6 @@ unsafe fn detached_sign_avx2(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
 }
 {% endif %}
 
-#[must_use]
 /// Verify the detached signature
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
