@@ -49,11 +49,10 @@ pub trait DetachedSignature {
 
 /// Errors that may arise when verifying a signature
 #[derive(Clone, Copy, Debug)]
+#[non_exhaustive]
 pub enum VerificationError {
     InvalidSignature,
     UnknownVerificationError,
-    #[doc(hidden)]
-    __NonExhaustive,
 }
 
 impl std::fmt::Display for VerificationError {
@@ -61,9 +60,6 @@ impl std::fmt::Display for VerificationError {
         match self {
             VerificationError::InvalidSignature => write!(f, "error: verification failed"),
             VerificationError::UnknownVerificationError => write!(f, "unknown error"),
-            VerificationError::__NonExhaustive => {
-                unreachable!("Should never have been constructed")
-            }
         }
     }
 }

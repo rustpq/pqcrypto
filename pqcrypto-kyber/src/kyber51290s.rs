@@ -15,6 +15,11 @@
 
 // This file is generated.
 
+#[cfg(feature = "serialization")]
+use serde::{Deserialize, Serialize};
+#[cfg(feature = "serialization")]
+use serde_big_array::BigArray;
+
 use crate::ffi;
 use pqcrypto_traits::kem as primitive;
 use pqcrypto_traits::{Error, Result};
@@ -22,7 +27,10 @@ use pqcrypto_traits::{Error, Result};
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
         #[derive(Clone, Copy)]
-        pub struct $type([u8; $size]);
+        #[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
+        pub struct $type(
+            #[cfg_attr(feature = "serialization", serde(with = "BigArray"))] [u8; $size],
+        );
 
         impl $type {
             /// Generates an uninitialized object

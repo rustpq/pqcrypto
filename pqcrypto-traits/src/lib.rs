@@ -5,14 +5,13 @@ pub type Result<T> = std::result::Result<T, Error>;
 
 /// Errors that may arise when constructing keys or signatures.
 #[derive(Clone, Copy, Debug)]
+#[non_exhaustive]
 pub enum Error {
     BadLength {
         name: &'static str,
         actual: usize,
         expected: usize,
     },
-    #[doc(hidden)]
-    __NonExhaustive,
 }
 
 impl std::fmt::Display for Error {
@@ -27,7 +26,6 @@ impl std::fmt::Display for Error {
                 "error: {} expected {} bytes, got {}",
                 name, actual, expected
             ),
-            Error::__NonExhaustive => unreachable!("Should never be constructed"),
         }
     }
 }

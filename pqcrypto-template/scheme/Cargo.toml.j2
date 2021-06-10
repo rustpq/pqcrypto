@@ -14,10 +14,18 @@ categories = ["cryptography"]
 [dependencies]
 pqcrypto-traits = {path = "../pqcrypto-traits", version = "{{ traits_version }}"}
 libc = "0.2.0"
+serde = { version = "1.0", features = ["derive"], optional = true }
+serde-big-array = { version = "0.3.2", features = ["const-generics"], optional = true }
 
-{% if insecure %}
 [features]
+{% if has_avx2 %}
+default = ["avx2"]
+avx2 = []
+{% else %}
 default = []
+{% endif %}
+serialization = ["serde", "serde-big-array"]
+{% if insecure %}
 cryptographically-insecure = []
 {% endif %}
 
@@ -37,10 +45,4 @@ maintenance = { status = "actively-developed" }
 {% if insecure %}
 [package.metadata.docs.rs]
 features = ["cryptographically-insecure"]
-{% endif %}
-
-{% if has_avx2 %}
-[features]
-default = ["avx2"]
-avx2 = []
 {% endif %}

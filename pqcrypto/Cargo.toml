@@ -28,6 +28,7 @@ pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.5.3", op
 [features]
 default = ["pqcrypto-kyber","pqcrypto-frodo","pqcrypto-ntru","pqcrypto-ntruprime","pqcrypto-saber","pqcrypto-classicmceliece","pqcrypto-hqc","pqcrypto-dilithium","pqcrypto-falcon","pqcrypto-rainbow","pqcrypto-sphincsplus",]
 cryptographically-insecure = []
+serialization = ["pqcrypto-kyber/serialization","pqcrypto-frodo/serialization","pqcrypto-ntru/serialization","pqcrypto-ntruprime/serialization","pqcrypto-saber/serialization","pqcrypto-classicmceliece/serialization","pqcrypto-hqc/serialization","pqcrypto-dilithium/serialization","pqcrypto-falcon/serialization","pqcrypto-rainbow/serialization","pqcrypto-sphincsplus/serialization",]
 
 [badges]
 travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
