@@ -18,12 +18,19 @@ This super-crate contains the following cryptographic algorithms:
 
 {% for (name, props) in kems.items()|list %}
 * [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}}) {% if props.insecure|default(False) %}(insecure, disabled by default){% endif %}
+
 {% endfor %}
 
 ## Signature Schemes
 {% for (name, props) in signs.items()|list %}
 * [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}}) {% if props.insecure|default(False) %}(insecure, disabled by default){% endif %}
+
 {% endfor %}
+
+## Serialization
+
+If you want `serde` support, enable the `serialization` feature.
+You may also enable it for individual algorithms via `pqcrypto-{alg}/serialization`.
 
 ## License
 

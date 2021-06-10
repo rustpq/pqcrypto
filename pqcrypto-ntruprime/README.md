@@ -8,7 +8,11 @@ This project packages Post-Quantum cryptographic algorithms that participate in
 the [NIST PQC standardization effort][nistpqc]. It is currently a collection of
 wrappers around C implementations from the [PQClean][pqclean] project.
 
-# Included implementations from PQClean
+## Serialization
+
+If you want `serde` support, enable the `serialization` feature.
+
+## Included implementations from PQClean
 
 Below is a list of the included schemes and the corresponding implementations
 sourced from [PQClean][pqclean]. The "default" implementation is used in the

@@ -16,6 +16,11 @@
 
 // This file is generated.
 
+#[cfg(feature = "serialization")]
+use serde::{Deserialize, Serialize};
+#[cfg(feature = "serialization")]
+use serde_big_array::BigArray;
+
 use crate::ffi;
 use pqcrypto_traits::sign as primitive;
 use pqcrypto_traits::{Error, Result};
@@ -23,7 +28,10 @@ use pqcrypto_traits::{Error, Result};
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
         #[derive(Clone, Copy)]
-        pub struct $type([u8; $size]);
+        #[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
+        pub struct $type(
+            #[cfg_attr(feature = "serialization", serde(with = "BigArray"))] [u8; $size],
+        );
 
         impl $type {
             /// Generates an uninitialized object
@@ -81,7 +89,12 @@ simple_struct!(
     ffi::PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES
 );
 #[derive(Clone, Copy)]
-pub struct DetachedSignature([u8; ffi::PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES], usize);
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub struct DetachedSignature(
+    #[cfg_attr(feature = "serialization", serde(with = "BigArray"))]
+    [u8; ffi::PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES],
+    usize,
+);
 
 // for internal use
 impl DetachedSignature {
@@ -115,6 +128,7 @@ impl primitive::DetachedSignature for DetachedSignature {
 }
 
 #[derive(Clone)]
+#[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
 pub struct SignedMessage(Vec<u8>);
 impl primitive::SignedMessage for SignedMessage {
     /// Get this object as a byte slice
