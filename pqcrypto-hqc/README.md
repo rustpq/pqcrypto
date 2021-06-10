@@ -20,10 +20,8 @@ Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
  * ``hqc-rmrs-128``
-    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``hqc-rmrs-192``
-    * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``hqc-rmrs-256``
     * ``clean`` (default)
