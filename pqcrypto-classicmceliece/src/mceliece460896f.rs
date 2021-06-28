@@ -113,43 +113,39 @@ pub const fn shared_secret_bytes() -> usize {
     ffi::PQCLEAN_MCELIECE460896F_VEC_CRYPTO_BYTES
 }
 
+macro_rules! gen_keypair {
+    ($variant:ident) => {{
+        let mut pk = PublicKey::new();
+        let mut sk = SecretKey::new();
+        assert_eq!(
+            unsafe { ffi::$variant(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()) },
+            0
+        );
+        (pk, sk)
+    }};
+}
+
 /// Generate a mceliece460896f keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
     #[cfg(enable_avx2)]
     {
         if is_x86_feature_detected!("avx2") {
-            return unsafe { keypair_avx2() };
+            return gen_keypair!(PQCLEAN_MCELIECE460896F_AVX_crypto_kem_keypair);
         }
     }
-    keypair_portable()
+    gen_keypair!(PQCLEAN_MCELIECE460896F_VEC_crypto_kem_keypair)
 }
 
-#[inline]
-fn keypair_portable() -> (PublicKey, SecretKey) {
-    let mut pk = PublicKey::new();
-    let mut sk = SecretKey::new();
-    assert_eq!(
-        unsafe {
-            ffi::PQCLEAN_MCELIECE460896F_VEC_crypto_kem_keypair(
-                pk.0.as_mut_ptr(),
-                sk.0.as_mut_ptr(),
-            )
-        },
-        0
-    );
-    (pk, sk)
-}
-#[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
-#[inline]
-unsafe fn keypair_avx2() -> (PublicKey, SecretKey) {
-    let mut pk = PublicKey::new();
-    let mut sk = SecretKey::new();
-    assert_eq!(
-        ffi::PQCLEAN_MCELIECE460896F_AVX_crypto_kem_keypair(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()),
-        0
-    );
-    (pk, sk)
+macro_rules! encap {
+    ($variant:ident, $pk:ident) => {{
+        let mut ss = SharedSecret::new();
+        let mut ct = Ciphertext::new();
+        assert_eq!(
+            unsafe { ffi::$variant(ct.0.as_mut_ptr(), ss.0.as_mut_ptr(), $pk.0.as_ptr()) },
+            0,
+        );
+        (ss, ct)
+    }};
 }
 
 /// Encapsulate to a mceliece460896f public key
@@ -157,49 +153,21 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     #[cfg(enable_avx2)]
     {
         if is_x86_feature_detected!("avx2") {
-            return unsafe { encapsulate_avx2(pk) };
+            return encap!(PQCLEAN_MCELIECE460896F_AVX_crypto_kem_enc, pk);
         }
     }
-
-    encapsulate_portable(pk)
+    encap!(PQCLEAN_MCELIECE460896F_VEC_crypto_kem_enc, pk)
 }
 
-#[inline]
-fn encapsulate_portable(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    let mut ss = SharedSecret::new();
-    let mut ct = Ciphertext::new();
-
-    assert_eq!(
-        unsafe {
-            ffi::PQCLEAN_MCELIECE460896F_VEC_crypto_kem_enc(
-                ct.0.as_mut_ptr(),
-                ss.0.as_mut_ptr(),
-                pk.0.as_ptr(),
-            )
-        },
-        0,
-    );
-
-    (ss, ct)
-}
-
-#[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
-#[inline]
-unsafe fn encapsulate_avx2(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    let mut ss = SharedSecret::new();
-    let mut ct = Ciphertext::new();
-
-    assert_eq!(
-        ffi::PQCLEAN_MCELIECE460896F_AVX_crypto_kem_enc(
-            ct.0.as_mut_ptr(),
-            ss.0.as_mut_ptr(),
-            pk.0.as_ptr(),
-        ),
-        0,
-    );
-
-    (ss, ct)
+macro_rules! decap {
+    ($variant:ident, $ct:ident, $sk:ident) => {{
+        let mut ss = SharedSecret::new();
+        assert_eq!(
+            unsafe { ffi::$variant(ss.0.as_mut_ptr(), $ct.0.as_ptr(), $sk.0.as_ptr(),) },
+            0
+        );
+        ss
+    }};
 }
 
 /// Decapsulate the received mceliece460896f ciphertext
@@ -207,42 +175,10 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     #[cfg(enable_avx2)]
     {
         if is_x86_feature_detected!("avx2") {
-            return unsafe { decapsulate_avx2(ct, sk) };
+            return decap!(PQCLEAN_MCELIECE460896F_AVX_crypto_kem_dec, ct, sk);
         }
     }
-    decapsulate_portable(ct, sk)
-}
-
-#[inline]
-fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    let mut ss = SharedSecret::new();
-    assert_eq!(
-        unsafe {
-            ffi::PQCLEAN_MCELIECE460896F_VEC_crypto_kem_dec(
-                ss.0.as_mut_ptr(),
-                ct.0.as_ptr(),
-                sk.0.as_ptr(),
-            )
-        },
-        0
-    );
-    ss
-}
-
-#[cfg(enable_avx2)]
-#[target_feature(enable = "avx2")]
-#[inline]
-unsafe fn decapsulate_avx2(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    let mut ss = SharedSecret::new();
-    assert_eq!(
-        ffi::PQCLEAN_MCELIECE460896F_AVX_crypto_kem_dec(
-            ss.0.as_mut_ptr(),
-            ct.0.as_ptr(),
-            sk.0.as_ptr(),
-        ),
-        0
-    );
-    ss
+    decap!(PQCLEAN_MCELIECE460896F_VEC_crypto_kem_dec, ct, sk)
 }
 
 #[cfg(test)]
