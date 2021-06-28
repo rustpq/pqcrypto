@@ -113,70 +113,54 @@ pub const fn shared_secret_bytes() -> usize {
     ffi::PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_BYTES
 }
 
-/// Generate a frodokem976shake keypair
-pub fn keypair() -> (PublicKey, SecretKey) {
-    keypair_portable()
+macro_rules! gen_keypair {
+    ($variant:ident) => {{
+        let mut pk = PublicKey::new();
+        let mut sk = SecretKey::new();
+        assert_eq!(
+            unsafe { ffi::$variant(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()) },
+            0
+        );
+        (pk, sk)
+    }};
 }
 
-#[inline]
-fn keypair_portable() -> (PublicKey, SecretKey) {
-    let mut pk = PublicKey::new();
-    let mut sk = SecretKey::new();
-    assert_eq!(
-        unsafe {
-            ffi::PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_keypair(
-                pk.0.as_mut_ptr(),
-                sk.0.as_mut_ptr(),
-            )
-        },
-        0
-    );
-    (pk, sk)
+/// Generate a frodokem976shake keypair
+pub fn keypair() -> (PublicKey, SecretKey) {
+    gen_keypair!(PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_keypair)
+}
+
+macro_rules! encap {
+    ($variant:ident, $pk:ident) => {{
+        let mut ss = SharedSecret::new();
+        let mut ct = Ciphertext::new();
+        assert_eq!(
+            unsafe { ffi::$variant(ct.0.as_mut_ptr(), ss.0.as_mut_ptr(), $pk.0.as_ptr()) },
+            0,
+        );
+        (ss, ct)
+    }};
 }
 
 /// Encapsulate to a frodokem976shake public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    encapsulate_portable(pk)
+    encap!(PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_enc, pk)
 }
 
-#[inline]
-fn encapsulate_portable(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    let mut ss = SharedSecret::new();
-    let mut ct = Ciphertext::new();
-
-    assert_eq!(
-        unsafe {
-            ffi::PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_enc(
-                ct.0.as_mut_ptr(),
-                ss.0.as_mut_ptr(),
-                pk.0.as_ptr(),
-            )
-        },
-        0,
-    );
-
-    (ss, ct)
+macro_rules! decap {
+    ($variant:ident, $ct:ident, $sk:ident) => {{
+        let mut ss = SharedSecret::new();
+        assert_eq!(
+            unsafe { ffi::$variant(ss.0.as_mut_ptr(), $ct.0.as_ptr(), $sk.0.as_ptr(),) },
+            0
+        );
+        ss
+    }};
 }
 
 /// Decapsulate the received frodokem976shake ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    decapsulate_portable(ct, sk)
-}
-
-#[inline]
-fn decapsulate_portable(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    let mut ss = SharedSecret::new();
-    assert_eq!(
-        unsafe {
-            ffi::PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_dec(
-                ss.0.as_mut_ptr(),
-                ct.0.as_ptr(),
-                sk.0.as_ptr(),
-            )
-        },
-        0
-    );
-    ss
+    decap!(PQCLEAN_FRODOKEM976SHAKE_OPT_crypto_kem_dec, ct, sk)
 }
 
 #[cfg(test)]

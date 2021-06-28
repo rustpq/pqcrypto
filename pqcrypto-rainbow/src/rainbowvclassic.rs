@@ -88,6 +88,7 @@ simple_struct!(
     SecretKey,
     ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES
 );
+
 #[derive(Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct DetachedSignature(
@@ -165,101 +166,117 @@ pub const fn signature_bytes() -> usize {
     ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES
 }
 
-/// Generate a rainbowV-classic keypair
-pub fn keypair() -> (PublicKey, SecretKey) {
-    keypair_portable()
+macro_rules! gen_keypair {
+    ($variant:ident) => {{
+        let mut pk = PublicKey::new();
+        let mut sk = SecretKey::new();
+        assert_eq!(
+            unsafe { ffi::$variant(pk.0.as_mut_ptr(), sk.0.as_mut_ptr()) },
+            0
+        );
+        (pk, sk)
+    }};
 }
 
-#[inline]
-fn keypair_portable() -> (PublicKey, SecretKey) {
-    let mut pk = PublicKey::new();
-    let mut sk = SecretKey::new();
-    assert_eq!(
+/// Generate a rainbowV-classic keypair
+pub fn keypair() -> (PublicKey, SecretKey) {
+    gen_keypair!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_keypair)
+}
+
+macro_rules! gen_signature {
+    ($variant:ident, $msg:ident, $sk:ident) => {{
+        let max_len = $msg.len() + signature_bytes();
+        let mut signed_msg = Vec::with_capacity(max_len);
+        let mut smlen: usize = 0;
         unsafe {
-            ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_keypair(
-                pk.0.as_mut_ptr(),
-                sk.0.as_mut_ptr(),
-            )
-        },
-        0
-    );
-    (pk, sk)
+            ffi::$variant(
+                signed_msg.as_mut_ptr(),
+                &mut smlen as *mut usize,
+                $msg.as_ptr(),
+                $msg.len(),
+                $sk.0.as_ptr(),
+            );
+            debug_assert!(smlen <= max_len, "exceeded vector capacity");
+            signed_msg.set_len(smlen);
+        }
+        SignedMessage(signed_msg)
+    }};
 }
 
 /// Sign the message and return the signed message.
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
-    sign_portable(msg, sk)
+    gen_signature!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign, msg, sk)
 }
 
-#[inline]
-fn sign_portable(msg: &[u8], sk: &SecretKey) -> SignedMessage {
-    let max_len = msg.len() + signature_bytes();
-    let mut signed_msg = Vec::with_capacity(max_len);
-    let mut smlen: usize = 0;
-    unsafe {
-        ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign(
-            signed_msg.as_mut_ptr(),
-            &mut smlen as *mut usize,
-            msg.as_ptr(),
-            msg.len(),
-            sk.0.as_ptr(),
-        );
-        debug_assert!(smlen <= max_len, "exceeded Vec capacity");
-        signed_msg.set_len(smlen);
-    }
-    SignedMessage(signed_msg)
+macro_rules! open_signed {
+    ($variant:ident, $sm:ident, $pk:ident) => {{
+        let mut m: Vec<u8> = Vec::with_capacity($sm.len());
+        let mut mlen: usize = 0;
+        match unsafe {
+            ffi::$variant(
+                m.as_mut_ptr(),
+                &mut mlen as *mut usize,
+                $sm.0.as_ptr(),
+                $sm.len(),
+                $pk.0.as_ptr(),
+            )
+        } {
+            0 => {
+                unsafe { m.set_len(mlen) };
+                Ok(m)
+            }
+            -1 => Err(primitive::VerificationError::InvalidSignature),
+            _ => Err(primitive::VerificationError::UnknownVerificationError),
+        }
+    }};
 }
 
+/// Open the signed message and if verification succeeds return the message
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
 ) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
-    open_portable(sm, pk)
+    open_signed!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_open, sm, pk)
 }
 
-#[inline]
-fn open_portable(
-    sm: &SignedMessage,
-    pk: &PublicKey,
-) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
-    let mut m: Vec<u8> = Vec::with_capacity(sm.len());
-    let mut mlen: usize = 0;
-    match unsafe {
-        ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_open(
-            m.as_mut_ptr(),
-            &mut mlen as *mut usize,
-            sm.0.as_ptr(),
-            sm.len(),
-            pk.0.as_ptr(),
-        )
-    } {
-        0 => {
-            unsafe { m.set_len(mlen) };
-            Ok(m)
+macro_rules! detached_signature {
+    ($variant:ident, $msg:ident, $sk:ident) => {{
+        let mut sig = DetachedSignature::new();
+        unsafe {
+            ffi::$variant(
+                sig.0.as_mut_ptr(),
+                &mut sig.1 as *mut usize,
+                $msg.as_ptr(),
+                $msg.len(),
+                $sk.0.as_ptr(),
+            );
         }
-        -1 => Err(primitive::VerificationError::InvalidSignature),
-        _ => Err(primitive::VerificationError::UnknownVerificationError),
-    }
+        sig
+    }};
 }
 
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
-    detached_sign_portable(msg, sk)
+    detached_signature!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_signature, msg, sk)
 }
 
-#[inline]
-fn detached_sign_portable(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
-    let mut sig = DetachedSignature::new();
-    unsafe {
-        ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_signature(
-            sig.0.as_mut_ptr(),
-            &mut sig.1 as *mut usize,
-            msg.as_ptr(),
-            msg.len(),
-            sk.0.as_ptr(),
-        );
-    }
-    sig
+macro_rules! verify_detached_sig {
+    ($variant:ident, $sig:ident, $msg:ident, $pk:ident) => {{
+        let res = unsafe {
+            ffi::$variant(
+                $sig.0.as_ptr(),
+                $sig.1,
+                $msg.as_ptr(),
+                $msg.len(),
+                $pk.0.as_ptr(),
+            )
+        };
+        match res {
+            0 => Ok(()),
+            -1 => Err(primitive::VerificationError::InvalidSignature),
+            _ => Err(primitive::VerificationError::UnknownVerificationError),
+        }
+    }};
 }
 
 /// Verify the detached signature
@@ -268,28 +285,12 @@ pub fn verify_detached_signature(
     msg: &[u8],
     pk: &PublicKey,
 ) -> std::result::Result<(), primitive::VerificationError> {
-    verify_detached_signature_portable(sig, msg, pk)
-}
-
-fn verify_detached_signature_portable(
-    sig: &DetachedSignature,
-    msg: &[u8],
-    pk: &PublicKey,
-) -> std::result::Result<(), primitive::VerificationError> {
-    let res = unsafe {
-        ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_verify(
-            sig.0.as_ptr(),
-            sig.1,
-            msg.as_ptr(),
-            msg.len(),
-            pk.0.as_ptr(),
-        )
-    };
-    match res {
-        0 => Ok(()),
-        -1 => Err(primitive::VerificationError::InvalidSignature),
-        _ => Err(primitive::VerificationError::UnknownVerificationError),
-    }
+    verify_detached_sig!(
+        PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_verify,
+        sig,
+        msg,
+        pk
+    )
 }
 
 #[cfg(test)]
