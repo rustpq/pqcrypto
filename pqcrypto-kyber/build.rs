@@ -1,11 +1,14 @@
 extern crate cc;
 extern crate glob;
 
+use pqcrypto_build::*;
 use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
+    prepare_build_environment();
+
+    let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,7 +18,7 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    cc::Build::new()
+    new_cc_builder()
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -32,8 +35,8 @@ fn main() {
     let is_macos = target_os == "macos";
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber512", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -46,11 +49,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber512", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -73,7 +76,7 @@ fn main() {
             )
             .compile("kyber512_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -88,8 +91,8 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber768", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -102,11 +105,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber768", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -129,7 +132,7 @@ fn main() {
             )
             .compile("kyber768_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -144,8 +147,8 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber1024", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -158,11 +161,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber1024", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -185,7 +188,7 @@ fn main() {
             )
             .compile("kyber1024_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -200,8 +203,8 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512-90s", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber512-90s", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -214,11 +217,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber512-90s", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber512-90s", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -241,7 +244,7 @@ fn main() {
             )
             .compile("kyber512-90s_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -256,8 +259,8 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768-90s", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber768-90s", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -270,11 +273,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber768-90s", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber768-90s", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -297,7 +300,7 @@ fn main() {
             )
             .compile("kyber768-90s_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -312,8 +315,8 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024-90s", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber1024-90s", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -326,11 +329,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", "kyber1024-90s", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_kem", "kyber1024-90s", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -353,7 +356,7 @@ fn main() {
             )
             .compile("kyber1024-90s_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {

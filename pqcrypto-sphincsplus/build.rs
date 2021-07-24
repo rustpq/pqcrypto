@@ -1,11 +1,14 @@
 extern crate cc;
 extern crate glob;
 
+use pqcrypto_build::*;
 use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
+    prepare_build_environment();
+
+    let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,7 +18,7 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    cc::Build::new()
+    new_cc_builder()
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -32,9 +35,9 @@ fn main() {
     let is_macos = target_os == "macos";
 
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128f-robust",
             "clean",
@@ -52,7 +55,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128f-robust",
             "aesni",
@@ -60,7 +63,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -83,7 +86,7 @@ fn main() {
             )
             .compile("sphincs-haraka-128f-robust_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -98,9 +101,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128f-simple",
             "clean",
@@ -118,7 +121,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128f-simple",
             "aesni",
@@ -126,7 +129,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -149,7 +152,7 @@ fn main() {
             )
             .compile("sphincs-haraka-128f-simple_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -164,9 +167,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128s-robust",
             "clean",
@@ -184,7 +187,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128s-robust",
             "aesni",
@@ -192,7 +195,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -215,7 +218,7 @@ fn main() {
             )
             .compile("sphincs-haraka-128s-robust_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -230,9 +233,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128s-simple",
             "clean",
@@ -250,7 +253,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-128s-simple",
             "aesni",
@@ -258,7 +261,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -281,7 +284,7 @@ fn main() {
             )
             .compile("sphincs-haraka-128s-simple_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -296,9 +299,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192f-robust",
             "clean",
@@ -316,7 +319,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192f-robust",
             "aesni",
@@ -324,7 +327,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -347,7 +350,7 @@ fn main() {
             )
             .compile("sphincs-haraka-192f-robust_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -362,9 +365,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192f-simple",
             "clean",
@@ -382,7 +385,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192f-simple",
             "aesni",
@@ -390,7 +393,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -413,7 +416,7 @@ fn main() {
             )
             .compile("sphincs-haraka-192f-simple_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -428,9 +431,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192s-robust",
             "clean",
@@ -448,7 +451,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192s-robust",
             "aesni",
@@ -456,7 +459,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -479,7 +482,7 @@ fn main() {
             )
             .compile("sphincs-haraka-192s-robust_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -494,9 +497,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192s-simple",
             "clean",
@@ -514,7 +517,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-192s-simple",
             "aesni",
@@ -522,7 +525,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -545,7 +548,7 @@ fn main() {
             )
             .compile("sphincs-haraka-192s-simple_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -560,9 +563,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256f-robust",
             "clean",
@@ -580,7 +583,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256f-robust",
             "aesni",
@@ -588,7 +591,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -611,7 +614,7 @@ fn main() {
             )
             .compile("sphincs-haraka-256f-robust_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -626,9 +629,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256f-simple",
             "clean",
@@ -646,7 +649,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256f-simple",
             "aesni",
@@ -654,7 +657,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -677,7 +680,7 @@ fn main() {
             )
             .compile("sphincs-haraka-256f-simple_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -692,9 +695,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256s-robust",
             "clean",
@@ -712,7 +715,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256s-robust",
             "aesni",
@@ -720,7 +723,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -743,7 +746,7 @@ fn main() {
             )
             .compile("sphincs-haraka-256s-robust_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -758,9 +761,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256s-simple",
             "clean",
@@ -778,7 +781,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-haraka-256s-simple",
             "aesni",
@@ -786,7 +789,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -809,7 +812,7 @@ fn main() {
             )
             .compile("sphincs-haraka-256s-simple_aesni");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -824,9 +827,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128f-robust",
             "clean",
@@ -844,7 +847,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128f-robust",
             "avx2",
@@ -852,7 +855,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -875,7 +878,7 @@ fn main() {
             )
             .compile("sphincs-shake256-128f-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -890,9 +893,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128f-simple",
             "clean",
@@ -910,7 +913,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128f-simple",
             "avx2",
@@ -918,7 +921,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -941,7 +944,7 @@ fn main() {
             )
             .compile("sphincs-shake256-128f-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -956,9 +959,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128s-robust",
             "clean",
@@ -976,7 +979,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128s-robust",
             "avx2",
@@ -984,7 +987,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1007,7 +1010,7 @@ fn main() {
             )
             .compile("sphincs-shake256-128s-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1022,9 +1025,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128s-simple",
             "clean",
@@ -1042,7 +1045,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-128s-simple",
             "avx2",
@@ -1050,7 +1053,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1073,7 +1076,7 @@ fn main() {
             )
             .compile("sphincs-shake256-128s-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1088,9 +1091,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192f-robust",
             "clean",
@@ -1108,7 +1111,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192f-robust",
             "avx2",
@@ -1116,7 +1119,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1139,7 +1142,7 @@ fn main() {
             )
             .compile("sphincs-shake256-192f-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1154,9 +1157,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192f-simple",
             "clean",
@@ -1174,7 +1177,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192f-simple",
             "avx2",
@@ -1182,7 +1185,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1205,7 +1208,7 @@ fn main() {
             )
             .compile("sphincs-shake256-192f-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1220,9 +1223,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192s-robust",
             "clean",
@@ -1240,7 +1243,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192s-robust",
             "avx2",
@@ -1248,7 +1251,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1271,7 +1274,7 @@ fn main() {
             )
             .compile("sphincs-shake256-192s-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1286,9 +1289,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192s-simple",
             "clean",
@@ -1306,7 +1309,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-192s-simple",
             "avx2",
@@ -1314,7 +1317,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1337,7 +1340,7 @@ fn main() {
             )
             .compile("sphincs-shake256-192s-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1352,9 +1355,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256f-robust",
             "clean",
@@ -1372,7 +1375,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256f-robust",
             "avx2",
@@ -1380,7 +1383,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1403,7 +1406,7 @@ fn main() {
             )
             .compile("sphincs-shake256-256f-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1418,9 +1421,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256f-simple",
             "clean",
@@ -1438,7 +1441,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256f-simple",
             "avx2",
@@ -1446,7 +1449,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1469,7 +1472,7 @@ fn main() {
             )
             .compile("sphincs-shake256-256f-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1484,9 +1487,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256s-robust",
             "clean",
@@ -1504,7 +1507,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256s-robust",
             "avx2",
@@ -1512,7 +1515,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1535,7 +1538,7 @@ fn main() {
             )
             .compile("sphincs-shake256-256s-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1550,9 +1553,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256s-simple",
             "clean",
@@ -1570,7 +1573,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-shake256-256s-simple",
             "avx2",
@@ -1578,7 +1581,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1601,7 +1604,7 @@ fn main() {
             )
             .compile("sphincs-shake256-256s-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1616,9 +1619,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128f-robust",
             "clean",
@@ -1636,7 +1639,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128f-robust",
             "avx2",
@@ -1644,7 +1647,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1667,7 +1670,7 @@ fn main() {
             )
             .compile("sphincs-sha256-128f-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1682,9 +1685,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128f-simple",
             "clean",
@@ -1702,7 +1705,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128f-simple",
             "avx2",
@@ -1710,7 +1713,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1733,7 +1736,7 @@ fn main() {
             )
             .compile("sphincs-sha256-128f-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1748,9 +1751,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128s-robust",
             "clean",
@@ -1768,7 +1771,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128s-robust",
             "avx2",
@@ -1776,7 +1779,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1799,7 +1802,7 @@ fn main() {
             )
             .compile("sphincs-sha256-128s-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1814,9 +1817,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128s-simple",
             "clean",
@@ -1834,7 +1837,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-128s-simple",
             "avx2",
@@ -1842,7 +1845,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1865,7 +1868,7 @@ fn main() {
             )
             .compile("sphincs-sha256-128s-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1880,9 +1883,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192f-robust",
             "clean",
@@ -1900,7 +1903,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192f-robust",
             "avx2",
@@ -1908,7 +1911,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1931,7 +1934,7 @@ fn main() {
             )
             .compile("sphincs-sha256-192f-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -1946,9 +1949,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192f-simple",
             "clean",
@@ -1966,7 +1969,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192f-simple",
             "avx2",
@@ -1974,7 +1977,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -1997,7 +2000,7 @@ fn main() {
             )
             .compile("sphincs-sha256-192f-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -2012,9 +2015,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192s-robust",
             "clean",
@@ -2032,7 +2035,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192s-robust",
             "avx2",
@@ -2040,7 +2043,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -2063,7 +2066,7 @@ fn main() {
             )
             .compile("sphincs-sha256-192s-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -2078,9 +2081,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192s-simple",
             "clean",
@@ -2098,7 +2101,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-192s-simple",
             "avx2",
@@ -2106,7 +2109,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -2129,7 +2132,7 @@ fn main() {
             )
             .compile("sphincs-sha256-192s-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -2144,9 +2147,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256f-robust",
             "clean",
@@ -2164,7 +2167,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256f-robust",
             "avx2",
@@ -2172,7 +2175,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -2195,7 +2198,7 @@ fn main() {
             )
             .compile("sphincs-sha256-256f-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -2210,9 +2213,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256f-simple",
             "clean",
@@ -2230,7 +2233,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256f-simple",
             "avx2",
@@ -2238,7 +2241,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -2261,7 +2264,7 @@ fn main() {
             )
             .compile("sphincs-sha256-256f-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -2276,9 +2279,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256s-robust",
             "clean",
@@ -2296,7 +2299,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256s-robust",
             "avx2",
@@ -2304,7 +2307,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -2327,7 +2330,7 @@ fn main() {
             )
             .compile("sphincs-sha256-256s-robust_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -2342,9 +2345,9 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256s-simple",
             "clean",
@@ -2362,7 +2365,7 @@ fn main() {
 
     if avx2_enabled && target_arch == "x86_64" {
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "sphincs-sha256-256s-simple",
             "avx2",
@@ -2370,7 +2373,7 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -2393,7 +2396,7 @@ fn main() {
             )
             .compile("sphincs-sha256-256s-simple_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {

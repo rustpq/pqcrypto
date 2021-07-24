@@ -1,11 +1,14 @@
 extern crate cc;
 extern crate glob;
 
+use pqcrypto_build::*;
 use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
+    prepare_build_environment();
+
+    let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,7 +18,7 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    cc::Build::new()
+    new_cc_builder()
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -32,8 +35,8 @@ fn main() {
     let is_macos = target_os == "macos";
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium2", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "dilithium2", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -46,11 +49,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium2", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "dilithium2", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -73,7 +76,7 @@ fn main() {
             )
             .compile("dilithium2_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -88,8 +91,8 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium3", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "dilithium3", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -102,11 +105,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium3", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "dilithium3", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -129,7 +132,7 @@ fn main() {
             )
             .compile("dilithium3_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {
@@ -144,8 +147,8 @@ fn main() {
             .compile("keccak4x");
     }
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium5", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "dilithium5", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -158,11 +161,11 @@ fn main() {
     }
 
     if avx2_enabled && !is_windows && target_arch == "x86_64" {
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "dilithium5", "avx2"]
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "dilithium5", "avx2"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -185,7 +188,7 @@ fn main() {
             )
             .compile("dilithium5_avx2");
 
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         if is_windows {
             builder.flag("/arch:AVX2");
         } else {

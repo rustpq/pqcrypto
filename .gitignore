@@ -1,5 +1,7 @@
 /target
 **/*.rs.bk
+pqclean
+pqclean-wasi
 
 /target
 **/*.rs.bk

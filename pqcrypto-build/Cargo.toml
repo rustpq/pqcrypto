@@ -1,0 +1,15 @@
+[package]
+name = "pqcrypto-build"
+version = "0.1.0"
+authors = ["Thom Wiggers <thom@thomwiggers.nl>", "Johnathan Sharratt <johnathan.sharratt@gmail.com"]
+edition = "2018"
+description = "Shared build tools for post-quantum cryptographic primitives"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/rustpq/"
+repository = "https://github.com/rustpq/pqclean/"
+keywords = ["cryptography", "post-quantum", "security"]
+categories = ["cryptography"]
+
+[dependencies]
+cc = { version = "1.0", features = ["parallel"] }
+glob = "0.3.0"

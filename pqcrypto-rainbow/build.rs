@@ -1,11 +1,14 @@
 extern crate cc;
 extern crate glob;
 
+use pqcrypto_build::*;
 use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
+    prepare_build_environment();
+
+    let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -15,7 +18,7 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    cc::Build::new()
+    new_cc_builder()
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -32,10 +35,15 @@ fn main() {
     let is_macos = target_os == "macos";
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-circumzenithal", "clean"]
-            .iter()
-            .collect();
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [
+            pqclean_path(),
+            "crypto_sign",
+            "rainbowI-circumzenithal",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.include(&common_dir).include(target_dir).files(
             scheme_files
@@ -46,8 +54,8 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-classic", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "rainbowI-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -60,10 +68,15 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-compressed", "clean"]
-            .iter()
-            .collect();
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [
+            pqclean_path(),
+            "crypto_sign",
+            "rainbowI-compressed",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.include(&common_dir).include(target_dir).files(
             scheme_files
@@ -74,9 +87,9 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
         let target_dir: PathBuf = [
-            "pqclean",
+            pqclean_path(),
             "crypto_sign",
             "rainbowIII-circumzenithal",
             "clean",
@@ -93,8 +106,8 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIII-classic", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "rainbowIII-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -107,10 +120,15 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIII-compressed", "clean"]
-            .iter()
-            .collect();
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [
+            pqclean_path(),
+            "crypto_sign",
+            "rainbowIII-compressed",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.include(&common_dir).include(target_dir).files(
             scheme_files
@@ -121,10 +139,15 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-circumzenithal", "clean"]
-            .iter()
-            .collect();
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [
+            pqclean_path(),
+            "crypto_sign",
+            "rainbowV-circumzenithal",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.include(&common_dir).include(target_dir).files(
             scheme_files
@@ -135,8 +158,8 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-classic", "clean"]
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "rainbowV-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
@@ -149,10 +172,15 @@ fn main() {
     }
 
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-compressed", "clean"]
-            .iter()
-            .collect();
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [
+            pqclean_path(),
+            "crypto_sign",
+            "rainbowV-compressed",
+            "clean",
+        ]
+        .iter()
+        .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.include(&common_dir).include(target_dir).files(
             scheme_files

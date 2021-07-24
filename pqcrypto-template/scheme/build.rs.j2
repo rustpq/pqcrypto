@@ -3,11 +3,14 @@ extern crate glob;
 
 use std::env;
 use std::path::PathBuf;
+use pqcrypto_build::*;
 
 {% set globals = namespace(have_avx2=False) %}
 
 fn main() {
-    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
+    prepare_build_environment();
+    
+    let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
         common_dir.join("aes.c"),
@@ -17,7 +20,7 @@ fn main() {
         common_dir.join("sp800-185.c"),
     ];
 
-    cc::Build::new()
+    new_cc_builder()
         .include(&common_dir)
         .files(common_files.into_iter())
         .compile("pqclean_common");
@@ -36,8 +39,8 @@ fn main() {
     {% for scheme in schemes %}
     {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
     {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
+        let mut builder = new_cc_builder();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         builder.include(&common_dir)
                .include(target_dir)
@@ -51,9 +54,9 @@ fn main() {
     {% set implementation = scheme.avx2_implementation %}
     {% set globals.have_avx2 = True %}
     if {{ avx2_guard }} {
-        let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
+        let target_dir: PathBuf = [pqclean_path(), "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
+        let mut builder = new_cc_builder();
 
         if is_windows {
             builder.flag("/arch:AVX2");
@@ -71,7 +74,7 @@ fn main() {
             .compile("{{ scheme.name }}_{{ implementation }}");
 
 
-	let mut builder =  cc::Build::new();
+	let mut builder =  new_cc_builder();
         if is_windows {
                 builder.flag("/arch:AVX2");
         } else  {
