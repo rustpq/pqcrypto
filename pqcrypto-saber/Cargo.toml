@@ -2,7 +2,7 @@
 name = "pqcrypto-saber"
 description = "Post-Quantum Key-Encapsulation Mechanism saber"
 readme = "README.md"
-version = "0.1.8"
+version = "0.1.7"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
