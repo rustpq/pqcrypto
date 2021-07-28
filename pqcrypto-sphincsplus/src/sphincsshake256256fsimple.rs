@@ -138,7 +138,7 @@ impl primitive::SignedMessage for SignedMessage {
     /// Get this object as a byte slice
     #[inline]
     fn as_bytes(&self) -> &[u8] {
-        &self.0.as_slice()
+        self.0.as_slice()
     }
 
     /// Construct this object from a byte slice
