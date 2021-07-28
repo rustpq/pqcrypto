@@ -3,7 +3,6 @@ extern crate glob;
 
 use std::env;
 use std::path::{Path, PathBuf};
-use std::{fs::File, io::Write};
 
 fn main() {
     let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
