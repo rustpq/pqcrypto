@@ -13,6 +13,10 @@
 // Find the templates in pqcrypto-template
 use libc::c_int;
 
+// ensures we link correctly
+#[allow(unused_imports)]
+use pqcrypto_internals::*;
+
 pub const PQCLEAN_NTRULPR653_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1125;
 pub const PQCLEAN_NTRULPR653_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 897;
 pub const PQCLEAN_NTRULPR653_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1025;

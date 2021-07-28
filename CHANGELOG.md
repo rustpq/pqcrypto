@@ -5,6 +5,7 @@
 * Falcon updates: remove inline functions from headerfiles
 * Enable Falcon AVX2
 * NTRU Prime updates
+* Move common files into `pqcrypto-internals` and out of individual libs
 
 ## 2021-06-10
 

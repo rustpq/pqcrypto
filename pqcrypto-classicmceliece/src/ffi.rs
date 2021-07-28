@@ -17,6 +17,10 @@
 // Find the templates in pqcrypto-template
 use libc::c_int;
 
+// ensures we link correctly
+#[allow(unused_imports)]
+use pqcrypto_internals::*;
+
 pub const PQCLEAN_MCELIECE348864_VEC_CRYPTO_SECRETKEYBYTES: usize = 6452;
 pub const PQCLEAN_MCELIECE348864_VEC_CRYPTO_PUBLICKEYBYTES: usize = 261120;
 pub const PQCLEAN_MCELIECE348864_VEC_CRYPTO_CIPHERTEXTBYTES: usize = 128;
