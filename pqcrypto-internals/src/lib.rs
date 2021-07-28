@@ -1,8 +1,5 @@
 use core::slice;
 
-use getrandom;
-use libc;
-
 /// Get random bytes; exposed for PQClean implementations.
 ///
 /// # Safety
