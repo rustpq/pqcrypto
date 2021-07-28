@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.14.0
+pqcrypto_version: 0.14.1
 traits_version: 0.3.2
 
 kems:
@@ -75,7 +75,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   ntruprime:
-    version: 0.1.1
+    version: 0.1.2
     schemes:
       - name: ntrulpr653
         implementation: clean
@@ -199,12 +199,14 @@ signs:
         implementation: clean
         avx2_implementation: avx2
   falcon:
-    version: 0.2.6
+    version: 0.2.7
     schemes:
       - name: falcon-512
         implementation: clean
+        avx2_implementation: avx2
       - name: falcon-1024
         implementation: clean
+        avx2_implementation: avx2
   rainbow:
     version: 0.2.1
     notes: |

@@ -180,6 +180,12 @@ macro_rules! gen_keypair {
 
 /// Generate a falcon-512 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return gen_keypair!(PQCLEAN_FALCON512_AVX2_crypto_sign_keypair);
+        }
+    }
     gen_keypair!(PQCLEAN_FALCON512_CLEAN_crypto_sign_keypair)
 }
 
@@ -205,6 +211,12 @@ macro_rules! gen_signature {
 
 /// Sign the message and return the signed message.
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return gen_signature!(PQCLEAN_FALCON512_AVX2_crypto_sign, msg, sk);
+        }
+    }
     gen_signature!(PQCLEAN_FALCON512_CLEAN_crypto_sign, msg, sk)
 }
 
@@ -236,6 +248,12 @@ pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
 ) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return open_signed!(PQCLEAN_FALCON512_AVX2_crypto_sign_open, sm, pk);
+        }
+    }
     open_signed!(PQCLEAN_FALCON512_CLEAN_crypto_sign_open, sm, pk)
 }
 
@@ -257,6 +275,12 @@ macro_rules! detached_signature {
 
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return detached_signature!(PQCLEAN_FALCON512_AVX2_crypto_sign_signature, msg, sk);
+        }
+    }
     detached_signature!(PQCLEAN_FALCON512_CLEAN_crypto_sign_signature, msg, sk)
 }
 
@@ -285,6 +309,12 @@ pub fn verify_detached_signature(
     msg: &[u8],
     pk: &PublicKey,
 ) -> std::result::Result<(), primitive::VerificationError> {
+    #[cfg(enable_avx2)]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return verify_detached_sig!(PQCLEAN_FALCON512_AVX2_crypto_sign_verify, sig, msg, pk);
+        }
+    }
     verify_detached_sig!(PQCLEAN_FALCON512_CLEAN_crypto_sign_verify, sig, msg, pk)
 }
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2021-07-28
+
+* Falcon updates: remove inline functions from headerfiles
+* Enable Falcon AVX2
+* NTRU Prime updates
+
 ## 2021-06-10
 
 * Add optional `serde` support
