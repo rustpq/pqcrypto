@@ -10,43 +10,42 @@
 #define SHA3_384_RATE 104
 #define SHA3_512_RATE 72
 
-
 #define PQC_SHAKEINCCTX_BYTES (sizeof(uint64_t)*26)
 #define PQC_SHAKECTX_BYTES (sizeof(uint64_t)*25)
 
 // Context for incremental API
 typedef struct {
-    uint64_t* ctx;
+    uint64_t ctx[26];
 } shake128incctx;
 
 // Context for non-incremental API
 typedef struct {
-    uint64_t* ctx;
+    uint64_t ctx[25];
 } shake128ctx;
 
 // Context for incremental API
 typedef struct {
-    uint64_t* ctx;
+    uint64_t ctx[26];
 } shake256incctx;
 
 // Context for non-incremental API
 typedef struct {
-    uint64_t* ctx;
+    uint64_t ctx[25];
 } shake256ctx;
 
 // Context for incremental API
 typedef struct {
-    uint64_t* ctx;
+    uint64_t ctx[26];
 } sha3_256incctx;
 
 // Context for incremental API
 typedef struct {
-    uint64_t* ctx;
+    uint64_t ctx[26];
 } sha3_384incctx;
 
 // Context for incremental API
 typedef struct {
-    uint64_t* ctx;
+    uint64_t ctx[26];
 } sha3_512incctx;
 
 /* Initialize the state and absorb the provided input.
