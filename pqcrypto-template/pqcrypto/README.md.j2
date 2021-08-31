@@ -19,14 +19,14 @@ This super-crate contains the following cryptographic algorithms:
 ## Key-Encapsulation Mechanisms
 
 {% for (name, props) in kems.items()|list %}
-* [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}}) {% if props.insecure|default(False) %}(insecure, disabled by default){% endif %}
+* [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}}){% if props.insecure|default(False) %}(insecure, disabled by default){% endif %}
 
 {% endfor %}
 
 ## Signature Schemes
 
 {% for (name, props) in signs.items()|list %}
-* [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}}) {% if props.insecure|default(False) %}(insecure, disabled by default){% endif %}
+* [``pqcrypto-{{ name }}``](https://crates.io/crates/pqcrypto-{{name}}){% if props.insecure|default(False) %}(insecure, disabled by default){% endif %}
 
 {% endfor %}
 
