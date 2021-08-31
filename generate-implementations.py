@@ -69,12 +69,6 @@ def generate_scheme(name, type, properties):
                    target_is_directory=True)
     except FileExistsError:
         pass
-    try:
-        os.symlink(os.path.join('..', 'wasi-sysroot'),
-                   os.path.join(target_dir, 'wasi-sysroot'),
-                   target_is_directory=True)
-    except FileExistsError:
-        pass
 
     has_avx2 = False
     for scheme in properties['schemes']:

@@ -28,10 +28,10 @@ This super-crate contains the following cryptographic algorithms:
 
 ## Signature Schemes
 
-* [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium)
-* [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon)
-* [``pqcrypto-rainbow``](https://crates.io/crates/pqcrypto-rainbow)
-* [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus)
+* [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium) 
+* [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon) 
+* [``pqcrypto-rainbow``](https://crates.io/crates/pqcrypto-rainbow) 
+* [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus) 
 
 ## Serialization
 

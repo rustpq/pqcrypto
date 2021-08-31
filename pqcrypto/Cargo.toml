@@ -25,9 +25,6 @@ pqcrypto-falcon = { path = "../pqcrypto-falcon", version = "0.2.6", optional = t
 pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.2.1", optional = true }
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.6.0", optional = true }
 
-[build-dependencies]
-pqcrypto-build = { path = "../pqcrypto-build", version = "0.1.0" }
-
 [features]
 default = ["pqcrypto-kyber","pqcrypto-frodo","pqcrypto-ntru","pqcrypto-ntruprime","pqcrypto-saber","pqcrypto-classicmceliece","pqcrypto-hqc","pqcrypto-dilithium","pqcrypto-falcon","pqcrypto-rainbow","pqcrypto-sphincsplus",]
 cryptographically-insecure = []
