@@ -11,6 +11,9 @@ repository = "https://github.com/rustpq/pqcrypto/"
 keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
+[build-dependencies]
+pqcrypto-build = { path = "../pqcrypto-build", version = "0.1.0" }
+
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.2" }
 pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.7.1", optional = true }

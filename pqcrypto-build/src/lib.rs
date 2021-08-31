@@ -7,11 +7,11 @@ pub fn new_cc_builder() -> cc::Build {
 
     let mut builder = cc::Build::new();
     if target_arch == "wasm32" {
-        if Path::new("wasi-sysroot").exists() == false {
-            eprintln!("failed to find wasi-sysroot");
+        if Path::new("../../wasi-sysroot").exists() == false {
+            eprintln!("failed to find wasi-sysroot in parent directory");
             std::process::exit(111);
         }
-        builder.flag("--sysroot=wasi-sysroot");
+        builder.flag("--sysroot=../../wasi-sysroot");
     }
     builder
 }

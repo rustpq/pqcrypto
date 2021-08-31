@@ -11,6 +11,9 @@ repository = "https://github.com/rustpq/pqcrypto/"
 keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
+[build-dependencies]
+pqcrypto-build = { path = "../pqcrypto-build", version = "0.1.0" }
+
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "{{ traits_version }}" }
 {% for (name, props) in kems.items()|list + signs.items()|list %}
