@@ -1,5 +1,6 @@
+//! Supporting Traits for the pqcrypto crates.
+
 #![no_std]
-/// Supporting Traits for the pqcrypto crates.
 
 #[cfg(feature = "std")]
 extern crate std;
