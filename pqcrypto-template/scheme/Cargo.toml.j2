@@ -12,18 +12,19 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
-pqcrypto-traits = {path = "../pqcrypto-traits", version = "{{ traits_version }}"}
+pqcrypto-traits = {path = "../pqcrypto-traits", version = "{{ traits_version }}", default-features = false}
 libc = "0.2.0"
 serde = { version = "1.0", features = ["derive"], optional = true }
 serde-big-array = { version = "0.3.2", features = ["const-generics"], optional = true }
 
 [features]
 {% if has_avx2 %}
-default = ["avx2"]
+default = ["avx2", "std"]
 avx2 = []
 {% else %}
-default = []
+default = ["std"]
 {% endif %}
+std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
 {% if insecure %}
 cryptographically-insecure = []

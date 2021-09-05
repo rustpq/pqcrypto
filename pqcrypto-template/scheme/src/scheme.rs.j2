@@ -381,7 +381,7 @@ macro_rules! open_signed {
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey
-) -> std::result::Result<Vec<u8>,primitive::VerificationError> {
+) -> core::result::Result<Vec<u8>,primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
     {
@@ -452,7 +452,7 @@ macro_rules! verify_detached_sig {
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
-pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> std::result::Result<(), primitive::VerificationError> {
+pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> core::result::Result<(), primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
     #[cfg(enable_avx2)]
     {
