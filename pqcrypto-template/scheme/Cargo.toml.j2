@@ -20,7 +20,7 @@ serde-big-array = { version = "0.3.2", features = ["const-generics"], optional =
 [features]
 {% if has_avx2 %}
 default = ["avx2", "std"]
-avx2 = []
+avx2 = ["std"]
 {% else %}
 default = ["std"]
 {% endif %}

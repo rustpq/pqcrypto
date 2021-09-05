@@ -39,6 +39,7 @@ use pqcrypto_traits::{Result, Error};
 {% if type == "kem" %}
 use pqcrypto_traits::kem as primitive;
 {% else %}
+use alloc::vec::Vec;
 use pqcrypto_traits::sign as primitive;
 {% endif %}
 
@@ -149,117 +150,26 @@ impl primitive::DetachedSignature for DetachedSignature {
     }
 }
 
-#[cfg(feature = "std")]
-pub use attached_sig::*;
-
-#[cfg(feature = "std")]
-mod attached_sig {
-    use super::*;
-    use std::vec::Vec;
-
-    #[derive(Clone)]
-    #[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
-    pub struct SignedMessage(Vec<u8>);
-    impl primitive::SignedMessage for SignedMessage {
-        /// Get this object as a byte slice
-        #[inline]
-        fn as_bytes(&self) -> &[u8] {
-            &self.0.as_slice()
-        }
-
-        /// Construct this object from a byte slice
-        #[inline]
-        fn from_bytes(bytes: &[u8]) -> Result<Self> {
-            Ok(SignedMessage(bytes.to_vec()))
-        }
+#[derive(Clone)]
+#[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
+pub struct SignedMessage(Vec<u8>);
+impl primitive::SignedMessage for SignedMessage {
+    /// Get this object as a byte slice
+    #[inline]
+    fn as_bytes(&self) -> &[u8] {
+        &self.0.as_slice()
     }
 
-    impl SignedMessage {
-        pub fn len(&self) -> usize {
-            self.0.len()
-        }
+    /// Construct this object from a byte slice
+    #[inline]
+    fn from_bytes(bytes: &[u8]) -> Result<Self> {
+        Ok(SignedMessage(bytes.to_vec()))
     }
+}
 
-    macro_rules! gen_signature {
-        ($variant:ident, $msg:ident, $sk:ident) => {
-        {
-            let max_len = $msg.len() + signature_bytes();
-            let mut signed_msg = Vec::with_capacity(max_len);
-            let mut smlen: usize = 0;
-            unsafe {
-                ffi::$variant(
-                    signed_msg.as_mut_ptr(),
-                    &mut smlen as *mut usize,
-                    $msg.as_ptr(),
-                    $msg.len(),
-                    $sk.0.as_ptr(),
-                );
-                debug_assert!(smlen <= max_len, "exceeded vector capacity");
-                signed_msg.set_len(smlen);
-            }
-            SignedMessage(signed_msg)
-        }
-        };
-    }
-
-    /// Sign the message and return the signed message.
-    {% if insecure %}
-    #[deprecated(note = "Insecure cryptography, do not use in production")]
-    {% endif %}
-    pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
-        {% if 'avx2_implementation' in scheme %}
-        #[cfg(enable_avx2)]
-        {
-            if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
-                return gen_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign, msg, sk);
-            }
-        }
-        {% endif %}
-        gen_signature!(PQCLEAN_{{ NS_NAME }}_crypto_sign, msg, sk)
-    }
-
-    macro_rules! open_signed {
-        ($variant:ident, $sm:ident, $pk:ident) => {
-        {
-            let mut m: Vec<u8> = Vec::with_capacity($sm.len());
-            let mut mlen: usize = 0;
-            match unsafe {
-                ffi::$variant(
-                    m.as_mut_ptr(),
-                    &mut mlen as *mut usize,
-                    $sm.0.as_ptr(),
-                    $sm.len(),
-                    $pk.0.as_ptr(),
-                )
-            } {
-                0 => {
-                    unsafe { m.set_len(mlen) };
-                    Ok(m)
-                }
-                -1 => Err(primitive::VerificationError::InvalidSignature),
-                _ => Err(primitive::VerificationError::UnknownVerificationError),
-            }
-        }
-        };
-    }
-
-    /// Open the signed message and if verification succeeds return the message
-    {% if insecure %}
-    #[deprecated(note = "Insecure cryptography, do not use in production")]
-    {% endif %}
-    pub fn open(
-        sm: &SignedMessage,
-        pk: &PublicKey
-    ) -> core::result::Result<Vec<u8>,primitive::VerificationError> {
-        {% if 'avx2_implementation' in scheme %}
-        #[cfg(enable_avx2)]
-        {
-            if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
-                return open_signed!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_open, sm, pk);
-            }
-        }
-        {% endif %}
-        open_signed!(PQCLEAN_{{ NS_NAME }}_crypto_sign_open, sm, pk)
+impl SignedMessage {
+    pub fn len(&self) -> usize {
+        self.0.len()
     }
 }
 {% endif %}
@@ -311,9 +221,9 @@ macro_rules! gen_keypair {
 {% endif %}
 pub fn keypair() -> (PublicKey, SecretKey) {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             {% if type == "kem" %}
             return gen_keypair!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_keypair);
             {% else %}
@@ -353,9 +263,9 @@ macro_rules! encap {
 {% endif %}
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return encap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_enc, pk);
         }
     }
@@ -388,9 +298,9 @@ macro_rules! decap {
 {% endif %}
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return decap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_dec, ct, sk);
         }
     }
@@ -401,6 +311,88 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
 
 {% else %}
 
+
+macro_rules! gen_signature {
+    ($variant:ident, $msg:ident, $sk:ident) => {
+    {
+        let max_len = $msg.len() + signature_bytes();
+        let mut signed_msg = Vec::with_capacity(max_len);
+        let mut smlen: usize = 0;
+        unsafe {
+            ffi::$variant(
+                signed_msg.as_mut_ptr(),
+                &mut smlen as *mut usize,
+                $msg.as_ptr(),
+                $msg.len(),
+                $sk.0.as_ptr(),
+            );
+            debug_assert!(smlen <= max_len, "exceeded vector capacity");
+            signed_msg.set_len(smlen);
+        }
+        SignedMessage(signed_msg)
+    }
+    };
+}
+
+/// Sign the message and return the signed message.
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
+pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
+    {% if 'avx2_implementation' in scheme %}
+    #[cfg(all(enable_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+            return gen_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign, msg, sk);
+        }
+    }
+    {% endif %}
+    gen_signature!(PQCLEAN_{{ NS_NAME }}_crypto_sign, msg, sk)
+}
+
+macro_rules! open_signed {
+    ($variant:ident, $sm:ident, $pk:ident) => {
+    {
+        let mut m: Vec<u8> = Vec::with_capacity($sm.len());
+        let mut mlen: usize = 0;
+        match unsafe {
+            ffi::$variant(
+                m.as_mut_ptr(),
+                &mut mlen as *mut usize,
+                $sm.0.as_ptr(),
+                $sm.len(),
+                $pk.0.as_ptr(),
+            )
+        } {
+            0 => {
+                unsafe { m.set_len(mlen) };
+                Ok(m)
+            }
+            -1 => Err(primitive::VerificationError::InvalidSignature),
+            _ => Err(primitive::VerificationError::UnknownVerificationError),
+        }
+    }
+    };
+}
+
+/// Open the signed message and if verification succeeds return the message
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
+pub fn open(
+    sm: &SignedMessage,
+    pk: &PublicKey
+) -> core::result::Result<Vec<u8>,primitive::VerificationError> {
+    {% if 'avx2_implementation' in scheme %}
+    #[cfg(all(enable_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+            return open_signed!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_open, sm, pk);
+        }
+    }
+    {% endif %}
+    open_signed!(PQCLEAN_{{ NS_NAME }}_crypto_sign_open, sm, pk)
+}
 
 macro_rules! detached_signature {
     ($variant:ident, $msg:ident, $sk:ident) => {
@@ -426,9 +418,9 @@ macro_rules! detached_signature {
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return detached_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_signature, msg, sk);
         }
     }
@@ -463,9 +455,9 @@ macro_rules! verify_detached_sig {
 {% endif %}
 pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> core::result::Result<(), primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return verify_detached_sig!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_verify, sig, msg, pk);
         }
     }
@@ -481,7 +473,6 @@ pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &Publi
 mod test {
     use super::*;
 {% if type == "sign" %}
-    use std::vec::Vec;
     use rand::prelude::*;
 {% endif %}
 

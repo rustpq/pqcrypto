@@ -17,8 +17,12 @@
 #![no_std]
 #![allow(clippy::len_without_is_empty)]
 
+// For no-std vectors
+extern crate alloc;
+
+// For tests
 #[cfg(feature = "std")]
-#[macro_use] extern crate std;
+extern crate std;
 
 {% if insecure %}
 #![cfg_attr(not(feature = "cryptographically-insecure"), deny(deprecated))]
@@ -42,19 +46,10 @@ pub use crate::{{ scheme_name }}::{
     shared_secret_bytes as {{ scheme_name }}_shared_secret_bytes,
     {% else %}
     signature_bytes as {{ scheme_name }}_signature_bytes,
+    sign as {{ scheme_name }}_sign,
+    open as {{ scheme_name }}_open,
     detached_sign as {{ scheme_name }}_detached_sign,
     verify_detached_signature as {{ scheme_name }}_verify_detached_signature,
     {% endif %}
 };
 {% endfor %}
-
-{% if type == "sign" %}
-{% for scheme in schemes %}
-{% set scheme_name = scheme.name|nameize %}
-#[cfg(feature = "std")]
-pub use crate::{{ scheme_name }}::{
-    sign as {{ scheme_name }}_sign,
-    open as {{ scheme_name }}_open,
-};
-{% endfor %}
-{% endif %}
