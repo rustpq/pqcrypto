@@ -1,7 +1,11 @@
+#![no_std]
 /// Supporting Traits for the pqcrypto crates.
 
+#[cfg(feature = "std")]
+extern crate std;
+
 /// Convenience wrapper for Result
-pub type Result<T> = std::result::Result<T, Error>;
+pub type Result<T> = core::result::Result<T, Error>;
 
 /// Errors that may arise when constructing keys or signatures.
 #[derive(Clone, Copy, Debug)]
@@ -14,8 +18,8 @@ pub enum Error {
     },
 }
 
-impl std::fmt::Display for Error {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl core::fmt::Display for Error {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         match self {
             Error::BadLength {
                 name,
@@ -30,6 +34,7 @@ impl std::fmt::Display for Error {
     }
 }
 
+#[cfg(feature = "std")]
 impl std::error::Error for Error {}
 
 pub mod kem;

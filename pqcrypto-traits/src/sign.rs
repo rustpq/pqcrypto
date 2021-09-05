@@ -55,8 +55,8 @@ pub enum VerificationError {
     UnknownVerificationError,
 }
 
-impl std::fmt::Display for VerificationError {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::result::Result<(), std::fmt::Error> {
+impl core::fmt::Display for VerificationError {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::result::Result<(), core::fmt::Error> {
         match self {
             VerificationError::InvalidSignature => write!(f, "error: verification failed"),
             VerificationError::UnknownVerificationError => write!(f, "unknown error"),
@@ -64,4 +64,5 @@ impl std::fmt::Display for VerificationError {
     }
 }
 
+#[cfg(feature = "std")]
 impl std::error::Error for VerificationError {}
