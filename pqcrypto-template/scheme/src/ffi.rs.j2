@@ -189,6 +189,7 @@ extern "C" {
 mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
     use super::*;
 {% if type == "sign" %}
+    use std::vec::Vec;
     use rand::prelude::*;
 {% endif %}
 
@@ -316,6 +317,7 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
 #[cfg(enable_avx2)]
 mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
     use super::*;
+    use std::{is_x86_feature_detected, vec::Vec};
 {% if type == "sign" %}
     use rand::prelude::*;
 {% endif %}
