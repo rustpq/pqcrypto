@@ -2,6 +2,8 @@
 name = "pqcrypto-internals"
 version = "0.2.1"
 edition = "2018"
+description = "bindings to common cryptography"
+license = "MIT OR Apache-2.0"
 
 links = "pqcrypto_internals"
 
