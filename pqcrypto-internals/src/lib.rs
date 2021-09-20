@@ -1,3 +1,5 @@
+#![no_std]
+
 use core::slice;
 
 /// Get random bytes; exposed for PQClean implementations.

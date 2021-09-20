@@ -192,7 +192,9 @@ extern "C" {
 #[cfg(test)]
 mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
     use super::*;
+    use alloc::vec;
 {% if type == "sign" %}
+    use alloc::vec::Vec;
     use rand::prelude::*;
 {% endif %}
 
@@ -316,11 +318,13 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
 {% if 'avx2_implementation' in scheme %}
 {% set implementation = scheme.avx2_implementation %}
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 {% if type == "sign" %}
+    use alloc::vec::Vec;
     use rand::prelude::*;
 {% endif %}
 
