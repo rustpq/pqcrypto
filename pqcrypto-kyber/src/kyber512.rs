@@ -121,9 +121,9 @@ macro_rules! gen_keypair {
 
 /// Generate a kyber512 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("avx2") {
+        if std::is_x86_feature_detected!("avx2") {
             return gen_keypair!(PQCLEAN_KYBER512_AVX2_crypto_kem_keypair);
         }
     }
@@ -144,9 +144,9 @@ macro_rules! encap {
 
 /// Encapsulate to a kyber512 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("avx2") {
+        if std::is_x86_feature_detected!("avx2") {
             return encap!(PQCLEAN_KYBER512_AVX2_crypto_kem_enc, pk);
         }
     }
@@ -166,9 +166,9 @@ macro_rules! decap {
 
 /// Decapsulate the received kyber512 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("avx2") {
+        if std::is_x86_feature_detected!("avx2") {
             return decap!(PQCLEAN_KYBER512_AVX2_crypto_kem_dec, ct, sk);
         }
     }

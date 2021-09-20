@@ -208,6 +208,7 @@ extern "C" {
 #[cfg(test)]
 mod test_ntruhps2048509_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -242,10 +243,11 @@ mod test_ntruhps2048509_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_ntruhps2048509_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -287,6 +289,7 @@ mod test_ntruhps2048509_avx2 {
 #[cfg(test)]
 mod test_ntruhps2048677_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -321,10 +324,11 @@ mod test_ntruhps2048677_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_ntruhps2048677_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -366,6 +370,7 @@ mod test_ntruhps2048677_avx2 {
 #[cfg(test)]
 mod test_ntruhps4096821_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -400,10 +405,11 @@ mod test_ntruhps4096821_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_ntruhps4096821_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -445,6 +451,7 @@ mod test_ntruhps4096821_avx2 {
 #[cfg(test)]
 mod test_ntruhrss701_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -479,10 +486,11 @@ mod test_ntruhrss701_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_ntruhrss701_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

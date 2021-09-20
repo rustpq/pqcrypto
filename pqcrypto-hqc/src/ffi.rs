@@ -75,6 +75,7 @@ extern "C" {
 #[cfg(test)]
 mod test_hqcrmrs128_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -108,6 +109,7 @@ mod test_hqcrmrs128_clean {
 #[cfg(test)]
 mod test_hqcrmrs192_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -141,6 +143,7 @@ mod test_hqcrmrs192_clean {
 #[cfg(test)]
 mod test_hqcrmrs256_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {

@@ -3148,6 +3148,8 @@ extern "C" {
 #[cfg(test)]
 mod test_sphincsharaka128frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -3263,11 +3265,13 @@ mod test_sphincsharaka128frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka128frobust_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -3393,6 +3397,8 @@ mod test_sphincsharaka128frobust_aesni {
 #[cfg(test)]
 mod test_sphincsharaka128fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -3508,11 +3514,13 @@ mod test_sphincsharaka128fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka128fsimple_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -3638,6 +3646,8 @@ mod test_sphincsharaka128fsimple_aesni {
 #[cfg(test)]
 mod test_sphincsharaka128srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -3753,11 +3763,13 @@ mod test_sphincsharaka128srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka128srobust_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -3883,6 +3895,8 @@ mod test_sphincsharaka128srobust_aesni {
 #[cfg(test)]
 mod test_sphincsharaka128ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -3998,11 +4012,13 @@ mod test_sphincsharaka128ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka128ssimple_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -4128,6 +4144,8 @@ mod test_sphincsharaka128ssimple_aesni {
 #[cfg(test)]
 mod test_sphincsharaka192frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -4243,11 +4261,13 @@ mod test_sphincsharaka192frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka192frobust_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -4373,6 +4393,8 @@ mod test_sphincsharaka192frobust_aesni {
 #[cfg(test)]
 mod test_sphincsharaka192fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -4488,11 +4510,13 @@ mod test_sphincsharaka192fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka192fsimple_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -4618,6 +4642,8 @@ mod test_sphincsharaka192fsimple_aesni {
 #[cfg(test)]
 mod test_sphincsharaka192srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -4733,11 +4759,13 @@ mod test_sphincsharaka192srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka192srobust_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -4863,6 +4891,8 @@ mod test_sphincsharaka192srobust_aesni {
 #[cfg(test)]
 mod test_sphincsharaka192ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -4978,11 +5008,13 @@ mod test_sphincsharaka192ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka192ssimple_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -5108,6 +5140,8 @@ mod test_sphincsharaka192ssimple_aesni {
 #[cfg(test)]
 mod test_sphincsharaka256frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -5223,11 +5257,13 @@ mod test_sphincsharaka256frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka256frobust_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -5353,6 +5389,8 @@ mod test_sphincsharaka256frobust_aesni {
 #[cfg(test)]
 mod test_sphincsharaka256fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -5468,11 +5506,13 @@ mod test_sphincsharaka256fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka256fsimple_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -5598,6 +5638,8 @@ mod test_sphincsharaka256fsimple_aesni {
 #[cfg(test)]
 mod test_sphincsharaka256srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -5713,11 +5755,13 @@ mod test_sphincsharaka256srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka256srobust_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -5843,6 +5887,8 @@ mod test_sphincsharaka256srobust_aesni {
 #[cfg(test)]
 mod test_sphincsharaka256ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -5958,11 +6004,13 @@ mod test_sphincsharaka256ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsharaka256ssimple_aesni {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -6088,6 +6136,8 @@ mod test_sphincsharaka256ssimple_aesni {
 #[cfg(test)]
 mod test_sphincsshake256128frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -6205,11 +6255,13 @@ mod test_sphincsshake256128frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256128frobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -6335,6 +6387,8 @@ mod test_sphincsshake256128frobust_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256128fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -6452,11 +6506,13 @@ mod test_sphincsshake256128fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256128fsimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -6582,6 +6638,8 @@ mod test_sphincsshake256128fsimple_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256128srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -6699,11 +6757,13 @@ mod test_sphincsshake256128srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256128srobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -6829,6 +6889,8 @@ mod test_sphincsshake256128srobust_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256128ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -6946,11 +7008,13 @@ mod test_sphincsshake256128ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256128ssimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -7076,6 +7140,8 @@ mod test_sphincsshake256128ssimple_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256192frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -7193,11 +7259,13 @@ mod test_sphincsshake256192frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256192frobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -7323,6 +7391,8 @@ mod test_sphincsshake256192frobust_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256192fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -7440,11 +7510,13 @@ mod test_sphincsshake256192fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256192fsimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -7570,6 +7642,8 @@ mod test_sphincsshake256192fsimple_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256192srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -7687,11 +7761,13 @@ mod test_sphincsshake256192srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256192srobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -7817,6 +7893,8 @@ mod test_sphincsshake256192srobust_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256192ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -7934,11 +8012,13 @@ mod test_sphincsshake256192ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256192ssimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -8064,6 +8144,8 @@ mod test_sphincsshake256192ssimple_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256256frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -8181,11 +8263,13 @@ mod test_sphincsshake256256frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256256frobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -8311,6 +8395,8 @@ mod test_sphincsshake256256frobust_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256256fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -8428,11 +8514,13 @@ mod test_sphincsshake256256fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256256fsimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -8558,6 +8646,8 @@ mod test_sphincsshake256256fsimple_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256256srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -8675,11 +8765,13 @@ mod test_sphincsshake256256srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256256srobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -8805,6 +8897,8 @@ mod test_sphincsshake256256srobust_avx2 {
 #[cfg(test)]
 mod test_sphincsshake256256ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -8922,11 +9016,13 @@ mod test_sphincsshake256256ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincsshake256256ssimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -9052,6 +9148,8 @@ mod test_sphincsshake256256ssimple_avx2 {
 #[cfg(test)]
 mod test_sphincssha256128frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -9167,11 +9265,13 @@ mod test_sphincssha256128frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256128frobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -9297,6 +9397,8 @@ mod test_sphincssha256128frobust_avx2 {
 #[cfg(test)]
 mod test_sphincssha256128fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -9412,11 +9514,13 @@ mod test_sphincssha256128fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256128fsimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -9542,6 +9646,8 @@ mod test_sphincssha256128fsimple_avx2 {
 #[cfg(test)]
 mod test_sphincssha256128srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -9657,11 +9763,13 @@ mod test_sphincssha256128srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256128srobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -9787,6 +9895,8 @@ mod test_sphincssha256128srobust_avx2 {
 #[cfg(test)]
 mod test_sphincssha256128ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -9902,11 +10012,13 @@ mod test_sphincssha256128ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256128ssimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -10032,6 +10144,8 @@ mod test_sphincssha256128ssimple_avx2 {
 #[cfg(test)]
 mod test_sphincssha256192frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -10147,11 +10261,13 @@ mod test_sphincssha256192frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256192frobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -10277,6 +10393,8 @@ mod test_sphincssha256192frobust_avx2 {
 #[cfg(test)]
 mod test_sphincssha256192fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -10392,11 +10510,13 @@ mod test_sphincssha256192fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256192fsimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -10522,6 +10642,8 @@ mod test_sphincssha256192fsimple_avx2 {
 #[cfg(test)]
 mod test_sphincssha256192srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -10637,11 +10759,13 @@ mod test_sphincssha256192srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256192srobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -10767,6 +10891,8 @@ mod test_sphincssha256192srobust_avx2 {
 #[cfg(test)]
 mod test_sphincssha256192ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -10882,11 +11008,13 @@ mod test_sphincssha256192ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256192ssimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -11012,6 +11140,8 @@ mod test_sphincssha256192ssimple_avx2 {
 #[cfg(test)]
 mod test_sphincssha256256frobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -11127,11 +11257,13 @@ mod test_sphincssha256256frobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256256frobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -11257,6 +11389,8 @@ mod test_sphincssha256256frobust_avx2 {
 #[cfg(test)]
 mod test_sphincssha256256fsimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -11372,11 +11506,13 @@ mod test_sphincssha256256fsimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256256fsimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -11502,6 +11638,8 @@ mod test_sphincssha256256fsimple_avx2 {
 #[cfg(test)]
 mod test_sphincssha256256srobust_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -11617,11 +11755,13 @@ mod test_sphincssha256256srobust_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256256srobust_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -11747,6 +11887,8 @@ mod test_sphincssha256256srobust_avx2 {
 #[cfg(test)]
 mod test_sphincssha256256ssimple_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -11862,11 +12004,13 @@ mod test_sphincssha256256ssimple_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sphincssha256256ssimple_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

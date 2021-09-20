@@ -1,11 +1,11 @@
 ---
 
 pqcrypto_version: 0.14.2
-traits_version: 0.3.2
+traits_version: 0.3.4
 
 kems:
   kyber:
-    version: 0.7.2
+    version: 0.7.3
     avx2_guard: 'avx2_enabled && !is_windows && !is_macos && target_arch == "x86_64"'
     schemes:
       - name: kyber512
@@ -27,7 +27,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   frodo:
-    version: 0.4.8
+    version: 0.4.9
     notes: |
       If you use it via the FFI interface: The ``clean`` implementation of Frodo
       needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
@@ -60,7 +60,7 @@ kems:
         alt_implementations:
           - clean
   ntru:
-    version: 0.5.5
+    version: 0.5.6
     schemes:
       - name: ntruhps2048509
         implementation: clean
@@ -75,7 +75,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   ntruprime:
-    version: 0.1.3
+    version: 0.1.4
     schemes:
       - name: ntrulpr653
         implementation: clean
@@ -84,6 +84,15 @@ kems:
         implementation: clean
         avx2_implementation: avx2
       - name: ntrulpr857
+        implementation: clean
+        avx2_implementation: avx2
+      - name: ntrulpr953
+        implementation: clean
+        avx2_implementation: avx2
+      - name: ntrulpr1013
+        implementation: clean
+        avx2_implementation: avx2
+      - name: ntrulpr1277
         implementation: clean
         avx2_implementation: avx2
       - name: sntrup653
@@ -95,8 +104,17 @@ kems:
       - name: sntrup857
         implementation: clean
         avx2_implementation: avx2
+      - name: sntrup953
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sntrup1013
+        implementation: clean
+        avx2_implementation: avx2
+      - name: sntrup1277
+        implementation: clean
+        avx2_implementation: avx2
   saber:
-    version: 0.1.8
+    version: 0.1.9
     schemes:
       - name: firesaber
         implementation: clean
@@ -108,7 +126,7 @@ kems:
         implementation: clean
         avx2_implementation: avx2
   classicmceliece:
-    version: 0.1.4
+    version: 0.1.5
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
@@ -171,7 +189,7 @@ kems:
         alt_implementations:
           - clean
   hqc:
-    version: 0.1.2
+    version: 0.1.3
     schemes:
       - name: hqc-rmrs-128
         implementation: clean
@@ -186,7 +204,7 @@ kems:
 
 signs:
   dilithium:
-    version: 0.4.2
+    version: 0.4.3
     avx2_guard: 'avx2_enabled && !is_windows && target_arch == "x86_64"'
     schemes:
       - name: dilithium2
@@ -199,7 +217,7 @@ signs:
         implementation: clean
         avx2_implementation: avx2
   falcon:
-    version: 0.2.8
+    version: 0.2.9
     schemes:
       - name: falcon-512
         implementation: clean
@@ -208,7 +226,7 @@ signs:
         implementation: clean
         avx2_implementation: avx2
   rainbow:
-    version: 0.2.2
+    version: 0.2.3
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
@@ -235,7 +253,7 @@ signs:
         doctest: no # Doc test fail because of too small stack size
         implementation: clean
   sphincsplus:
-    version: 0.6.1
+    version: 0.6.2
     schemes:
       - name: sphincs-haraka-128f-robust
         implementation: clean

@@ -676,6 +676,7 @@ extern "C" {
 #[cfg(test)]
 mod test_mceliece348864_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -713,6 +714,7 @@ mod test_mceliece348864_vec {
 #[cfg(test)]
 mod test_mceliece348864_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -747,10 +749,11 @@ mod test_mceliece348864_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece348864_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -792,6 +795,7 @@ mod test_mceliece348864_avx {
 #[cfg(test)]
 mod test_mceliece348864f_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -829,6 +833,7 @@ mod test_mceliece348864f_vec {
 #[cfg(test)]
 mod test_mceliece348864f_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -863,10 +868,11 @@ mod test_mceliece348864f_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece348864f_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -908,6 +914,7 @@ mod test_mceliece348864f_avx {
 #[cfg(test)]
 mod test_mceliece460896_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -945,6 +952,7 @@ mod test_mceliece460896_vec {
 #[cfg(test)]
 mod test_mceliece460896_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -979,10 +987,11 @@ mod test_mceliece460896_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece460896_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -1024,6 +1033,7 @@ mod test_mceliece460896_avx {
 #[cfg(test)]
 mod test_mceliece460896f_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1061,6 +1071,7 @@ mod test_mceliece460896f_vec {
 #[cfg(test)]
 mod test_mceliece460896f_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1095,10 +1106,11 @@ mod test_mceliece460896f_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece460896f_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -1140,6 +1152,7 @@ mod test_mceliece460896f_avx {
 #[cfg(test)]
 mod test_mceliece6688128_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1177,6 +1190,7 @@ mod test_mceliece6688128_vec {
 #[cfg(test)]
 mod test_mceliece6688128_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1211,10 +1225,11 @@ mod test_mceliece6688128_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece6688128_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -1256,6 +1271,7 @@ mod test_mceliece6688128_avx {
 #[cfg(test)]
 mod test_mceliece6688128f_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1293,6 +1309,7 @@ mod test_mceliece6688128f_vec {
 #[cfg(test)]
 mod test_mceliece6688128f_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1327,10 +1344,11 @@ mod test_mceliece6688128f_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece6688128f_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -1372,6 +1390,7 @@ mod test_mceliece6688128f_avx {
 #[cfg(test)]
 mod test_mceliece6960119_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1409,6 +1428,7 @@ mod test_mceliece6960119_vec {
 #[cfg(test)]
 mod test_mceliece6960119_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1443,10 +1463,11 @@ mod test_mceliece6960119_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece6960119_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -1488,6 +1509,7 @@ mod test_mceliece6960119_avx {
 #[cfg(test)]
 mod test_mceliece6960119f_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1525,6 +1547,7 @@ mod test_mceliece6960119f_vec {
 #[cfg(test)]
 mod test_mceliece6960119f_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1559,10 +1582,11 @@ mod test_mceliece6960119f_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece6960119f_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -1604,6 +1628,7 @@ mod test_mceliece6960119f_avx {
 #[cfg(test)]
 mod test_mceliece8192128_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1641,6 +1666,7 @@ mod test_mceliece8192128_vec {
 #[cfg(test)]
 mod test_mceliece8192128_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1675,10 +1701,11 @@ mod test_mceliece8192128_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece8192128_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -1720,6 +1747,7 @@ mod test_mceliece8192128_avx {
 #[cfg(test)]
 mod test_mceliece8192128f_vec {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1757,6 +1785,7 @@ mod test_mceliece8192128f_vec {
 #[cfg(test)]
 mod test_mceliece8192128f_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -1791,10 +1820,11 @@ mod test_mceliece8192128f_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_mceliece8192128f_avx {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

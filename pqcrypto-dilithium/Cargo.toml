@@ -2,25 +2,26 @@
 name = "pqcrypto-dilithium"
 description = "Post-Quantum Signature Scheme dilithium"
 readme = "README.md"
-version = "0.4.2"
+version = "0.4.3"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"
 repository = "https://github.com/rustpq/pqcrypto/"
 keywords = ["cryptography", "post-quantum", "security"]
-categories = ["cryptography"]
+categories = ["cryptography", "no-std"]
 
 [dependencies]
 pqcrypto-internals = { path = "../pqcrypto-internals", version = "0.2" }
-pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.3.2"}
+pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.3.4", default-features = false}
 libc = "0.2.0"
 serde = { version = "1.0", features = ["derive"], optional = true }
 serde-big-array = { version = "0.3.2", features = ["const-generics"], optional = true }
 
 [features]
-default = ["avx2"]
-avx2 = []
+default = ["avx2", "std"]
+avx2 = ["std"]
+std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
 
 [dev-dependencies]

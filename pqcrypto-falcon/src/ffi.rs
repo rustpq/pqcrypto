@@ -178,6 +178,8 @@ extern "C" {
 #[cfg(test)]
 mod test_falcon512_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -288,11 +290,13 @@ mod test_falcon512_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_falcon512_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -411,6 +415,8 @@ mod test_falcon512_avx2 {
 #[cfg(test)]
 mod test_falcon1024_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -521,11 +527,13 @@ mod test_falcon1024_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_falcon1024_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

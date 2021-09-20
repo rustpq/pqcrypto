@@ -1,10 +1,10 @@
-//! ntrulpr761
+//! sntrup953
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
 //! # Example
 //! ```
-//! use pqcrypto_ntruprime::ntrulpr761::*;
+//! use pqcrypto_ntruprime::sntrup953::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(&ct, &sk);
@@ -81,36 +81,36 @@ macro_rules! simple_struct {
 
 simple_struct!(
     PublicKey,
-    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_PUBLICKEYBYTES
 );
 simple_struct!(
     SecretKey,
-    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_SECRETKEYBYTES
 );
 simple_struct!(
     Ciphertext,
-    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_CIPHERTEXTBYTES
 );
-simple_struct!(SharedSecret, ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_BYTES);
+simple_struct!(SharedSecret, ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_BYTES);
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes for the encapsulated ciphertext
 pub const fn ciphertext_bytes() -> usize {
-    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_CIPHERTEXTBYTES
 }
 
 /// Get the number of bytes for the shared secret
 pub const fn shared_secret_bytes() -> usize {
-    ffi::PQCLEAN_NTRULPR761_CLEAN_CRYPTO_BYTES
+    ffi::PQCLEAN_SNTRUP953_CLEAN_CRYPTO_BYTES
 }
 
 macro_rules! gen_keypair {
@@ -125,15 +125,15 @@ macro_rules! gen_keypair {
     }};
 }
 
-/// Generate a ntrulpr761 keypair
+/// Generate a sntrup953 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return gen_keypair!(PQCLEAN_NTRULPR761_AVX2_crypto_kem_keypair);
+            return gen_keypair!(PQCLEAN_SNTRUP953_AVX2_crypto_kem_keypair);
         }
     }
-    gen_keypair!(PQCLEAN_NTRULPR761_CLEAN_crypto_kem_keypair)
+    gen_keypair!(PQCLEAN_SNTRUP953_CLEAN_crypto_kem_keypair)
 }
 
 macro_rules! encap {
@@ -148,15 +148,15 @@ macro_rules! encap {
     }};
 }
 
-/// Encapsulate to a ntrulpr761 public key
+/// Encapsulate to a sntrup953 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return encap!(PQCLEAN_NTRULPR761_AVX2_crypto_kem_enc, pk);
+            return encap!(PQCLEAN_SNTRUP953_AVX2_crypto_kem_enc, pk);
         }
     }
-    encap!(PQCLEAN_NTRULPR761_CLEAN_crypto_kem_enc, pk)
+    encap!(PQCLEAN_SNTRUP953_CLEAN_crypto_kem_enc, pk)
 }
 
 macro_rules! decap {
@@ -170,15 +170,15 @@ macro_rules! decap {
     }};
 }
 
-/// Decapsulate the received ntrulpr761 ciphertext
+/// Decapsulate the received sntrup953 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return decap!(PQCLEAN_NTRULPR761_AVX2_crypto_kem_dec, ct, sk);
+            return decap!(PQCLEAN_SNTRUP953_AVX2_crypto_kem_dec, ct, sk);
         }
     }
-    decap!(PQCLEAN_NTRULPR761_CLEAN_crypto_kem_dec, ct, sk)
+    decap!(PQCLEAN_SNTRUP953_CLEAN_crypto_kem_dec, ct, sk)
 }
 
 #[cfg(test)]

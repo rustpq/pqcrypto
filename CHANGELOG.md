@@ -1,5 +1,14 @@
 # Changelog
 
+## 2021-09-20
+
+* `no_std` support thanks to @rozbb (PR#25)
+* Extract randombytes from PQClean-provided APIs (avoids symbol conflict) (PR #24)
+* Update PQClean:
+    * NTRUPrime new parametersets
+    * Small Falcon fixes
+    * Small NTRU fix
+
 ## 2021-07-28
 
 * Falcon updates: remove inline functions from headerfiles

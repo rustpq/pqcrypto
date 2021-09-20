@@ -19,7 +19,15 @@
 //! This implementation requires a lot of stack space. You need to specify
 //! ``RUST_MIN_STACK=800000000``, probably.
 
+#![no_std]
 #![allow(clippy::len_without_is_empty)]
+
+// For no-std vectors
+extern crate alloc;
+
+// For tests
+#[cfg(feature = "std")]
+extern crate std;
 
 pub mod ffi;
 pub mod rainbowicircumzenithal;

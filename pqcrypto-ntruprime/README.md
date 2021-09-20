@@ -28,6 +28,15 @@ methods only.
  * ``ntrulpr857``
     * ``avx2`` (if supported)
     * ``clean`` (default)
+ * ``ntrulpr953``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``ntrulpr1013``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``ntrulpr1277``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
  * ``sntrup653``
     * ``avx2`` (if supported)
     * ``clean`` (default)
@@ -35,6 +44,15 @@ methods only.
     * ``avx2`` (if supported)
     * ``clean`` (default)
  * ``sntrup857``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``sntrup953``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``sntrup1013``
+    * ``avx2`` (if supported)
+    * ``clean`` (default)
+ * ``sntrup1277``
     * ``avx2`` (if supported)
     * ``clean`` (default)
 

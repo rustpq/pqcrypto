@@ -18,7 +18,15 @@
 //! `RUST_MIN_STACK` to make sure it has enough stack space in threads.
 //! This is not relevant for the 'normal' api methods.
 
+#![no_std]
 #![allow(clippy::len_without_is_empty)]
+
+// For no-std vectors
+extern crate alloc;
+
+// For tests
+#[cfg(feature = "std")]
+extern crate std;
 
 pub mod ffi;
 pub mod frodokem1344aes;

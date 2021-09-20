@@ -275,6 +275,7 @@ extern "C" {
 #[cfg(test)]
 mod test_kyber512_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -305,10 +306,11 @@ mod test_kyber512_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_kyber512_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -346,6 +348,7 @@ mod test_kyber512_avx2 {
 #[cfg(test)]
 mod test_kyber768_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -376,10 +379,11 @@ mod test_kyber768_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_kyber768_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -417,6 +421,7 @@ mod test_kyber768_avx2 {
 #[cfg(test)]
 mod test_kyber1024_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -447,10 +452,11 @@ mod test_kyber1024_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_kyber1024_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -488,6 +494,7 @@ mod test_kyber1024_avx2 {
 #[cfg(test)]
 mod test_kyber51290s_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -522,10 +529,11 @@ mod test_kyber51290s_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_kyber51290s_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -563,6 +571,7 @@ mod test_kyber51290s_avx2 {
 #[cfg(test)]
 mod test_kyber76890s_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -597,10 +606,11 @@ mod test_kyber76890s_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_kyber76890s_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -638,6 +648,7 @@ mod test_kyber76890s_avx2 {
 #[cfg(test)]
 mod test_kyber102490s_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -672,10 +683,11 @@ mod test_kyber102490s_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_kyber102490s_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

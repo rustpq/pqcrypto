@@ -35,7 +35,8 @@ pub mod kem {
     pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
     #[cfg(feature = "pqcrypto-ntruprime")]
     pub use pqcrypto_ntruprime::{
-        ntrulpr653, ntrulpr761, ntrulpr857, sntrup653, sntrup761, sntrup857,
+        ntrulpr1013, ntrulpr1277, ntrulpr653, ntrulpr761, ntrulpr857, ntrulpr953, sntrup1013,
+        sntrup1277, sntrup653, sntrup761, sntrup857, sntrup953,
     };
     #[cfg(feature = "pqcrypto-saber")]
     pub use pqcrypto_saber::{firesaber, lightsaber, saber};
