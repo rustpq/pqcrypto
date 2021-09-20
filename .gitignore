@@ -4,3 +4,5 @@
 /target
 **/*.rs.bk
 Cargo.lock
+
+.vscode/

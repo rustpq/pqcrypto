@@ -2,7 +2,7 @@
 name = "pqcrypto-falcon"
 description = "Post-Quantum Signature Scheme falcon"
 readme = "README.md"
-version = "0.2.7"
+version = "0.2.8"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -12,6 +12,7 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
+pqcrypto-internals = { path = "../pqcrypto-internals", version = "0.2" }
 pqcrypto-traits = {path = "../pqcrypto-traits", version = "0.3.2"}
 libc = "0.2.0"
 serde = { version = "1.0", features = ["derive"], optional = true }

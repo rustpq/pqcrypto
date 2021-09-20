@@ -13,6 +13,10 @@
 // Find the templates in pqcrypto-template
 use libc::c_int;
 
+// ensures we link correctly
+#[allow(unused_imports)]
+use pqcrypto_internals::*;
+
 pub const PQCLEAN_KYBER512_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1632;
 pub const PQCLEAN_KYBER512_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 800;
 pub const PQCLEAN_KYBER512_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 768;

@@ -2,23 +2,11 @@ extern crate cc;
 extern crate glob;
 
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 fn main() {
-    let common_dir: PathBuf = ["pqclean", "common"].iter().collect();
-    let common_files = vec![
-        common_dir.join("fips202.c"),
-        common_dir.join("aes.c"),
-        common_dir.join("sha2.c"),
-        common_dir.join("randombytes.c"),
-        common_dir.join("nistseedexpander.c"),
-        common_dir.join("sp800-185.c"),
-    ];
-
-    cc::Build::new()
-        .include(&common_dir)
-        .files(common_files.into_iter())
-        .compile("pqclean_common");
+    let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
+    let common_dir = Path::new("pqclean/common");
 
     #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
@@ -37,11 +25,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece348864_vec");
     }
     {
@@ -50,11 +42,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece348864_clean");
     }
 
@@ -65,7 +61,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -77,6 +73,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -85,20 +82,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece348864_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -106,11 +89,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece348864f_vec");
     }
     {
@@ -119,11 +106,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece348864f_clean");
     }
 
@@ -134,7 +125,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -146,6 +137,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -154,20 +146,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece348864f_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -175,11 +153,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece460896_vec");
     }
     {
@@ -188,11 +170,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece460896_clean");
     }
 
@@ -203,7 +189,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -215,6 +201,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -223,20 +210,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece460896_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -244,11 +217,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece460896f_vec");
     }
     {
@@ -257,11 +234,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece460896f_clean");
     }
 
@@ -272,7 +253,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -284,6 +265,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -292,20 +274,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece460896f_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -313,11 +281,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6688128_vec");
     }
     {
@@ -326,11 +298,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6688128_clean");
     }
 
@@ -341,7 +317,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -353,6 +329,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -361,20 +338,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece6688128_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -382,11 +345,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6688128f_vec");
     }
     {
@@ -395,11 +362,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6688128f_clean");
     }
 
@@ -410,7 +381,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -422,6 +393,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -430,20 +402,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece6688128f_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -451,11 +409,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6960119_vec");
     }
     {
@@ -464,11 +426,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6960119_clean");
     }
 
@@ -479,7 +445,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -491,6 +457,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -499,20 +466,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece6960119_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -520,11 +473,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6960119f_vec");
     }
     {
@@ -533,11 +490,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece6960119f_clean");
     }
 
@@ -548,7 +509,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -560,6 +521,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -568,20 +530,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece6960119f_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -589,11 +537,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece8192128_vec");
     }
     {
@@ -602,11 +554,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece8192128_clean");
     }
 
@@ -617,7 +573,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -629,6 +585,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -637,20 +594,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece8192128_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
     {
         let mut builder = cc::Build::new();
@@ -658,11 +601,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece8192128f_vec");
     }
     {
@@ -671,11 +618,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("mceliece8192128f_clean");
     }
 
@@ -686,7 +637,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -698,6 +649,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -706,20 +658,6 @@ fn main() {
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             )
             .compile("mceliece8192128f_avx");
-
-        let mut builder = cc::Build::new();
-        if is_windows {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &common_dir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
     }
 
     // Print enableing flag for AVX2 implementation
