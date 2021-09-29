@@ -3,11 +3,12 @@ extern crate glob;
 
 use pqcrypto_build::*;
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 fn main() {
     prepare_build_environment();
 
+    let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
     let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
@@ -40,11 +41,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("kyber512_clean");
     }
 
@@ -55,7 +60,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = new_cc_builder();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -67,6 +72,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -96,11 +102,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("kyber768_clean");
     }
 
@@ -111,7 +121,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = new_cc_builder();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -123,6 +133,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -152,11 +163,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("kyber1024_clean");
     }
 
@@ -167,7 +182,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = new_cc_builder();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -179,6 +194,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -208,11 +224,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("kyber512-90s_clean");
     }
 
@@ -223,7 +243,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = new_cc_builder();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -235,6 +255,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -264,11 +285,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("kyber768-90s_clean");
     }
 
@@ -279,7 +304,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = new_cc_builder();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -291,6 +316,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(
@@ -320,11 +346,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("kyber1024-90s_clean");
     }
 
@@ -335,7 +365,7 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = new_cc_builder();
 
-        if is_windows {
+        if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
             builder
@@ -347,6 +377,7 @@ fn main() {
                 .flag("-mpclmul");
         }
         builder
+            .include(internals_include_path)
             .include(&common_dir)
             .include(target_dir)
             .files(

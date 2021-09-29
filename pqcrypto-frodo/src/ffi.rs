@@ -13,6 +13,10 @@
 // Find the templates in pqcrypto-template
 use libc::c_int;
 
+// ensures we link correctly
+#[allow(unused_imports)]
+use pqcrypto_internals::*;
+
 pub const PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_SECRETKEYBYTES: usize = 19888;
 pub const PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_PUBLICKEYBYTES: usize = 9616;
 pub const PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_CIPHERTEXTBYTES: usize = 9720;

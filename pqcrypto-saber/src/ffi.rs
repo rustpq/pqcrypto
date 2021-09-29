@@ -10,6 +10,10 @@
 // Find the templates in pqcrypto-template
 use libc::c_int;
 
+// ensures we link correctly
+#[allow(unused_imports)]
+use pqcrypto_internals::*;
+
 pub const PQCLEAN_FIRESABER_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 3040;
 pub const PQCLEAN_FIRESABER_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1312;
 pub const PQCLEAN_FIRESABER_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1472;

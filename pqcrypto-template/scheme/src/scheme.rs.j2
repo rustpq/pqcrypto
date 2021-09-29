@@ -39,6 +39,7 @@ use pqcrypto_traits::{Result, Error};
 {% if type == "kem" %}
 use pqcrypto_traits::kem as primitive;
 {% else %}
+use alloc::vec::Vec;
 use pqcrypto_traits::sign as primitive;
 {% endif %}
 
@@ -156,7 +157,7 @@ impl primitive::SignedMessage for SignedMessage {
     /// Get this object as a byte slice
     #[inline]
     fn as_bytes(&self) -> &[u8] {
-        &self.0.as_slice()
+        self.0.as_slice()
     }
 
     /// Construct this object from a byte slice
@@ -220,9 +221,9 @@ macro_rules! gen_keypair {
 {% endif %}
 pub fn keypair() -> (PublicKey, SecretKey) {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             {% if type == "kem" %}
             return gen_keypair!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_keypair);
             {% else %}
@@ -262,9 +263,9 @@ macro_rules! encap {
 {% endif %}
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return encap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_enc, pk);
         }
     }
@@ -297,9 +298,9 @@ macro_rules! decap {
 {% endif %}
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return decap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_dec, ct, sk);
         }
     }
@@ -339,9 +340,9 @@ macro_rules! gen_signature {
 {% endif %}
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return gen_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign, msg, sk);
         }
     }
@@ -381,11 +382,11 @@ macro_rules! open_signed {
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey
-) -> std::result::Result<Vec<u8>,primitive::VerificationError> {
+) -> core::result::Result<Vec<u8>,primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return open_signed!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_open, sm, pk);
         }
     }
@@ -417,9 +418,9 @@ macro_rules! detached_signature {
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return detached_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_signature, msg, sk);
         }
     }
@@ -452,11 +453,11 @@ macro_rules! verify_detached_sig {
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
-pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> std::result::Result<(), primitive::VerificationError> {
+pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> core::result::Result<(), primitive::VerificationError> {
     {% if 'avx2_implementation' in scheme %}
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
             return verify_detached_sig!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_verify, sig, msg, pk);
         }
     }

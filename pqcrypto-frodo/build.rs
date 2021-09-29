@@ -3,11 +3,12 @@ extern crate glob;
 
 use pqcrypto_build::*;
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 fn main() {
     prepare_build_environment();
 
+    let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
     let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
@@ -40,11 +41,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem640aes_opt");
     }
     {
@@ -53,11 +58,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem640aes_clean");
     }
 
@@ -67,11 +76,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem640shake_opt");
     }
     {
@@ -80,11 +93,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem640shake_clean");
     }
 
@@ -94,11 +111,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem976aes_opt");
     }
     {
@@ -107,11 +128,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem976aes_clean");
     }
 
@@ -121,11 +146,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem976shake_opt");
     }
     {
@@ -134,11 +163,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem976shake_clean");
     }
 
@@ -148,11 +181,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem1344aes_opt");
     }
     {
@@ -161,11 +198,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem1344aes_clean");
     }
 
@@ -175,11 +216,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem1344shake_opt");
     }
     {
@@ -188,11 +233,15 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("frodokem1344shake_clean");
     }
 }

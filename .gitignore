@@ -6,3 +6,5 @@ pqclean-wasi
 /target
 **/*.rs.bk
 Cargo.lock
+
+.vscode/

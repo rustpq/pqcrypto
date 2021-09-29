@@ -3,11 +3,12 @@ extern crate glob;
 
 use pqcrypto_build::*;
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 fn main() {
     prepare_build_environment();
 
+    let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
     let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
     let common_files = vec![
         common_dir.join("fips202.c"),
@@ -40,25 +41,97 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("falcon-512_clean");
     }
 
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "falcon-512", "avx2"]
+            .iter()
+            .collect();
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        let mut builder = cc::Build::new();
+
+        if cfg!(target_env = "msvc") {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
+        }
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            )
+            .compile("falcon-512_avx2");
+    }
     {
         let mut builder = new_cc_builder();
         let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "falcon-1024", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        builder.include(&common_dir).include(target_dir).files(
-            scheme_files
-                .into_iter()
-                .map(|p| p.unwrap().to_string_lossy().into_owned()),
-        );
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
         builder.compile("falcon-1024_clean");
+    }
+
+    if avx2_enabled && target_arch == "x86_64" {
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "falcon-1024", "avx2"]
+            .iter()
+            .collect();
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        let mut builder = cc::Build::new();
+
+        if cfg!(target_env = "msvc") {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
+        }
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            )
+            .compile("falcon-1024_avx2");
+    }
+
+    // Print enableing flag for AVX2 implementation
+    if avx2_enabled && target_arch == "x86_64" {
+        println!("cargo:rustc-cfg=enable_avx2");
     }
 }
