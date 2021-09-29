@@ -1,28 +1,12 @@
 extern crate cc;
 extern crate glob;
 
-use pqcrypto_build::*;
 use std::env;
 use std::path::{Path, PathBuf};
 
 fn main() {
-    prepare_build_environment();
-
     let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
-    let common_dir: PathBuf = [pqclean_path(), "common"].iter().collect();
-    let common_files = vec![
-        common_dir.join("fips202.c"),
-        common_dir.join("aes.c"),
-        common_dir.join("sha2.c"),
-        common_dir.join("randombytes.c"),
-        common_dir.join("nistseedexpander.c"),
-        common_dir.join("sp800-185.c"),
-    ];
-
-    new_cc_builder()
-        .include(&common_dir)
-        .files(common_files.into_iter())
-        .compile("pqclean_common");
+    let common_dir = Path::new("pqclean/common");
 
     #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
@@ -36,16 +20,14 @@ fn main() {
     let is_macos = target_os == "macos";
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [
-            pqclean_path(),
-            "crypto_sign",
-            "rainbowI-circumzenithal",
-            "clean",
-        ]
-        .iter()
-        .collect();
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-circumzenithal", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -59,11 +41,14 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "rainbowI-classic", "clean"]
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -77,16 +62,14 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [
-            pqclean_path(),
-            "crypto_sign",
-            "rainbowI-compressed",
-            "clean",
-        ]
-        .iter()
-        .collect();
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowI-compressed", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -100,9 +83,9 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
+        let mut builder = cc::Build::new();
         let target_dir: PathBuf = [
-            pqclean_path(),
+            "pqclean",
             "crypto_sign",
             "rainbowIII-circumzenithal",
             "clean",
@@ -110,6 +93,9 @@ fn main() {
         .iter()
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -123,11 +109,14 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "rainbowIII-classic", "clean"]
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIII-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -141,16 +130,14 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [
-            pqclean_path(),
-            "crypto_sign",
-            "rainbowIII-compressed",
-            "clean",
-        ]
-        .iter()
-        .collect();
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowIII-compressed", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -164,16 +151,14 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [
-            pqclean_path(),
-            "crypto_sign",
-            "rainbowV-circumzenithal",
-            "clean",
-        ]
-        .iter()
-        .collect();
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-circumzenithal", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -187,11 +172,14 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [pqclean_path(), "crypto_sign", "rainbowV-classic", "clean"]
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-classic", "clean"]
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -205,16 +193,14 @@ fn main() {
     }
 
     {
-        let mut builder = new_cc_builder();
-        let target_dir: PathBuf = [
-            pqclean_path(),
-            "crypto_sign",
-            "rainbowV-compressed",
-            "clean",
-        ]
-        .iter()
-        .collect();
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", "rainbowV-compressed", "clean"]
+            .iter()
+            .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)

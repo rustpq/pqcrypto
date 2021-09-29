@@ -22,6 +22,7 @@ use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
 use crate::ffi;
+use alloc::vec::Vec;
 use pqcrypto_traits::sign as primitive;
 use pqcrypto_traits::{Error, Result};
 
@@ -183,9 +184,9 @@ macro_rules! gen_keypair {
 
 /// Generate a sphincs-haraka-256f-robust keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("aes") {
+        if std::is_x86_feature_detected!("aes") {
             return gen_keypair!(PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_keypair);
         }
     }
@@ -214,9 +215,9 @@ macro_rules! gen_signature {
 
 /// Sign the message and return the signed message.
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("aes") {
+        if std::is_x86_feature_detected!("aes") {
             return gen_signature!(PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign, msg, sk);
         }
     }
@@ -250,10 +251,10 @@ macro_rules! open_signed {
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
-) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
-    #[cfg(enable_avx2)]
+) -> core::result::Result<Vec<u8>, primitive::VerificationError> {
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("aes") {
+        if std::is_x86_feature_detected!("aes") {
             return open_signed!(
                 PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_open,
                 sm,
@@ -286,9 +287,9 @@ macro_rules! detached_signature {
 
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
-    #[cfg(enable_avx2)]
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("aes") {
+        if std::is_x86_feature_detected!("aes") {
             return detached_signature!(
                 PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_signature,
                 msg,
@@ -327,10 +328,10 @@ pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],
     pk: &PublicKey,
-) -> std::result::Result<(), primitive::VerificationError> {
-    #[cfg(enable_avx2)]
+) -> core::result::Result<(), primitive::VerificationError> {
+    #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if is_x86_feature_detected!("aes") {
+        if std::is_x86_feature_detected!("aes") {
             return verify_detached_sig!(
                 PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_verify,
                 sig,

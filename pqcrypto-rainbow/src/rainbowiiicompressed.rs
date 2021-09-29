@@ -22,6 +22,7 @@ use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
 use crate::ffi;
+use alloc::vec::Vec;
 use pqcrypto_traits::sign as primitive;
 use pqcrypto_traits::{Error, Result};
 
@@ -238,7 +239,7 @@ macro_rules! open_signed {
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
-) -> std::result::Result<Vec<u8>, primitive::VerificationError> {
+) -> core::result::Result<Vec<u8>, primitive::VerificationError> {
     open_signed!(PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_open, sm, pk)
 }
 
@@ -291,7 +292,7 @@ pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],
     pk: &PublicKey,
-) -> std::result::Result<(), primitive::VerificationError> {
+) -> core::result::Result<(), primitive::VerificationError> {
     verify_detached_sig!(
         PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_verify,
         sig,

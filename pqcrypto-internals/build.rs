@@ -1,8 +1,11 @@
 extern crate cc;
 
+use std::env;
 use std::path::Path;
 
 fn main() {
+    let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
+
     let includepath = Path::new("include").canonicalize().unwrap();
     println!("cargo:includepath={}", includepath.to_str().unwrap());
 
@@ -15,27 +18,35 @@ fn main() {
         cfiledir.join("sp800-185.c"),
     ];
 
-    cc::Build::new()
-        .include(&includepath)
-        .files(common_files.into_iter())
-        .compile("pqclean_common");
+    if target_arch == "wasm32" {
+        cc::Build::new()
+            .flag("--sysroot=../../wasi-sysroot")
+            .include(&includepath)
+            .files(common_files.into_iter())
+            .compile("pqclean_common");
+    } else {
+        cc::Build::new()
+            .include(&includepath)
+            .files(common_files.into_iter())
+            .compile("pqclean_common");
 
-    if cfg!(target_arch = "x86") || cfg!(target_arch = "x86_64") {
-        let mut builder = cc::Build::new();
-        if cfg!(target_env = "msvc") {
-            builder.flag("/arch:AVX2");
-        } else {
-            builder.flag("-mavx2");
-        };
-        builder
-            .file(
-                &cfiledir
-                    .join("keccak4x")
-                    .join("KeccakP-1600-times4-SIMD256.c"),
-            )
-            .compile("keccak4x");
-        println!("cargo:rustc-link-lib=keccak4x");
+        if cfg!(target_arch = "x86") || cfg!(target_arch = "x86_64") {
+            let mut builder = cc::Build::new();
+            if cfg!(target_env = "msvc") {
+                builder.flag("/arch:AVX2");
+            } else {
+                builder.flag("-mavx2");
+            };
+            builder
+                .file(
+                    &cfiledir
+                        .join("keccak4x")
+                        .join("KeccakP-1600-times4-SIMD256.c"),
+                )
+                .compile("keccak4x");
+            println!("cargo:rustc-link-lib=keccak4x");
+        }
+
+        println!("cargo:rustc-link-lib=pqclean_common");
     }
-
-    println!("cargo:rustc-link-lib=pqclean_common");
 }

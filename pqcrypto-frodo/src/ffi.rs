@@ -243,6 +243,7 @@ extern "C" {
 #[cfg(test)]
 mod test_frodokem640aes_opt {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -280,6 +281,7 @@ mod test_frodokem640aes_opt {
 #[cfg(test)]
 mod test_frodokem640aes_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -317,6 +319,7 @@ mod test_frodokem640aes_clean {
 #[cfg(test)]
 mod test_frodokem640shake_opt {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -354,6 +357,7 @@ mod test_frodokem640shake_opt {
 #[cfg(test)]
 mod test_frodokem640shake_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -391,6 +395,7 @@ mod test_frodokem640shake_clean {
 #[cfg(test)]
 mod test_frodokem976aes_opt {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -428,6 +433,7 @@ mod test_frodokem976aes_opt {
 #[cfg(test)]
 mod test_frodokem976aes_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -465,6 +471,7 @@ mod test_frodokem976aes_clean {
 #[cfg(test)]
 mod test_frodokem976shake_opt {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -502,6 +509,7 @@ mod test_frodokem976shake_opt {
 #[cfg(test)]
 mod test_frodokem976shake_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -539,6 +547,7 @@ mod test_frodokem976shake_clean {
 #[cfg(test)]
 mod test_frodokem1344aes_opt {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -576,6 +585,7 @@ mod test_frodokem1344aes_opt {
 #[cfg(test)]
 mod test_frodokem1344aes_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -613,6 +623,7 @@ mod test_frodokem1344aes_clean {
 #[cfg(test)]
 mod test_frodokem1344shake_opt {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -650,6 +661,7 @@ mod test_frodokem1344shake_opt {
 #[cfg(test)]
 mod test_frodokem1344shake_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {

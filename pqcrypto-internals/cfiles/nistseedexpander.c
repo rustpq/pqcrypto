@@ -8,7 +8,6 @@
 
 #include "nistseedexpander.h"
 #include "aes.h"
-#include <string.h>
 
 /*
  seedexpander_init()

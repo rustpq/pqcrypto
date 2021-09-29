@@ -259,6 +259,8 @@ extern "C" {
 #[cfg(test)]
 mod test_dilithium2_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -369,11 +371,13 @@ mod test_dilithium2_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_dilithium2_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -492,6 +496,8 @@ mod test_dilithium2_avx2 {
 #[cfg(test)]
 mod test_dilithium3_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -602,11 +608,13 @@ mod test_dilithium3_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_dilithium3_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -725,6 +733,8 @@ mod test_dilithium3_avx2 {
 #[cfg(test)]
 mod test_dilithium5_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -835,11 +845,13 @@ mod test_dilithium5_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_dilithium5_avx2 {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

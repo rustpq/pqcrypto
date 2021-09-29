@@ -360,6 +360,8 @@ extern "C" {
 #[cfg(test)]
 mod test_rainbowicircumzenithal_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -478,6 +480,8 @@ mod test_rainbowicircumzenithal_clean {
 #[cfg(test)]
 mod test_rainbowiclassic_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -592,6 +596,8 @@ mod test_rainbowiclassic_clean {
 #[cfg(test)]
 mod test_rainbowicompressed_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -709,6 +715,8 @@ mod test_rainbowicompressed_clean {
 #[cfg(test)]
 mod test_rainbowiiicircumzenithal_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -829,6 +837,8 @@ mod test_rainbowiiicircumzenithal_clean {
 #[cfg(test)]
 mod test_rainbowiiiclassic_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -946,6 +956,8 @@ mod test_rainbowiiiclassic_clean {
 #[cfg(test)]
 mod test_rainbowiiicompressed_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -1063,6 +1075,8 @@ mod test_rainbowiiicompressed_clean {
 #[cfg(test)]
 mod test_rainbowvcircumzenithal_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -1181,6 +1195,8 @@ mod test_rainbowvcircumzenithal_clean {
 #[cfg(test)]
 mod test_rainbowvclassic_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]
@@ -1295,6 +1311,8 @@ mod test_rainbowvclassic_clean {
 #[cfg(test)]
 mod test_rainbowvcompressed_clean {
     use super::*;
+    use alloc::vec;
+    use alloc::vec::Vec;
     use rand::prelude::*;
 
     #[test]

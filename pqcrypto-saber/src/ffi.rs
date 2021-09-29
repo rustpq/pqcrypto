@@ -134,6 +134,7 @@ extern "C" {
 #[cfg(test)]
 mod test_firesaber_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -164,10 +165,11 @@ mod test_firesaber_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_firesaber_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -205,6 +207,7 @@ mod test_firesaber_avx2 {
 #[cfg(test)]
 mod test_lightsaber_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -235,10 +238,11 @@ mod test_lightsaber_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_lightsaber_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -276,6 +280,7 @@ mod test_lightsaber_avx2 {
 #[cfg(test)]
 mod test_saber_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -302,10 +307,11 @@ mod test_saber_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_saber_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

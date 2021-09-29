@@ -274,6 +274,7 @@ extern "C" {
 #[cfg(test)]
 mod test_ntrulpr653_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -304,10 +305,11 @@ mod test_ntrulpr653_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_ntrulpr653_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -345,6 +347,7 @@ mod test_ntrulpr653_avx2 {
 #[cfg(test)]
 mod test_ntrulpr761_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -375,10 +378,11 @@ mod test_ntrulpr761_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_ntrulpr761_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -416,6 +420,7 @@ mod test_ntrulpr761_avx2 {
 #[cfg(test)]
 mod test_ntrulpr857_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -446,10 +451,11 @@ mod test_ntrulpr857_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_ntrulpr857_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -487,6 +493,7 @@ mod test_ntrulpr857_avx2 {
 #[cfg(test)]
 mod test_sntrup653_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -517,10 +524,11 @@ mod test_sntrup653_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sntrup653_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -558,6 +566,7 @@ mod test_sntrup653_avx2 {
 #[cfg(test)]
 mod test_sntrup761_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -588,10 +597,11 @@ mod test_sntrup761_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sntrup761_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {
@@ -629,6 +639,7 @@ mod test_sntrup761_avx2 {
 #[cfg(test)]
 mod test_sntrup857_clean {
     use super::*;
+    use alloc::vec;
 
     #[test]
     fn test_ffi() {
@@ -659,10 +670,11 @@ mod test_sntrup857_clean {
         }
     }
 }
-#[cfg(test)]
-#[cfg(enable_avx2)]
+#[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_sntrup857_avx2 {
     use super::*;
+    use alloc::vec;
+    use std::is_x86_feature_detected;
 
     #[test]
     fn test_ffi() {

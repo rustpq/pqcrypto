@@ -10,7 +10,15 @@
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
 
+#![no_std]
 #![allow(clippy::len_without_is_empty)]
+
+// For no-std vectors
+extern crate alloc;
+
+// For tests
+#[cfg(feature = "std")]
+extern crate std;
 
 pub mod ffi;
 pub mod hqcrmrs128;
