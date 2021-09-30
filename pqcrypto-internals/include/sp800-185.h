@@ -1,8 +1,7 @@
 #ifndef SP800_185_H
 #define SP800_185_H
 
-#include <stddef.h>
-#include <stdint.h>
+#include "common.h"
 
 #include "fips202.h"
 

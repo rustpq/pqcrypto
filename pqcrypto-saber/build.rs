@@ -25,6 +25,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -44,6 +47,9 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
@@ -72,6 +78,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -91,6 +100,9 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {
@@ -117,6 +129,9 @@ fn main() {
         let mut builder = cc::Build::new();
         let target_dir: PathBuf = ["pqclean", "crypto_kem", "saber", "clean"].iter().collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -134,6 +149,9 @@ fn main() {
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         let mut builder = cc::Build::new();
 
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
         } else {

@@ -25,6 +25,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -42,6 +45,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -60,6 +66,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -77,6 +86,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -95,6 +107,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -112,6 +127,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -130,6 +148,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -147,6 +168,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -165,6 +189,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -182,6 +209,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -200,6 +230,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)
@@ -217,6 +250,9 @@ fn main() {
             .iter()
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        if target_arch == "wasm32" {
+            builder.flag("--sysroot=../../wasi-sysroot");
+        }
         builder
             .include(internals_include_path)
             .include(&common_dir)

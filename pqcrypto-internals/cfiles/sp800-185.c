@@ -1,6 +1,3 @@
-#include <stddef.h>
-#include <stdint.h>
-
 #include "sp800-185.h"
 
 static size_t left_encode(uint8_t *encbuf, size_t value) {

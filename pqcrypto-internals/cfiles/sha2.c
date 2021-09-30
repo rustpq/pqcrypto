@@ -2,11 +2,6 @@
  * crypto_hash/sha512/ref/ from http://bench.cr.yp.to/supercop.html
  * by D. J. Bernstein */
 
-#include <stddef.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "sha2.h"
 
 static uint32_t load_bigendian_32(const uint8_t *x) {

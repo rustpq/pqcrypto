@@ -1,6 +1,7 @@
 #ifndef RANDOMBYTES_H
 #define RANDOMBYTES_H
-#include <stdint.h>
+
+#include "common.h"
 
 #ifdef _WIN32
 #include <crtdefs.h>
