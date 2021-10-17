@@ -19,8 +19,9 @@ fn main() {
     ];
 
     if target_arch == "wasm32" {
+        let wasi_sdk_path = &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
         cc::Build::new()
-            .flag("--sysroot=../../wasi-sysroot")
+            .flag(format!("--sysroot={}", wasi_sdk_path).as_str())
             .include(&includepath)
             .files(common_files.into_iter())
             .compile("pqclean_common");
