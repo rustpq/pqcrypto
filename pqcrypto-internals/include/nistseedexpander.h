@@ -9,7 +9,9 @@
 //  Modified for PQClean by Sebastian Verschoor
 //
 
-#include "common.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
 
 #define NISTSEEDEXPANDER_SEED_LEN 32
 

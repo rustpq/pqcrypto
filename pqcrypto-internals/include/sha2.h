@@ -1,7 +1,9 @@
 #ifndef SHA2_H
 #define SHA2_H
 
-#include "common.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
 
 /* The incremental API allows hashing of individual input blocks; these blocks
     must be exactly 64 bytes each.

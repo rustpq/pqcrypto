@@ -1,7 +1,9 @@
 #ifndef AES_H
 #define AES_H
 
-#include "common.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
 
 #define AES128_KEYBYTES 16
 #define AES192_KEYBYTES 24
