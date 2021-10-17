@@ -26,7 +26,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -47,7 +49,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -68,7 +72,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -94,7 +100,9 @@ fn main() {
         .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -115,7 +123,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -136,7 +146,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -157,7 +169,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -178,7 +192,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
@@ -199,7 +215,9 @@ fn main() {
             .collect();
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         if target_arch == "wasm32" {
-            builder.flag("--sysroot=../../wasi-sysroot");
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
         builder
             .include(internals_include_path)
