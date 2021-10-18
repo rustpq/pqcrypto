@@ -3,7 +3,6 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <string.h>
 
 /* The incremental API allows hashing of individual input blocks; these blocks
     must be exactly 64 bytes each.

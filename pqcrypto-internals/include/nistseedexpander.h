@@ -11,7 +11,6 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <string.h>
 
 #define NISTSEEDEXPANDER_SEED_LEN 32
 

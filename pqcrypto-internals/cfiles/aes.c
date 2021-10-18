@@ -26,6 +26,9 @@
  * SOFTWARE.
  */
 
+#include <stdint.h>
+#include <string.h>
+
 #include "aes.h"
 
 static inline uint32_t br_dec32le(const unsigned char *src) {
