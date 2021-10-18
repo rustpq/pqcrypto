@@ -1,5 +1,9 @@
 # Changelog
 
+## 2021-10-18
+
+* Fix small issue in randombytes implementation: should return 0
+
 ## 2021-09-20
 
 * `no_std` support thanks to @rozbb (PR#25)
