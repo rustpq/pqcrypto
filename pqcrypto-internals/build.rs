@@ -1,5 +1,6 @@
 extern crate cc;
 
+use std::env;
 use std::path::Path;
 
 fn main() {
@@ -19,10 +20,13 @@ fn main() {
         .include(&includepath)
         .files(common_files.into_iter())
         .compile("pqclean_common");
+    println!("cargo:rustc-link-lib=pqclean_common");
 
-    if cfg!(target_arch = "x86") || cfg!(target_arch = "x86_64") {
+    let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default();
+    if target_arch == "x86" || target_arch == "x86_64" {
         let mut builder = cc::Build::new();
-        if cfg!(target_env = "msvc") {
+        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
+        if target_os == "windows" {
             builder.flag("/arch:AVX2");
         } else {
             builder.flag("-mavx2");
@@ -36,6 +40,4 @@ fn main() {
             .compile("keccak4x");
         println!("cargo:rustc-link-lib=keccak4x");
     }
-
-    println!("cargo:rustc-link-lib=pqclean_common");
 }
