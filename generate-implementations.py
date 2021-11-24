@@ -9,6 +9,7 @@ import shutil
 
 
 DEFAULT_AVX2_GUARD = 'avx2_enabled && target_arch == "x86_64"'
+DEFAULT_AES_GUARD = 'aes_enabled && target_arch == "x86_64"'
 
 
 def read_yaml():
@@ -64,13 +65,6 @@ def generate_scheme(name, type, properties):
     except FileExistsError:
         pass
 
-    has_avx2 = False
-    for scheme in properties['schemes']:
-        if 'avx2_implementation' in scheme:
-            has_avx2 = True
-            if 'avx2_feature' not in scheme:
-                scheme['avx2_feature'] = 'avx2'
-
     render_template(
         target_dir, 'Cargo.toml', 'scheme/Cargo.toml.j2',
         traits_version=implementations['traits_version'],
@@ -79,15 +73,17 @@ def generate_scheme(name, type, properties):
         type=type,
         insecure=properties.get('insecure', False),
         version=properties['version'],
-        has_avx2=has_avx2,
+        implementations=properties['implementations'],
     )
 
     render_template(
         target_dir, 'build.rs', 'scheme/build.rs.j2',
         name=name,
         type=type,
+        implementations=properties['implementations'],
         schemes=properties['schemes'],
-        avx2_guard=properties.get('avx2_guard', DEFAULT_AVX2_GUARD)
+        avx2_guard=properties.get('avx2_guard', DEFAULT_AVX2_GUARD),
+        aes_guard=properties.get('aes_guard', DEFAULT_AES_GUARD),
     )
 
     metadatas = dict()
@@ -100,7 +96,7 @@ def generate_scheme(name, type, properties):
         type=type,
         name=name,
         metadatas=metadatas,
-        schemes=properties['schemes']
+        schemes=properties['schemes'],
     )
 
     for scheme in properties['schemes']:

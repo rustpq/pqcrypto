@@ -1,6 +1,6 @@
 //! {{ scheme.name }}
 //!
-//! These bindings use the {{ scheme.implementation }} version from [PQClean][pqc]
+//! These bindings use the {{ scheme.implementations[0] }} version from [PQClean][pqc]
 {% if insecure %}
 //!
 //! **This algorithm has security problems**
@@ -28,6 +28,10 @@
 //! [pqc]: https://github.com/pqclean/pqclean/
 
 // This file is generated.
+
+{% set globals = namespace() %}
+{% set globals.have_avx2 = False %}
+{% set globals.have_aes = False %}
 
 #[cfg(feature = "serialization")]
 use serde::{Deserialize, Serialize};
@@ -95,9 +99,16 @@ macro_rules! simple_struct {
     };
 }
 
-{% set NS_NAME = [scheme.name|namespaceize, scheme.implementation|namespaceize]|join('_') %}
-{% if 'avx2_implementation' in scheme %}
-{% set AVX2_NAME = [scheme.name|namespaceize, scheme.avx2_implementation|namespaceize]|join('_') %}
+{% set NS_NAME = [scheme.name|namespaceize, scheme.implementations[0]|namespaceize]|join('_') %}
+{% if 'avx2' in scheme.implementations %}
+{% set globals.have_avx2 = True %}
+{% set AVX2_NAME = [scheme.name|namespaceize, 'avx2'|namespaceize]|join('_') %}
+{% elif 'avx' in scheme.implementations %}
+{% set globals.have_avx2 = True %}
+{% set AVX2_NAME = [scheme.name|namespaceize, 'avx'|namespaceize]|join('_') %}
+{% elif 'aesni' in scheme.implementations %}
+{% set globals.have_aes = True %}
+{% set AES_NAME = [scheme.name|namespaceize, 'aesni'|namespaceize]|join('_') %}
 {% endif %}
 
 simple_struct!(PublicKey, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES);
@@ -172,7 +183,7 @@ impl SignedMessage {
         self.0.len()
     }
 }
-{% endif %}
+{% endif %} {# KEM or SIGN #}
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
@@ -220,14 +231,26 @@ macro_rules! gen_keypair {
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
 pub fn keypair() -> (PublicKey, SecretKey) {
-    {% if 'avx2_implementation' in scheme %}
+    {% if globals.have_avx2 %}
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("avx2") {
             {% if type == "kem" %}
             return gen_keypair!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_keypair);
             {% else %}
             return gen_keypair!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_keypair);
+            {% endif %}
+        }
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    #[cfg(all(enable_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            {% if type == "kem" %}
+            return gen_keypair!(PQCLEAN_{{ AES_NAME }}_crypto_kem_keypair);
+            {% else %}
+            return gen_keypair!(PQCLEAN_{{ AES_NAME }}_crypto_sign_keypair);
             {% endif %}
         }
     }
@@ -262,11 +285,19 @@ macro_rules! encap {
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    {% if 'avx2_implementation' in scheme %}
+    {% if globals.have_avx2 %}
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("avx2") {
             return encap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_enc, pk);
+        }
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    #[cfg(all(enable_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return encap!(PQCLEAN_{{ AES_NAME }}_crypto_kem_enc, pk);
         }
     }
     {% endif %}
@@ -297,11 +328,19 @@ macro_rules! decap {
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    {% if 'avx2_implementation' in scheme %}
+    {% if globals.have_avx2 %}
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("avx2") {
             return decap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_dec, ct, sk);
+        }
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    #[cfg(all(enable_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return decap!(PQCLEAN_{{ AES_NAME }}_crypto_kem_dec, ct, sk);
         }
     }
     {% endif %}
@@ -339,11 +378,19 @@ macro_rules! gen_signature {
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
-    {% if 'avx2_implementation' in scheme %}
+    {% if globals.have_avx2 %}
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("avx2") {
             return gen_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign, msg, sk);
+        }
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    #[cfg(all(enable_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return gen_signature!(PQCLEAN_{{ AES_NAME }}_crypto_sign, msg, sk);
         }
     }
     {% endif %}
@@ -383,11 +430,19 @@ pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey
 ) -> core::result::Result<Vec<u8>,primitive::VerificationError> {
-    {% if 'avx2_implementation' in scheme %}
+    {% if globals.have_avx2 %}
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("avx2") {
             return open_signed!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_open, sm, pk);
+        }
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    #[cfg(all(enable_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return open_signed!(PQCLEAN_{{ AES_NAME }}_crypto_sign_open, sm, pk);
         }
     }
     {% endif %}
@@ -417,11 +472,19 @@ macro_rules! detached_signature {
 {% endif %}
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
-    {% if 'avx2_implementation' in scheme %}
+    {% if globals.have_avx2 %}
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("avx2") {
             return detached_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_signature, msg, sk);
+        }
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    #[cfg(all(enable_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return detached_signature!(PQCLEAN_{{ AES_NAME }}_crypto_sign_signature, msg, sk);
         }
     }
     {% endif %}
@@ -454,11 +517,19 @@ macro_rules! verify_detached_sig {
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
 pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &PublicKey) -> core::result::Result<(), primitive::VerificationError> {
-    {% if 'avx2_implementation' in scheme %}
+    {% if globals.have_avx2 %}
     #[cfg(all(enable_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("{{ scheme.avx2_feature }}") {
+        if std::is_x86_feature_detected!("avx2") {
             return verify_detached_sig!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_verify, sig, msg, pk);
+        }
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    #[cfg(all(enable_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return verify_detached_sig!(PQCLEAN_{{ AES_NAME }}_crypto_sign_verify, sig, msg, pk);
         }
     }
     {% endif %}
@@ -466,7 +537,7 @@ pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &Publi
 }
 
 
-{% endif %}
+{% endif %} {# KEM or SIGN #}
 
 
 #[cfg(test)]
@@ -508,5 +579,5 @@ mod test {
         assert!(verify_detached_signature(&sig, &message, &pk).is_ok());
         assert!(!verify_detached_signature(&sig, &message[..message.len()-1], &pk).is_ok());
     }
-{% endif %}
+{% endif %} {# KEM or SIGN #}
 }
