@@ -13,17 +13,18 @@ categories = ["cryptography", "no-std"]
 
 [dependencies]
 pqcrypto-internals = { path = "../pqcrypto-internals", version = "0.2" }
-pqcrypto-traits = {path = "../pqcrypto-traits", version = "{{ traits_version }}", default-features = false}
+pqcrypto-traits = { path = "../pqcrypto-traits", version = "{{ traits_version }}", default-features = false }
 libc = "0.2.0"
 serde = { version = "1.0", features = ["derive"], optional = true }
 serde-big-array = { version = "0.3.2", features = ["const-generics"], optional = true }
 
 [features]
-{% if has_avx2 %}
-default = ["avx2", "std"]
+default = [{% if 'avx2' in implementations or 'avx' in implementations %}"avx2", {% endif %}{% if 'aesni' in implementations %}"aes", {% endif %}"std"]
+{% if 'avx2' in implementations or 'avx' in implementations %}
 avx2 = ["std"]
-{% else %}
-default = ["std"]
+{% endif %}
+{% if 'aesni' in implementations %}
+aes = ["std"]
 {% endif %}
 std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
