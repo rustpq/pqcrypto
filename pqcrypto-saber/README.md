@@ -19,15 +19,15 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``firesaber``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``lightsaber``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``saber``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
+* ``firesaber``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``lightsaber``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``saber``
+  * ``clean``
+  * ``avx2`` (if supported)
 
 
 ## License

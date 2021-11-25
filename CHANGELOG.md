@@ -7,6 +7,8 @@
 * Refactor build.rs.js2 to use macro calls
 * Update the other template files to adapt to this change
 * Slight modifications to README.md
+* Update PQClean
+  * Larger-size NTRU parametersets
 
 ## 2021-10-26
 

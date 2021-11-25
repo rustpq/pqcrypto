@@ -53,8 +53,12 @@ kems:
         implementations: [clean, avx2]
       - name: ntruhps4096821
         implementations: [clean, avx2]
+      - name: ntruhps40961229
+        implementations: [clean]
       - name: ntruhrss701
         implementations: [clean, avx2]
+      - name: ntruhrss1373
+        implementations: [clean]
   ntruprime:
     version: 0.1.5
     implementations: [clean, avx2]

@@ -19,26 +19,27 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``frodokem640aes``
-    * ``opt`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``frodokem640shake``
-    * ``opt`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``frodokem976aes``
-    * ``opt`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``frodokem976shake``
-    * ``opt`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``frodokem1344aes``
-    * ``opt`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``frodokem1344shake``
-    * ``opt`` (default)
-    * ``clean`` (included as ``ffi`` only)
+* ``frodokem640aes``
+  * ``opt``
+  * ``clean``
+* ``frodokem640shake``
+  * ``opt``
+  * ``clean``
+* ``frodokem976aes``
+  * ``opt``
+  * ``clean``
+* ``frodokem976shake``
+  * ``opt``
+  * ``clean``
+* ``frodokem1344aes``
+  * ``opt``
+  * ``clean``
+* ``frodokem1344shake``
+  * ``opt``
+  * ``clean``
 
-# Notes
+## Notes
+
 If you use it via the FFI interface: The ``clean`` implementation of Frodo
 needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
 sure it has enough stack space in threads.

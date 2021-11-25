@@ -19,12 +19,12 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``hqc-rmrs-128``
-    * ``clean`` (default)
- * ``hqc-rmrs-192``
-    * ``clean`` (default)
- * ``hqc-rmrs-256``
-    * ``clean`` (default)
+* ``hqc-rmrs-128``
+  * ``clean``
+* ``hqc-rmrs-192``
+  * ``clean``
+* ``hqc-rmrs-256``
+  * ``clean``
 
 
 ## License

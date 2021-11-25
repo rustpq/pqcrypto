@@ -19,18 +19,22 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``ntruhps2048509``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntruhps2048677``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntruhps4096821``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntruhrss701``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
+* ``ntruhps2048509``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntruhps2048677``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntruhps4096821``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntruhps40961229``
+  * ``clean``
+* ``ntruhrss701``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntruhrss1373``
+  * ``clean``
 
 
 ## License

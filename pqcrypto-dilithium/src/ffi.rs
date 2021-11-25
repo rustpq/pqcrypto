@@ -17,24 +17,29 @@ use pqcrypto_internals::*;
 pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2528;
 pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1312;
 pub const PQCLEAN_DILITHIUM2_CLEAN_CRYPTO_BYTES: usize = 2420;
+
 #[cfg(enable_avx2)]
 pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES: usize = 2528;
 #[cfg(enable_avx2)]
 pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1312;
 #[cfg(enable_avx2)]
 pub const PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES: usize = 2420;
+
 pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 4000;
 pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1952;
 pub const PQCLEAN_DILITHIUM3_CLEAN_CRYPTO_BYTES: usize = 3293;
+
 #[cfg(enable_avx2)]
 pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES: usize = 4000;
 #[cfg(enable_avx2)]
 pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1952;
 #[cfg(enable_avx2)]
 pub const PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES: usize = 3293;
+
 pub const PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 4864;
 pub const PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 2592;
 pub const PQCLEAN_DILITHIUM5_CLEAN_CRYPTO_BYTES: usize = 4595;
+
 #[cfg(enable_avx2)]
 pub const PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES: usize = 4864;
 #[cfg(enable_avx2)]
@@ -113,6 +118,7 @@ extern "C" {
         pk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "dilithium3_clean")]
 extern "C" {
     pub fn PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -184,6 +190,7 @@ extern "C" {
         pk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "dilithium5_clean")]
 extern "C" {
     pub fn PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -315,16 +322,16 @@ mod test_dilithium2_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_signature(
@@ -349,28 +356,30 @@ mod test_dilithium2_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_dilithium2_avx2 {
     use super::*;
@@ -384,115 +393,114 @@ mod test_dilithium2_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        unsafe { run_test_ffi() };
-    }
+        unsafe {
+            let mut rng = rand::thread_rng();
+            let mut mlen: usize = rng.gen::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-    #[target_feature(enable = "avx2")]
-    unsafe fn run_test_ffi() {
-        let mut rng = rand::thread_rng();
-        let mut mlen: usize = rng.gen::<u16>() as usize;
-        let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut pk = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES];
+            let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES);
+            let mut smlen = 0;
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign(
+                    sm.as_mut_ptr(),
+                    &mut smlen as *mut usize,
+                    msg.as_ptr(),
+                    mlen,
+                    sk.as_ptr()
+                )
+            );
+            sm.set_len(smlen);
 
-        let mut pk = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES];
-        let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES);
-        let mut smlen = 0;
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-        );
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign(
-                sm.as_mut_ptr(),
-                &mut smlen as *mut usize,
-                msg.as_ptr(),
-                mlen,
-                sk.as_ptr()
-            )
-        );
-        sm.set_len(smlen);
+            let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES);
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_open(
+                    unpacked_m.as_mut_ptr(),
+                    &mut mlen as *mut usize,
+                    sm.as_ptr(),
+                    sm.len(),
+                    pk.as_ptr()
+                )
+            );
+            unpacked_m.set_len(mlen);
+            assert_eq!(unpacked_m, msg);
 
-        let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES);
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_open(
-                unpacked_m.as_mut_ptr(),
-                &mut mlen as *mut usize,
-                sm.as_ptr(),
-                sm.len(),
-                pk.as_ptr()
-            )
-        );
-        unpacked_m.set_len(mlen);
-        assert_eq!(unpacked_m, msg);
-
-        // check verification fails with wrong pk
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
-        );
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_open(
-                unpacked_m.as_mut_ptr(),
-                &mut mlen as *mut usize,
-                sm.as_ptr(),
-                sm.len(),
-                pk_alt.as_ptr()
-            )
-        );
-
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_signature(
-                detached_sig.as_mut_ptr(),
-                &mut smlen as *mut usize,
-                msg.as_ptr(),
-                msg.len(),
-                sk.as_ptr()
-            )
-        );
-        assert!(
-            smlen <= PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES,
-            "Signed message length should be ≤ CRYPTO_BYTES"
-        );
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len(),
-                pk.as_ptr()
-            )
-        );
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len(),
-                pk_alt.as_ptr()
-            )
-        );
-
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM2_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len() - 1,
-                pk.as_ptr()
-            )
-        );
+            // check verification fails with wrong pk
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_keypair(
+                    pk_alt.as_mut_ptr(),
+                    sk_alt.as_mut_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_open(
+                    unpacked_m.as_mut_ptr(),
+                    &mut mlen as *mut usize,
+                    sm.as_ptr(),
+                    sm.len(),
+                    pk_alt.as_ptr()
+                )
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_signature(
+                    detached_sig.as_mut_ptr(),
+                    &mut smlen as *mut usize,
+                    msg.as_ptr(),
+                    msg.len(),
+                    sk.as_ptr()
+                )
+            );
+            assert!(
+                smlen <= PQCLEAN_DILITHIUM2_AVX2_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len(),
+                    pk.as_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len(),
+                    pk_alt.as_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM2_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len() - 1,
+                    pk.as_ptr()
+                )
+            );
+        }
     }
 }
+
 #[cfg(test)]
 mod test_dilithium3_clean {
     use super::*;
@@ -552,16 +560,16 @@ mod test_dilithium3_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_signature(
@@ -586,28 +594,30 @@ mod test_dilithium3_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM3_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_dilithium3_avx2 {
     use super::*;
@@ -621,115 +631,114 @@ mod test_dilithium3_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        unsafe { run_test_ffi() };
-    }
+        unsafe {
+            let mut rng = rand::thread_rng();
+            let mut mlen: usize = rng.gen::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-    #[target_feature(enable = "avx2")]
-    unsafe fn run_test_ffi() {
-        let mut rng = rand::thread_rng();
-        let mut mlen: usize = rng.gen::<u16>() as usize;
-        let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut pk = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES];
+            let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES);
+            let mut smlen = 0;
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign(
+                    sm.as_mut_ptr(),
+                    &mut smlen as *mut usize,
+                    msg.as_ptr(),
+                    mlen,
+                    sk.as_ptr()
+                )
+            );
+            sm.set_len(smlen);
 
-        let mut pk = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES];
-        let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES);
-        let mut smlen = 0;
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-        );
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign(
-                sm.as_mut_ptr(),
-                &mut smlen as *mut usize,
-                msg.as_ptr(),
-                mlen,
-                sk.as_ptr()
-            )
-        );
-        sm.set_len(smlen);
+            let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES);
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_open(
+                    unpacked_m.as_mut_ptr(),
+                    &mut mlen as *mut usize,
+                    sm.as_ptr(),
+                    sm.len(),
+                    pk.as_ptr()
+                )
+            );
+            unpacked_m.set_len(mlen);
+            assert_eq!(unpacked_m, msg);
 
-        let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES);
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_open(
-                unpacked_m.as_mut_ptr(),
-                &mut mlen as *mut usize,
-                sm.as_ptr(),
-                sm.len(),
-                pk.as_ptr()
-            )
-        );
-        unpacked_m.set_len(mlen);
-        assert_eq!(unpacked_m, msg);
-
-        // check verification fails with wrong pk
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
-        );
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_open(
-                unpacked_m.as_mut_ptr(),
-                &mut mlen as *mut usize,
-                sm.as_ptr(),
-                sm.len(),
-                pk_alt.as_ptr()
-            )
-        );
-
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_signature(
-                detached_sig.as_mut_ptr(),
-                &mut smlen as *mut usize,
-                msg.as_ptr(),
-                msg.len(),
-                sk.as_ptr()
-            )
-        );
-        assert!(
-            smlen <= PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES,
-            "Signed message length should be ≤ CRYPTO_BYTES"
-        );
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len(),
-                pk.as_ptr()
-            )
-        );
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len(),
-                pk_alt.as_ptr()
-            )
-        );
-
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM3_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len() - 1,
-                pk.as_ptr()
-            )
-        );
+            // check verification fails with wrong pk
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_keypair(
+                    pk_alt.as_mut_ptr(),
+                    sk_alt.as_mut_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_open(
+                    unpacked_m.as_mut_ptr(),
+                    &mut mlen as *mut usize,
+                    sm.as_ptr(),
+                    sm.len(),
+                    pk_alt.as_ptr()
+                )
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_signature(
+                    detached_sig.as_mut_ptr(),
+                    &mut smlen as *mut usize,
+                    msg.as_ptr(),
+                    msg.len(),
+                    sk.as_ptr()
+                )
+            );
+            assert!(
+                smlen <= PQCLEAN_DILITHIUM3_AVX2_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len(),
+                    pk.as_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len(),
+                    pk_alt.as_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM3_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len() - 1,
+                    pk.as_ptr()
+                )
+            );
+        }
     }
 }
+
 #[cfg(test)]
 mod test_dilithium5_clean {
     use super::*;
@@ -789,16 +798,16 @@ mod test_dilithium5_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_signature(
@@ -823,28 +832,30 @@ mod test_dilithium5_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_DILITHIUM5_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(all(test, enable_avx2, feature = "avx2"))]
 mod test_dilithium5_avx2 {
     use super::*;
@@ -858,112 +869,110 @@ mod test_dilithium5_avx2 {
         if !is_x86_feature_detected!("avx2") {
             return;
         }
-        unsafe { run_test_ffi() };
-    }
+        unsafe {
+            let mut rng = rand::thread_rng();
+            let mut mlen: usize = rng.gen::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
 
-    #[target_feature(enable = "avx2")]
-    unsafe fn run_test_ffi() {
-        let mut rng = rand::thread_rng();
-        let mut mlen: usize = rng.gen::<u16>() as usize;
-        let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut pk = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_PUBLICKEYBYTES];
+            let mut sk = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES];
+            let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_PUBLICKEYBYTES];
+            let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES];
+            let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES];
+            let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES);
+            let mut smlen = 0;
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign(
+                    sm.as_mut_ptr(),
+                    &mut smlen as *mut usize,
+                    msg.as_ptr(),
+                    mlen,
+                    sk.as_ptr()
+                )
+            );
+            sm.set_len(smlen);
 
-        let mut pk = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut pk_alt = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_PUBLICKEYBYTES];
-        let mut sk_alt = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_SECRETKEYBYTES];
-        let mut detached_sig = vec![0u8; PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES];
-        let mut sm = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES);
-        let mut smlen = 0;
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_keypair(pk.as_mut_ptr(), sk.as_mut_ptr())
-        );
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign(
-                sm.as_mut_ptr(),
-                &mut smlen as *mut usize,
-                msg.as_ptr(),
-                mlen,
-                sk.as_ptr()
-            )
-        );
-        sm.set_len(smlen);
+            let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES);
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_open(
+                    unpacked_m.as_mut_ptr(),
+                    &mut mlen as *mut usize,
+                    sm.as_ptr(),
+                    sm.len(),
+                    pk.as_ptr()
+                )
+            );
+            unpacked_m.set_len(mlen);
+            assert_eq!(unpacked_m, msg);
 
-        let mut unpacked_m = Vec::with_capacity(mlen + PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES);
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_open(
-                unpacked_m.as_mut_ptr(),
-                &mut mlen as *mut usize,
-                sm.as_ptr(),
-                sm.len(),
-                pk.as_ptr()
-            )
-        );
-        unpacked_m.set_len(mlen);
-        assert_eq!(unpacked_m, msg);
-
-        // check verification fails with wrong pk
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_keypair(pk_alt.as_mut_ptr(), sk_alt.as_mut_ptr())
-        );
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_open(
-                unpacked_m.as_mut_ptr(),
-                &mut mlen as *mut usize,
-                sm.as_ptr(),
-                sm.len(),
-                pk_alt.as_ptr()
-            )
-        );
-
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_signature(
-                detached_sig.as_mut_ptr(),
-                &mut smlen as *mut usize,
-                msg.as_ptr(),
-                msg.len(),
-                sk.as_ptr()
-            )
-        );
-        assert!(
-            smlen <= PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES,
-            "Signed message length should be ≤ CRYPTO_BYTES"
-        );
-        assert_eq!(
-            0,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len(),
-                pk.as_ptr()
-            )
-        );
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len(),
-                pk_alt.as_ptr()
-            )
-        );
-
-        assert_eq!(
-            -1,
-            PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
-                detached_sig.as_ptr(),
-                smlen,
-                msg.as_ptr(),
-                msg.len() - 1,
-                pk.as_ptr()
-            )
-        );
+            // check verification fails with wrong pk
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_keypair(
+                    pk_alt.as_mut_ptr(),
+                    sk_alt.as_mut_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_open(
+                    unpacked_m.as_mut_ptr(),
+                    &mut mlen as *mut usize,
+                    sm.as_ptr(),
+                    sm.len(),
+                    pk_alt.as_ptr()
+                )
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_signature(
+                    detached_sig.as_mut_ptr(),
+                    &mut smlen as *mut usize,
+                    msg.as_ptr(),
+                    msg.len(),
+                    sk.as_ptr()
+                )
+            );
+            assert!(
+                smlen <= PQCLEAN_DILITHIUM5_AVX2_CRYPTO_BYTES,
+                "Signed message length should be ≤ CRYPTO_BYTES"
+            );
+            assert_eq!(
+                0,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len(),
+                    pk.as_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len(),
+                    pk_alt.as_ptr()
+                )
+            );
+            assert_eq!(
+                -1,
+                PQCLEAN_DILITHIUM5_AVX2_crypto_sign_verify(
+                    detached_sig.as_ptr(),
+                    smlen,
+                    msg.as_ptr(),
+                    msg.len() - 1,
+                    pk.as_ptr()
+                )
+            );
+        }
     }
 }

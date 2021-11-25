@@ -19,42 +19,42 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``ntrulpr653``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntrulpr761``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntrulpr857``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntrulpr953``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntrulpr1013``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``ntrulpr1277``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``sntrup653``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``sntrup761``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``sntrup857``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``sntrup953``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``sntrup1013``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``sntrup1277``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
+* ``ntrulpr653``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntrulpr761``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntrulpr857``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntrulpr953``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntrulpr1013``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``ntrulpr1277``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``sntrup653``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``sntrup761``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``sntrup857``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``sntrup953``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``sntrup1013``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``sntrup1277``
+  * ``clean``
+  * ``avx2`` (if supported)
 
 
 ## License

@@ -19,15 +19,15 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``dilithium2``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``dilithium3``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``dilithium5``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
+* ``dilithium2``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``dilithium3``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``dilithium5``
+  * ``clean``
+  * ``avx2`` (if supported)
 
 
 ## License
