@@ -70,10 +70,10 @@ jobs:
         wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
         tar -xvzf wasi-sysroot-12.0.tar.gz
         rm wasi-sysroot-12.0.tar.gz
-        export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
     - name: Run tests
       run: |
-        export WASMTIME_HOME="/home/runner/.wasmtime"
+        export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
+        export WASMTIME_HOME="$(pwd)/.wasmtime"
         export PATH="$WASMTIME_HOME/bin:$PATH"
         cargo wasi build
         #cargo wasi test -- --nocapture      
