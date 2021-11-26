@@ -69,8 +69,8 @@ jobs:
       RUST_MIN_STACK: 20971520
     steps:
       - uses: actions/checkout@v2
-          with:
-            submodules: true    
+        with:
+          submodules: true    
       - name: Install WASI
         run: cargo install cargo-wasi    
       - name: Install wasmtime
