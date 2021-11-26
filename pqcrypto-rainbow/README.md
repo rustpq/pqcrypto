@@ -19,26 +19,27 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``rainbowI-circumzenithal``
-    * ``clean`` (default)
- * ``rainbowI-classic``
-    * ``clean`` (default)
- * ``rainbowI-compressed``
-    * ``clean`` (default)
- * ``rainbowIII-circumzenithal``
-    * ``clean`` (default)
- * ``rainbowIII-classic``
-    * ``clean`` (default)
- * ``rainbowIII-compressed``
-    * ``clean`` (default)
- * ``rainbowV-circumzenithal``
-    * ``clean`` (default)
- * ``rainbowV-classic``
-    * ``clean`` (default)
- * ``rainbowV-compressed``
-    * ``clean`` (default)
+* ``rainbowI-circumzenithal``
+  * ``clean``
+* ``rainbowI-classic``
+  * ``clean``
+* ``rainbowI-compressed``
+  * ``clean``
+* ``rainbowIII-circumzenithal``
+  * ``clean``
+* ``rainbowIII-classic``
+  * ``clean``
+* ``rainbowIII-compressed``
+  * ``clean``
+* ``rainbowV-circumzenithal``
+  * ``clean``
+* ``rainbowV-classic``
+  * ``clean``
+* ``rainbowV-compressed``
+  * ``clean``
 
-# Notes
+## Notes
+
 This implementation requires a lot of stack space.
 You need to specify ``RUST_MIN_STACK=800000000``, probably.
 

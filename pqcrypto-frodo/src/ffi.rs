@@ -21,46 +21,57 @@ pub const PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_SECRETKEYBYTES: usize = 19888;
 pub const PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_PUBLICKEYBYTES: usize = 9616;
 pub const PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_CIPHERTEXTBYTES: usize = 9720;
 pub const PQCLEAN_FRODOKEM640AES_OPT_CRYPTO_BYTES: usize = 16;
+
 pub const PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 19888;
 pub const PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 9616;
 pub const PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 9720;
 pub const PQCLEAN_FRODOKEM640AES_CLEAN_CRYPTO_BYTES: usize = 16;
+
 pub const PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_SECRETKEYBYTES: usize = 19888;
 pub const PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_PUBLICKEYBYTES: usize = 9616;
 pub const PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES: usize = 9720;
 pub const PQCLEAN_FRODOKEM640SHAKE_OPT_CRYPTO_BYTES: usize = 16;
+
 pub const PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 19888;
 pub const PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 9616;
 pub const PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 9720;
 pub const PQCLEAN_FRODOKEM640SHAKE_CLEAN_CRYPTO_BYTES: usize = 16;
+
 pub const PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_SECRETKEYBYTES: usize = 31296;
 pub const PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_PUBLICKEYBYTES: usize = 15632;
 pub const PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_CIPHERTEXTBYTES: usize = 15744;
 pub const PQCLEAN_FRODOKEM976AES_OPT_CRYPTO_BYTES: usize = 24;
+
 pub const PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 31296;
 pub const PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 15632;
 pub const PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 15744;
 pub const PQCLEAN_FRODOKEM976AES_CLEAN_CRYPTO_BYTES: usize = 24;
+
 pub const PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_SECRETKEYBYTES: usize = 31296;
 pub const PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_PUBLICKEYBYTES: usize = 15632;
 pub const PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES: usize = 15744;
 pub const PQCLEAN_FRODOKEM976SHAKE_OPT_CRYPTO_BYTES: usize = 24;
+
 pub const PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 31296;
 pub const PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 15632;
 pub const PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 15744;
 pub const PQCLEAN_FRODOKEM976SHAKE_CLEAN_CRYPTO_BYTES: usize = 24;
+
 pub const PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_SECRETKEYBYTES: usize = 43088;
 pub const PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_PUBLICKEYBYTES: usize = 21520;
 pub const PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_CIPHERTEXTBYTES: usize = 21632;
 pub const PQCLEAN_FRODOKEM1344AES_OPT_CRYPTO_BYTES: usize = 32;
+
 pub const PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 43088;
 pub const PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 21520;
 pub const PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 21632;
 pub const PQCLEAN_FRODOKEM1344AES_CLEAN_CRYPTO_BYTES: usize = 32;
+
 pub const PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_SECRETKEYBYTES: usize = 43088;
 pub const PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_PUBLICKEYBYTES: usize = 21520;
 pub const PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_CIPHERTEXTBYTES: usize = 21632;
 pub const PQCLEAN_FRODOKEM1344SHAKE_OPT_CRYPTO_BYTES: usize = 32;
+
 pub const PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 43088;
 pub const PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 21520;
 pub const PQCLEAN_FRODOKEM1344SHAKE_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 21632;
@@ -80,6 +91,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "frodokem640aes_clean")]
 extern "C" {
     pub fn PQCLEAN_FRODOKEM640AES_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -109,6 +121,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "frodokem640shake_clean")]
 extern "C" {
     pub fn PQCLEAN_FRODOKEM640SHAKE_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -138,6 +151,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "frodokem976aes_clean")]
 extern "C" {
     pub fn PQCLEAN_FRODOKEM976AES_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -167,6 +181,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "frodokem976shake_clean")]
 extern "C" {
     pub fn PQCLEAN_FRODOKEM976SHAKE_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -196,6 +211,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "frodokem1344aes_clean")]
 extern "C" {
     pub fn PQCLEAN_FRODOKEM1344AES_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -225,6 +241,7 @@ extern "C" {
         sk: *const u8,
     ) -> c_int;
 }
+
 #[link(name = "frodokem1344shake_clean")]
 extern "C" {
     pub fn PQCLEAN_FRODOKEM1344SHAKE_CLEAN_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
@@ -278,6 +295,7 @@ mod test_frodokem640aes_opt {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem640aes_clean {
     use super::*;
@@ -316,6 +334,7 @@ mod test_frodokem640aes_clean {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem640shake_opt {
     use super::*;
@@ -354,6 +373,7 @@ mod test_frodokem640shake_opt {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem640shake_clean {
     use super::*;
@@ -392,6 +412,7 @@ mod test_frodokem640shake_clean {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem976aes_opt {
     use super::*;
@@ -430,6 +451,7 @@ mod test_frodokem976aes_opt {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem976aes_clean {
     use super::*;
@@ -468,6 +490,7 @@ mod test_frodokem976aes_clean {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem976shake_opt {
     use super::*;
@@ -506,6 +529,7 @@ mod test_frodokem976shake_opt {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem976shake_clean {
     use super::*;
@@ -544,6 +568,7 @@ mod test_frodokem976shake_clean {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem1344aes_opt {
     use super::*;
@@ -582,6 +607,7 @@ mod test_frodokem1344aes_opt {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem1344aes_clean {
     use super::*;
@@ -620,6 +646,7 @@ mod test_frodokem1344aes_clean {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem1344shake_opt {
     use super::*;
@@ -658,6 +685,7 @@ mod test_frodokem1344shake_opt {
         }
     }
 }
+
 #[cfg(test)]
 mod test_frodokem1344shake_clean {
     use super::*;

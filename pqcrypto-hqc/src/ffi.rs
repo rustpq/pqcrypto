@@ -18,10 +18,12 @@ pub const PQCLEAN_HQCRMRS128_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2289;
 pub const PQCLEAN_HQCRMRS128_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 2249;
 pub const PQCLEAN_HQCRMRS128_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 4481;
 pub const PQCLEAN_HQCRMRS128_CLEAN_CRYPTO_BYTES: usize = 64;
+
 pub const PQCLEAN_HQCRMRS192_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 4562;
 pub const PQCLEAN_HQCRMRS192_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 4522;
 pub const PQCLEAN_HQCRMRS192_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 9026;
 pub const PQCLEAN_HQCRMRS192_CLEAN_CRYPTO_BYTES: usize = 64;
+
 pub const PQCLEAN_HQCRMRS256_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 7285;
 pub const PQCLEAN_HQCRMRS256_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 7245;
 pub const PQCLEAN_HQCRMRS256_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 14469;
@@ -106,6 +108,7 @@ mod test_hqcrmrs128_clean {
         }
     }
 }
+
 #[cfg(test)]
 mod test_hqcrmrs192_clean {
     use super::*;
@@ -140,6 +143,7 @@ mod test_hqcrmrs192_clean {
         }
     }
 }
+
 #[cfg(test)]
 mod test_hqcrmrs256_clean {
     use super::*;

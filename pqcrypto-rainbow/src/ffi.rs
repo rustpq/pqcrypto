@@ -23,27 +23,35 @@ use pqcrypto_internals::*;
 pub const PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 103648;
 pub const PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 60192;
 pub const PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_CRYPTO_BYTES: usize = 66;
+
 pub const PQCLEAN_RAINBOWICLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 103648;
 pub const PQCLEAN_RAINBOWICLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 161600;
 pub const PQCLEAN_RAINBOWICLASSIC_CLEAN_CRYPTO_BYTES: usize = 66;
+
 pub const PQCLEAN_RAINBOWICOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 64;
 pub const PQCLEAN_RAINBOWICOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 60192;
 pub const PQCLEAN_RAINBOWICOMPRESSED_CLEAN_CRYPTO_BYTES: usize = 66;
+
 pub const PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 626048;
 pub const PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 264608;
 pub const PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_CRYPTO_BYTES: usize = 164;
+
 pub const PQCLEAN_RAINBOWIIICLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 626048;
 pub const PQCLEAN_RAINBOWIIICLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 882080;
 pub const PQCLEAN_RAINBOWIIICLASSIC_CLEAN_CRYPTO_BYTES: usize = 164;
+
 pub const PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 64;
 pub const PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 264608;
 pub const PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_CRYPTO_BYTES: usize = 164;
+
 pub const PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1408736;
 pub const PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 536136;
 pub const PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_CRYPTO_BYTES: usize = 212;
+
 pub const PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1408736;
 pub const PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1930600;
 pub const PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES: usize = 212;
+
 pub const PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 64;
 pub const PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 536136;
 pub const PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_CRYPTO_BYTES: usize = 212;
@@ -421,16 +429,16 @@ mod test_rainbowicircumzenithal_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_signature(
@@ -455,28 +463,30 @@ mod test_rainbowicircumzenithal_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowiclassic_clean {
     use super::*;
@@ -537,16 +547,16 @@ mod test_rainbowiclassic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_signature(
@@ -571,28 +581,30 @@ mod test_rainbowiclassic_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowicompressed_clean {
     use super::*;
@@ -656,16 +668,16 @@ mod test_rainbowicompressed_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_signature(
@@ -690,28 +702,30 @@ mod test_rainbowicompressed_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowiiicircumzenithal_clean {
     use super::*;
@@ -778,16 +792,16 @@ mod test_rainbowiiicircumzenithal_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_signature(
@@ -812,28 +826,30 @@ mod test_rainbowiiicircumzenithal_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowiiiclassic_clean {
     use super::*;
@@ -897,16 +913,16 @@ mod test_rainbowiiiclassic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_signature(
@@ -931,28 +947,30 @@ mod test_rainbowiiiclassic_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowiiicompressed_clean {
     use super::*;
@@ -1016,16 +1034,16 @@ mod test_rainbowiiicompressed_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_signature(
@@ -1050,28 +1068,30 @@ mod test_rainbowiiicompressed_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowvcircumzenithal_clean {
     use super::*;
@@ -1136,16 +1156,16 @@ mod test_rainbowvcircumzenithal_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_signature(
@@ -1170,28 +1190,30 @@ mod test_rainbowvcircumzenithal_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowvclassic_clean {
     use super::*;
@@ -1252,16 +1274,16 @@ mod test_rainbowvclassic_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_signature(
@@ -1286,28 +1308,30 @@ mod test_rainbowvclassic_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }
 }
+
 #[cfg(test)]
 mod test_rainbowvcompressed_clean {
     use super::*;
@@ -1371,16 +1395,16 @@ mod test_rainbowvcompressed_clean {
                     sk_alt.as_mut_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_open(
                     unpacked_m.as_mut_ptr(),
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
             assert_eq!(
                 0,
                 PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_signature(
@@ -1405,24 +1429,25 @@ mod test_rainbowvcompressed_clean {
                     pk.as_ptr()
                 )
             );
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                ) < 0
+                )
             );
-
-            assert!(
+            assert_eq!(
+                -1,
                 PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_verify(
                     detached_sig.as_ptr(),
                     smlen,
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                ) < 0
+                )
             );
         }
     }

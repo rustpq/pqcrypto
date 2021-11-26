@@ -19,24 +19,24 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``kyber512``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``kyber768``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``kyber1024``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``kyber512-90s``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``kyber768-90s``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
- * ``kyber1024-90s``
-    * ``avx2`` (if supported)
-    * ``clean`` (default)
+* ``kyber512``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``kyber768``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``kyber1024``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``kyber512-90s``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``kyber768-90s``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``kyber1024-90s``
+  * ``clean``
+  * ``avx2`` (if supported)
 
 
 ## License

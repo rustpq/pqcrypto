@@ -19,48 +19,49 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
- * ``mceliece348864``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece348864f``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece460896``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece460896f``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece6688128``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece6688128f``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece6960119``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece6960119f``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece8192128``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
- * ``mceliece8192128f``
-    * ``avx`` (if supported)
-    * ``vec`` (default)
-    * ``clean`` (included as ``ffi`` only)
+* ``mceliece348864``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece348864f``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece460896``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece460896f``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece6688128``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece6688128f``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece6960119``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece6960119f``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece8192128``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
+* ``mceliece8192128f``
+  * ``vec``
+  * ``clean``
+  * ``avx`` (if supported)
 
-# Notes
+## Notes
+
 This implementation requires a lot of stack space.
 You need to specify ``RUST_MIN_STACK=800000000``, probably.
 
