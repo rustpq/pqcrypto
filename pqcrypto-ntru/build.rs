@@ -103,10 +103,12 @@ fn main() {
     if avx2_enabled && target_arch == "x86_64" {
         build_avx2!("ntruhps4096821");
     }
+    build_clean!("ntruhps40961229");
     build_clean!("ntruhrss701");
     if avx2_enabled && target_arch == "x86_64" {
         build_avx2!("ntruhrss701");
     }
+    build_clean!("ntruhrss1373");
 
     if avx2_enabled && target_arch == "x86_64" {
         // Print enableing flag for AVX2 implementation

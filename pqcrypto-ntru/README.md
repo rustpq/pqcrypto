@@ -28,9 +28,13 @@ methods only.
 * ``ntruhps4096821``
   * ``clean``
   * ``avx2`` (if supported)
+* ``ntruhps40961229``
+  * ``clean``
 * ``ntruhrss701``
   * ``clean``
   * ``avx2`` (if supported)
+* ``ntruhrss1373``
+  * ``clean``
 
 
 ## License

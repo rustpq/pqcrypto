@@ -32,7 +32,9 @@ pub mod kem {
         kyber1024, kyber102490s, kyber512, kyber51290s, kyber768, kyber76890s,
     };
     #[cfg(feature = "pqcrypto-ntru")]
-    pub use pqcrypto_ntru::{ntruhps2048509, ntruhps2048677, ntruhps4096821, ntruhrss701};
+    pub use pqcrypto_ntru::{
+        ntruhps2048509, ntruhps2048677, ntruhps40961229, ntruhps4096821, ntruhrss1373, ntruhrss701,
+    };
     #[cfg(feature = "pqcrypto-ntruprime")]
     pub use pqcrypto_ntruprime::{
         ntrulpr1013, ntrulpr1277, ntrulpr653, ntrulpr761, ntrulpr857, ntrulpr953, sntrup1013,
