@@ -60,7 +60,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Install Rust
-      run: rustup update stable && rustup default stable && rustup component add rus>
+      run: rustup update stable && rustup default stable && rustup component add rustfmt
     - name: Install WASI
       run: cargo install cargo-wasi
     - name: Install wasmtime
