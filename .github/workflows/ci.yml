@@ -53,6 +53,7 @@ jobs:
         with:
           command: clippy
           args: -- -D warnings
+
   wasi:
     name: Wasi
     runs-on: ubuntu-latest
