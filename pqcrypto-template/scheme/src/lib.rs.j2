@@ -3,7 +3,7 @@
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
-{% for scheme in schemes %}//! * {{ scheme.name }} - {{ scheme.implementation }}
+{% for scheme in schemes %}//! * {{ scheme.name }} - {{ scheme.implementations[0] }}
 {% endfor %}
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/

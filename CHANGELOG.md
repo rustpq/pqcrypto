@@ -1,5 +1,17 @@
 # Changelog
 
+## 2021-11-24
+
+* Add a general implementation list for each scheme in implementations.yaml which is used by build.rs.j2
+* Each scheme now has a list of supported implementation variants
+* Refactor build.rs.js2 to use macro calls
+* Update the other template files to adapt to this change
+* Slight modifications to README.md
+
+## 2021-10-26
+
+* Make `pqcrypto-internals` cross-compilable
+
 ## 2021-10-18
 
 * Fix small issue in randombytes implementation: should return 0
@@ -9,9 +21,9 @@
 * `no_std` support thanks to @rozbb (PR#25)
 * Extract randombytes from PQClean-provided APIs (avoids symbol conflict) (PR #24)
 * Update PQClean:
-    * NTRUPrime new parametersets
-    * Small Falcon fixes
-    * Small NTRU fix
+  * NTRUPrime new parametersets
+  * Small Falcon fixes
+  * Small NTRU fix
 
 ## 2021-07-28
 
@@ -19,6 +31,10 @@
 * Enable Falcon AVX2
 * NTRU Prime updates
 * Move common files into `pqcrypto-internals` and out of individual libs
+
+## 2021-06-28
+
+* Refactor the wrapper methods in scheme.rs.js2 file to macro calls
 
 ## 2021-06-10
 
@@ -120,10 +136,10 @@
 * Update FALCON from PQClean
 * Update SPHINCS+ from PQClean
 * Package LEDAcryptKEM
-    * **Warning:** The LEDAcryptKEM implementations currently packaged are known to have timing side-channel vulnerabilities.
+  * **Warning:** The LEDAcryptKEM implementations currently packaged are known to have timing side-channel vulnerabilities.
 * Package Rainbow
-    * The ``clean`` implementations are currently known to have undefined behaviour.
-      See https://github.com/PQClean/PQClean/issues/220
+  * The ``clean`` implementations are currently known to have undefined behaviour.
+      See [pqclean/issues/220](https://github.com/PQClean/PQClean/issues/220)
 * Hide a internal enum variable from ``pqcrypto_traits::sign::VerificationError``
 
 ## 2019-07-24
@@ -138,23 +154,28 @@
 * Update `rand` crate to `0.7.0`
 
 ## 2019-07-18
+
 * Update PQClean implementations
   * SPHINCS+ is now thread-safe.
   * Frodo now uses ``opt`` implementation by default.
 * Allow for multiple implementations in the ``ffi`` interface.
 
 ## 2019-07-09
+
 * Make ``encapsulate`` and ``decapsulate`` take references.
 * Add Dilithium
 * Add SABER
 
 ## 2019-07-08
+
 * Remove ``pqcrypto-internals``
 
 ## 2019-05-22
+
 * Added ``pqcrypto_traits::{Error,Result}`` to ``from_bytes`` signature.
 * Added ``pqcrypto::prelude`` to allow importing all traits in one easy go.
 * Removed all uses of ``mem::uninitialized()``
 
 ## 2019-05-21
+
 * Added MQDSS

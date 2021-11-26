@@ -25,16 +25,20 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
-{% for scheme in schemes %} * ``{{ scheme.name }}``
-{% if 'avx2_implementation' in scheme %}
-    * ``{{ scheme.avx2_implementation }}`` (if supported)
+{% for scheme in schemes %}
+* ``{{ scheme.name }}``
+{% for implementation in scheme.implementations %}
+{% if implementation == 'avx2' or implementation == 'avx' or implementation == 'aesni' %}
+  * ``{{ implementation }}`` (if supported)
+{% else %}
+  * ``{{ implementation }}``
 {% endif %}
-    * ``{{ scheme.implementation }}`` (default)
-{% for implementation in scheme.alt_implementations|default([]) %}
-    * ``{{ implementation }}`` (included as ``ffi`` only)
-{% endfor %}{% endfor %}
+{% endfor %}{# implementations #}
+{% endfor %}{# schemes #}
 
-{% if notes %}# Notes
+{% if notes %}
+## Notes
+
 {{ notes }}
 {% endif %}
 

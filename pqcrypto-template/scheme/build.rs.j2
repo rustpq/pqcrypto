@@ -4,14 +4,74 @@ extern crate glob;
 use std::env;
 use std::path::{Path, PathBuf};
 
-{% set globals = namespace(have_avx2=False) %}
+{% set globals = namespace() %}
+{% set globals.have_avx2 = False %}
+{% set globals.have_aes = False %}
+
+{% for implementation in implementations %}
+macro_rules! build_{{ implementation }} {
+    ($variant:expr) => {
+        let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
+        let common_dir = Path::new("pqclean/common");
+
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", $variant, "{{ implementation }}"]
+            .iter()
+            .collect();
+
+        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+        if target_os == "wasi" {
+            let wasi_sdk_path = &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
+        }
+
+        {% if implementation == 'avx2' or implementation == 'avx' %}
+        {% set globals.have_avx2 = True %}
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        if cfg!(target_env = "msvc") {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder
+                .flag("-mavx2")
+                .flag("-mbmi2")
+                .flag("-mbmi")
+                .flag("-maes")
+                .flag("-mpopcnt")
+                .flag("-mpclmul");
+        }
+        {% elif implementation == 'aesni' %}
+        {% set globals.have_aes = True %}
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        if cfg!(target_env = "msvc") {
+            builder.flag("/arch:AVX2");
+        } else {
+            builder
+                .flag("-maes");
+        }
+        {% else %}
+        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
+        {% endif %}
+
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile(format!("{}_{{ implementation }}", $variant).as_str());
+    };
+}
+
+{% endfor %}
 
 fn main() {
-    let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
-    let common_dir = Path::new("pqclean/common");
-
     #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
+    #[allow(unused_variables)]
+    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]
@@ -22,60 +82,31 @@ fn main() {
     let is_macos = target_os == "macos";
 
     {% for scheme in schemes %}
-    {% for implementation in [scheme.implementation] + scheme.alt_implementations|default([]) %}
-    {
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
-        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-        if target_arch == "wasm32" {
-            let wasi_sdk_path = &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
-            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
-        }
-        builder.include(internals_include_path)
-               .include(&common_dir)
-               .include(target_dir)
-               .files(scheme_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()));
-        builder.compile("{{ scheme.name }}_{{ implementation }}");
-    }
-    {% endfor %}
-
-    {# Do we have an AVX2 version? #}
-    {% if 'avx2_implementation' in scheme %}
-    {% set implementation = scheme.avx2_implementation %}
-    {% set globals.have_avx2 = True %}
+    {% for implementation in scheme.implementations %}
+    {% if implementation == 'avx2' or implementation == 'avx' %}
     if {{ avx2_guard }} {
-        let target_dir: PathBuf = ["pqclean", "crypto_{{ type }}", "{{ scheme.name }}", "{{ implementation }}"].iter().collect();
-        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        let mut builder = cc::Build::new();
-
-        if target_arch == "wasm32" {
-            let wasi_sdk_path = &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
-            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
-        }
-        if cfg!(target_env = "msvc") {
-            builder.flag("/arch:AVX2");
-        } else   {
-            builder.flag("-mavx2")
-            .flag("-mbmi2")
-            .flag("-mbmi")
-            .flag("-maes")
-            .flag("-mpopcnt")
-            .flag("-mpclmul");
-        }
-        builder
-            .include(internals_include_path)
-            .include(&common_dir)
-            .include(target_dir)
-            .files(scheme_files.into_iter().map(|p| p.unwrap().to_string_lossy().into_owned()))
-            .compile("{{ scheme.name }}_{{ implementation }}");
+        build_{{ implementation }}!("{{ scheme.name }}");
     }
+    {% elif implementation == 'aesni' %}
+    if {{ aes_guard }} {
+        build_{{ implementation }}!("{{ scheme.name }}");
+    }
+    {% else %}
+    build_{{ implementation }}!("{{ scheme.name }}");
     {% endif %}
+    {% endfor %}
     {% endfor %}
 
     {% if globals.have_avx2 %}
-    // Print enableing flag for AVX2 implementation
     if {{ avx2_guard }} {
+        // Print enableing flag for AVX2 implementation
         println!("cargo:rustc-cfg=enable_avx2");
+    }
+    {% endif %}
+    {% if globals.have_aes %}
+    if {{ aes_guard }} {
+        // Print enableing flag for AES implementation
+        println!("cargo:rustc-cfg=enable_aes");
     }
     {% endif %}
 }
