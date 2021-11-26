@@ -1,4 +1,7 @@
-on: push
+on:
+  push:
+  pull_request:
+    branches: [master]
 
 name: Continuous integration
 
@@ -12,6 +15,7 @@ jobs:
           - beta
           - nightly
     env:
+      CARGO_TERM_COLOR: always
       # 20 MiB stack
       RUST_MIN_STACK: 20971520
 
