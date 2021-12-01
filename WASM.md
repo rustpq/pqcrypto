@@ -13,13 +13,14 @@ Download the wasm32-wasi sysroot build from https://github.com/WebAssembly/wasi-
 and set the environment variable to point to it
 
 ```sh
-cd ..
-wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
-tar -xvzf wasi-sysroot-12.0.tar.gz
-rm wasi-sysroot-12.0.tar.gz
+sudo mkdir -p /opt/wasi
+cd /opt/wasi
+wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz -O /tmp/wasi-sysroot-12.0.tar.gz
+sudo tar -xvzf /tmp/wasi-sysroot-12.0.tar.gz
+rm /tmp/wasi-sysroot-12.0.tar.gz
 
 sudo tee /etc/profile.d/wasi.sh <<EOF
-export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
+export WASI_SDK_DIR="/opt/wasi/wasi-sysroot"
 EOF
 source /etc/profile.d/wasi.sh
 ````
