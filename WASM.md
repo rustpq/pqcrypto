@@ -10,7 +10,9 @@ library it becomes possible.
 # Steps
 
 Download the wasm32-wasi sysroot build from https://github.com/WebAssembly/wasi-sdk
-and set the environment variable to point to it
+and set the environment variable to point to it. This example installs it globally and makes it
+available system-wide. You may also consider adding it to your profile's environment variables
+or exporting the environment variable each time manually.
 
 ```sh
 sudo mkdir -p /opt/wasi
