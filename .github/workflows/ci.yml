@@ -1,4 +1,6 @@
-on: push
+on:
+  push:
+  pull_request:
 
 name: Continuous integration
 
@@ -12,6 +14,7 @@ jobs:
           - beta
           - nightly
     env:
+      CARGO_TERM_COLOR: always
       # 20 MiB stack
       RUST_MIN_STACK: 20971520
 
@@ -49,5 +52,39 @@ jobs:
         with:
           command: clippy
           args: -- -D warnings
+
+  wasi:
+    name: wasi
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - beta
+          - nightly
+    env:
+      CARGO_TERM_COLOR: always
+      # 20 MiB stack
+      RUST_MIN_STACK: 20971520
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true    
+      - name: Install WASI
+        run: cargo install cargo-wasi    
+      - name: Install wasmtime
+        run: curl https://wasmtime.dev/install.sh -sSf | bash    
+      - name: Install WASI SDK
+        run: |
+          wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
+          tar -xvzf wasi-sysroot-12.0.tar.gz
+          rm wasi-sysroot-12.0.tar.gz    
+      - name: Run tests
+        run: |
+          export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
+          export WASMTIME_HOME="$(pwd)/.wasmtime"
+          export PATH="$WASMTIME_HOME/bin:$PATH"
+          cargo wasi build
+          #cargo wasi test -- --nocapture
 
 #  vim: set ft=yaml ts=2 sw=2 tw=0 et :

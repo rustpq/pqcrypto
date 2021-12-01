@@ -14,6 +14,13 @@ macro_rules! build_clean {
             .iter()
             .collect();
 
+        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+        if target_os == "wasi" {
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
+        }
+
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
 
         builder
@@ -36,6 +43,13 @@ macro_rules! build_avx2 {
 
         let mut builder = cc::Build::new();
         let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, "avx2"].iter().collect();
+
+        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+        if target_os == "wasi" {
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
+        }
 
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         if cfg!(target_env = "msvc") {
