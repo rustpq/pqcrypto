@@ -25,7 +25,7 @@ sudo tee /etc/profile.d/wasi.sh <<EOF
 export WASI_SDK_DIR="/opt/wasi/wasi-sysroot"
 EOF
 source /etc/profile.d/wasi.sh
-````
+```
 
 Note: While the source command brings the WASI export variables into your current
 terminal any new terminals will miss this until you log out and back in.
