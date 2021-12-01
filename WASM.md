@@ -3,9 +3,9 @@ Support for WebAssembly
 
 # Summary
 
-Due to the need for a standard library in the build these quantum routines it is not
-possible to compile them as pure no-std WASM however by using wasi and its standard
-library it becomes possible.
+Due to the need for a standard library to build these quantum routines it is not
+possible to compile them as pure no-std WASM. However by using wasi and its standard
+library, it becomes possible.
 
 # Steps
 
