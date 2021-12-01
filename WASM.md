@@ -25,7 +25,7 @@ source /etc/profile.d/wasi.sh
 ````
 
 Note: While the source command brings the WASI export variables into your current
-terminal any new terminals will miss this until you restart your machine.
+terminal any new terminals will miss this until you log out and back in.
 
 You can now compile the library for linking with WebAssembly using the following
 command or via cargo dependencies with the same specifics.
