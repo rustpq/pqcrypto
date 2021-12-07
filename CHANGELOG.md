@@ -1,5 +1,14 @@
 # Changelog
 
+## 2021-12-07
+
+* Add AArch64 compilation option for supported schemes
+  * NTT operations can now compute with NEON support
+
+## 2021-12-01
+
+* Add WebAssembly (WASM) support
+
 ## 2021-11-24
 
 * Add a general implementation list for each scheme in implementations.yaml which is used by build.rs.j2

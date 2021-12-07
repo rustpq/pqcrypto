@@ -5,8 +5,9 @@ use std::env;
 use std::path::{Path, PathBuf};
 
 {% set globals = namespace() %}
-{% set globals.have_avx2 = False %}
-{% set globals.have_aes = False %}
+{% set globals.x86_aes = False %}
+{% set globals.x86_avx2 = False %}
+{% set globals.aarch64_neon = False %}
 
 {% for implementation in implementations %}
 macro_rules! build_{{ implementation }} {
@@ -26,7 +27,7 @@ macro_rules! build_{{ implementation }} {
         }
 
         {% if implementation == 'avx2' or implementation == 'avx' %}
-        {% set globals.have_avx2 = True %}
+        {% set globals.x86_avx2 = True %}
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
@@ -40,7 +41,7 @@ macro_rules! build_{{ implementation }} {
                 .flag("-mpclmul");
         }
         {% elif implementation == 'aesni' %}
-        {% set globals.have_aes = True %}
+        {% set globals.x86_aes = True %}
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
         if cfg!(target_env = "msvc") {
             builder.flag("/arch:AVX2");
@@ -48,6 +49,10 @@ macro_rules! build_{{ implementation }} {
             builder
                 .flag("-maes");
         }
+        {% elif implementation == 'aarch64' %}
+        {% set globals.aarch64_neon = True %}
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        builder.flag("-march=armv8-a");
         {% else %}
         let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
         {% endif %}
@@ -69,9 +74,11 @@ macro_rules! build_{{ implementation }} {
 
 fn main() {
     #[allow(unused_variables)]
+    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
     #[allow(unused_variables)]
-    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    let neon_enabled = env::var("CARGO_FEATURE_NEON").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]
@@ -84,11 +91,15 @@ fn main() {
     {% for scheme in schemes %}
     {% for implementation in scheme.implementations %}
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    if {{ avx2_guard }} {
+    if {{ x86_avx2_guard }} {
         build_{{ implementation }}!("{{ scheme.name }}");
     }
     {% elif implementation == 'aesni' %}
-    if {{ aes_guard }} {
+    if {{ x86_aes_guard }} {
+        build_{{ implementation }}!("{{ scheme.name }}");
+    }
+    {% elif implementation == 'aarch64' %}
+    if {{ aarch64_neon_guard }} {
         build_{{ implementation }}!("{{ scheme.name }}");
     }
     {% else %}
@@ -97,16 +108,22 @@ fn main() {
     {% endfor %}
     {% endfor %}
 
-    {% if globals.have_avx2 %}
-    if {{ avx2_guard }} {
+    {% if globals.x86_avx2 %}
+    if {{ x86_avx2_guard }} {
         // Print enableing flag for AVX2 implementation
-        println!("cargo:rustc-cfg=enable_avx2");
+        println!("cargo:rustc-cfg=enable_x86_avx2");
     }
     {% endif %}
-    {% if globals.have_aes %}
-    if {{ aes_guard }} {
+    {% if globals.x86_aes %}
+    if {{ x86_aes_guard }} {
         // Print enableing flag for AES implementation
-        println!("cargo:rustc-cfg=enable_aes");
+        println!("cargo:rustc-cfg=enable_x86_aes");
+    }
+    {% endif %}
+    {% if globals.aarch64_neon %}
+    if {{ aarch64_neon_guard }} {
+        // Print enableing flag for AARCH64 implementation
+        println!("cargo:rustc-cfg=enable_aarch64_neon");
     }
     {% endif %}
 }

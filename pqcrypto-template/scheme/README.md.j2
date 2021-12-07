@@ -28,10 +28,10 @@ methods only.
 {% for scheme in schemes %}
 * ``{{ scheme.name }}``
 {% for implementation in scheme.implementations %}
-{% if implementation == 'avx2' or implementation == 'avx' or implementation == 'aesni' %}
-  * ``{{ implementation }}`` (if supported)
+{% if implementation == 'clean' %}
+  * ``{{ implementation }}`` (default)
 {% else %}
-  * ``{{ implementation }}``
+  * ``{{ implementation }}`` (if supported)
 {% endif %}
 {% endfor %}{# implementations #}
 {% endfor %}{# schemes #}

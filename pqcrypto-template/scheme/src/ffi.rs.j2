@@ -19,18 +19,22 @@ use pqcrypto_internals::*;
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
 
 {% if implementation == 'avx2' or implementation == 'avx' %}
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 {% elif implementation == 'aesni' %}
-#[cfg(enable_aes)]
+#[cfg(enable_x86_aes)]
+{% elif implementation == 'aarch64' %}
+#[cfg(enable_aarch64_neon)]
 {% endif %}
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
 {% endif %}
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES: usize = {{ metadata['length-secret-key'] }};
 {% if implementation == 'avx2' or implementation == 'avx' %}
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 {% elif implementation == 'aesni' %}
-#[cfg(enable_aes)]
+#[cfg(enable_x86_aes)]
+{% elif implementation == 'aarch64' %}
+#[cfg(enable_aarch64_neon)]
 {% endif %}
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -38,18 +42,22 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES: usize = {{ metadata['leng
 pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['length-public-key'] }};
 {% if type == "kem" %}
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
     {% endif %}
     pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_CIPHERTEXTBYTES: usize = {{ metadata['length-ciphertext'] }};
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -57,9 +65,11 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['leng
     pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES: usize = {{ metadata['length-shared-secret'] }};
 {% else %}
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -75,35 +85,43 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['leng
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
 
 {% if implementation == 'avx2' or implementation == 'avx' %}
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 {% elif implementation == 'aesni' %}
-#[cfg(enable_aes)]
+#[cfg(enable_x86_aes)]
+{% elif implementation == 'aarch64' %}
+#[cfg(enable_aarch64_neon)]
 {% endif %}
 #[link(name = "{{ scheme.name }}_{{ implementation }}")]
 extern "C" {
 {% if type == "kem" %}
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
     {% endif %}
         pub fn PQCLEAN_{{ NS_NAME }}_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
     {% endif %}
         pub fn PQCLEAN_{{ NS_NAME }}_crypto_kem_enc(ct: *mut u8, ss: *mut u8, pk: *const u8) -> c_int;
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -115,45 +133,55 @@ extern "C" {
         ) -> c_int;
 {% else %}
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
     {% endif %}
         pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
     {% endif %}
         pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign(sm: *mut u8, smlen: *mut usize, msg: *const u8, len: usize, sk: *const u8) -> c_int;
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
     {% endif %}
         pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_open(m: *mut u8, mlen: *mut usize, sm: *const u8, smlen: usize, pk: *const u8) -> c_int;
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
     {% endif %}
         pub fn PQCLEAN_{{ NS_NAME }}_crypto_sign_signature(sig: *mut u8, siglen: *mut usize, m: *const u8, mlen: usize, sk: *const u8) -> c_int;
     {% if implementation == 'avx2' or implementation == 'avx' %}
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     {% elif implementation == 'aesni' %}
-    #[cfg(enable_aes)]
+    #[cfg(enable_x86_aes)]
+    {% elif implementation == 'aarch64' %}
+    #[cfg(enable_aarch64_neon)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -170,9 +198,11 @@ extern "C" {
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
 
 {% if implementation == 'avx2' or implementation == 'avx' %}
-#[cfg(all(test, enable_avx2, feature = "avx2"))]
+#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
 {% elif implementation == 'aesni' %}
-#[cfg(all(test, enable_aes, feature = "aes"))]
+#[cfg(all(test, enable_x86_aes, feature = "aes"))]
+{% elif implementation == 'aarch64' %}
+#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
 {% else %}
 #[cfg(test)]
 {% endif %}

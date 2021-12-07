@@ -19,12 +19,15 @@ serde = { version = "1.0", features = ["derive"], optional = true }
 serde-big-array = { version = "0.3.2", features = ["const-generics"], optional = true }
 
 [features]
-default = [{% if 'avx2' in implementations or 'avx' in implementations %}"avx2", {% endif %}{% if 'aesni' in implementations %}"aes", {% endif %}"std"]
+default = [{% if 'avx2' in implementations or 'avx' in implementations %}"avx2", {% endif %}{% if 'aesni' in implementations %}"aes", {% endif %}{% if 'aarch64' in implementations %}"neon", {% endif %}"std"]
 {% if 'avx2' in implementations or 'avx' in implementations %}
 avx2 = ["std"]
 {% endif %}
 {% if 'aesni' in implementations %}
 aes = ["std"]
+{% endif %}
+{% if 'aarch64' in implementations %}
+neon = ["std"]
 {% endif %}
 std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
