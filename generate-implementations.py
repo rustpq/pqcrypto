@@ -8,8 +8,9 @@ import re
 import shutil
 
 
-DEFAULT_AVX2_GUARD = 'avx2_enabled && target_arch == "x86_64"'
-DEFAULT_AES_GUARD = 'aes_enabled && target_arch == "x86_64"'
+DEFAULT_X86_AES_GUARD = 'target_arch == "x86_64" && aes_enabled'
+DEFAULT_X86_AVX2_GUARD = 'target_arch == "x86_64" && avx2_enabled'
+DEFAULT_AARCH64_NEON_GUARD = 'target_arch == "aarch64" && neon_enabled'
 
 
 def read_yaml():
@@ -82,8 +83,9 @@ def generate_scheme(name, type, properties):
         type=type,
         implementations=properties['implementations'],
         schemes=properties['schemes'],
-        avx2_guard=properties.get('avx2_guard', DEFAULT_AVX2_GUARD),
-        aes_guard=properties.get('aes_guard', DEFAULT_AES_GUARD),
+        x86_aes_guard=properties.get('x86_aes_guard', DEFAULT_X86_AES_GUARD),
+        x86_avx2_guard=properties.get('x86_avx2_guard', DEFAULT_X86_AVX2_GUARD),
+        aarch64_neon_guard=properties.get('aarch64_neon_guard', DEFAULT_AARCH64_NEON_GUARD),
     )
 
     metadatas = dict()
