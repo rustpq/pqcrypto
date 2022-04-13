@@ -109,9 +109,11 @@ macro_rules! build_avx {
 
 fn main() {
     #[allow(unused_variables)]
+    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
     #[allow(unused_variables)]
-    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    let neon_enabled = env::var("CARGO_FEATURE_NEON").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]
@@ -123,57 +125,57 @@ fn main() {
 
     build_vec!("mceliece348864");
     build_clean!("mceliece348864");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece348864");
     }
     build_vec!("mceliece348864f");
     build_clean!("mceliece348864f");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece348864f");
     }
     build_vec!("mceliece460896");
     build_clean!("mceliece460896");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece460896");
     }
     build_vec!("mceliece460896f");
     build_clean!("mceliece460896f");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece460896f");
     }
     build_vec!("mceliece6688128");
     build_clean!("mceliece6688128");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece6688128");
     }
     build_vec!("mceliece6688128f");
     build_clean!("mceliece6688128f");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece6688128f");
     }
     build_vec!("mceliece6960119");
     build_clean!("mceliece6960119");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece6960119");
     }
     build_vec!("mceliece6960119f");
     build_clean!("mceliece6960119f");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece6960119f");
     }
     build_vec!("mceliece8192128");
     build_clean!("mceliece8192128");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece8192128");
     }
     build_vec!("mceliece8192128f");
     build_clean!("mceliece8192128f");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx!("mceliece8192128f");
     }
 
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         // Print enableing flag for AVX2 implementation
-        println!("cargo:rustc-cfg=enable_avx2");
+        println!("cargo:rustc-cfg=enable_x86_avx2");
     }
 }

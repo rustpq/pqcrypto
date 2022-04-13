@@ -32,16 +32,16 @@ jobs:
 
       - uses: actions-rs/cargo@v1
         with:
-          command: build
+          command: build --features cryptographically-insecure
 
       - uses: actions-rs/cargo@v1
         with:
-          command: test
+          command: test --features cryptographically-insecure
 
       - uses: actions-rs/cargo@v1
         with:
           command: check
-          args: --features serialization
+          args: --features serialization,cryptographically-insecure
 
       - uses: actions-rs/cargo@v1
         with:
@@ -69,22 +69,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true    
+          submodules: true
       - name: Install WASI
-        run: cargo install cargo-wasi    
+        run: cargo install cargo-wasi
       - name: Install wasmtime
-        run: curl https://wasmtime.dev/install.sh -sSf | bash    
+        run: curl https://wasmtime.dev/install.sh -sSf | bash
       - name: Install WASI SDK
         run: |
           wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
           tar -xvzf wasi-sysroot-12.0.tar.gz
-          rm wasi-sysroot-12.0.tar.gz    
+          rm wasi-sysroot-12.0.tar.gz
       - name: Run tests
         run: |
           export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
           export WASMTIME_HOME="$(pwd)/.wasmtime"
           export PATH="$WASMTIME_HOME/bin:$PATH"
-          cargo wasi build
+          cargo wasi build --features cryptographically-insecure
           #cargo wasi test -- --nocapture
 
 #  vim: set ft=yaml ts=2 sw=2 tw=0 et :

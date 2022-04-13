@@ -17,7 +17,8 @@
 //!
 //! # Notes
 //! This implementation requires a lot of stack space. You need to specify
-//! ``RUST_MIN_STACK=800000000``, probably.
+//! ``RUST_MIN_STACK=800000000``, probably.  Rainbow does no longer get
+//! the claimed security, see https://eprint.iacr.org/2022/214.pdf
 
 #![no_std]
 #![allow(clippy::len_without_is_empty)]
@@ -29,6 +30,7 @@ extern crate alloc;
 #[cfg(feature = "std")]
 extern crate std;
 
+#[cfg_attr(not(feature = "cryptographically-insecure"), deny(deprecated))]
 pub mod ffi;
 pub mod rainbowicircumzenithal;
 pub mod rainbowiclassic;

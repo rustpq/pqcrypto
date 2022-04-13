@@ -38,9 +38,11 @@ macro_rules! build_clean {
 
 fn main() {
     #[allow(unused_variables)]
+    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
     #[allow(unused_variables)]
-    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    let neon_enabled = env::var("CARGO_FEATURE_NEON").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]

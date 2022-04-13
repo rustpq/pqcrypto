@@ -22,21 +22,27 @@ methods only.
 * ``kyber512``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``kyber768``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``kyber1024``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``kyber512-90s``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``kyber768-90s``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``kyber1024-90s``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 
 
 ## License

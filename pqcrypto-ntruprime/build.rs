@@ -79,9 +79,11 @@ macro_rules! build_avx2 {
 
 fn main() {
     #[allow(unused_variables)]
+    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
     #[allow(unused_variables)]
-    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    let neon_enabled = env::var("CARGO_FEATURE_NEON").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]
@@ -92,56 +94,56 @@ fn main() {
     let is_macos = target_os == "macos";
 
     build_clean!("ntrulpr653");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("ntrulpr653");
     }
     build_clean!("ntrulpr761");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("ntrulpr761");
     }
     build_clean!("ntrulpr857");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("ntrulpr857");
     }
     build_clean!("ntrulpr953");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("ntrulpr953");
     }
     build_clean!("ntrulpr1013");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("ntrulpr1013");
     }
     build_clean!("ntrulpr1277");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("ntrulpr1277");
     }
     build_clean!("sntrup653");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("sntrup653");
     }
     build_clean!("sntrup761");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("sntrup761");
     }
     build_clean!("sntrup857");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("sntrup857");
     }
     build_clean!("sntrup953");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("sntrup953");
     }
     build_clean!("sntrup1013");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("sntrup1013");
     }
     build_clean!("sntrup1277");
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("sntrup1277");
     }
 
-    if avx2_enabled && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled {
         // Print enableing flag for AVX2 implementation
-        println!("cargo:rustc-cfg=enable_avx2");
+        println!("cargo:rustc-cfg=enable_x86_avx2");
     }
 }

@@ -17,22 +17,22 @@ pub const PQCLEAN_FALCON512_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1281;
 pub const PQCLEAN_FALCON512_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 897;
 pub const PQCLEAN_FALCON512_CLEAN_CRYPTO_BYTES: usize = 690;
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_FALCON512_AVX2_CRYPTO_SECRETKEYBYTES: usize = 1281;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_FALCON512_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 897;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_FALCON512_AVX2_CRYPTO_BYTES: usize = 690;
 
 pub const PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2305;
 pub const PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1793;
 pub const PQCLEAN_FALCON1024_CLEAN_CRYPTO_BYTES: usize = 1330;
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_FALCON1024_AVX2_CRYPTO_SECRETKEYBYTES: usize = 2305;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_FALCON1024_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1793;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_FALCON1024_AVX2_CRYPTO_BYTES: usize = 1330;
 
 #[link(name = "falcon-512_clean")]
@@ -68,12 +68,12 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 #[link(name = "falcon-512_avx2")]
 extern "C" {
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON512_AVX2_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON512_AVX2_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -81,7 +81,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON512_AVX2_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -89,7 +89,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON512_AVX2_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -97,7 +97,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON512_AVX2_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -140,12 +140,12 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 #[link(name = "falcon-1024_avx2")]
 extern "C" {
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON1024_AVX2_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON1024_AVX2_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -153,7 +153,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON1024_AVX2_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -161,7 +161,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON1024_AVX2_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -169,7 +169,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_FALCON1024_AVX2_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -296,7 +296,7 @@ mod test_falcon512_clean {
     }
 }
 
-#[cfg(all(test, enable_avx2, feature = "avx2"))]
+#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
 mod test_falcon512_avx2 {
     use super::*;
     use alloc::vec;
@@ -534,7 +534,7 @@ mod test_falcon1024_clean {
     }
 }
 
-#[cfg(all(test, enable_avx2, feature = "avx2"))]
+#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
 mod test_falcon1024_avx2 {
     use super::*;
     use alloc::vec;

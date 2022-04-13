@@ -1,11 +1,11 @@
 ---
 
-pqcrypto_version: 0.14.2
+pqcrypto_version: 0.15.0
 traits_version: 0.3.4
 
 kems:
   kyber:
-    version: 0.7.4
+    version: 0.7.5
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos'
     implementations: [clean, avx2, aarch64]
     schemes:
@@ -22,7 +22,7 @@ kems:
       - name: kyber1024-90s
         implementations: [clean, avx2, aarch64]
   frodo:
-    version: 0.4.10
+    version: 0.4.11
     notes: |
       If you use it via the FFI interface: The ``clean`` implementation of Frodo
       needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
@@ -44,7 +44,7 @@ kems:
       - name: frodokem1344shake
         implementations: [opt, clean]
   ntru:
-    version: 0.5.7
+    version: 0.5.8
     implementations: [clean, avx2]
     schemes:
       - name: ntruhps2048509
@@ -60,7 +60,7 @@ kems:
       - name: ntruhrss1373
         implementations: [clean]
   ntruprime:
-    version: 0.1.5
+    version: 0.1.6
     implementations: [clean, avx2]
     schemes:
       - name: ntrulpr653
@@ -88,7 +88,7 @@ kems:
       - name: sntrup1277
         implementations: [clean, avx2]
   saber:
-    version: 0.1.10
+    version: 0.1.11
     implementations: [clean, avx2, aarch64]
     schemes:
       - name: firesaber
@@ -98,7 +98,7 @@ kems:
       - name: saber
         implementations: [clean, avx2, aarch64]
   classicmceliece:
-    version: 0.1.6
+    version: 0.1.7
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
@@ -132,7 +132,7 @@ kems:
         implementations: [vec, clean, avx]
         doctest: no
   hqc:
-    version: 0.1.4
+    version: 0.1.5
     implementations: [clean]
     schemes:
       - name: hqc-rmrs-128
@@ -145,7 +145,7 @@ kems:
 
 signs:
   dilithium:
-    version: 0.4.4
+    version: 0.4.5
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows'
     implementations: [clean, avx2, aarch64]
     schemes:
@@ -164,11 +164,15 @@ signs:
       - name: falcon-1024
         implementations: [clean, avx2]
   rainbow:
-    version: 0.2.4
+    version: 0.3.0
     notes: |
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
+
+      Rainbow does no longer get the claimed security, see
+      https://eprint.iacr.org/2022/214.pdf
     implementations: [clean]
+    insecure: true
     schemes:
       - name: rainbowI-circumzenithal
         implementations: [clean]
@@ -192,7 +196,7 @@ signs:
         implementations: [clean]
         doctest: no # Doc test fail because of too small stack size
   sphincsplus:
-    version: 0.6.3
+    version: 0.6.4
     implementations: [clean, aesni, avx2]
     schemes:
       - name: sphincs-haraka-128f-robust

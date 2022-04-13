@@ -22,13 +22,13 @@ pub const PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 699;
 pub const PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 699;
 pub const PQCLEAN_NTRUHPS2048509_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048509_AVX2_CRYPTO_SECRETKEYBYTES: usize = 935;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048509_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 699;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048509_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 699;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048509_AVX2_CRYPTO_BYTES: usize = 32;
 
 pub const PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1234;
@@ -36,13 +36,13 @@ pub const PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 930;
 pub const PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 930;
 pub const PQCLEAN_NTRUHPS2048677_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048677_AVX2_CRYPTO_SECRETKEYBYTES: usize = 1234;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048677_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 930;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048677_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 930;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS2048677_AVX2_CRYPTO_BYTES: usize = 32;
 
 pub const PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1590;
@@ -50,13 +50,13 @@ pub const PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1230;
 pub const PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1230;
 pub const PQCLEAN_NTRUHPS4096821_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS4096821_AVX2_CRYPTO_SECRETKEYBYTES: usize = 1590;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS4096821_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1230;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS4096821_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 1230;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHPS4096821_AVX2_CRYPTO_BYTES: usize = 32;
 
 pub const PQCLEAN_NTRUHPS40961229_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2366;
@@ -69,13 +69,13 @@ pub const PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1138;
 pub const PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_CIPHERTEXTBYTES: usize = 1138;
 pub const PQCLEAN_NTRUHRSS701_CLEAN_CRYPTO_BYTES: usize = 32;
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHRSS701_AVX2_CRYPTO_SECRETKEYBYTES: usize = 1450;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHRSS701_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1138;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHRSS701_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 1138;
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 pub const PQCLEAN_NTRUHRSS701_AVX2_CRYPTO_BYTES: usize = 32;
 
 pub const PQCLEAN_NTRUHRSS1373_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2983;
@@ -98,18 +98,18 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 #[link(name = "ntruhps2048509_avx2")]
 extern "C" {
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS2048509_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS2048509_AVX2_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS2048509_AVX2_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -132,18 +132,18 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 #[link(name = "ntruhps2048677_avx2")]
 extern "C" {
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS2048677_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS2048677_AVX2_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS2048677_AVX2_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -166,18 +166,18 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 #[link(name = "ntruhps4096821_avx2")]
 extern "C" {
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS4096821_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS4096821_AVX2_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHPS4096821_AVX2_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -215,18 +215,18 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(enable_avx2)]
+#[cfg(enable_x86_avx2)]
 #[link(name = "ntruhrss701_avx2")]
 extern "C" {
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHRSS701_AVX2_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHRSS701_AVX2_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_avx2)]
+    #[cfg(enable_x86_avx2)]
     pub fn PQCLEAN_NTRUHRSS701_AVX2_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -288,7 +288,7 @@ mod test_ntruhps2048509_clean {
     }
 }
 
-#[cfg(all(test, enable_avx2, feature = "avx2"))]
+#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
 mod test_ntruhps2048509_avx2 {
     use super::*;
     use alloc::vec;
@@ -370,7 +370,7 @@ mod test_ntruhps2048677_clean {
     }
 }
 
-#[cfg(all(test, enable_avx2, feature = "avx2"))]
+#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
 mod test_ntruhps2048677_avx2 {
     use super::*;
     use alloc::vec;
@@ -452,7 +452,7 @@ mod test_ntruhps4096821_clean {
     }
 }
 
-#[cfg(all(test, enable_avx2, feature = "avx2"))]
+#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
 mod test_ntruhps4096821_avx2 {
     use super::*;
     use alloc::vec;
@@ -573,7 +573,7 @@ mod test_ntruhrss701_clean {
     }
 }
 
-#[cfg(all(test, enable_avx2, feature = "avx2"))]
+#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
 mod test_ntruhrss701_avx2 {
     use super::*;
     use alloc::vec;
