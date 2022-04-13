@@ -11,6 +11,7 @@ links = "pqcrypto_internals"
 
 [build-dependencies]
 cc = { version = "1.0", features = ["parallel"] }
+dunce = "1.0.2"
 
 [dependencies]
 getrandom = "0.2"
