@@ -32,11 +32,13 @@ jobs:
 
       - uses: actions-rs/cargo@v1
         with:
-          command: build --features cryptographically-insecure
+          command: build
+          args: --features cryptographically-insecure
 
       - uses: actions-rs/cargo@v1
         with:
-          command: test --features cryptographically-insecure
+          command: test
+          args: --features cryptographically-insecure
 
       - uses: actions-rs/cargo@v1
         with:
