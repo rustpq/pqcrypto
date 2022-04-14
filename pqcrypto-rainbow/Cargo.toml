@@ -16,7 +16,7 @@ pqcrypto-internals = { path = "../pqcrypto-internals", version = "0.2" }
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.4", default-features = false }
 libc = "0.2.0"
 serde = { version = "1.0", features = ["derive"], optional = true }
-serde-big-array = { version = "0.3.2", features = ["const-generics"], optional = true }
+serde-big-array = { version = "0.4", optional = true }
 
 [features]
 default = ["std"]
@@ -25,7 +25,7 @@ serialization = ["serde", "serde-big-array"]
 cryptographically-insecure = []
 
 [dev-dependencies]
-rand = "0.7.0"
+rand = "0.8.0"
 
 [build-dependencies]
 cc = { version = "1.0", features = ["parallel"] }
