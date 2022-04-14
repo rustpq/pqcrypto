@@ -2,7 +2,7 @@
 name = "pqcrypto"
 description = "Post-Quantum cryptographic primitives"
 readme = "README.md"
-version = "0.14.2"
+version = "0.15.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -13,16 +13,16 @@ categories = ["cryptography"]
 
 [dependencies]
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.4" }
-pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.7.4", optional = true }
-pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.4.10", optional = true }
+pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.7.5", optional = true }
+pqcrypto-frodo = { path = "../pqcrypto-frodo", version = "0.4.11", optional = true }
 pqcrypto-ntru = { path = "../pqcrypto-ntru", version = "0.5.8", optional = true }
-pqcrypto-ntruprime = { path = "../pqcrypto-ntruprime", version = "0.1.5", optional = true }
-pqcrypto-saber = { path = "../pqcrypto-saber", version = "0.1.10", optional = true }
+pqcrypto-ntruprime = { path = "../pqcrypto-ntruprime", version = "0.1.6", optional = true }
+pqcrypto-saber = { path = "../pqcrypto-saber", version = "0.1.11", optional = true }
 pqcrypto-classicmceliece = { path = "../pqcrypto-classicmceliece", version = "0.1.7", optional = true }
-pqcrypto-hqc = { path = "../pqcrypto-hqc", version = "0.1.4", optional = true }
+pqcrypto-hqc = { path = "../pqcrypto-hqc", version = "0.1.5", optional = true }
 pqcrypto-dilithium = { path = "../pqcrypto-dilithium", version = "0.4.5", optional = true }
 pqcrypto-falcon = { path = "../pqcrypto-falcon", version = "0.2.10", optional = true }
-pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.2.5", optional = true }
+pqcrypto-rainbow = { path = "../pqcrypto-rainbow", version = "0.3.0", optional = true }
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.6.4", optional = true }
 
 [features]
