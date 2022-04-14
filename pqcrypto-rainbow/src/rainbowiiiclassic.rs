@@ -2,6 +2,8 @@
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
+//! **This algorithm has security problems**
+//!
 //! # Example
 //! ```
 //! use pqcrypto_rainbow::rainbowiiiclassic::*;
@@ -180,6 +182,7 @@ macro_rules! gen_keypair {
 }
 
 /// Generate a rainbowIII-classic keypair
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn keypair() -> (PublicKey, SecretKey) {
     gen_keypair!(PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_keypair)
 }
@@ -205,6 +208,7 @@ macro_rules! gen_signature {
 }
 
 /// Sign the message and return the signed message.
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     gen_signature!(PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign, msg, sk)
 }
@@ -233,6 +237,7 @@ macro_rules! open_signed {
 }
 
 /// Open the signed message and if verification succeeds return the message
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
@@ -256,6 +261,7 @@ macro_rules! detached_signature {
     }};
 }
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     detached_signature!(
@@ -285,6 +291,7 @@ macro_rules! verify_detached_sig {
 }
 
 /// Verify the detached signature
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],

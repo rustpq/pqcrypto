@@ -20,48 +20,77 @@ use libc::c_int;
 #[allow(unused_imports)]
 use pqcrypto_internals::*;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 103648;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 60192;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_CRYPTO_BYTES: usize = 66;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 103648;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 161600;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICLASSIC_CLEAN_CRYPTO_BYTES: usize = 66;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 64;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 60192;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWICOMPRESSED_CLEAN_CRYPTO_BYTES: usize = 66;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 626048;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 264608;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_CRYPTO_BYTES: usize = 164;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 626048;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 882080;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICLASSIC_CLEAN_CRYPTO_BYTES: usize = 164;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 64;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 264608;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_CRYPTO_BYTES: usize = 164;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1408736;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 536136;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_CRYPTO_BYTES: usize = 212;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 1408736;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 1930600;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES: usize = 212;
 
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 64;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_CRYPTO_PUBLICKEYBYTES: usize = 536136;
+#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub const PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_CRYPTO_BYTES: usize = 212;
 
 #[link(name = "rainbowI-circumzenithal_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_keypair(
         pk: *mut u8,
         sk: *mut u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -69,6 +98,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -76,6 +106,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -83,6 +114,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICIRCUMZENITHAL_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -94,7 +126,9 @@ extern "C" {
 
 #[link(name = "rainbowI-classic_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -102,6 +136,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -109,6 +144,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -116,6 +152,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICLASSIC_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -127,7 +164,9 @@ extern "C" {
 
 #[link(name = "rainbowI-compressed_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -135,6 +174,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -142,6 +182,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -149,6 +190,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWICOMPRESSED_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -160,10 +202,12 @@ extern "C" {
 
 #[link(name = "rainbowIII-circumzenithal_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_keypair(
         pk: *mut u8,
         sk: *mut u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -171,6 +215,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -178,6 +223,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -185,6 +231,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICIRCUMZENITHAL_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -196,7 +243,9 @@ extern "C" {
 
 #[link(name = "rainbowIII-classic_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -204,6 +253,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -211,6 +261,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -218,6 +269,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICLASSIC_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -229,10 +281,12 @@ extern "C" {
 
 #[link(name = "rainbowIII-compressed_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_keypair(
         pk: *mut u8,
         sk: *mut u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -240,6 +294,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -247,6 +302,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -254,6 +310,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWIIICOMPRESSED_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -265,10 +322,12 @@ extern "C" {
 
 #[link(name = "rainbowV-circumzenithal_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_keypair(
         pk: *mut u8,
         sk: *mut u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -276,6 +335,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -283,6 +343,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -290,6 +351,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCIRCUMZENITHAL_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -301,7 +363,9 @@ extern "C" {
 
 #[link(name = "rainbowV-classic_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -309,6 +373,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -316,6 +381,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -323,6 +389,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -334,7 +401,9 @@ extern "C" {
 
 #[link(name = "rainbowV-compressed_clean")]
 extern "C" {
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -342,6 +411,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -349,6 +419,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -356,6 +427,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
+    #[deprecated(note = "Insecure cryptography, do not use in production")]
     pub fn PQCLEAN_RAINBOWVCOMPRESSED_CLEAN_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,

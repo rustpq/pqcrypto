@@ -25,7 +25,7 @@ extern crate alloc;
 extern crate std;
 
 {% if insecure %}
-#![cfg_attr(not(feature = "cryptographically-insecure"), deny(deprecated))]
+#[cfg_attr(not(feature = "cryptographically-insecure"), deny(deprecated))]
 {% endif %}
 
 pub mod ffi;

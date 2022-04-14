@@ -184,7 +184,7 @@ macro_rules! gen_keypair {
 
 /// Generate a sphincs-haraka-256f-robust keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    #[cfg(all(enable_aes, feature = "aes"))]
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
         if std::is_x86_feature_detected!("aes") {
             return gen_keypair!(PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign_keypair);
@@ -215,7 +215,7 @@ macro_rules! gen_signature {
 
 /// Sign the message and return the signed message.
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
-    #[cfg(all(enable_aes, feature = "aes"))]
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
         if std::is_x86_feature_detected!("aes") {
             return gen_signature!(PQCLEAN_SPHINCSHARAKA256FROBUST_AESNI_crypto_sign, msg, sk);
@@ -252,7 +252,7 @@ pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
 ) -> core::result::Result<Vec<u8>, primitive::VerificationError> {
-    #[cfg(all(enable_aes, feature = "aes"))]
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
         if std::is_x86_feature_detected!("aes") {
             return open_signed!(
@@ -287,7 +287,7 @@ macro_rules! detached_signature {
 
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
-    #[cfg(all(enable_aes, feature = "aes"))]
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
         if std::is_x86_feature_detected!("aes") {
             return detached_signature!(
@@ -329,7 +329,7 @@ pub fn verify_detached_signature(
     msg: &[u8],
     pk: &PublicKey,
 ) -> core::result::Result<(), primitive::VerificationError> {
-    #[cfg(all(enable_aes, feature = "aes"))]
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
         if std::is_x86_feature_detected!("aes") {
             return verify_detached_sig!(

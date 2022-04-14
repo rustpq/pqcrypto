@@ -118,10 +118,19 @@ macro_rules! gen_keypair {
 
 /// Generate a saber keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    #[cfg(all(enable_avx2, feature = "avx2"))]
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
             return gen_keypair!(PQCLEAN_SABER_AVX2_crypto_kem_keypair);
+        }
+    }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        // always use AArch64 code, when target is detected as all AArch64 targets have NEON
+        // support, and std::is_aarch64_feature_detected!("neon") works only with Rust nightly at
+        // the moment
+        if true {
+            return gen_keypair!(PQCLEAN_SABER_AARCH64_crypto_kem_keypair);
         }
     }
     gen_keypair!(PQCLEAN_SABER_CLEAN_crypto_kem_keypair)
@@ -141,10 +150,16 @@ macro_rules! encap {
 
 /// Encapsulate to a saber public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    #[cfg(all(enable_avx2, feature = "avx2"))]
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
             return encap!(PQCLEAN_SABER_AVX2_crypto_kem_enc, pk);
+        }
+    }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return encap!(PQCLEAN_SABER_AARCH64_crypto_kem_enc, pk);
         }
     }
     encap!(PQCLEAN_SABER_CLEAN_crypto_kem_enc, pk)
@@ -163,10 +178,16 @@ macro_rules! decap {
 
 /// Decapsulate the received saber ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    #[cfg(all(enable_avx2, feature = "avx2"))]
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
             return decap!(PQCLEAN_SABER_AVX2_crypto_kem_dec, ct, sk);
+        }
+    }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return decap!(PQCLEAN_SABER_AARCH64_crypto_kem_dec, ct, sk);
         }
     }
     decap!(PQCLEAN_SABER_CLEAN_crypto_kem_dec, ct, sk)

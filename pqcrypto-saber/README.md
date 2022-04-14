@@ -22,12 +22,15 @@ methods only.
 * ``firesaber``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``lightsaber``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``saber``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 
 
 ## License

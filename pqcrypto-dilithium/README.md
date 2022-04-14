@@ -22,12 +22,15 @@ methods only.
 * ``dilithium2``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``dilithium3``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 * ``dilithium5``
   * ``clean``
   * ``avx2`` (if supported)
+  * ``aarch64`` (if supported)
 
 
 ## License

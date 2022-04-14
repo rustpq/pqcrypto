@@ -79,11 +79,46 @@ macro_rules! build_avx2 {
     };
 }
 
+macro_rules! build_aarch64 {
+    ($variant:expr) => {
+        let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
+        let common_dir = Path::new("pqclean/common");
+
+        let mut builder = cc::Build::new();
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", $variant, "aarch64"]
+            .iter()
+            .collect();
+
+        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+        if target_os == "wasi" {
+            let wasi_sdk_path =
+                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
+        }
+
+        let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
+        builder.flag("-march=armv8-a");
+
+        builder
+            .include(internals_include_path)
+            .include(&common_dir)
+            .include(target_dir)
+            .files(
+                scheme_files
+                    .into_iter()
+                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
+            );
+        builder.compile(format!("{}_aarch64", $variant).as_str());
+    };
+}
+
 fn main() {
+    #[allow(unused_variables)]
+    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
     #[allow(unused_variables)]
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
     #[allow(unused_variables)]
-    let aes_enabled = env::var("CARGO_FEATURE_AES").is_ok();
+    let neon_enabled = env::var("CARGO_FEATURE_NEON").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]
@@ -94,20 +129,33 @@ fn main() {
     let is_macos = target_os == "macos";
 
     build_clean!("dilithium2");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx2!("dilithium2");
     }
+    if target_arch == "aarch64" && neon_enabled {
+        build_aarch64!("dilithium2");
+    }
     build_clean!("dilithium3");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx2!("dilithium3");
     }
+    if target_arch == "aarch64" && neon_enabled {
+        build_aarch64!("dilithium3");
+    }
     build_clean!("dilithium5");
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx2!("dilithium5");
     }
+    if target_arch == "aarch64" && neon_enabled {
+        build_aarch64!("dilithium5");
+    }
 
-    if avx2_enabled && !is_windows && target_arch == "x86_64" {
+    if target_arch == "x86_64" && avx2_enabled && !is_windows {
         // Print enableing flag for AVX2 implementation
-        println!("cargo:rustc-cfg=enable_avx2");
+        println!("cargo:rustc-cfg=enable_x86_avx2");
+    }
+    if target_arch == "aarch64" && neon_enabled {
+        // Print enableing flag for AARCH64 implementation
+        println!("cargo:rustc-cfg=enable_aarch64_neon");
     }
 }

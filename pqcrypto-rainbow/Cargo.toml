@@ -2,7 +2,7 @@
 name = "pqcrypto-rainbow"
 description = "Post-Quantum Signature Scheme rainbow"
 readme = "README.md"
-version = "0.2.4"
+version = "0.2.5"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -22,6 +22,7 @@ serde-big-array = { version = "0.3.2", features = ["const-generics"], optional =
 default = ["std"]
 std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
+cryptographically-insecure = []
 
 [dev-dependencies]
 rand = "0.7.0"
@@ -34,3 +35,5 @@ glob = "0.3.0"
 travis-ci = { repository = "rustpq/pqcrypto", branch = "master" }
 maintenance = { status = "actively-developed" }
 
+[package.metadata.docs.rs]
+features = ["cryptographically-insecure"]

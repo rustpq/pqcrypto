@@ -1,5 +1,16 @@
 # Changelog
 
+## 2022-04-13
+
+* Update schemes
+  * NTRU small fixes
+  * Dilithium fixes
+  * McEliece small fix
+  * SPHINCS+ small fixes
+  * SABER NEON implementation
+  * Kyber neon
+* Many build system fixes
+
 ## 2021-12-07
 
 * Add AArch64 compilation option for supported schemes

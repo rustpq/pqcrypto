@@ -1,5 +1,9 @@
 # rainbow
 
+    This (implementation of an) cryptographic algorithm is insecure.
+    This crate will only compile if you enable the "cryptographically-insecure" feature.
+
+    Only use this crate and algorithm for research and educational purposes.
 
 This crate contains bindings to the C implementations of the following schemes,
 from [PQClean][pqclean].
@@ -42,6 +46,9 @@ methods only.
 
 This implementation requires a lot of stack space.
 You need to specify ``RUST_MIN_STACK=800000000``, probably.
+
+Rainbow does no longer get the claimed security, see
+https://eprint.iacr.org/2022/214.pdf
 
 
 ## License
