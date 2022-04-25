@@ -42,8 +42,8 @@ fn main() {
             builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
         }
 
-        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
-        if target_os == "windows" {
+        let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
+        if target_env == "msvc" {
             builder.flag("/arch:AVX2");
         } else {
             builder.flag("-mavx2");
