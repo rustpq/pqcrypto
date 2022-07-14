@@ -437,7 +437,7 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowicircumzenithal_clean {
     use super::*;
     use alloc::vec;
@@ -559,7 +559,7 @@ mod test_rainbowicircumzenithal_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowiclassic_clean {
     use super::*;
     use alloc::vec;
@@ -677,7 +677,7 @@ mod test_rainbowiclassic_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowicompressed_clean {
     use super::*;
     use alloc::vec;
@@ -798,7 +798,7 @@ mod test_rainbowicompressed_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowiiicircumzenithal_clean {
     use super::*;
     use alloc::vec;
@@ -922,7 +922,7 @@ mod test_rainbowiiicircumzenithal_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowiiiclassic_clean {
     use super::*;
     use alloc::vec;
@@ -1043,7 +1043,7 @@ mod test_rainbowiiiclassic_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowiiicompressed_clean {
     use super::*;
     use alloc::vec;
@@ -1164,7 +1164,7 @@ mod test_rainbowiiicompressed_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowvcircumzenithal_clean {
     use super::*;
     use alloc::vec;
@@ -1286,7 +1286,7 @@ mod test_rainbowvcircumzenithal_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowvclassic_clean {
     use super::*;
     use alloc::vec;
@@ -1404,7 +1404,7 @@ mod test_rainbowvclassic_clean {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "cryptographically-insecure"))]
 mod test_rainbowvcompressed_clean {
     use super::*;
     use alloc::vec;

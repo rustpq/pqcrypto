@@ -197,14 +197,26 @@ extern "C" {
 {% for implementation in scheme.implementations %}
 {% set NS_NAME = [scheme.name|namespaceize, implementation|namespaceize]|join('_') %}
 
-{% if implementation == 'avx2' or implementation == 'avx' %}
-#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
-{% elif implementation == 'aesni' %}
-#[cfg(all(test, enable_x86_aes, feature = "aes"))]
-{% elif implementation == 'aarch64' %}
-#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
+{% if insecure %}
+	{% if implementation == 'avx2' or implementation == 'avx' %}
+	#[cfg(all(test, enable_x86_avx2, feature = "avx2", feature = "cryptographically-insecure"))]
+	{% elif implementation == 'aesni' %}
+	#[cfg(all(test, enable_x86_aes, feature = "aes", feature = "cryptographically-insecure"))]
+	{% elif implementation == 'aarch64' %}
+	#[cfg(all(test, enable_aarch64_neon, feature = "neon", feature = "cryptographically-insecure"))]
+	{% else %}
+	#[cfg(all(test, feature = "cryptographically-insecure"))]
+	{% endif %}
 {% else %}
-#[cfg(test)]
+	{% if implementation == 'avx2' or implementation == 'avx' %}
+	#[cfg(all(test, enable_x86_avx2, feature = "avx2"))]
+	{% elif implementation == 'aesni' %}
+	#[cfg(all(test, enable_x86_aes, feature = "aes"))]
+	{% elif implementation == 'aarch64' %}
+	#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
+	{% else %}
+	#[cfg(test)]
+	{% endif %}
 {% endif %}
 mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
     use super::*;
