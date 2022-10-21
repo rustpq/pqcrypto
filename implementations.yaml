@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.15.0
+pqcrypto_version: 0.16.0
 traits_version: 0.3.4
 
 kems:
@@ -21,82 +21,6 @@ kems:
         implementations: [clean, avx2]
       - name: kyber1024-90s
         implementations: [clean, avx2]
-  frodo:
-    version: 0.4.11
-    notes: |
-      If you use it via the FFI interface: The ``clean`` implementation of Frodo
-      needs a lot of stack space, specify env variable `RUST_MIN_STACK` to make
-      sure it has enough stack space in threads.
-
-      This is not relevant for the 'normal' api methods.
-    implementations: [opt, clean]
-    schemes:
-      - name: frodokem640aes
-        implementations: [opt, clean]
-      - name: frodokem640shake
-        implementations: [opt, clean]
-      - name: frodokem976aes
-        implementations: [opt, clean]
-      - name: frodokem976shake
-        implementations: [opt, clean]
-      - name: frodokem1344aes
-        implementations: [opt, clean]
-      - name: frodokem1344shake
-        implementations: [opt, clean]
-  ntru:
-    version: 0.5.8
-    implementations: [clean, avx2]
-    schemes:
-      - name: ntruhps2048509
-        implementations: [clean, avx2]
-      - name: ntruhps2048677
-        implementations: [clean, avx2]
-      - name: ntruhps4096821
-        implementations: [clean, avx2]
-      - name: ntruhps40961229
-        implementations: [clean]
-      - name: ntruhrss701
-        implementations: [clean, avx2]
-      - name: ntruhrss1373
-        implementations: [clean]
-  ntruprime:
-    version: 0.1.6
-    implementations: [clean, avx2]
-    schemes:
-      - name: ntrulpr653
-        implementations: [clean, avx2]
-      - name: ntrulpr761
-        implementations: [clean, avx2]
-      - name: ntrulpr857
-        implementations: [clean, avx2]
-      - name: ntrulpr953
-        implementations: [clean, avx2]
-      - name: ntrulpr1013
-        implementations: [clean, avx2]
-      - name: ntrulpr1277
-        implementations: [clean, avx2]
-      - name: sntrup653
-        implementations: [clean, avx2]
-      - name: sntrup761
-        implementations: [clean, avx2]
-      - name: sntrup857
-        implementations: [clean, avx2]
-      - name: sntrup953
-        implementations: [clean, avx2]
-      - name: sntrup1013
-        implementations: [clean, avx2]
-      - name: sntrup1277
-        implementations: [clean, avx2]
-  saber:
-    version: 0.1.11
-    implementations: [clean, avx2, aarch64]
-    schemes:
-      - name: firesaber
-        implementations: [clean, avx2, aarch64]
-      - name: lightsaber
-        implementations: [clean, avx2, aarch64]
-      - name: saber
-        implementations: [clean, avx2, aarch64]
   classicmceliece:
     version: 0.1.7
     notes: |
@@ -163,38 +87,6 @@ signs:
         implementations: [clean, avx2]
       - name: falcon-1024
         implementations: [clean, avx2]
-  rainbow:
-    version: 0.3.0
-    notes: |
-      This implementation requires a lot of stack space.
-      You need to specify ``RUST_MIN_STACK=800000000``, probably.
-
-      Rainbow does no longer get the claimed security, see
-      https://eprint.iacr.org/2022/214.pdf
-    implementations: [clean]
-    insecure: true
-    schemes:
-      - name: rainbowI-circumzenithal
-        implementations: [clean]
-      - name: rainbowI-classic
-        implementations: [clean]
-      - name: rainbowI-compressed
-        implementations: [clean]
-      - name: rainbowIII-circumzenithal
-        implementations: [clean]
-      - name: rainbowIII-classic
-        implementations: [clean]
-      - name: rainbowIII-compressed
-        implementations: [clean]
-      - name: rainbowV-circumzenithal
-        implementations: [clean]
-        doctest: no # Doc test fail because of too small stack size
-      - name: rainbowV-classic
-        implementations: [clean]
-        doctest: no # Doc test fail because of too small stack size
-      - name: rainbowV-compressed
-        implementations: [clean]
-        doctest: no # Doc test fail because of too small stack size
   sphincsplus:
     version: 0.6.4
     implementations: [clean, aesni, avx2]

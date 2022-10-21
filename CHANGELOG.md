@@ -1,5 +1,15 @@
 # Changelog
 
+## 2022-10-21
+
+* Remove schemes eliminated from the NIST competition as they are no longer
+  tracked by PQClean
+  * Frodo
+  * NTRU
+  * NTRU Prime
+  * Rainbow
+  * SABER
+
 ## 2022-04-13
 
 * Update schemes
