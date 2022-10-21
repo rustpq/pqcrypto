@@ -9,6 +9,8 @@
   * NTRU Prime
   * Rainbow
   * SABER
+* Update HQC implementation from PQClean
+  * Fixes aliasing violation
 
 ## 2022-04-13
 

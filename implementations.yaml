@@ -56,7 +56,7 @@ kems:
         implementations: [vec, clean, avx]
         doctest: no
   hqc:
-    version: 0.1.5
+    version: 0.1.6
     implementations: [clean]
     schemes:
       - name: hqc-rmrs-128
