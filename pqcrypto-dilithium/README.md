@@ -31,6 +31,15 @@ methods only.
   * ``clean``
   * ``avx2`` (if supported)
   * ``aarch64`` (if supported)
+* ``dilithium2aes``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``dilithium3aes``
+  * ``clean``
+  * ``avx2`` (if supported)
+* ``dilithium5aes``
+  * ``clean``
+  * ``avx2`` (if supported)
 
 
 ## License

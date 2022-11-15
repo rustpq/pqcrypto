@@ -30,7 +30,9 @@ pub mod kem {
 
 pub mod sign {
     #[cfg(feature = "pqcrypto-dilithium")]
-    pub use pqcrypto_dilithium::{dilithium2, dilithium3, dilithium5};
+    pub use pqcrypto_dilithium::{
+        dilithium2, dilithium2aes, dilithium3, dilithium3aes, dilithium5, dilithium5aes,
+    };
     #[cfg(feature = "pqcrypto-falcon")]
     pub use pqcrypto_falcon::{falcon1024, falcon512};
     #[cfg(feature = "pqcrypto-sphincsplus")]

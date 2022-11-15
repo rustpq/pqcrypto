@@ -79,6 +79,12 @@ signs:
         implementations: [clean, avx2, aarch64]
       - name: dilithium5
         implementations: [clean, avx2, aarch64]
+      - name: dilithium2aes
+        implementations: [clean, avx2]
+      - name: dilithium3aes
+        implementations: [clean, avx2]
+      - name: dilithium5aes
+        implementations: [clean, avx2]
   falcon:
     version: 0.2.10
     implementations: [clean, avx2]
