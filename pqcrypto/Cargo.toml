@@ -2,7 +2,7 @@
 name = "pqcrypto"
 description = "Post-Quantum cryptographic primitives"
 readme = "README.md"
-version = "0.16.0"
+version = "0.16.1"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -16,7 +16,7 @@ pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.4" }
 pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.7.6", optional = true }
 pqcrypto-classicmceliece = { path = "../pqcrypto-classicmceliece", version = "0.1.7", optional = true }
 pqcrypto-hqc = { path = "../pqcrypto-hqc", version = "0.1.6", optional = true }
-pqcrypto-dilithium = { path = "../pqcrypto-dilithium", version = "0.4.5", optional = true }
+pqcrypto-dilithium = { path = "../pqcrypto-dilithium", version = "0.4.6", optional = true }
 pqcrypto-falcon = { path = "../pqcrypto-falcon", version = "0.2.10", optional = true }
 pqcrypto-sphincsplus = { path = "../pqcrypto-sphincsplus", version = "0.6.4", optional = true }
 
