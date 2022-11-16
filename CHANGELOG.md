@@ -1,5 +1,9 @@
 # Changelog
 
+## 2022-11-16
+
+* Add support for Dilithium*AES instances
+
 ## 2022-10-21
 
 * Remove schemes eliminated from the NIST competition as they are no longer
