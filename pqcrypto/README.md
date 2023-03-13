@@ -19,10 +19,6 @@ This super-crate contains the following cryptographic algorithms:
 ## Key-Encapsulation Mechanisms
 
 * [``pqcrypto-kyber``](https://crates.io/crates/pqcrypto-kyber) 
-* [``pqcrypto-frodo``](https://crates.io/crates/pqcrypto-frodo) 
-* [``pqcrypto-ntru``](https://crates.io/crates/pqcrypto-ntru) 
-* [``pqcrypto-ntruprime``](https://crates.io/crates/pqcrypto-ntruprime) 
-* [``pqcrypto-saber``](https://crates.io/crates/pqcrypto-saber) 
 * [``pqcrypto-classicmceliece``](https://crates.io/crates/pqcrypto-classicmceliece) 
 * [``pqcrypto-hqc``](https://crates.io/crates/pqcrypto-hqc) 
 
@@ -30,7 +26,6 @@ This super-crate contains the following cryptographic algorithms:
 
 * [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium) 
 * [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon) 
-* [``pqcrypto-rainbow``](https://crates.io/crates/pqcrypto-rainbow) (insecure, disabled by default)
 * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus) 
 
 ## Serialization

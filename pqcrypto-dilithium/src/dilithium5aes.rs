@@ -1,12 +1,10 @@
-//! rainbowV-classic
+//! dilithium5aes
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
-//! **This algorithm has security problems**
-//!
 //! # Example
-//! ```no_run
-//! use pqcrypto_rainbow::rainbowvclassic::*;
+//! ```
+//! use pqcrypto_dilithium::dilithium5aes::*;
 //! let message = vec![0, 1, 2, 3, 4, 5];
 //! let (pk, sk) = keypair();
 //! let sm = sign(&message, &sk);
@@ -85,25 +83,25 @@ macro_rules! simple_struct {
 
 simple_struct!(
     PublicKey,
-    ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_PUBLICKEYBYTES
 );
 simple_struct!(
     SecretKey,
-    ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_SECRETKEYBYTES
 );
 
 #[derive(Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct DetachedSignature(
     #[cfg_attr(feature = "serialization", serde(with = "BigArray"))]
-    [u8; ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES],
+    [u8; ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_BYTES],
     usize,
 );
 
 // for internal use
 impl DetachedSignature {
     fn new() -> Self {
-        DetachedSignature([0u8; ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES], 0)
+        DetachedSignature([0u8; ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_BYTES], 0)
     }
 }
 
@@ -117,7 +115,7 @@ impl primitive::DetachedSignature for DetachedSignature {
     #[inline]
     fn from_bytes(bytes: &[u8]) -> Result<Self> {
         let actual = bytes.len();
-        let expected = ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES;
+        let expected = ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_BYTES;
         if actual > expected {
             return Err(Error::BadLength {
                 name: "DetachedSignature",
@@ -125,7 +123,7 @@ impl primitive::DetachedSignature for DetachedSignature {
                 expected,
             });
         }
-        let mut array = [0u8; ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES];
+        let mut array = [0u8; ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_BYTES];
         array[..bytes.len()].copy_from_slice(bytes);
         Ok(DetachedSignature(array, actual))
     }
@@ -156,17 +154,17 @@ impl SignedMessage {
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes that a signature occupies
 pub const fn signature_bytes() -> usize {
-    ffi::PQCLEAN_RAINBOWVCLASSIC_CLEAN_CRYPTO_BYTES
+    ffi::PQCLEAN_DILITHIUM5AES_CLEAN_CRYPTO_BYTES
 }
 
 macro_rules! gen_keypair {
@@ -181,10 +179,15 @@ macro_rules! gen_keypair {
     }};
 }
 
-/// Generate a rainbowV-classic keypair
-#[deprecated(note = "Insecure cryptography, do not use in production")]
+/// Generate a dilithium5aes keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    gen_keypair!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_keypair)
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return gen_keypair!(PQCLEAN_DILITHIUM5AES_AVX2_crypto_sign_keypair);
+        }
+    }
+    gen_keypair!(PQCLEAN_DILITHIUM5AES_CLEAN_crypto_sign_keypair)
 }
 
 macro_rules! gen_signature {
@@ -208,9 +211,14 @@ macro_rules! gen_signature {
 }
 
 /// Sign the message and return the signed message.
-#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
-    gen_signature!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign, msg, sk)
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return gen_signature!(PQCLEAN_DILITHIUM5AES_AVX2_crypto_sign, msg, sk);
+        }
+    }
+    gen_signature!(PQCLEAN_DILITHIUM5AES_CLEAN_crypto_sign, msg, sk)
 }
 
 macro_rules! open_signed {
@@ -237,12 +245,17 @@ macro_rules! open_signed {
 }
 
 /// Open the signed message and if verification succeeds return the message
-#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn open(
     sm: &SignedMessage,
     pk: &PublicKey,
 ) -> core::result::Result<Vec<u8>, primitive::VerificationError> {
-    open_signed!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_open, sm, pk)
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return open_signed!(PQCLEAN_DILITHIUM5AES_AVX2_crypto_sign_open, sm, pk);
+        }
+    }
+    open_signed!(PQCLEAN_DILITHIUM5AES_CLEAN_crypto_sign_open, sm, pk)
 }
 
 macro_rules! detached_signature {
@@ -261,10 +274,15 @@ macro_rules! detached_signature {
     }};
 }
 
-#[deprecated(note = "Insecure cryptography, do not use in production")]
 /// Create a detached signature on the message
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
-    detached_signature!(PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_signature, msg, sk)
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return detached_signature!(PQCLEAN_DILITHIUM5AES_AVX2_crypto_sign_signature, msg, sk);
+        }
+    }
+    detached_signature!(PQCLEAN_DILITHIUM5AES_CLEAN_crypto_sign_signature, msg, sk)
 }
 
 macro_rules! verify_detached_sig {
@@ -287,18 +305,23 @@ macro_rules! verify_detached_sig {
 }
 
 /// Verify the detached signature
-#[deprecated(note = "Insecure cryptography, do not use in production")]
 pub fn verify_detached_signature(
     sig: &DetachedSignature,
     msg: &[u8],
     pk: &PublicKey,
 ) -> core::result::Result<(), primitive::VerificationError> {
-    verify_detached_sig!(
-        PQCLEAN_RAINBOWVCLASSIC_CLEAN_crypto_sign_verify,
-        sig,
-        msg,
-        pk
-    )
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return verify_detached_sig!(
+                PQCLEAN_DILITHIUM5AES_AVX2_crypto_sign_verify,
+                sig,
+                msg,
+                pk
+            );
+        }
+    }
+    verify_detached_sig!(PQCLEAN_DILITHIUM5AES_CLEAN_crypto_sign_verify, sig, msg, pk)
 }
 
 #[cfg(test)]

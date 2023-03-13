@@ -1,5 +1,21 @@
 # Changelog
 
+## 2022-11-16
+
+* Add support for Dilithium*AES instances
+
+## 2022-10-21
+
+* Remove schemes eliminated from the NIST competition as they are no longer
+  tracked by PQClean
+  * Frodo
+  * NTRU
+  * NTRU Prime
+  * Rainbow
+  * SABER
+* Update HQC implementation from PQClean
+  * Fixes aliasing violation
+
 ## 2022-04-13
 
 * Update schemes
