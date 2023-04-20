@@ -29,7 +29,7 @@ impl core::fmt::Display for Error {
             } => write!(
                 f,
                 "error: {} expected {} bytes, got {}",
-                name, actual, expected
+                name, expected, actual
             ),
         }
     }
