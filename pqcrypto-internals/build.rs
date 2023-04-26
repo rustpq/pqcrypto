@@ -23,7 +23,7 @@ fn main() {
     if target_os == "wasi" {
         let wasi_sdk_path =
             &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
-        build.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
+        build.flag(format!("--sysroot={wasi_sdk_path}").as_str());
     }
 
     build
@@ -39,7 +39,7 @@ fn main() {
         if target_os == "wasi" {
             let wasi_sdk_path =
                 &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
-            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
+            builder.flag(format!("--sysroot={wasi_sdk_path}").as_str());
         }
 
         let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
@@ -50,7 +50,7 @@ fn main() {
         };
         builder
             .file(
-                &cfiledir
+                cfiledir
                     .join("keccak4x")
                     .join("KeccakP-1600-times4-SIMD256.c"),
             )
