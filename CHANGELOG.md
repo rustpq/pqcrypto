@@ -1,5 +1,9 @@
 # Changelog
 
+* Update Rust dependencies
+* Update SPHINCS+ implementation
+* Update Falcon implementation
+
 ## 2022-11-16
 
 * Add support for Dilithium*AES instances

@@ -2,7 +2,7 @@
 name = "pqcrypto-sphincsplus"
 description = "Post-Quantum Signature Scheme sphincsplus"
 readme = "README.md"
-version = "0.6.4"
+version = "0.7.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -16,7 +16,7 @@ pqcrypto-internals = { path = "../pqcrypto-internals", version = "0.2" }
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.4", default-features = false }
 libc = "0.2.0"
 serde = { version = "1.0", features = ["derive"], optional = true }
-serde-big-array = { version = "0.3.2", features = ["const-generics"], optional = true }
+serde-big-array = { version = "0.5.1", optional = true }
 
 [features]
 default = ["avx2", "aes", "std"]
@@ -26,7 +26,7 @@ std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
 
 [dev-dependencies]
-rand = "0.7.0"
+rand = "0.8.5"
 
 [build-dependencies]
 cc = { version = "1.0", features = ["parallel"] }

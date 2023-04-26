@@ -182,101 +182,101 @@ fn main() {
     if target_arch == "x86_64" && aes_enabled {
         build_aesni!("sphincs-haraka-256s-simple");
     }
-    build_clean!("sphincs-shake256-128f-robust");
+    build_clean!("sphincs-shake-128f-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-128f-robust");
+        build_avx2!("sphincs-shake-128f-robust");
     }
-    build_clean!("sphincs-shake256-128f-simple");
+    build_clean!("sphincs-shake-128f-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-128f-simple");
+        build_avx2!("sphincs-shake-128f-simple");
     }
-    build_clean!("sphincs-shake256-128s-robust");
+    build_clean!("sphincs-shake-128s-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-128s-robust");
+        build_avx2!("sphincs-shake-128s-robust");
     }
-    build_clean!("sphincs-shake256-128s-simple");
+    build_clean!("sphincs-shake-128s-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-128s-simple");
+        build_avx2!("sphincs-shake-128s-simple");
     }
-    build_clean!("sphincs-shake256-192f-robust");
+    build_clean!("sphincs-shake-192f-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-192f-robust");
+        build_avx2!("sphincs-shake-192f-robust");
     }
-    build_clean!("sphincs-shake256-192f-simple");
+    build_clean!("sphincs-shake-192f-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-192f-simple");
+        build_avx2!("sphincs-shake-192f-simple");
     }
-    build_clean!("sphincs-shake256-192s-robust");
+    build_clean!("sphincs-shake-192s-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-192s-robust");
+        build_avx2!("sphincs-shake-192s-robust");
     }
-    build_clean!("sphincs-shake256-192s-simple");
+    build_clean!("sphincs-shake-192s-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-192s-simple");
+        build_avx2!("sphincs-shake-192s-simple");
     }
-    build_clean!("sphincs-shake256-256f-robust");
+    build_clean!("sphincs-shake-256f-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-256f-robust");
+        build_avx2!("sphincs-shake-256f-robust");
     }
-    build_clean!("sphincs-shake256-256f-simple");
+    build_clean!("sphincs-shake-256f-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-256f-simple");
+        build_avx2!("sphincs-shake-256f-simple");
     }
-    build_clean!("sphincs-shake256-256s-robust");
+    build_clean!("sphincs-shake-256s-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-256s-robust");
+        build_avx2!("sphincs-shake-256s-robust");
     }
-    build_clean!("sphincs-shake256-256s-simple");
+    build_clean!("sphincs-shake-256s-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-shake256-256s-simple");
+        build_avx2!("sphincs-shake-256s-simple");
     }
-    build_clean!("sphincs-sha256-128f-robust");
+    build_clean!("sphincs-sha2-128f-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-128f-robust");
+        build_avx2!("sphincs-sha2-128f-robust");
     }
-    build_clean!("sphincs-sha256-128f-simple");
+    build_clean!("sphincs-sha2-128f-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-128f-simple");
+        build_avx2!("sphincs-sha2-128f-simple");
     }
-    build_clean!("sphincs-sha256-128s-robust");
+    build_clean!("sphincs-sha2-128s-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-128s-robust");
+        build_avx2!("sphincs-sha2-128s-robust");
     }
-    build_clean!("sphincs-sha256-128s-simple");
+    build_clean!("sphincs-sha2-128s-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-128s-simple");
+        build_avx2!("sphincs-sha2-128s-simple");
     }
-    build_clean!("sphincs-sha256-192f-robust");
+    build_clean!("sphincs-sha2-192f-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-192f-robust");
+        build_avx2!("sphincs-sha2-192f-robust");
     }
-    build_clean!("sphincs-sha256-192f-simple");
+    build_clean!("sphincs-sha2-192f-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-192f-simple");
+        build_avx2!("sphincs-sha2-192f-simple");
     }
-    build_clean!("sphincs-sha256-192s-robust");
+    build_clean!("sphincs-sha2-192s-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-192s-robust");
+        build_avx2!("sphincs-sha2-192s-robust");
     }
-    build_clean!("sphincs-sha256-192s-simple");
+    build_clean!("sphincs-sha2-192s-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-192s-simple");
+        build_avx2!("sphincs-sha2-192s-simple");
     }
-    build_clean!("sphincs-sha256-256f-robust");
+    build_clean!("sphincs-sha2-256f-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-256f-robust");
+        build_avx2!("sphincs-sha2-256f-robust");
     }
-    build_clean!("sphincs-sha256-256f-simple");
+    build_clean!("sphincs-sha2-256f-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-256f-simple");
+        build_avx2!("sphincs-sha2-256f-simple");
     }
-    build_clean!("sphincs-sha256-256s-robust");
+    build_clean!("sphincs-sha2-256s-robust");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-256s-robust");
+        build_avx2!("sphincs-sha2-256s-robust");
     }
-    build_clean!("sphincs-sha256-256s-simple");
+    build_clean!("sphincs-sha2-256s-simple");
     if target_arch == "x86_64" && avx2_enabled {
-        build_avx2!("sphincs-sha256-256s-simple");
+        build_avx2!("sphincs-sha2-256s-simple");
     }
 
     if target_arch == "x86_64" && avx2_enabled {

@@ -4,7 +4,10 @@
 //!
 //! # Example
 //! ```
+//! // if using pqcrypto-sphincsplus
 //! use pqcrypto_sphincsplus::sphincsharaka128fsimple::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::sign::sphincsharaka128fsimple::*;
 //! let message = vec![0, 1, 2, 3, 4, 5];
 //! let (pk, sk) = keypair();
 //! let sm = sign(&message, &sk);

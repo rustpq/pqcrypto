@@ -15,30 +15,30 @@
 //! * sphincs-haraka-256f-simple - clean
 //! * sphincs-haraka-256s-robust - clean
 //! * sphincs-haraka-256s-simple - clean
-//! * sphincs-shake256-128f-robust - clean
-//! * sphincs-shake256-128f-simple - clean
-//! * sphincs-shake256-128s-robust - clean
-//! * sphincs-shake256-128s-simple - clean
-//! * sphincs-shake256-192f-robust - clean
-//! * sphincs-shake256-192f-simple - clean
-//! * sphincs-shake256-192s-robust - clean
-//! * sphincs-shake256-192s-simple - clean
-//! * sphincs-shake256-256f-robust - clean
-//! * sphincs-shake256-256f-simple - clean
-//! * sphincs-shake256-256s-robust - clean
-//! * sphincs-shake256-256s-simple - clean
-//! * sphincs-sha256-128f-robust - clean
-//! * sphincs-sha256-128f-simple - clean
-//! * sphincs-sha256-128s-robust - clean
-//! * sphincs-sha256-128s-simple - clean
-//! * sphincs-sha256-192f-robust - clean
-//! * sphincs-sha256-192f-simple - clean
-//! * sphincs-sha256-192s-robust - clean
-//! * sphincs-sha256-192s-simple - clean
-//! * sphincs-sha256-256f-robust - clean
-//! * sphincs-sha256-256f-simple - clean
-//! * sphincs-sha256-256s-robust - clean
-//! * sphincs-sha256-256s-simple - clean
+//! * sphincs-shake-128f-robust - clean
+//! * sphincs-shake-128f-simple - clean
+//! * sphincs-shake-128s-robust - clean
+//! * sphincs-shake-128s-simple - clean
+//! * sphincs-shake-192f-robust - clean
+//! * sphincs-shake-192f-simple - clean
+//! * sphincs-shake-192s-robust - clean
+//! * sphincs-shake-192s-simple - clean
+//! * sphincs-shake-256f-robust - clean
+//! * sphincs-shake-256f-simple - clean
+//! * sphincs-shake-256s-robust - clean
+//! * sphincs-shake-256s-simple - clean
+//! * sphincs-sha2-128f-robust - clean
+//! * sphincs-sha2-128f-simple - clean
+//! * sphincs-sha2-128s-robust - clean
+//! * sphincs-sha2-128s-simple - clean
+//! * sphincs-sha2-192f-robust - clean
+//! * sphincs-sha2-192f-simple - clean
+//! * sphincs-sha2-192s-robust - clean
+//! * sphincs-sha2-192s-simple - clean
+//! * sphincs-sha2-256f-robust - clean
+//! * sphincs-sha2-256f-simple - clean
+//! * sphincs-sha2-256s-robust - clean
+//! * sphincs-sha2-256s-simple - clean
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
@@ -66,30 +66,30 @@ pub mod sphincsharaka256frobust;
 pub mod sphincsharaka256fsimple;
 pub mod sphincsharaka256srobust;
 pub mod sphincsharaka256ssimple;
-pub mod sphincssha256128frobust;
-pub mod sphincssha256128fsimple;
-pub mod sphincssha256128srobust;
-pub mod sphincssha256128ssimple;
-pub mod sphincssha256192frobust;
-pub mod sphincssha256192fsimple;
-pub mod sphincssha256192srobust;
-pub mod sphincssha256192ssimple;
-pub mod sphincssha256256frobust;
-pub mod sphincssha256256fsimple;
-pub mod sphincssha256256srobust;
-pub mod sphincssha256256ssimple;
-pub mod sphincsshake256128frobust;
-pub mod sphincsshake256128fsimple;
-pub mod sphincsshake256128srobust;
-pub mod sphincsshake256128ssimple;
-pub mod sphincsshake256192frobust;
-pub mod sphincsshake256192fsimple;
-pub mod sphincsshake256192srobust;
-pub mod sphincsshake256192ssimple;
-pub mod sphincsshake256256frobust;
-pub mod sphincsshake256256fsimple;
-pub mod sphincsshake256256srobust;
-pub mod sphincsshake256256ssimple;
+pub mod sphincssha2128frobust;
+pub mod sphincssha2128fsimple;
+pub mod sphincssha2128srobust;
+pub mod sphincssha2128ssimple;
+pub mod sphincssha2192frobust;
+pub mod sphincssha2192fsimple;
+pub mod sphincssha2192srobust;
+pub mod sphincssha2192ssimple;
+pub mod sphincssha2256frobust;
+pub mod sphincssha2256fsimple;
+pub mod sphincssha2256srobust;
+pub mod sphincssha2256ssimple;
+pub mod sphincsshake128frobust;
+pub mod sphincsshake128fsimple;
+pub mod sphincsshake128srobust;
+pub mod sphincsshake128ssimple;
+pub mod sphincsshake192frobust;
+pub mod sphincsshake192fsimple;
+pub mod sphincsshake192srobust;
+pub mod sphincsshake192ssimple;
+pub mod sphincsshake256frobust;
+pub mod sphincsshake256fsimple;
+pub mod sphincsshake256srobust;
+pub mod sphincsshake256ssimple;
 
 pub use crate::sphincsharaka128frobust::{
     detached_sign as sphincsharaka128frobust_detached_sign,
@@ -199,219 +199,183 @@ pub use crate::sphincsharaka256ssimple::{
     signature_bytes as sphincsharaka256ssimple_signature_bytes,
     verify_detached_signature as sphincsharaka256ssimple_verify_detached_signature,
 };
-pub use crate::sphincssha256128frobust::{
-    detached_sign as sphincssha256128frobust_detached_sign,
-    keypair as sphincssha256128frobust_keypair, open as sphincssha256128frobust_open,
-    public_key_bytes as sphincssha256128frobust_public_key_bytes,
-    secret_key_bytes as sphincssha256128frobust_secret_key_bytes,
-    sign as sphincssha256128frobust_sign,
-    signature_bytes as sphincssha256128frobust_signature_bytes,
-    verify_detached_signature as sphincssha256128frobust_verify_detached_signature,
+pub use crate::sphincssha2128frobust::{
+    detached_sign as sphincssha2128frobust_detached_sign, keypair as sphincssha2128frobust_keypair,
+    open as sphincssha2128frobust_open, public_key_bytes as sphincssha2128frobust_public_key_bytes,
+    secret_key_bytes as sphincssha2128frobust_secret_key_bytes, sign as sphincssha2128frobust_sign,
+    signature_bytes as sphincssha2128frobust_signature_bytes,
+    verify_detached_signature as sphincssha2128frobust_verify_detached_signature,
 };
-pub use crate::sphincssha256128fsimple::{
-    detached_sign as sphincssha256128fsimple_detached_sign,
-    keypair as sphincssha256128fsimple_keypair, open as sphincssha256128fsimple_open,
-    public_key_bytes as sphincssha256128fsimple_public_key_bytes,
-    secret_key_bytes as sphincssha256128fsimple_secret_key_bytes,
-    sign as sphincssha256128fsimple_sign,
-    signature_bytes as sphincssha256128fsimple_signature_bytes,
-    verify_detached_signature as sphincssha256128fsimple_verify_detached_signature,
+pub use crate::sphincssha2128fsimple::{
+    detached_sign as sphincssha2128fsimple_detached_sign, keypair as sphincssha2128fsimple_keypair,
+    open as sphincssha2128fsimple_open, public_key_bytes as sphincssha2128fsimple_public_key_bytes,
+    secret_key_bytes as sphincssha2128fsimple_secret_key_bytes, sign as sphincssha2128fsimple_sign,
+    signature_bytes as sphincssha2128fsimple_signature_bytes,
+    verify_detached_signature as sphincssha2128fsimple_verify_detached_signature,
 };
-pub use crate::sphincssha256128srobust::{
-    detached_sign as sphincssha256128srobust_detached_sign,
-    keypair as sphincssha256128srobust_keypair, open as sphincssha256128srobust_open,
-    public_key_bytes as sphincssha256128srobust_public_key_bytes,
-    secret_key_bytes as sphincssha256128srobust_secret_key_bytes,
-    sign as sphincssha256128srobust_sign,
-    signature_bytes as sphincssha256128srobust_signature_bytes,
-    verify_detached_signature as sphincssha256128srobust_verify_detached_signature,
+pub use crate::sphincssha2128srobust::{
+    detached_sign as sphincssha2128srobust_detached_sign, keypair as sphincssha2128srobust_keypair,
+    open as sphincssha2128srobust_open, public_key_bytes as sphincssha2128srobust_public_key_bytes,
+    secret_key_bytes as sphincssha2128srobust_secret_key_bytes, sign as sphincssha2128srobust_sign,
+    signature_bytes as sphincssha2128srobust_signature_bytes,
+    verify_detached_signature as sphincssha2128srobust_verify_detached_signature,
 };
-pub use crate::sphincssha256128ssimple::{
-    detached_sign as sphincssha256128ssimple_detached_sign,
-    keypair as sphincssha256128ssimple_keypair, open as sphincssha256128ssimple_open,
-    public_key_bytes as sphincssha256128ssimple_public_key_bytes,
-    secret_key_bytes as sphincssha256128ssimple_secret_key_bytes,
-    sign as sphincssha256128ssimple_sign,
-    signature_bytes as sphincssha256128ssimple_signature_bytes,
-    verify_detached_signature as sphincssha256128ssimple_verify_detached_signature,
+pub use crate::sphincssha2128ssimple::{
+    detached_sign as sphincssha2128ssimple_detached_sign, keypair as sphincssha2128ssimple_keypair,
+    open as sphincssha2128ssimple_open, public_key_bytes as sphincssha2128ssimple_public_key_bytes,
+    secret_key_bytes as sphincssha2128ssimple_secret_key_bytes, sign as sphincssha2128ssimple_sign,
+    signature_bytes as sphincssha2128ssimple_signature_bytes,
+    verify_detached_signature as sphincssha2128ssimple_verify_detached_signature,
 };
-pub use crate::sphincssha256192frobust::{
-    detached_sign as sphincssha256192frobust_detached_sign,
-    keypair as sphincssha256192frobust_keypair, open as sphincssha256192frobust_open,
-    public_key_bytes as sphincssha256192frobust_public_key_bytes,
-    secret_key_bytes as sphincssha256192frobust_secret_key_bytes,
-    sign as sphincssha256192frobust_sign,
-    signature_bytes as sphincssha256192frobust_signature_bytes,
-    verify_detached_signature as sphincssha256192frobust_verify_detached_signature,
+pub use crate::sphincssha2192frobust::{
+    detached_sign as sphincssha2192frobust_detached_sign, keypair as sphincssha2192frobust_keypair,
+    open as sphincssha2192frobust_open, public_key_bytes as sphincssha2192frobust_public_key_bytes,
+    secret_key_bytes as sphincssha2192frobust_secret_key_bytes, sign as sphincssha2192frobust_sign,
+    signature_bytes as sphincssha2192frobust_signature_bytes,
+    verify_detached_signature as sphincssha2192frobust_verify_detached_signature,
 };
-pub use crate::sphincssha256192fsimple::{
-    detached_sign as sphincssha256192fsimple_detached_sign,
-    keypair as sphincssha256192fsimple_keypair, open as sphincssha256192fsimple_open,
-    public_key_bytes as sphincssha256192fsimple_public_key_bytes,
-    secret_key_bytes as sphincssha256192fsimple_secret_key_bytes,
-    sign as sphincssha256192fsimple_sign,
-    signature_bytes as sphincssha256192fsimple_signature_bytes,
-    verify_detached_signature as sphincssha256192fsimple_verify_detached_signature,
+pub use crate::sphincssha2192fsimple::{
+    detached_sign as sphincssha2192fsimple_detached_sign, keypair as sphincssha2192fsimple_keypair,
+    open as sphincssha2192fsimple_open, public_key_bytes as sphincssha2192fsimple_public_key_bytes,
+    secret_key_bytes as sphincssha2192fsimple_secret_key_bytes, sign as sphincssha2192fsimple_sign,
+    signature_bytes as sphincssha2192fsimple_signature_bytes,
+    verify_detached_signature as sphincssha2192fsimple_verify_detached_signature,
 };
-pub use crate::sphincssha256192srobust::{
-    detached_sign as sphincssha256192srobust_detached_sign,
-    keypair as sphincssha256192srobust_keypair, open as sphincssha256192srobust_open,
-    public_key_bytes as sphincssha256192srobust_public_key_bytes,
-    secret_key_bytes as sphincssha256192srobust_secret_key_bytes,
-    sign as sphincssha256192srobust_sign,
-    signature_bytes as sphincssha256192srobust_signature_bytes,
-    verify_detached_signature as sphincssha256192srobust_verify_detached_signature,
+pub use crate::sphincssha2192srobust::{
+    detached_sign as sphincssha2192srobust_detached_sign, keypair as sphincssha2192srobust_keypair,
+    open as sphincssha2192srobust_open, public_key_bytes as sphincssha2192srobust_public_key_bytes,
+    secret_key_bytes as sphincssha2192srobust_secret_key_bytes, sign as sphincssha2192srobust_sign,
+    signature_bytes as sphincssha2192srobust_signature_bytes,
+    verify_detached_signature as sphincssha2192srobust_verify_detached_signature,
 };
-pub use crate::sphincssha256192ssimple::{
-    detached_sign as sphincssha256192ssimple_detached_sign,
-    keypair as sphincssha256192ssimple_keypair, open as sphincssha256192ssimple_open,
-    public_key_bytes as sphincssha256192ssimple_public_key_bytes,
-    secret_key_bytes as sphincssha256192ssimple_secret_key_bytes,
-    sign as sphincssha256192ssimple_sign,
-    signature_bytes as sphincssha256192ssimple_signature_bytes,
-    verify_detached_signature as sphincssha256192ssimple_verify_detached_signature,
+pub use crate::sphincssha2192ssimple::{
+    detached_sign as sphincssha2192ssimple_detached_sign, keypair as sphincssha2192ssimple_keypair,
+    open as sphincssha2192ssimple_open, public_key_bytes as sphincssha2192ssimple_public_key_bytes,
+    secret_key_bytes as sphincssha2192ssimple_secret_key_bytes, sign as sphincssha2192ssimple_sign,
+    signature_bytes as sphincssha2192ssimple_signature_bytes,
+    verify_detached_signature as sphincssha2192ssimple_verify_detached_signature,
 };
-pub use crate::sphincssha256256frobust::{
-    detached_sign as sphincssha256256frobust_detached_sign,
-    keypair as sphincssha256256frobust_keypair, open as sphincssha256256frobust_open,
-    public_key_bytes as sphincssha256256frobust_public_key_bytes,
-    secret_key_bytes as sphincssha256256frobust_secret_key_bytes,
-    sign as sphincssha256256frobust_sign,
-    signature_bytes as sphincssha256256frobust_signature_bytes,
-    verify_detached_signature as sphincssha256256frobust_verify_detached_signature,
+pub use crate::sphincssha2256frobust::{
+    detached_sign as sphincssha2256frobust_detached_sign, keypair as sphincssha2256frobust_keypair,
+    open as sphincssha2256frobust_open, public_key_bytes as sphincssha2256frobust_public_key_bytes,
+    secret_key_bytes as sphincssha2256frobust_secret_key_bytes, sign as sphincssha2256frobust_sign,
+    signature_bytes as sphincssha2256frobust_signature_bytes,
+    verify_detached_signature as sphincssha2256frobust_verify_detached_signature,
 };
-pub use crate::sphincssha256256fsimple::{
-    detached_sign as sphincssha256256fsimple_detached_sign,
-    keypair as sphincssha256256fsimple_keypair, open as sphincssha256256fsimple_open,
-    public_key_bytes as sphincssha256256fsimple_public_key_bytes,
-    secret_key_bytes as sphincssha256256fsimple_secret_key_bytes,
-    sign as sphincssha256256fsimple_sign,
-    signature_bytes as sphincssha256256fsimple_signature_bytes,
-    verify_detached_signature as sphincssha256256fsimple_verify_detached_signature,
+pub use crate::sphincssha2256fsimple::{
+    detached_sign as sphincssha2256fsimple_detached_sign, keypair as sphincssha2256fsimple_keypair,
+    open as sphincssha2256fsimple_open, public_key_bytes as sphincssha2256fsimple_public_key_bytes,
+    secret_key_bytes as sphincssha2256fsimple_secret_key_bytes, sign as sphincssha2256fsimple_sign,
+    signature_bytes as sphincssha2256fsimple_signature_bytes,
+    verify_detached_signature as sphincssha2256fsimple_verify_detached_signature,
 };
-pub use crate::sphincssha256256srobust::{
-    detached_sign as sphincssha256256srobust_detached_sign,
-    keypair as sphincssha256256srobust_keypair, open as sphincssha256256srobust_open,
-    public_key_bytes as sphincssha256256srobust_public_key_bytes,
-    secret_key_bytes as sphincssha256256srobust_secret_key_bytes,
-    sign as sphincssha256256srobust_sign,
-    signature_bytes as sphincssha256256srobust_signature_bytes,
-    verify_detached_signature as sphincssha256256srobust_verify_detached_signature,
+pub use crate::sphincssha2256srobust::{
+    detached_sign as sphincssha2256srobust_detached_sign, keypair as sphincssha2256srobust_keypair,
+    open as sphincssha2256srobust_open, public_key_bytes as sphincssha2256srobust_public_key_bytes,
+    secret_key_bytes as sphincssha2256srobust_secret_key_bytes, sign as sphincssha2256srobust_sign,
+    signature_bytes as sphincssha2256srobust_signature_bytes,
+    verify_detached_signature as sphincssha2256srobust_verify_detached_signature,
 };
-pub use crate::sphincssha256256ssimple::{
-    detached_sign as sphincssha256256ssimple_detached_sign,
-    keypair as sphincssha256256ssimple_keypair, open as sphincssha256256ssimple_open,
-    public_key_bytes as sphincssha256256ssimple_public_key_bytes,
-    secret_key_bytes as sphincssha256256ssimple_secret_key_bytes,
-    sign as sphincssha256256ssimple_sign,
-    signature_bytes as sphincssha256256ssimple_signature_bytes,
-    verify_detached_signature as sphincssha256256ssimple_verify_detached_signature,
+pub use crate::sphincssha2256ssimple::{
+    detached_sign as sphincssha2256ssimple_detached_sign, keypair as sphincssha2256ssimple_keypair,
+    open as sphincssha2256ssimple_open, public_key_bytes as sphincssha2256ssimple_public_key_bytes,
+    secret_key_bytes as sphincssha2256ssimple_secret_key_bytes, sign as sphincssha2256ssimple_sign,
+    signature_bytes as sphincssha2256ssimple_signature_bytes,
+    verify_detached_signature as sphincssha2256ssimple_verify_detached_signature,
 };
-pub use crate::sphincsshake256128frobust::{
-    detached_sign as sphincsshake256128frobust_detached_sign,
-    keypair as sphincsshake256128frobust_keypair, open as sphincsshake256128frobust_open,
-    public_key_bytes as sphincsshake256128frobust_public_key_bytes,
-    secret_key_bytes as sphincsshake256128frobust_secret_key_bytes,
-    sign as sphincsshake256128frobust_sign,
-    signature_bytes as sphincsshake256128frobust_signature_bytes,
-    verify_detached_signature as sphincsshake256128frobust_verify_detached_signature,
+pub use crate::sphincsshake128frobust::{
+    detached_sign as sphincsshake128frobust_detached_sign,
+    keypair as sphincsshake128frobust_keypair, open as sphincsshake128frobust_open,
+    public_key_bytes as sphincsshake128frobust_public_key_bytes,
+    secret_key_bytes as sphincsshake128frobust_secret_key_bytes,
+    sign as sphincsshake128frobust_sign, signature_bytes as sphincsshake128frobust_signature_bytes,
+    verify_detached_signature as sphincsshake128frobust_verify_detached_signature,
 };
-pub use crate::sphincsshake256128fsimple::{
-    detached_sign as sphincsshake256128fsimple_detached_sign,
-    keypair as sphincsshake256128fsimple_keypair, open as sphincsshake256128fsimple_open,
-    public_key_bytes as sphincsshake256128fsimple_public_key_bytes,
-    secret_key_bytes as sphincsshake256128fsimple_secret_key_bytes,
-    sign as sphincsshake256128fsimple_sign,
-    signature_bytes as sphincsshake256128fsimple_signature_bytes,
-    verify_detached_signature as sphincsshake256128fsimple_verify_detached_signature,
+pub use crate::sphincsshake128fsimple::{
+    detached_sign as sphincsshake128fsimple_detached_sign,
+    keypair as sphincsshake128fsimple_keypair, open as sphincsshake128fsimple_open,
+    public_key_bytes as sphincsshake128fsimple_public_key_bytes,
+    secret_key_bytes as sphincsshake128fsimple_secret_key_bytes,
+    sign as sphincsshake128fsimple_sign, signature_bytes as sphincsshake128fsimple_signature_bytes,
+    verify_detached_signature as sphincsshake128fsimple_verify_detached_signature,
 };
-pub use crate::sphincsshake256128srobust::{
-    detached_sign as sphincsshake256128srobust_detached_sign,
-    keypair as sphincsshake256128srobust_keypair, open as sphincsshake256128srobust_open,
-    public_key_bytes as sphincsshake256128srobust_public_key_bytes,
-    secret_key_bytes as sphincsshake256128srobust_secret_key_bytes,
-    sign as sphincsshake256128srobust_sign,
-    signature_bytes as sphincsshake256128srobust_signature_bytes,
-    verify_detached_signature as sphincsshake256128srobust_verify_detached_signature,
+pub use crate::sphincsshake128srobust::{
+    detached_sign as sphincsshake128srobust_detached_sign,
+    keypair as sphincsshake128srobust_keypair, open as sphincsshake128srobust_open,
+    public_key_bytes as sphincsshake128srobust_public_key_bytes,
+    secret_key_bytes as sphincsshake128srobust_secret_key_bytes,
+    sign as sphincsshake128srobust_sign, signature_bytes as sphincsshake128srobust_signature_bytes,
+    verify_detached_signature as sphincsshake128srobust_verify_detached_signature,
 };
-pub use crate::sphincsshake256128ssimple::{
-    detached_sign as sphincsshake256128ssimple_detached_sign,
-    keypair as sphincsshake256128ssimple_keypair, open as sphincsshake256128ssimple_open,
-    public_key_bytes as sphincsshake256128ssimple_public_key_bytes,
-    secret_key_bytes as sphincsshake256128ssimple_secret_key_bytes,
-    sign as sphincsshake256128ssimple_sign,
-    signature_bytes as sphincsshake256128ssimple_signature_bytes,
-    verify_detached_signature as sphincsshake256128ssimple_verify_detached_signature,
+pub use crate::sphincsshake128ssimple::{
+    detached_sign as sphincsshake128ssimple_detached_sign,
+    keypair as sphincsshake128ssimple_keypair, open as sphincsshake128ssimple_open,
+    public_key_bytes as sphincsshake128ssimple_public_key_bytes,
+    secret_key_bytes as sphincsshake128ssimple_secret_key_bytes,
+    sign as sphincsshake128ssimple_sign, signature_bytes as sphincsshake128ssimple_signature_bytes,
+    verify_detached_signature as sphincsshake128ssimple_verify_detached_signature,
 };
-pub use crate::sphincsshake256192frobust::{
-    detached_sign as sphincsshake256192frobust_detached_sign,
-    keypair as sphincsshake256192frobust_keypair, open as sphincsshake256192frobust_open,
-    public_key_bytes as sphincsshake256192frobust_public_key_bytes,
-    secret_key_bytes as sphincsshake256192frobust_secret_key_bytes,
-    sign as sphincsshake256192frobust_sign,
-    signature_bytes as sphincsshake256192frobust_signature_bytes,
-    verify_detached_signature as sphincsshake256192frobust_verify_detached_signature,
+pub use crate::sphincsshake192frobust::{
+    detached_sign as sphincsshake192frobust_detached_sign,
+    keypair as sphincsshake192frobust_keypair, open as sphincsshake192frobust_open,
+    public_key_bytes as sphincsshake192frobust_public_key_bytes,
+    secret_key_bytes as sphincsshake192frobust_secret_key_bytes,
+    sign as sphincsshake192frobust_sign, signature_bytes as sphincsshake192frobust_signature_bytes,
+    verify_detached_signature as sphincsshake192frobust_verify_detached_signature,
 };
-pub use crate::sphincsshake256192fsimple::{
-    detached_sign as sphincsshake256192fsimple_detached_sign,
-    keypair as sphincsshake256192fsimple_keypair, open as sphincsshake256192fsimple_open,
-    public_key_bytes as sphincsshake256192fsimple_public_key_bytes,
-    secret_key_bytes as sphincsshake256192fsimple_secret_key_bytes,
-    sign as sphincsshake256192fsimple_sign,
-    signature_bytes as sphincsshake256192fsimple_signature_bytes,
-    verify_detached_signature as sphincsshake256192fsimple_verify_detached_signature,
+pub use crate::sphincsshake192fsimple::{
+    detached_sign as sphincsshake192fsimple_detached_sign,
+    keypair as sphincsshake192fsimple_keypair, open as sphincsshake192fsimple_open,
+    public_key_bytes as sphincsshake192fsimple_public_key_bytes,
+    secret_key_bytes as sphincsshake192fsimple_secret_key_bytes,
+    sign as sphincsshake192fsimple_sign, signature_bytes as sphincsshake192fsimple_signature_bytes,
+    verify_detached_signature as sphincsshake192fsimple_verify_detached_signature,
 };
-pub use crate::sphincsshake256192srobust::{
-    detached_sign as sphincsshake256192srobust_detached_sign,
-    keypair as sphincsshake256192srobust_keypair, open as sphincsshake256192srobust_open,
-    public_key_bytes as sphincsshake256192srobust_public_key_bytes,
-    secret_key_bytes as sphincsshake256192srobust_secret_key_bytes,
-    sign as sphincsshake256192srobust_sign,
-    signature_bytes as sphincsshake256192srobust_signature_bytes,
-    verify_detached_signature as sphincsshake256192srobust_verify_detached_signature,
+pub use crate::sphincsshake192srobust::{
+    detached_sign as sphincsshake192srobust_detached_sign,
+    keypair as sphincsshake192srobust_keypair, open as sphincsshake192srobust_open,
+    public_key_bytes as sphincsshake192srobust_public_key_bytes,
+    secret_key_bytes as sphincsshake192srobust_secret_key_bytes,
+    sign as sphincsshake192srobust_sign, signature_bytes as sphincsshake192srobust_signature_bytes,
+    verify_detached_signature as sphincsshake192srobust_verify_detached_signature,
 };
-pub use crate::sphincsshake256192ssimple::{
-    detached_sign as sphincsshake256192ssimple_detached_sign,
-    keypair as sphincsshake256192ssimple_keypair, open as sphincsshake256192ssimple_open,
-    public_key_bytes as sphincsshake256192ssimple_public_key_bytes,
-    secret_key_bytes as sphincsshake256192ssimple_secret_key_bytes,
-    sign as sphincsshake256192ssimple_sign,
-    signature_bytes as sphincsshake256192ssimple_signature_bytes,
-    verify_detached_signature as sphincsshake256192ssimple_verify_detached_signature,
+pub use crate::sphincsshake192ssimple::{
+    detached_sign as sphincsshake192ssimple_detached_sign,
+    keypair as sphincsshake192ssimple_keypair, open as sphincsshake192ssimple_open,
+    public_key_bytes as sphincsshake192ssimple_public_key_bytes,
+    secret_key_bytes as sphincsshake192ssimple_secret_key_bytes,
+    sign as sphincsshake192ssimple_sign, signature_bytes as sphincsshake192ssimple_signature_bytes,
+    verify_detached_signature as sphincsshake192ssimple_verify_detached_signature,
 };
-pub use crate::sphincsshake256256frobust::{
-    detached_sign as sphincsshake256256frobust_detached_sign,
-    keypair as sphincsshake256256frobust_keypair, open as sphincsshake256256frobust_open,
-    public_key_bytes as sphincsshake256256frobust_public_key_bytes,
-    secret_key_bytes as sphincsshake256256frobust_secret_key_bytes,
-    sign as sphincsshake256256frobust_sign,
-    signature_bytes as sphincsshake256256frobust_signature_bytes,
-    verify_detached_signature as sphincsshake256256frobust_verify_detached_signature,
+pub use crate::sphincsshake256frobust::{
+    detached_sign as sphincsshake256frobust_detached_sign,
+    keypair as sphincsshake256frobust_keypair, open as sphincsshake256frobust_open,
+    public_key_bytes as sphincsshake256frobust_public_key_bytes,
+    secret_key_bytes as sphincsshake256frobust_secret_key_bytes,
+    sign as sphincsshake256frobust_sign, signature_bytes as sphincsshake256frobust_signature_bytes,
+    verify_detached_signature as sphincsshake256frobust_verify_detached_signature,
 };
-pub use crate::sphincsshake256256fsimple::{
-    detached_sign as sphincsshake256256fsimple_detached_sign,
-    keypair as sphincsshake256256fsimple_keypair, open as sphincsshake256256fsimple_open,
-    public_key_bytes as sphincsshake256256fsimple_public_key_bytes,
-    secret_key_bytes as sphincsshake256256fsimple_secret_key_bytes,
-    sign as sphincsshake256256fsimple_sign,
-    signature_bytes as sphincsshake256256fsimple_signature_bytes,
-    verify_detached_signature as sphincsshake256256fsimple_verify_detached_signature,
+pub use crate::sphincsshake256fsimple::{
+    detached_sign as sphincsshake256fsimple_detached_sign,
+    keypair as sphincsshake256fsimple_keypair, open as sphincsshake256fsimple_open,
+    public_key_bytes as sphincsshake256fsimple_public_key_bytes,
+    secret_key_bytes as sphincsshake256fsimple_secret_key_bytes,
+    sign as sphincsshake256fsimple_sign, signature_bytes as sphincsshake256fsimple_signature_bytes,
+    verify_detached_signature as sphincsshake256fsimple_verify_detached_signature,
 };
-pub use crate::sphincsshake256256srobust::{
-    detached_sign as sphincsshake256256srobust_detached_sign,
-    keypair as sphincsshake256256srobust_keypair, open as sphincsshake256256srobust_open,
-    public_key_bytes as sphincsshake256256srobust_public_key_bytes,
-    secret_key_bytes as sphincsshake256256srobust_secret_key_bytes,
-    sign as sphincsshake256256srobust_sign,
-    signature_bytes as sphincsshake256256srobust_signature_bytes,
-    verify_detached_signature as sphincsshake256256srobust_verify_detached_signature,
+pub use crate::sphincsshake256srobust::{
+    detached_sign as sphincsshake256srobust_detached_sign,
+    keypair as sphincsshake256srobust_keypair, open as sphincsshake256srobust_open,
+    public_key_bytes as sphincsshake256srobust_public_key_bytes,
+    secret_key_bytes as sphincsshake256srobust_secret_key_bytes,
+    sign as sphincsshake256srobust_sign, signature_bytes as sphincsshake256srobust_signature_bytes,
+    verify_detached_signature as sphincsshake256srobust_verify_detached_signature,
 };
-pub use crate::sphincsshake256256ssimple::{
-    detached_sign as sphincsshake256256ssimple_detached_sign,
-    keypair as sphincsshake256256ssimple_keypair, open as sphincsshake256256ssimple_open,
-    public_key_bytes as sphincsshake256256ssimple_public_key_bytes,
-    secret_key_bytes as sphincsshake256256ssimple_secret_key_bytes,
-    sign as sphincsshake256256ssimple_sign,
-    signature_bytes as sphincsshake256256ssimple_signature_bytes,
-    verify_detached_signature as sphincsshake256256ssimple_verify_detached_signature,
+pub use crate::sphincsshake256ssimple::{
+    detached_sign as sphincsshake256ssimple_detached_sign,
+    keypair as sphincsshake256ssimple_keypair, open as sphincsshake256ssimple_open,
+    public_key_bytes as sphincsshake256ssimple_public_key_bytes,
+    secret_key_bytes as sphincsshake256ssimple_secret_key_bytes,
+    sign as sphincsshake256ssimple_sign, signature_bytes as sphincsshake256ssimple_signature_bytes,
+    verify_detached_signature as sphincsshake256ssimple_verify_detached_signature,
 };

@@ -4,7 +4,10 @@
 //!
 //! # Example
 //! ```
+//! // if using pqcrypto-falcon
 //! use pqcrypto_falcon::falcon1024::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::sign::falcon1024::*;
 //! let message = vec![0, 1, 2, 3, 4, 5];
 //! let (pk, sk) = keypair();
 //! let sm = sign(&message, &sk);

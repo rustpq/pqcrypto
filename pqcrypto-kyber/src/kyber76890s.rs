@@ -4,7 +4,10 @@
 //!
 //! # Example
 //! ```
+//! // if using pqcrypto-kyber
 //! use pqcrypto_kyber::kyber76890s::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::kem::kyber76890s::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(&ct, &sk);

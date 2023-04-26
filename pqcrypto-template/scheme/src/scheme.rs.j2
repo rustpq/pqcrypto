@@ -10,13 +10,19 @@
 //! ```{% if not scheme.doctest|default(true) %}no_run{% endif %}
 
 {% if type == "kem" %}
+//! // if using pqcrypto-{{ name }}
 //! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::kem::{{scheme.name|nameize}}::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(&ct, &sk);
 //! assert!(ss1 == ss2);
 {% else %}
+//! // if using pqcrypto-{{ name }}
 //! use pqcrypto_{{ name }}::{{ scheme.name|nameize }}::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::sign::{{scheme.name|nameize}}::*;
 //! let message = vec![0, 1, 2, 3, 4, 5];
 //! let (pk, sk) = keypair();
 //! let sm = sign(&message, &sk);

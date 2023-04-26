@@ -4,7 +4,10 @@
 //!
 //! # Example
 //! ```
+//! // if using pqcrypto-hqc
 //! use pqcrypto_hqc::hqcrmrs128::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::kem::hqcrmrs128::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(&ct, &sk);

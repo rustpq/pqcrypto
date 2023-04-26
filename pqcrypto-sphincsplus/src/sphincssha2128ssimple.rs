@@ -1,10 +1,13 @@
-//! sphincs-shake256-256f-simple
+//! sphincs-sha2-128s-simple
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
 //! # Example
 //! ```
-//! use pqcrypto_sphincsplus::sphincsshake256256fsimple::*;
+//! // if using pqcrypto-sphincsplus
+//! use pqcrypto_sphincsplus::sphincssha2128ssimple::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::sign::sphincssha2128ssimple::*;
 //! let message = vec![0, 1, 2, 3, 4, 5];
 //! let (pk, sk) = keypair();
 //! let sm = sign(&message, &sk);
@@ -83,18 +86,18 @@ macro_rules! simple_struct {
 
 simple_struct!(
     PublicKey,
-    ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES
 );
 simple_struct!(
     SecretKey,
-    ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES
 );
 
 #[derive(Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct DetachedSignature(
     #[cfg_attr(feature = "serialization", serde(with = "BigArray"))]
-    [u8; ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES],
+    [u8; ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_BYTES],
     usize,
 );
 
@@ -102,7 +105,7 @@ pub struct DetachedSignature(
 impl DetachedSignature {
     fn new() -> Self {
         DetachedSignature(
-            [0u8; ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES],
+            [0u8; ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_BYTES],
             0,
         )
     }
@@ -118,7 +121,7 @@ impl primitive::DetachedSignature for DetachedSignature {
     #[inline]
     fn from_bytes(bytes: &[u8]) -> Result<Self> {
         let actual = bytes.len();
-        let expected = ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES;
+        let expected = ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_BYTES;
         if actual > expected {
             return Err(Error::BadLength {
                 name: "DetachedSignature",
@@ -126,7 +129,7 @@ impl primitive::DetachedSignature for DetachedSignature {
                 expected,
             });
         }
-        let mut array = [0u8; ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES];
+        let mut array = [0u8; ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_BYTES];
         array[..bytes.len()].copy_from_slice(bytes);
         Ok(DetachedSignature(array, actual))
     }
@@ -157,17 +160,17 @@ impl SignedMessage {
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes that a signature occupies
 pub const fn signature_bytes() -> usize {
-    ffi::PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_CRYPTO_BYTES
+    ffi::PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_BYTES
 }
 
 macro_rules! gen_keypair {
@@ -182,15 +185,15 @@ macro_rules! gen_keypair {
     }};
 }
 
-/// Generate a sphincs-shake256-256f-simple keypair
+/// Generate a sphincs-sha2-128s-simple keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return gen_keypair!(PQCLEAN_SPHINCSSHAKE256256FSIMPLE_AVX2_crypto_sign_keypair);
+            return gen_keypair!(PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_crypto_sign_keypair);
         }
     }
-    gen_keypair!(PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign_keypair)
+    gen_keypair!(PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_crypto_sign_keypair)
 }
 
 macro_rules! gen_signature {
@@ -218,10 +221,10 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return gen_signature!(PQCLEAN_SPHINCSSHAKE256256FSIMPLE_AVX2_crypto_sign, msg, sk);
+            return gen_signature!(PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_crypto_sign, msg, sk);
         }
     }
-    gen_signature!(PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign, msg, sk)
+    gen_signature!(PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_crypto_sign, msg, sk)
 }
 
 macro_rules! open_signed {
@@ -255,18 +258,10 @@ pub fn open(
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return open_signed!(
-                PQCLEAN_SPHINCSSHAKE256256FSIMPLE_AVX2_crypto_sign_open,
-                sm,
-                pk
-            );
+            return open_signed!(PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_crypto_sign_open, sm, pk);
         }
     }
-    open_signed!(
-        PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign_open,
-        sm,
-        pk
-    )
+    open_signed!(PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_crypto_sign_open, sm, pk)
 }
 
 macro_rules! detached_signature {
@@ -291,14 +286,14 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {
         if std::is_x86_feature_detected!("avx2") {
             return detached_signature!(
-                PQCLEAN_SPHINCSSHAKE256256FSIMPLE_AVX2_crypto_sign_signature,
+                PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_crypto_sign_signature,
                 msg,
                 sk
             );
         }
     }
     detached_signature!(
-        PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign_signature,
+        PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_crypto_sign_signature,
         msg,
         sk
     )
@@ -333,7 +328,7 @@ pub fn verify_detached_signature(
     {
         if std::is_x86_feature_detected!("avx2") {
             return verify_detached_sig!(
-                PQCLEAN_SPHINCSSHAKE256256FSIMPLE_AVX2_crypto_sign_verify,
+                PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_crypto_sign_verify,
                 sig,
                 msg,
                 pk
@@ -341,7 +336,7 @@ pub fn verify_detached_signature(
         }
     }
     verify_detached_sig!(
-        PQCLEAN_SPHINCSSHAKE256256FSIMPLE_CLEAN_crypto_sign_verify,
+        PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_crypto_sign_verify,
         sig,
         msg,
         pk

@@ -4,7 +4,10 @@
 //!
 //! # Example
 //! ```
+//! // if using pqcrypto-dilithium
 //! use pqcrypto_dilithium::dilithium5aes::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::sign::dilithium5aes::*;
 //! let message = vec![0, 1, 2, 3, 4, 5];
 //! let (pk, sk) = keypair();
 //! let sm = sign(&message, &sk);

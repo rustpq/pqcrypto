@@ -4,7 +4,10 @@
 //!
 //! # Example
 //! ```
+//! // if using pqcrypto-classicmceliece
 //! use pqcrypto_classicmceliece::mceliece460896f::*;
+//! // or if using the pqcrypto crate:
+//! // use pqcrypto::kem::mceliece460896f::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(&ct, &sk);

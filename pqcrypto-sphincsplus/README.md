@@ -55,76 +55,76 @@ methods only.
 * ``sphincs-haraka-256s-simple``
   * ``clean``
   * ``aesni`` (if supported)
-* ``sphincs-shake256-128f-robust``
+* ``sphincs-shake-128f-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-128f-simple``
+* ``sphincs-shake-128f-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-128s-robust``
+* ``sphincs-shake-128s-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-128s-simple``
+* ``sphincs-shake-128s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-192f-robust``
+* ``sphincs-shake-192f-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-192f-simple``
+* ``sphincs-shake-192f-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-192s-robust``
+* ``sphincs-shake-192s-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-192s-simple``
+* ``sphincs-shake-192s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-256f-robust``
+* ``sphincs-shake-256f-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-256f-simple``
+* ``sphincs-shake-256f-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-256s-robust``
+* ``sphincs-shake-256s-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake256-256s-simple``
+* ``sphincs-shake-256s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-128f-robust``
+* ``sphincs-sha2-128f-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-128f-simple``
+* ``sphincs-sha2-128f-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-128s-robust``
+* ``sphincs-sha2-128s-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-128s-simple``
+* ``sphincs-sha2-128s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-192f-robust``
+* ``sphincs-sha2-192f-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-192f-simple``
+* ``sphincs-sha2-192f-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-192s-robust``
+* ``sphincs-sha2-192s-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-192s-simple``
+* ``sphincs-sha2-192s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-256f-robust``
+* ``sphincs-sha2-256f-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-256f-simple``
+* ``sphincs-sha2-256f-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-256s-robust``
+* ``sphincs-sha2-256s-robust``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha256-256s-simple``
+* ``sphincs-sha2-256s-simple``
   * ``clean``
   * ``avx2`` (if supported)
 
