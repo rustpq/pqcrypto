@@ -4,7 +4,7 @@ description = "Post-Quantum cryptographic primitives"
 readme = "README.md"
 version = "0.17.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
-edition = "2018"
+edition = "2021"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"
 repository = "https://github.com/rustpq/pqcrypto/"
@@ -12,7 +12,7 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography"]
 
 [dependencies]
-pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.4" }
+pqcrypto-traits = { path = "../pqcrypto-traits", version = "0.3.5" }
 pqcrypto-kyber = { path = "../pqcrypto-kyber", version = "0.7.7", optional = true }
 pqcrypto-classicmceliece = { path = "../pqcrypto-classicmceliece", version = "0.1.8", optional = true }
 pqcrypto-hqc = { path = "../pqcrypto-hqc", version = "0.1.7", optional = true }

@@ -1,8 +1,8 @@
 [package]
 name = "pqcrypto-traits"
-version = "0.3.4"
+version = "0.3.5"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
-edition = "2018"
+edition = "2021"
 description = "Shared traits for post-quantum cryptographic primitives"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"

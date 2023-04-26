@@ -1,7 +1,7 @@
 ---
 
 pqcrypto_version: 0.17.0
-traits_version: 0.3.4
+traits_version: 0.3.5
 
 kems:
   kyber:
