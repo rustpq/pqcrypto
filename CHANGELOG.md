@@ -11,6 +11,7 @@
 * Bring SPHINCS+ to closer to FIPS variants by removing -robust and Haraka variants
 * Small fix in Falcon
 * Add Falcon NEON implementation
+* Update Rust edition to 2021
 
 ## 2023-04-26
 
