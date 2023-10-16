@@ -3,8 +3,12 @@
 ## 2023-10-16
 
 * Update Kyber to draft FIPS standard
+    * Remove 90s variants
 * Update Dilithium to draft FIPS standard
+    * Remove 90s variants
 * Update McEliece implementation
+    * Remove Vec variants
+* Bring SPHINCS+ to closer to FIPS variants by removing -robust and Haraka variants
 * Small fix in Falcon
 * Add Falcon NEON implementation
 
