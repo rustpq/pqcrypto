@@ -19,41 +19,33 @@ jobs:
       RUST_MIN_STACK: 20971520
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: ${{ matrix.rust }}
-          override: true
-          components: rustfmt, clippy
+      - name: Install Rust
+        run: |
+          rustup set auto-self-update disable
+          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
+          rustup default ${{ matrix.rust }}
+          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
+          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
+          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
-      - uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --features cryptographically-insecure
+      - name: build with cryptographically-insecure turned on (if available)
+        run: cargo build --features cryptographically-insecure
 
-      - uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --features cryptographically-insecure
+      - name: Run tests with cryptographically-insecure turned on
+        run: cargo test --features cryptographically-insecure
 
-      - uses: actions-rs/cargo@v1
-        with:
-          command: check
-          args: --features serialization,cryptographically-insecure
+      - name: Run cargo check with all features
+        run: cargo check --all-features
 
-      - uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+      - name: Run cargo fmt
+        run: cargo fmt --all -- --check
 
-      - uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: -- -D warnings -A deprecated
+      - name: run Cargo clippy
+        run: cargo clipy -- -D warnings -A deprecated
 
   wasi:
     name: wasi
@@ -65,13 +57,22 @@ jobs:
           - beta
           - nightly
     env:
-      CARGO_TERM_COLOR: always
       # 20 MiB stack
       RUST_MIN_STACK: 20971520
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
+
+      - name: Install Rust
+        run: |
+          rustup set auto-self-update disable
+          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
+          rustup default ${{ matrix.rust }}
+          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
+          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
+          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
+
       - name: Install WASI
         run: cargo install cargo-wasi
       - name: Install wasmtime
