@@ -190,6 +190,15 @@ pub fn keypair() -> (PublicKey, SecretKey) {
             return gen_keypair!(PQCLEAN_FALCON512_AVX2_crypto_sign_keypair);
         }
     }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        // always use AArch64 code, when target is detected as all AArch64 targets have NEON
+        // support, and std::is_aarch64_feature_detected!("neon") works only with Rust nightly at
+        // the moment
+        if true {
+            return gen_keypair!(PQCLEAN_FALCON512_AARCH64_crypto_sign_keypair);
+        }
+    }
     gen_keypair!(PQCLEAN_FALCON512_CLEAN_crypto_sign_keypair)
 }
 
@@ -219,6 +228,12 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     {
         if std::is_x86_feature_detected!("avx2") {
             return gen_signature!(PQCLEAN_FALCON512_AVX2_crypto_sign, msg, sk);
+        }
+    }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return gen_signature!(PQCLEAN_FALCON512_AARCH64_crypto_sign, msg, sk);
         }
     }
     gen_signature!(PQCLEAN_FALCON512_CLEAN_crypto_sign, msg, sk)
@@ -258,6 +273,12 @@ pub fn open(
             return open_signed!(PQCLEAN_FALCON512_AVX2_crypto_sign_open, sm, pk);
         }
     }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return open_signed!(PQCLEAN_FALCON512_AARCH64_crypto_sign_open, sm, pk);
+        }
+    }
     open_signed!(PQCLEAN_FALCON512_CLEAN_crypto_sign_open, sm, pk)
 }
 
@@ -283,6 +304,12 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {
         if std::is_x86_feature_detected!("avx2") {
             return detached_signature!(PQCLEAN_FALCON512_AVX2_crypto_sign_signature, msg, sk);
+        }
+    }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return detached_signature!(PQCLEAN_FALCON512_AARCH64_crypto_sign_signature, msg, sk);
         }
     }
     detached_signature!(PQCLEAN_FALCON512_CLEAN_crypto_sign_signature, msg, sk)
@@ -317,6 +344,17 @@ pub fn verify_detached_signature(
     {
         if std::is_x86_feature_detected!("avx2") {
             return verify_detached_sig!(PQCLEAN_FALCON512_AVX2_crypto_sign_verify, sig, msg, pk);
+        }
+    }
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return verify_detached_sig!(
+                PQCLEAN_FALCON512_AARCH64_crypto_sign_verify,
+                sig,
+                msg,
+                pk
+            );
         }
     }
     verify_detached_sig!(PQCLEAN_FALCON512_CLEAN_crypto_sign_verify, sig, msg, pk)

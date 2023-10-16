@@ -52,7 +52,7 @@ fn main() {
     #[allow(unused_variables)]
     let is_macos = target_os == "macos";
 
-    build_clean!("hqc-rmrs-128");
-    build_clean!("hqc-rmrs-192");
-    build_clean!("hqc-rmrs-256");
+    build_clean!("hqc-128");
+    build_clean!("hqc-192");
+    build_clean!("hqc-256");
 }

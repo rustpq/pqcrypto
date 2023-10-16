@@ -1,13 +1,13 @@
-//! kyber1024-90s
+//! hqc-256
 //!
 //! These bindings use the clean version from [PQClean][pqc]
 //!
 //! # Example
 //! ```
-//! // if using pqcrypto-kyber
-//! use pqcrypto_kyber::kyber102490s::*;
+//! // if using pqcrypto-hqc
+//! use pqcrypto_hqc::hqc256::*;
 //! // or if using the pqcrypto crate:
-//! // use pqcrypto::kem::kyber102490s::*;
+//! // use pqcrypto::kem::hqc256::*;
 //! let (pk, sk) = keypair();
 //! let (ss1, ct) = encapsulate(&pk);
 //! let ss2 = decapsulate(&ct, &sk);
@@ -82,38 +82,29 @@ macro_rules! simple_struct {
     };
 }
 
-simple_struct!(
-    PublicKey,
-    ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_PUBLICKEYBYTES
-);
-simple_struct!(
-    SecretKey,
-    ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_SECRETKEYBYTES
-);
-simple_struct!(
-    Ciphertext,
-    ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_CIPHERTEXTBYTES
-);
-simple_struct!(SharedSecret, ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_BYTES);
+simple_struct!(PublicKey, ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_PUBLICKEYBYTES);
+simple_struct!(SecretKey, ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_SECRETKEYBYTES);
+simple_struct!(Ciphertext, ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_CIPHERTEXTBYTES);
+simple_struct!(SharedSecret, ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_BYTES);
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes for the encapsulated ciphertext
 pub const fn ciphertext_bytes() -> usize {
-    ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_CIPHERTEXTBYTES
 }
 
 /// Get the number of bytes for the shared secret
 pub const fn shared_secret_bytes() -> usize {
-    ffi::PQCLEAN_KYBER102490S_CLEAN_CRYPTO_BYTES
+    ffi::PQCLEAN_HQC256_CLEAN_CRYPTO_BYTES
 }
 
 macro_rules! gen_keypair {
@@ -128,15 +119,9 @@ macro_rules! gen_keypair {
     }};
 }
 
-/// Generate a kyber1024-90s keypair
+/// Generate a hqc-256 keypair
 pub fn keypair() -> (PublicKey, SecretKey) {
-    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
-    {
-        if std::is_x86_feature_detected!("avx2") {
-            return gen_keypair!(PQCLEAN_KYBER102490S_AVX2_crypto_kem_keypair);
-        }
-    }
-    gen_keypair!(PQCLEAN_KYBER102490S_CLEAN_crypto_kem_keypair)
+    gen_keypair!(PQCLEAN_HQC256_CLEAN_crypto_kem_keypair)
 }
 
 macro_rules! encap {
@@ -151,15 +136,9 @@ macro_rules! encap {
     }};
 }
 
-/// Encapsulate to a kyber1024-90s public key
+/// Encapsulate to a hqc-256 public key
 pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
-    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
-    {
-        if std::is_x86_feature_detected!("avx2") {
-            return encap!(PQCLEAN_KYBER102490S_AVX2_crypto_kem_enc, pk);
-        }
-    }
-    encap!(PQCLEAN_KYBER102490S_CLEAN_crypto_kem_enc, pk)
+    encap!(PQCLEAN_HQC256_CLEAN_crypto_kem_enc, pk)
 }
 
 macro_rules! decap {
@@ -173,15 +152,9 @@ macro_rules! decap {
     }};
 }
 
-/// Decapsulate the received kyber1024-90s ciphertext
+/// Decapsulate the received hqc-256 ciphertext
 pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
-    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
-    {
-        if std::is_x86_feature_detected!("avx2") {
-            return decap!(PQCLEAN_KYBER102490S_AVX2_crypto_kem_dec, ct, sk);
-        }
-    }
-    decap!(PQCLEAN_KYBER102490S_CLEAN_crypto_kem_dec, ct, sk)
+    decap!(PQCLEAN_HQC256_CLEAN_crypto_kem_dec, ct, sk)
 }
 
 #[cfg(test)]

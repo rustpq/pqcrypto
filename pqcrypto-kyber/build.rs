@@ -148,18 +148,6 @@ fn main() {
     if target_arch == "aarch64" && neon_enabled {
         build_aarch64!("kyber1024");
     }
-    build_clean!("kyber512-90s");
-    if target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos {
-        build_avx2!("kyber512-90s");
-    }
-    build_clean!("kyber768-90s");
-    if target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos {
-        build_avx2!("kyber768-90s");
-    }
-    build_clean!("kyber1024-90s");
-    if target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos {
-        build_avx2!("kyber1024-90s");
-    }
 
     if target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos {
         // Print enableing flag for AVX2 implementation

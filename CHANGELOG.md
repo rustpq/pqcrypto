@@ -1,5 +1,15 @@
 # Changelog
 
+## 2023-10-16
+
+* Update Kyber to draft FIPS standard
+* Update Dilithium to draft FIPS standard
+* Update McEliece implementation
+* Small fix in Falcon
+* Add Falcon NEON implementation
+
+## 2023-04-26
+
 * Update Rust dependencies
 * Update SPHINCS+ implementation
 * Update Falcon implementation

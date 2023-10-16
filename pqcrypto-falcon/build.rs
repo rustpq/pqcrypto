@@ -100,9 +100,15 @@ fn main() {
     if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("falcon-512");
     }
+    if target_arch == "aarch64" && neon_enabled {
+        build_aarch64!("falcon-512");
+    }
     build_clean!("falcon-1024");
     if target_arch == "x86_64" && avx2_enabled {
         build_avx2!("falcon-1024");
+    }
+    if target_arch == "aarch64" && neon_enabled {
+        build_aarch64!("falcon-1024");
     }
 
     if target_arch == "x86_64" && avx2_enabled {

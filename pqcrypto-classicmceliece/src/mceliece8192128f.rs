@@ -1,6 +1,6 @@
 //! mceliece8192128f
 //!
-//! These bindings use the vec version from [PQClean][pqc]
+//! These bindings use the clean version from [PQClean][pqc]
 //!
 //! # Example
 //! ```no_run
@@ -84,36 +84,39 @@ macro_rules! simple_struct {
 
 simple_struct!(
     PublicKey,
-    ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_PUBLICKEYBYTES
 );
 simple_struct!(
     SecretKey,
-    ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_SECRETKEYBYTES
 );
 simple_struct!(
     Ciphertext,
-    ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_CIPHERTEXTBYTES
 );
-simple_struct!(SharedSecret, ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_BYTES);
+simple_struct!(
+    SharedSecret,
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_BYTES
+);
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
-    ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_PUBLICKEYBYTES
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_PUBLICKEYBYTES
 }
 
 /// Get the number of bytes for a secret key
 pub const fn secret_key_bytes() -> usize {
-    ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_SECRETKEYBYTES
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_SECRETKEYBYTES
 }
 
 /// Get the number of bytes for the encapsulated ciphertext
 pub const fn ciphertext_bytes() -> usize {
-    ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_CIPHERTEXTBYTES
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_CIPHERTEXTBYTES
 }
 
 /// Get the number of bytes for the shared secret
 pub const fn shared_secret_bytes() -> usize {
-    ffi::PQCLEAN_MCELIECE8192128F_VEC_CRYPTO_BYTES
+    ffi::PQCLEAN_MCELIECE8192128F_CLEAN_CRYPTO_BYTES
 }
 
 macro_rules! gen_keypair {
@@ -136,7 +139,7 @@ pub fn keypair() -> (PublicKey, SecretKey) {
             return gen_keypair!(PQCLEAN_MCELIECE8192128F_AVX_crypto_kem_keypair);
         }
     }
-    gen_keypair!(PQCLEAN_MCELIECE8192128F_VEC_crypto_kem_keypair)
+    gen_keypair!(PQCLEAN_MCELIECE8192128F_CLEAN_crypto_kem_keypair)
 }
 
 macro_rules! encap {
@@ -159,7 +162,7 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
             return encap!(PQCLEAN_MCELIECE8192128F_AVX_crypto_kem_enc, pk);
         }
     }
-    encap!(PQCLEAN_MCELIECE8192128F_VEC_crypto_kem_enc, pk)
+    encap!(PQCLEAN_MCELIECE8192128F_CLEAN_crypto_kem_enc, pk)
 }
 
 macro_rules! decap {
@@ -181,7 +184,7 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
             return decap!(PQCLEAN_MCELIECE8192128F_AVX_crypto_kem_dec, ct, sk);
         }
     }
-    decap!(PQCLEAN_MCELIECE8192128F_VEC_crypto_kem_dec, ct, sk)
+    decap!(PQCLEAN_MCELIECE8192128F_CLEAN_crypto_kem_dec, ct, sk)
 }
 
 #[cfg(test)]

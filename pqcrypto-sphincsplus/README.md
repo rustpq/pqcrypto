@@ -19,109 +19,37 @@ sourced from [PQClean][pqclean]. The "default" implementation is used in the
 Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
-* ``sphincs-haraka-128f-robust``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-128f-simple``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-128s-robust``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-128s-simple``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-192f-robust``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-192f-simple``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-192s-robust``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-192s-simple``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-256f-robust``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-256f-simple``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-256s-robust``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-haraka-256s-simple``
-  * ``clean``
-  * ``aesni`` (if supported)
-* ``sphincs-shake-128f-robust``
-  * ``clean``
-  * ``avx2`` (if supported)
 * ``sphincs-shake-128f-simple``
-  * ``clean``
-  * ``avx2`` (if supported)
-* ``sphincs-shake-128s-robust``
   * ``clean``
   * ``avx2`` (if supported)
 * ``sphincs-shake-128s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake-192f-robust``
-  * ``clean``
-  * ``avx2`` (if supported)
 * ``sphincs-shake-192f-simple``
-  * ``clean``
-  * ``avx2`` (if supported)
-* ``sphincs-shake-192s-robust``
   * ``clean``
   * ``avx2`` (if supported)
 * ``sphincs-shake-192s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-shake-256f-robust``
-  * ``clean``
-  * ``avx2`` (if supported)
 * ``sphincs-shake-256f-simple``
-  * ``clean``
-  * ``avx2`` (if supported)
-* ``sphincs-shake-256s-robust``
   * ``clean``
   * ``avx2`` (if supported)
 * ``sphincs-shake-256s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha2-128f-robust``
-  * ``clean``
-  * ``avx2`` (if supported)
 * ``sphincs-sha2-128f-simple``
-  * ``clean``
-  * ``avx2`` (if supported)
-* ``sphincs-sha2-128s-robust``
   * ``clean``
   * ``avx2`` (if supported)
 * ``sphincs-sha2-128s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha2-192f-robust``
-  * ``clean``
-  * ``avx2`` (if supported)
 * ``sphincs-sha2-192f-simple``
-  * ``clean``
-  * ``avx2`` (if supported)
-* ``sphincs-sha2-192s-robust``
   * ``clean``
   * ``avx2`` (if supported)
 * ``sphincs-sha2-192s-simple``
   * ``clean``
   * ``avx2`` (if supported)
-* ``sphincs-sha2-256f-robust``
-  * ``clean``
-  * ``avx2`` (if supported)
 * ``sphincs-sha2-256f-simple``
-  * ``clean``
-  * ``avx2`` (if supported)
-* ``sphincs-sha2-256s-robust``
   * ``clean``
   * ``avx2`` (if supported)
 * ``sphincs-sha2-256s-simple``
