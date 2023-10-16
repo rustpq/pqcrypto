@@ -133,7 +133,7 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return gen_keypair!(PQCLEAN_MCELIECE460896_AVX_crypto_kem_keypair);
+            return gen_keypair!(PQCLEAN_MCELIECE460896_AVX2_crypto_kem_keypair);
         }
     }
     gen_keypair!(PQCLEAN_MCELIECE460896_CLEAN_crypto_kem_keypair)
@@ -156,7 +156,7 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return encap!(PQCLEAN_MCELIECE460896_AVX_crypto_kem_enc, pk);
+            return encap!(PQCLEAN_MCELIECE460896_AVX2_crypto_kem_enc, pk);
         }
     }
     encap!(PQCLEAN_MCELIECE460896_CLEAN_crypto_kem_enc, pk)
@@ -178,7 +178,7 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
         if std::is_x86_feature_detected!("avx2") {
-            return decap!(PQCLEAN_MCELIECE460896_AVX_crypto_kem_dec, ct, sk);
+            return decap!(PQCLEAN_MCELIECE460896_AVX2_crypto_kem_dec, ct, sk);
         }
     }
     decap!(PQCLEAN_MCELIECE460896_CLEAN_crypto_kem_dec, ct, sk)

@@ -21,34 +21,34 @@ methods only.
 
 * ``mceliece348864``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece348864f``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece460896``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece460896f``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6688128``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6688128f``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6960119``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6960119f``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece8192128``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece8192128f``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 
 ## Notes
 

@@ -21,33 +21,33 @@ kems:
       This implementation requires a lot of stack space.
       You need to specify ``RUST_MIN_STACK=800000000``, probably.
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows'
-    implementations: [clean, avx]
+    implementations: [clean, avx2]
     schemes:
       - name: mceliece348864
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
       - name: mceliece348864f
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
       - name: mceliece460896
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
       - name: mceliece460896f
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
       - name: mceliece6688128
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
         doctest: no
       - name: mceliece6688128f
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
         doctest: no
       - name: mceliece6960119
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
         doctest: no
       - name: mceliece6960119f
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
         doctest: no
       - name: mceliece8192128
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
         doctest: no
       - name: mceliece8192128f
-        implementations: [clean, avx]
+        implementations: [clean, avx2]
         doctest: no
   hqc:
     version: 0.2.0
@@ -75,7 +75,7 @@ signs:
         implementations: [clean, avx2, aarch64]
   falcon:
     version: 0.3.0
-    implementations: [clean, avx2]
+    implementations: [clean, avx2, aarch64]
     schemes:
       - name: falcon-512
         implementations: [clean, avx2, aarch64]
@@ -83,7 +83,7 @@ signs:
         implementations: [clean, avx2, aarch64]
   sphincsplus:
     version: 0.7.0
-    implementations: [clean, aesni, avx2]
+    implementations: [clean, avx2]
     schemes:
       - name: sphincs-shake-128f-simple
         implementations: [clean, avx2]
