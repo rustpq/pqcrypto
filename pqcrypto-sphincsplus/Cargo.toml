@@ -4,7 +4,7 @@ description = "Post-Quantum Signature Scheme sphincsplus"
 readme = "README.md"
 version = "0.7.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
-edition = "2018"
+edition = "2021"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"
 repository = "https://github.com/rustpq/pqcrypto/"
@@ -19,9 +19,8 @@ serde = { version = "1.0", features = ["derive"], optional = true }
 serde-big-array = { version = "0.5.1", optional = true }
 
 [features]
-default = ["avx2", "aes", "std"]
+default = ["avx2", "std"]
 avx2 = ["std"]
-aes = ["std"]
 std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
 

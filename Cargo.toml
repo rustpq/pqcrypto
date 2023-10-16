@@ -11,3 +11,4 @@ members=[
     "pqcrypto-falcon",
     "pqcrypto-sphincsplus",
 ]
+resolver="2"

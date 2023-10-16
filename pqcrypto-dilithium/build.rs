@@ -150,18 +150,6 @@ fn main() {
     if target_arch == "aarch64" && neon_enabled {
         build_aarch64!("dilithium5");
     }
-    build_clean!("dilithium2aes");
-    if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx2!("dilithium2aes");
-    }
-    build_clean!("dilithium3aes");
-    if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx2!("dilithium3aes");
-    }
-    build_clean!("dilithium5aes");
-    if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx2!("dilithium5aes");
-    }
 
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
         // Print enableing flag for AVX2 implementation

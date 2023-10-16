@@ -2,9 +2,9 @@
 name = "pqcrypto-dilithium"
 description = "Post-Quantum Signature Scheme dilithium"
 readme = "README.md"
-version = "0.4.7"
+version = "0.5.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
-edition = "2018"
+edition = "2021"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"
 repository = "https://github.com/rustpq/pqcrypto/"

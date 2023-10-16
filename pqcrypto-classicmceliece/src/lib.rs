@@ -3,16 +3,16 @@
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
-//! * mceliece348864 - vec
-//! * mceliece348864f - vec
-//! * mceliece460896 - vec
-//! * mceliece460896f - vec
-//! * mceliece6688128 - vec
-//! * mceliece6688128f - vec
-//! * mceliece6960119 - vec
-//! * mceliece6960119f - vec
-//! * mceliece8192128 - vec
-//! * mceliece8192128f - vec
+//! * mceliece348864 - clean
+//! * mceliece348864f - clean
+//! * mceliece460896 - clean
+//! * mceliece460896f - clean
+//! * mceliece6688128 - clean
+//! * mceliece6688128f - clean
+//! * mceliece6960119 - clean
+//! * mceliece6960119f - clean
+//! * mceliece8192128 - clean
+//! * mceliece8192128f - clean
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!

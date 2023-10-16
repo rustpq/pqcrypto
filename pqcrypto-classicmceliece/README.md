@@ -20,45 +20,35 @@ Rust-friendly interface, alternative implementations are exposed as ``ffi``
 methods only.
 
 * ``mceliece348864``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece348864f``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece460896``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece460896f``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6688128``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6688128f``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6960119``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece6960119f``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece8192128``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 * ``mceliece8192128f``
-  * ``vec``
   * ``clean``
-  * ``avx`` (if supported)
+  * ``avx2`` (if supported)
 
 ## Notes
 

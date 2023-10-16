@@ -4,36 +4,6 @@ extern crate glob;
 use std::env;
 use std::path::{Path, PathBuf};
 
-macro_rules! build_vec {
-    ($variant:expr) => {
-        let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
-        let common_dir = Path::new("pqclean/common");
-
-        let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, "vec"].iter().collect();
-
-        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
-        if target_os == "wasi" {
-            let wasi_sdk_path =
-                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
-            builder.flag(format!("--sysroot={}", wasi_sdk_path).as_str());
-        }
-
-        let scheme_files = glob::glob(target_dir.join("*.c").to_str().unwrap()).unwrap();
-
-        builder
-            .include(internals_include_path)
-            .include(&common_dir)
-            .include(target_dir)
-            .files(
-                scheme_files
-                    .into_iter()
-                    .map(|p| p.unwrap().to_string_lossy().into_owned()),
-            );
-        builder.compile(format!("{}_vec", $variant).as_str());
-    };
-}
-
 macro_rules! build_clean {
     ($variant:expr) => {
         let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
@@ -66,13 +36,13 @@ macro_rules! build_clean {
     };
 }
 
-macro_rules! build_avx {
+macro_rules! build_avx2 {
     ($variant:expr) => {
         let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
         let common_dir = Path::new("pqclean/common");
 
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, "avx"].iter().collect();
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, "avx2"].iter().collect();
 
         let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
         if target_os == "wasi" {
@@ -104,7 +74,7 @@ macro_rules! build_avx {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             );
-        builder.compile(format!("{}_avx", $variant).as_str());
+        builder.compile(format!("{}_avx2", $variant).as_str());
     };
 }
 
@@ -124,55 +94,45 @@ fn main() {
     #[allow(unused_variables)]
     let is_macos = target_os == "macos";
 
-    build_vec!("mceliece348864");
     build_clean!("mceliece348864");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece348864");
+        build_avx2!("mceliece348864");
     }
-    build_vec!("mceliece348864f");
     build_clean!("mceliece348864f");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece348864f");
+        build_avx2!("mceliece348864f");
     }
-    build_vec!("mceliece460896");
     build_clean!("mceliece460896");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece460896");
+        build_avx2!("mceliece460896");
     }
-    build_vec!("mceliece460896f");
     build_clean!("mceliece460896f");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece460896f");
+        build_avx2!("mceliece460896f");
     }
-    build_vec!("mceliece6688128");
     build_clean!("mceliece6688128");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece6688128");
+        build_avx2!("mceliece6688128");
     }
-    build_vec!("mceliece6688128f");
     build_clean!("mceliece6688128f");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece6688128f");
+        build_avx2!("mceliece6688128f");
     }
-    build_vec!("mceliece6960119");
     build_clean!("mceliece6960119");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece6960119");
+        build_avx2!("mceliece6960119");
     }
-    build_vec!("mceliece6960119f");
     build_clean!("mceliece6960119f");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece6960119f");
+        build_avx2!("mceliece6960119f");
     }
-    build_vec!("mceliece8192128");
     build_clean!("mceliece8192128");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece8192128");
+        build_avx2!("mceliece8192128");
     }
-    build_vec!("mceliece8192128f");
     build_clean!("mceliece8192128f");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
-        build_avx!("mceliece8192128f");
+        build_avx2!("mceliece8192128f");
     }
 
     if target_arch == "x86_64" && avx2_enabled && !is_windows {

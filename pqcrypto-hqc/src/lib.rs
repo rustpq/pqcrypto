@@ -3,9 +3,9 @@
 //! This crate provides bindings to and wrappers around the following
 //! implementations from [PQClean][pqc]:
 //!
-//! * hqc-rmrs-128 - clean
-//! * hqc-rmrs-192 - clean
-//! * hqc-rmrs-256 - clean
+//! * hqc-128 - clean
+//! * hqc-192 - clean
+//! * hqc-256 - clean
 //!
 //! [pqc]: https://github.com/pqclean/pqclean/
 //!
@@ -21,28 +21,25 @@ extern crate alloc;
 extern crate std;
 
 pub mod ffi;
-pub mod hqcrmrs128;
-pub mod hqcrmrs192;
-pub mod hqcrmrs256;
+pub mod hqc128;
+pub mod hqc192;
+pub mod hqc256;
 
-pub use crate::hqcrmrs128::{
-    ciphertext_bytes as hqcrmrs128_ciphertext_bytes, decapsulate as hqcrmrs128_decapsulate,
-    encapsulate as hqcrmrs128_encapsulate, keypair as hqcrmrs128_keypair,
-    public_key_bytes as hqcrmrs128_public_key_bytes,
-    secret_key_bytes as hqcrmrs128_secret_key_bytes,
-    shared_secret_bytes as hqcrmrs128_shared_secret_bytes,
+pub use crate::hqc128::{
+    ciphertext_bytes as hqc128_ciphertext_bytes, decapsulate as hqc128_decapsulate,
+    encapsulate as hqc128_encapsulate, keypair as hqc128_keypair,
+    public_key_bytes as hqc128_public_key_bytes, secret_key_bytes as hqc128_secret_key_bytes,
+    shared_secret_bytes as hqc128_shared_secret_bytes,
 };
-pub use crate::hqcrmrs192::{
-    ciphertext_bytes as hqcrmrs192_ciphertext_bytes, decapsulate as hqcrmrs192_decapsulate,
-    encapsulate as hqcrmrs192_encapsulate, keypair as hqcrmrs192_keypair,
-    public_key_bytes as hqcrmrs192_public_key_bytes,
-    secret_key_bytes as hqcrmrs192_secret_key_bytes,
-    shared_secret_bytes as hqcrmrs192_shared_secret_bytes,
+pub use crate::hqc192::{
+    ciphertext_bytes as hqc192_ciphertext_bytes, decapsulate as hqc192_decapsulate,
+    encapsulate as hqc192_encapsulate, keypair as hqc192_keypair,
+    public_key_bytes as hqc192_public_key_bytes, secret_key_bytes as hqc192_secret_key_bytes,
+    shared_secret_bytes as hqc192_shared_secret_bytes,
 };
-pub use crate::hqcrmrs256::{
-    ciphertext_bytes as hqcrmrs256_ciphertext_bytes, decapsulate as hqcrmrs256_decapsulate,
-    encapsulate as hqcrmrs256_encapsulate, keypair as hqcrmrs256_keypair,
-    public_key_bytes as hqcrmrs256_public_key_bytes,
-    secret_key_bytes as hqcrmrs256_secret_key_bytes,
-    shared_secret_bytes as hqcrmrs256_shared_secret_bytes,
+pub use crate::hqc256::{
+    ciphertext_bytes as hqc256_ciphertext_bytes, decapsulate as hqc256_decapsulate,
+    encapsulate as hqc256_encapsulate, keypair as hqc256_keypair,
+    public_key_bytes as hqc256_public_key_bytes, secret_key_bytes as hqc256_secret_key_bytes,
+    shared_secret_bytes as hqc256_shared_secret_bytes,
 };

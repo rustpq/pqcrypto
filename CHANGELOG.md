@@ -1,5 +1,20 @@
 # Changelog
 
+## 2023-10-16
+
+* Update Kyber to draft FIPS standard
+    * Remove 90s variants
+* Update Dilithium to draft FIPS standard
+    * Remove 90s variants
+* Update McEliece implementation
+    * Remove Vec variants
+* Bring SPHINCS+ to closer to FIPS variants by removing -robust and Haraka variants
+* Small fix in Falcon
+* Add Falcon NEON implementation
+* Update Rust edition to 2021
+
+## 2023-04-26
+
 * Update Rust dependencies
 * Update SPHINCS+ implementation
 * Update Falcon implementation

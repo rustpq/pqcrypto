@@ -28,7 +28,7 @@ fn main() {
 
     build
         .include(&includepath)
-        .files(common_files.into_iter())
+        .files(common_files)
         .compile("pqclean_common");
     println!("cargo:rustc-link-lib=pqclean_common");
 

@@ -2,9 +2,9 @@
 name = "pqcrypto-classicmceliece"
 description = "Post-Quantum Key-Encapsulation Mechanism classicmceliece"
 readme = "README.md"
-version = "0.1.8"
+version = "0.2.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
-edition = "2018"
+edition = "2021"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/rustpq/"
 repository = "https://github.com/rustpq/pqcrypto/"
