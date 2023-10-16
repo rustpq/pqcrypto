@@ -45,7 +45,7 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: run Cargo clippy
-        run: cargo clipy -- -D warnings -A deprecated
+        run: cargo clippy -- -D warnings -A deprecated
 
   wasi:
     name: wasi
