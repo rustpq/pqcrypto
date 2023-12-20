@@ -5,7 +5,7 @@ traits_version: 0.3.5
 
 kems:
   kyber:
-    version: 0.8.0
+    version: 0.7.7
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos'
     implementations: [clean, avx2, aarch64]
     schemes:
@@ -15,99 +15,4 @@ kems:
         implementations: [clean, avx2, aarch64]
       - name: kyber1024
         implementations: [clean, avx2, aarch64]
-  classicmceliece:
-    version: 0.2.0
-    notes: |
-      This implementation requires a lot of stack space.
-      You need to specify ``RUST_MIN_STACK=800000000``, probably.
-    x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows'
-    implementations: [clean, avx2]
-    schemes:
-      - name: mceliece348864
-        implementations: [clean, avx2]
-      - name: mceliece348864f
-        implementations: [clean, avx2]
-      - name: mceliece460896
-        implementations: [clean, avx2]
-      - name: mceliece460896f
-        implementations: [clean, avx2]
-      - name: mceliece6688128
-        implementations: [clean, avx2]
-        doctest: no
-      - name: mceliece6688128f
-        implementations: [clean, avx2]
-        doctest: no
-      - name: mceliece6960119
-        implementations: [clean, avx2]
-        doctest: no
-      - name: mceliece6960119f
-        implementations: [clean, avx2]
-        doctest: no
-      - name: mceliece8192128
-        implementations: [clean, avx2]
-        doctest: no
-      - name: mceliece8192128f
-        implementations: [clean, avx2]
-        doctest: no
-  hqc:
-    version: 0.2.0
-    implementations: [clean]
-    schemes:
-      - name: hqc-128
-        implementations: [clean]
-      - name: hqc-192
-        implementations: [clean]
-      - name: hqc-256
-        implementations: [clean]
-
-
-signs:
-  dilithium:
-    version: 0.5.0
-    x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows'
-    implementations: [clean, avx2, aarch64]
-    schemes:
-      - name: dilithium2
-        implementations: [clean, avx2, aarch64]
-      - name: dilithium3
-        implementations: [clean, avx2, aarch64]
-      - name: dilithium5
-        implementations: [clean, avx2, aarch64]
-  falcon:
-    version: 0.3.0
-    implementations: [clean, avx2, aarch64]
-    schemes:
-      - name: falcon-512
-        implementations: [clean, avx2, aarch64]
-      - name: falcon-1024
-        implementations: [clean, avx2, aarch64]
-  sphincsplus:
-    version: 0.7.0
-    implementations: [clean, avx2]
-    schemes:
-      - name: sphincs-shake-128f-simple
-        implementations: [clean, avx2]
-      - name: sphincs-shake-128s-simple
-        implementations: [clean, avx2]
-      - name: sphincs-shake-192f-simple
-        implementations: [clean, avx2]
-      - name: sphincs-shake-192s-simple
-        implementations: [clean, avx2]
-      - name: sphincs-shake-256f-simple
-        implementations: [clean, avx2]
-      - name: sphincs-shake-256s-simple
-        implementations: [clean, avx2]
-      - name: sphincs-sha2-128f-simple
-        implementations: [clean, avx2]
-      - name: sphincs-sha2-128s-simple
-        implementations: [clean, avx2]
-      - name: sphincs-sha2-192f-simple
-        implementations: [clean, avx2]
-      - name: sphincs-sha2-192s-simple
-        implementations: [clean, avx2]
-      - name: sphincs-sha2-256f-simple
-        implementations: [clean, avx2]
-      - name: sphincs-sha2-256s-simple
-        implementations: [clean, avx2]
-
-#  vim: set ft=yaml ts=2 sw=2 tw=0 et :
+signs: {}
