@@ -136,15 +136,6 @@ pub fn keypair() -> (PublicKey, SecretKey) {
             return gen_keypair!(PQCLEAN_KYBER1024_AVX2_crypto_kem_keypair);
         }
     }
-    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
-    {
-        // always use AArch64 code, when target is detected as all AArch64 targets have NEON
-        // support, and std::is_aarch64_feature_detected!("neon") works only with Rust nightly at
-        // the moment
-        if true {
-            return gen_keypair!(PQCLEAN_KYBER1024_AARCH64_crypto_kem_keypair);
-        }
-    }
     gen_keypair!(PQCLEAN_KYBER1024_CLEAN_crypto_kem_keypair)
 }
 
@@ -168,12 +159,6 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
             return encap!(PQCLEAN_KYBER1024_AVX2_crypto_kem_enc, pk);
         }
     }
-    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
-    {
-        if true {
-            return encap!(PQCLEAN_KYBER1024_AARCH64_crypto_kem_enc, pk);
-        }
-    }
     encap!(PQCLEAN_KYBER1024_CLEAN_crypto_kem_enc, pk)
 }
 
@@ -194,12 +179,6 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {
         if std::is_x86_feature_detected!("avx2") {
             return decap!(PQCLEAN_KYBER1024_AVX2_crypto_kem_dec, ct, sk);
-        }
-    }
-    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
-    {
-        if true {
-            return decap!(PQCLEAN_KYBER1024_AARCH64_crypto_kem_dec, ct, sk);
         }
     }
     decap!(PQCLEAN_KYBER1024_CLEAN_crypto_kem_dec, ct, sk)

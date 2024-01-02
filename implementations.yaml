@@ -5,14 +5,14 @@ traits_version: 0.3.5
 
 kems:
   kyber:
-    version: 0.7.7
+    version: 0.7.9
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos'
-    implementations: [clean, avx2, aarch64]
+    implementations: [clean, avx2]
     schemes:
       - name: kyber512
-        implementations: [clean, avx2, aarch64]
+        implementations: [clean, avx2]
       - name: kyber768
-        implementations: [clean, avx2, aarch64]
+        implementations: [clean, avx2]
       - name: kyber1024
-        implementations: [clean, avx2, aarch64]
+        implementations: [clean, avx2]
 signs: {}
