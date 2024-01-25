@@ -5,7 +5,7 @@ traits_version: 0.3.5
 
 kems:
   kyber:
-    version: 0.8.0
+    version: 0.8.1
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos'
     implementations: [clean, avx2, aarch64]
     schemes:

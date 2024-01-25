@@ -1,5 +1,11 @@
 # Changelog
 
+## 2024-01-25
+
+* Update Kyber `clean` implementation to avoid potential Kyber side-channel vulnerabilities.
+  Note that the `aarch64` implementation is still vulnerable, but it is waiting for other updates.
+  This library is for experimental purposes, so security vulnerabilties are addressed on a best-effort basis.
+
 ## 2023-10-16
 
 * Update Kyber to draft FIPS standard
