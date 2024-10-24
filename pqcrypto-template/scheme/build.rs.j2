@@ -111,18 +111,21 @@ fn main() {
     {% endfor %}
 
     {% if globals.x86_avx2 %}
+    println!("cargo::rustc-check-cfg=cfg(enable_x86_avx2)");
     if {{ x86_avx2_guard }} {
         // Print enableing flag for AVX2 implementation
         println!("cargo:rustc-cfg=enable_x86_avx2");
     }
     {% endif %}
     {% if globals.x86_aes %}
+    println!("cargo::rustc-check-cfg=cfg(enable_x86_aes)");
     if {{ x86_aes_guard }} {
         // Print enableing flag for AES implementation
         println!("cargo:rustc-cfg=enable_x86_aes");
     }
     {% endif %}
     {% if globals.aarch64_neon %}
+    println!("cargo::rustc-check-cfg=cfg(enable_aarch64_neon)");
     if {{ aarch64_neon_guard }} {
         // Print enableing flag for AARCH64 implementation
         println!("cargo:rustc-cfg=enable_aarch64_neon");

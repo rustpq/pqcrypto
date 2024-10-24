@@ -145,6 +145,7 @@ fn main() {
         build_avx2!("sphincs-sha2-256s-simple");
     }
 
+    println!("cargo::rustc-check-cfg=cfg(enable_x86_avx2)");
     if target_arch == "x86_64" && avx2_enabled {
         // Print enableing flag for AVX2 implementation
         println!("cargo:rustc-cfg=enable_x86_avx2");

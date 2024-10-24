@@ -149,10 +149,12 @@ fn main() {
         build_aarch64!("ml-kem-1024");
     }
 
+    println!("cargo::rustc-check-cfg=cfg(enable_x86_avx2)");
     if target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos {
         // Print enableing flag for AVX2 implementation
         println!("cargo:rustc-cfg=enable_x86_avx2");
     }
+    println!("cargo::rustc-check-cfg=cfg(enable_aarch64_neon)");
     if target_arch == "aarch64" && neon_enabled {
         // Print enableing flag for AARCH64 implementation
         println!("cargo:rustc-cfg=enable_aarch64_neon");

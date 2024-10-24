@@ -135,6 +135,7 @@ fn main() {
         build_avx2!("mceliece8192128f");
     }
 
+    println!("cargo::rustc-check-cfg=cfg(enable_x86_avx2)");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
         // Print enableing flag for AVX2 implementation
         println!("cargo:rustc-cfg=enable_x86_avx2");
