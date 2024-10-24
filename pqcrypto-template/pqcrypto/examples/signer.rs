@@ -2,7 +2,7 @@ use std::fs::{self, File};
 use std::io::prelude::*;
 
 use pqcrypto::prelude::*;
-use pqcrypto::sign::dilithium2::*;
+use pqcrypto::sign::mldsa44::*;
 
 fn parseargs() -> (String, String, String) {
     let args: Vec<String> = std::env::args().collect();

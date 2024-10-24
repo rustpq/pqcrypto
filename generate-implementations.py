@@ -73,6 +73,7 @@ def generate_scheme(name, type, properties):
         name=name,
         type=type,
         insecure=properties.get('insecure', False),
+        supports_context=properties.get('supports_context', False),
         version=properties['version'],
         implementations=properties['implementations'],
     )
@@ -95,6 +96,7 @@ def generate_scheme(name, type, properties):
     render_template(
         target_dir, 'src/ffi.rs', 'scheme/src/ffi.rs.j2',
         insecure=properties.get('insecure', False),
+        supports_context=properties.get('supports_context', False),
         type=type,
         name=name,
         metadatas=metadatas,
@@ -107,6 +109,7 @@ def generate_scheme(name, type, properties):
             "scheme/src/scheme.rs.j2",
             type=type,
             name=name,
+            supports_context=properties.get('supports_context', False),
             insecure=properties.get('insecure', False),
             scheme=scheme,
         )
@@ -116,6 +119,7 @@ def generate_scheme(name, type, properties):
         name=name,
         type=type,
         insecure=properties.get('insecure', False),
+        supports_context=properties.get('supports_context', False),
         notes=properties.get('notes', None),
         schemes=properties['schemes'],
     )
@@ -125,6 +129,7 @@ def generate_scheme(name, type, properties):
         name=name,
         type=type,
         insecure=properties.get('insecure', False),
+        supports_context=properties.get('supports_context', False),
         notes=properties.get('notes', None),
         schemes=properties['schemes'],
     )

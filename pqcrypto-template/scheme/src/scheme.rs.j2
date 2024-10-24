@@ -54,6 +54,10 @@ use alloc::vec::Vec;
 use pqcrypto_traits::sign as primitive;
 {% endif %}
 
+{% if supports_context %}
+use paste::paste;
+{% endif %}
+
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
         #[derive(Clone, Copy)]
@@ -402,11 +406,49 @@ macro_rules! gen_signature {
         let mut signed_msg = Vec::with_capacity(max_len);
         let mut smlen: usize = 0;
         unsafe {
+            {% if supports_context %}
+            paste! {
+                ffi::[<$variant _ctx>](
+                signed_msg.as_mut_ptr(),
+                &mut smlen as *mut usize,
+                $msg.as_ptr(),
+                $msg.len(),
+                core::ptr::null(), 0,
+                $sk.0.as_ptr(),
+            );
+            }
+            {% else %}
             ffi::$variant(
                 signed_msg.as_mut_ptr(),
                 &mut smlen as *mut usize,
                 $msg.as_ptr(),
                 $msg.len(),
+                $sk.0.as_ptr(),
+            );
+            {% endif %}
+            debug_assert!(smlen <= max_len, "exceeded vector capacity");
+            signed_msg.set_len(smlen);
+        }
+        SignedMessage(signed_msg)
+    }
+    };
+}
+
+{% if supports_context %}
+macro_rules! gen_signature_ctx {
+    ($variant:ident, $msg:ident, $ctx:ident, $sk:ident) => {
+    {
+        let max_len = $msg.len() + signature_bytes();
+        let mut signed_msg = Vec::with_capacity(max_len);
+        let mut smlen: usize = 0;
+        unsafe {
+            ffi::$variant(
+                signed_msg.as_mut_ptr(),
+                &mut smlen as *mut usize,
+                $msg.as_ptr(),
+                $msg.len(),
+                $ctx.as_ptr(),
+                $ctx.len(),
                 $sk.0.as_ptr(),
             );
             debug_assert!(smlen <= max_len, "exceeded vector capacity");
@@ -416,6 +458,7 @@ macro_rules! gen_signature {
     }
     };
 }
+{% endif %}
 
 /// Sign the message and return the signed message.
 {% if insecure %}
@@ -449,8 +492,79 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     gen_signature!(PQCLEAN_{{ NS_NAME }}_crypto_sign, msg, sk)
 }
 
+{% if supports_context %}
+/// Sign the message for the provided context and return the signed message.
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
+pub fn sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> SignedMessage {
+    {% if globals.x86_avx2 %}
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return gen_signature_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_ctx, msg, ctx, sk);
+        }
+    }
+    {% endif %}
+    {% if globals.x86_aes %}
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return gen_signature_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_ctx, msg, ctx, sk);
+        }
+    }
+    {% endif %}
+    {% if globals.aarch64_neon %}
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return gen_signature_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_ctx, msg, ctx, sk);
+        }
+    }
+    {% endif %}
+    gen_signature_ctx!(PQCLEAN_{{ NS_NAME }}_crypto_sign_ctx, msg, ctx, sk)
+}
+{% endif %}
+
 macro_rules! open_signed {
     ($variant:ident, $sm:ident, $pk:ident) => {
+    {
+        let mut m: Vec<u8> = Vec::with_capacity($sm.len());
+        let mut mlen: usize = 0;
+        match unsafe {
+            {% if supports_context %}
+            paste!{ ffi:: [<$variant _ctx>] (
+                m.as_mut_ptr(),
+                &mut mlen as *mut usize,
+                $sm.0.as_ptr(),
+                $sm.len(),
+                core::ptr::null() as *const u8, 0,
+                $pk.0.as_ptr(),
+            )}
+            {% else %}
+            ffi::$variant(
+                m.as_mut_ptr(),
+                &mut mlen as *mut usize,
+                $sm.0.as_ptr(),
+                $sm.len(),
+                $pk.0.as_ptr(),
+            )
+            {% endif %}
+        } {
+            0 => {
+                unsafe { m.set_len(mlen) };
+                Ok(m)
+            }
+            -1 => Err(primitive::VerificationError::InvalidSignature),
+            _ => Err(primitive::VerificationError::UnknownVerificationError),
+        }
+    }
+    };
+}
+
+{% if supports_context %}
+macro_rules! open_signed_ctx {
+    ($variant:ident, $sm:ident, $ctx: ident, $pk:ident) => {
     {
         let mut m: Vec<u8> = Vec::with_capacity($sm.len());
         let mut mlen: usize = 0;
@@ -460,6 +574,8 @@ macro_rules! open_signed {
                 &mut mlen as *mut usize,
                 $sm.0.as_ptr(),
                 $sm.len(),
+                $ctx.as_ptr(),
+                $ctx.len(),
                 $pk.0.as_ptr(),
             )
         } {
@@ -473,6 +589,7 @@ macro_rules! open_signed {
     }
     };
 }
+{% endif %}
 
 /// Open the signed message and if verification succeeds return the message
 {% if insecure %}
@@ -509,8 +626,78 @@ pub fn open(
     open_signed!(PQCLEAN_{{ NS_NAME }}_crypto_sign_open, sm, pk)
 }
 
+{% if supports_context %}
+/// Open the signed message and if verification succeeds return the message
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
+pub fn open_ctx(
+    sm: &SignedMessage,
+    ctx: &[u8],
+    pk: &PublicKey
+) -> core::result::Result<Vec<u8>,primitive::VerificationError> {
+    {% if globals.x86_avx2 %}
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return open_signed_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_open_ctx, sm, ctx, pk);
+        }
+    }
+    {% endif %}
+    {% if globals.x86_aes %}
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return open_signed_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_open_ctx, sm, ctx, pk);
+        }
+    }
+    {% endif %}
+    {% if globals.aarch64_neon %}
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return open_signed_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_open_ctx, sm, ctx, pk);
+        }
+    }
+    {% endif %}
+    open_signed_ctx!(PQCLEAN_{{ NS_NAME }}_crypto_sign_open_ctx, sm, ctx, pk)
+}
+{% endif %}
+
 macro_rules! detached_signature {
     ($variant:ident, $msg:ident, $sk:ident) => {
+    {
+        let mut sig = DetachedSignature::new();
+        unsafe {
+            {% if supports_context %}
+            paste! {
+                ffi:: [<$variant _ctx >](
+                    sig.0.as_mut_ptr(),
+                    &mut sig.1 as *mut usize,
+                    $msg.as_ptr(),
+                    $msg.len(),
+                    core::ptr::null(), 0,
+                    $sk.0.as_ptr(),
+                );
+            }
+            {% else %}
+            ffi::$variant(
+                sig.0.as_mut_ptr(),
+                &mut sig.1 as *mut usize,
+                $msg.as_ptr(),
+                $msg.len(),
+                $sk.0.as_ptr(),
+            );
+            {% endif %}
+        }
+        sig
+    }
+    };
+}
+
+{% if supports_context %}
+macro_rules! detached_signature_ctx {
+    ($variant:ident, $msg:ident, $ctx:ident, $sk:ident) => {
     {
         let mut sig = DetachedSignature::new();
         unsafe {
@@ -519,6 +706,8 @@ macro_rules! detached_signature {
                 &mut sig.1 as *mut usize,
                 $msg.as_ptr(),
                 $msg.len(),
+                $ctx.as_ptr(),
+                $ctx.len(),
                 $sk.0.as_ptr(),
             );
         }
@@ -526,6 +715,7 @@ macro_rules! detached_signature {
     }
     };
 }
+{% endif %}
 
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -559,8 +749,77 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     detached_signature!(PQCLEAN_{{ NS_NAME }}_crypto_sign_signature, msg, sk)
 }
 
+{% if supports_context %}
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
+/// Create a detached signature on the message
+pub fn detached_sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> DetachedSignature {
+    {% if globals.x86_avx2 %}
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return detached_signature_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk);
+        }
+    }
+    {% endif %}
+    {% if globals.x86_aes %}
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return detached_signature_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk);
+        }
+    }
+    {% endif %}
+    {% if globals.aarch64_neon %}
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return detached_signature_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk);
+        }
+    }
+    {% endif %}
+    detached_signature_ctx!(PQCLEAN_{{ NS_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk)
+}
+{% endif %}
+
 macro_rules! verify_detached_sig {
     ($variant:ident, $sig:ident, $msg:ident, $pk:ident) => {
+    {
+        let res = unsafe {
+            {% if supports_context %}
+            paste! {
+                ffi:: [<$variant _ctx >](
+                    $sig.0.as_ptr(),
+                    $sig.1,
+                    $msg.as_ptr(),
+                    $msg.len(),
+                    core::ptr::null(), 0,
+                    $pk.0.as_ptr(),
+                )
+            }
+            {% else %}
+            ffi::$variant(
+                $sig.0.as_ptr(),
+                $sig.1,
+                $msg.as_ptr(),
+                $msg.len(),
+                $pk.0.as_ptr(),
+            )
+            {% endif %}
+        };
+        match res {
+            0 => Ok(()),
+            -1 => Err(primitive::VerificationError::InvalidSignature),
+            _ => Err(primitive::VerificationError::UnknownVerificationError),
+        }
+    }
+    };
+}
+
+{% if supports_context %}
+macro_rules! verify_detached_sig_ctx {
+    ($variant:ident, $sig:ident, $msg:ident, $ctx:ident, $pk:ident) => {
     {
         let res = unsafe {
             ffi::$variant(
@@ -568,6 +827,8 @@ macro_rules! verify_detached_sig {
                 $sig.1,
                 $msg.as_ptr(),
                 $msg.len(),
+                $ctx.as_ptr(),
+                $ctx.len(),
                 $pk.0.as_ptr(),
             )
         };
@@ -579,6 +840,7 @@ macro_rules! verify_detached_sig {
     }
     };
 }
+{% endif %}
 
 /// Verify the detached signature
 {% if insecure %}
@@ -611,6 +873,41 @@ pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &Publi
     {% endif %}
     verify_detached_sig!(PQCLEAN_{{ NS_NAME }}_crypto_sign_verify, sig, msg, pk)
 }
+
+{% if supports_context %}
+
+/// Verify the detached signature
+{% if insecure %}
+#[deprecated(note = "Insecure cryptography, do not use in production")]
+{% endif %}
+pub fn verify_detached_signature_ctx(sig: &DetachedSignature, msg: &[u8], ctx: &[u8], pk: &PublicKey) -> core::result::Result<(), primitive::VerificationError> {
+    {% if globals.x86_avx2 %}
+    #[cfg(all(enable_x86_avx2, feature = "avx2"))]
+    {
+        if std::is_x86_feature_detected!("avx2") {
+            return verify_detached_sig_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk);
+        }
+    }
+    {% endif %}
+    {% if globals.x86_aes %}
+    #[cfg(all(enable_x86_aes, feature = "aes"))]
+    {
+        if std::is_x86_feature_detected!("aes") {
+            return verify_detached_sig_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk);
+        }
+    }
+    {% endif %}
+    {% if globals.aarch64_neon %}
+    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    {
+        if true {
+            return verify_detached_sig_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk);
+        }
+    }
+    {% endif %}
+    verify_detached_sig_ctx!(PQCLEAN_{{ NS_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk)
+}
+{% endif %}
 
 
 {% endif %} {# KEM or SIGN #}
@@ -655,5 +952,36 @@ mod test {
         assert!(verify_detached_signature(&sig, &message, &pk).is_ok());
         assert!(!verify_detached_signature(&sig, &message[..message.len()-1], &pk).is_ok());
     }
+
+    {% if supports_context %}
+    #[test]
+    pub fn test_sign_ctx() {
+        let mut rng = rand::thread_rng();
+        let len: u16 = rng.gen();
+        let ctx = (0..10).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
+
+        let message = (0..len).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
+        let (pk, sk) = keypair();
+        let sm = sign_ctx(&message, &ctx, &sk);
+        let verifiedmsg = open_ctx(&sm, &ctx, &pk).unwrap();
+        assert!(verifiedmsg == message);
+        assert!(open(&sm, &pk).is_err());
+    }
+
+    #[test]
+    pub fn test_sign_detached_ctx() {
+        let mut rng = rand::thread_rng();
+        let len: u16 = rng.gen();
+        let message = (0..len).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
+        let ctx = (0..10).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
+
+        let (pk, sk) = keypair();
+        let sig = detached_sign_ctx(&message, &ctx, &sk);
+        assert!(verify_detached_signature_ctx(&sig, &message, &ctx, &pk).is_ok());
+        assert!(!verify_detached_signature_ctx(&sig, &message[..message.len()-1], &ctx, &pk).is_ok());
+        assert!(!verify_detached_signature_ctx(&sig, &message[..message.len()], &ctx[..ctx.len()-1], &pk).is_ok());
+        assert!(!verify_detached_signature(&sig, &message[..message.len()-1], &pk).is_ok());
+    }
+    {% endif %}
 {% endif %} {# KEM or SIGN #}
 }

@@ -12,11 +12,14 @@ keywords = ["cryptography", "post-quantum", "security"]
 categories = ["cryptography", "no-std"]
 
 [dependencies]
-pqcrypto-internals = { path = "../pqcrypto-internals", version = "0.2" }
+pqcrypto-internals = { path = "../pqcrypto-internals", version = "0.2.6" }
 pqcrypto-traits = { path = "../pqcrypto-traits", version = "{{ traits_version }}", default-features = false }
 libc = "0.2.0"
 serde = { version = "1.0", features = ["derive"], optional = true }
 serde-big-array = { version = "0.5.1", optional = true }
+{% if supports_context %}
+paste = "*"
+{% endif %}
 
 [features]
 default = [{% if 'avx2' in implementations or 'avx' in implementations %}"avx2", {% endif %}{% if 'aesni' in implementations %}"aes", {% endif %}{% if 'aarch64' in implementations %}"neon", {% endif %}"std"]

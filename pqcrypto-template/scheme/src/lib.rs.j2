@@ -50,6 +50,12 @@ pub use crate::{{ scheme_name }}::{
     open as {{ scheme_name }}_open,
     detached_sign as {{ scheme_name }}_detached_sign,
     verify_detached_signature as {{ scheme_name }}_verify_detached_signature,
+    {% if supports_context %}
+    sign_ctx as {{ scheme_name }}_sign_ctx,
+    open_ctx as {{ scheme_name }}_open_ctx,
+    detached_sign_ctx as {{ scheme_name }}_detached_sign_ctx,
+    verify_detached_signature_ctx as {{ scheme_name }}_verify_detached_signature_ctx,
+    {% endif %}
     {% endif %}
 };
 {% endfor %}
