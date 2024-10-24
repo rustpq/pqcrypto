@@ -1,5 +1,9 @@
 # Changelog
 
+## 2024-10-24
+* `pqcrypto-kyber` and `pqcrypto-dilithium` are retired and replaced by `pqcrypto-mlkem` and `pqcrypto-mldsa`, respectively.
+* `pqcrypto-falcon` now separates Falcon into the "compressed" mode and the "padded" variants. The "compressed" variant likely produces shorter signatures than the max size.
+
 ## 2024-01-25
 
 * Update Kyber `clean` implementation to avoid potential Kyber side-channel vulnerabilities.

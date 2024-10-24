@@ -28,7 +28,7 @@ pub mod kem {
 
 pub mod sign {
     #[cfg(feature = "pqcrypto-falcon")]
-    pub use pqcrypto_falcon::{falcon1024, falcon512};
+    pub use pqcrypto_falcon::{falcon1024, falcon512, falconpadded1024, falconpadded512};
     #[cfg(feature = "pqcrypto-mldsa")]
     pub use pqcrypto_mldsa::{mldsa44, mldsa65, mldsa87};
     #[cfg(feature = "pqcrypto-sphincsplus")]

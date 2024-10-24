@@ -75,12 +75,16 @@ signs:
       - name: ml-dsa-87
         implementations: [clean, avx2, aarch64]
   falcon:
-    version: 0.3.0
+    version: 0.4.0
     implementations: [clean, avx2, aarch64]
     schemes:
       - name: falcon-512
         implementations: [clean, avx2, aarch64]
+      - name: falcon-padded-512
+        implementations: [clean, avx2, aarch64]
       - name: falcon-1024
+        implementations: [clean, avx2, aarch64]
+      - name: falcon-padded-1024
         implementations: [clean, avx2, aarch64]
   sphincsplus:
     version: 0.7.0
