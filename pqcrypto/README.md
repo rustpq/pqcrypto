@@ -11,13 +11,13 @@ This super-crate contains the following cryptographic algorithms:
 
 ## Key-Encapsulation Mechanisms
 
-* [``pqcrypto-kyber``](https://crates.io/crates/pqcrypto-kyber) 
+* [``pqcrypto-mlkem``](https://crates.io/crates/pqcrypto-mlkem) 
 * [``pqcrypto-classicmceliece``](https://crates.io/crates/pqcrypto-classicmceliece) 
 * [``pqcrypto-hqc``](https://crates.io/crates/pqcrypto-hqc) 
 
 ## Signature Schemes
 
-* [``pqcrypto-dilithium``](https://crates.io/crates/pqcrypto-dilithium) 
+* [``pqcrypto-mldsa``](https://crates.io/crates/pqcrypto-mldsa) 
 * [``pqcrypto-falcon``](https://crates.io/crates/pqcrypto-falcon) 
 * [``pqcrypto-sphincsplus``](https://crates.io/crates/pqcrypto-sphincsplus) 
 

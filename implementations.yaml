@@ -1,19 +1,19 @@
 ---
 
-pqcrypto_version: 0.17.0
+pqcrypto_version: 0.18.0
 traits_version: 0.3.5
 
 kems:
-  kyber:
-    version: 0.8.1
+  mlkem:
+    version: 0.1.0
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos'
     implementations: [clean, avx2, aarch64]
     schemes:
-      - name: kyber512
+      - name: ml-kem-512
         implementations: [clean, avx2, aarch64]
-      - name: kyber768
+      - name: ml-kem-768
         implementations: [clean, avx2, aarch64]
-      - name: kyber1024
+      - name: ml-kem-1024
         implementations: [clean, avx2, aarch64]
   classicmceliece:
     version: 0.2.0
@@ -62,16 +62,17 @@ kems:
 
 
 signs:
-  dilithium:
-    version: 0.5.0
+  mldsa:
+    version: 0.1.0
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows'
     implementations: [clean, avx2, aarch64]
+    supports_context: true
     schemes:
-      - name: dilithium2
+      - name: ml-dsa-44
         implementations: [clean, avx2, aarch64]
-      - name: dilithium3
+      - name: ml-dsa-65
         implementations: [clean, avx2, aarch64]
-      - name: dilithium5
+      - name: ml-dsa-87
         implementations: [clean, avx2, aarch64]
   falcon:
     version: 0.3.0

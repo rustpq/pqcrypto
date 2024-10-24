@@ -4,10 +4,10 @@ members=[
     "pqcrypto",
     "pqcrypto-traits",
     "pqcrypto-internals",
-    "pqcrypto-kyber",
+    "pqcrypto-mlkem",
     "pqcrypto-classicmceliece",
     "pqcrypto-hqc",
-    "pqcrypto-dilithium",
+    "pqcrypto-mldsa",
     "pqcrypto-falcon",
     "pqcrypto-sphincsplus",
 ]

@@ -189,6 +189,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -231,6 +232,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-shake-128s-simple_clean")]
@@ -267,6 +269,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -309,6 +312,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-shake-192f-simple_clean")]
@@ -345,6 +349,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -387,6 +392,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-shake-192s-simple_clean")]
@@ -423,6 +429,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -465,6 +472,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-shake-256f-simple_clean")]
@@ -501,6 +509,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -543,6 +552,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-shake-256s-simple_clean")]
@@ -579,6 +589,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -621,6 +632,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-sha2-128f-simple_clean")]
@@ -657,6 +669,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -699,6 +712,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-sha2-128s-simple_clean")]
@@ -735,6 +749,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -777,6 +792,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-sha2-192f-simple_clean")]
@@ -813,6 +829,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -855,6 +872,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-sha2-192s-simple_clean")]
@@ -891,6 +909,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -933,6 +952,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-sha2-256f-simple_clean")]
@@ -969,6 +989,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -1011,6 +1032,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[link(name = "sphincs-sha2-256s-simple_clean")]
@@ -1047,6 +1069,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(enable_x86_avx2)]
@@ -1089,6 +1112,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
+
 }
 
 #[cfg(test)]
@@ -1113,6 +1137,7 @@ mod test_sphincsshake128fsimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE128FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE128FSIMPLE_CLEAN_crypto_sign_keypair(
@@ -1126,9 +1151,10 @@ mod test_sphincsshake128fsimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -1141,8 +1167,9 @@ mod test_sphincsshake128fsimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -1153,7 +1180,8 @@ mod test_sphincsshake128fsimple_clean {
                 PQCLEAN_SPHINCSSHAKE128FSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -1163,7 +1191,8 @@ mod test_sphincsshake128fsimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -1173,7 +1202,8 @@ mod test_sphincsshake128fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE128FSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -1187,7 +1217,8 @@ mod test_sphincsshake128fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -1197,7 +1228,8 @@ mod test_sphincsshake128fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -1207,7 +1239,8 @@ mod test_sphincsshake128fsimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -1239,6 +1272,7 @@ mod test_sphincsshake128fsimple_avx2 {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE128FSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE128FSIMPLE_AVX2_crypto_sign_keypair(
@@ -1252,9 +1286,10 @@ mod test_sphincsshake128fsimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -1267,8 +1302,9 @@ mod test_sphincsshake128fsimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -1279,7 +1315,8 @@ mod test_sphincsshake128fsimple_avx2 {
                 PQCLEAN_SPHINCSSHAKE128FSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -1289,7 +1326,8 @@ mod test_sphincsshake128fsimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -1299,7 +1337,8 @@ mod test_sphincsshake128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE128FSIMPLE_AVX2_CRYPTO_BYTES,
@@ -1313,7 +1352,8 @@ mod test_sphincsshake128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -1323,7 +1363,8 @@ mod test_sphincsshake128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -1333,7 +1374,8 @@ mod test_sphincsshake128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -1361,6 +1403,7 @@ mod test_sphincsshake128ssimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE128SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE128SSIMPLE_CLEAN_crypto_sign_keypair(
@@ -1374,9 +1417,10 @@ mod test_sphincsshake128ssimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -1389,8 +1433,9 @@ mod test_sphincsshake128ssimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -1401,7 +1446,8 @@ mod test_sphincsshake128ssimple_clean {
                 PQCLEAN_SPHINCSSHAKE128SSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -1411,7 +1457,8 @@ mod test_sphincsshake128ssimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -1421,7 +1468,8 @@ mod test_sphincsshake128ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE128SSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -1435,7 +1483,8 @@ mod test_sphincsshake128ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -1445,7 +1494,8 @@ mod test_sphincsshake128ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -1455,7 +1505,8 @@ mod test_sphincsshake128ssimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -1487,6 +1538,7 @@ mod test_sphincsshake128ssimple_avx2 {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE128SSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE128SSIMPLE_AVX2_crypto_sign_keypair(
@@ -1500,9 +1552,10 @@ mod test_sphincsshake128ssimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -1515,8 +1568,9 @@ mod test_sphincsshake128ssimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -1527,7 +1581,8 @@ mod test_sphincsshake128ssimple_avx2 {
                 PQCLEAN_SPHINCSSHAKE128SSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -1537,7 +1592,8 @@ mod test_sphincsshake128ssimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -1547,7 +1603,8 @@ mod test_sphincsshake128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE128SSIMPLE_AVX2_CRYPTO_BYTES,
@@ -1561,7 +1618,8 @@ mod test_sphincsshake128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -1571,7 +1629,8 @@ mod test_sphincsshake128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -1581,7 +1640,8 @@ mod test_sphincsshake128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -1609,6 +1669,7 @@ mod test_sphincsshake192fsimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE192FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE192FSIMPLE_CLEAN_crypto_sign_keypair(
@@ -1622,9 +1683,10 @@ mod test_sphincsshake192fsimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -1637,8 +1699,9 @@ mod test_sphincsshake192fsimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -1649,7 +1712,8 @@ mod test_sphincsshake192fsimple_clean {
                 PQCLEAN_SPHINCSSHAKE192FSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -1659,7 +1723,8 @@ mod test_sphincsshake192fsimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -1669,7 +1734,8 @@ mod test_sphincsshake192fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE192FSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -1683,7 +1749,8 @@ mod test_sphincsshake192fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -1693,7 +1760,8 @@ mod test_sphincsshake192fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -1703,7 +1771,8 @@ mod test_sphincsshake192fsimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -1735,6 +1804,7 @@ mod test_sphincsshake192fsimple_avx2 {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE192FSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE192FSIMPLE_AVX2_crypto_sign_keypair(
@@ -1748,9 +1818,10 @@ mod test_sphincsshake192fsimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -1763,8 +1834,9 @@ mod test_sphincsshake192fsimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -1775,7 +1847,8 @@ mod test_sphincsshake192fsimple_avx2 {
                 PQCLEAN_SPHINCSSHAKE192FSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -1785,7 +1858,8 @@ mod test_sphincsshake192fsimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -1795,7 +1869,8 @@ mod test_sphincsshake192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE192FSIMPLE_AVX2_CRYPTO_BYTES,
@@ -1809,7 +1884,8 @@ mod test_sphincsshake192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -1819,7 +1895,8 @@ mod test_sphincsshake192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -1829,7 +1906,8 @@ mod test_sphincsshake192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -1857,6 +1935,7 @@ mod test_sphincsshake192ssimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE192SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE192SSIMPLE_CLEAN_crypto_sign_keypair(
@@ -1870,9 +1949,10 @@ mod test_sphincsshake192ssimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -1885,8 +1965,9 @@ mod test_sphincsshake192ssimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -1897,7 +1978,8 @@ mod test_sphincsshake192ssimple_clean {
                 PQCLEAN_SPHINCSSHAKE192SSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -1907,7 +1989,8 @@ mod test_sphincsshake192ssimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -1917,7 +2000,8 @@ mod test_sphincsshake192ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE192SSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -1931,7 +2015,8 @@ mod test_sphincsshake192ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -1941,7 +2026,8 @@ mod test_sphincsshake192ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -1951,7 +2037,8 @@ mod test_sphincsshake192ssimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -1983,6 +2070,7 @@ mod test_sphincsshake192ssimple_avx2 {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE192SSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE192SSIMPLE_AVX2_crypto_sign_keypair(
@@ -1996,9 +2084,10 @@ mod test_sphincsshake192ssimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2011,8 +2100,9 @@ mod test_sphincsshake192ssimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2023,7 +2113,8 @@ mod test_sphincsshake192ssimple_avx2 {
                 PQCLEAN_SPHINCSSHAKE192SSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2033,7 +2124,8 @@ mod test_sphincsshake192ssimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2043,7 +2135,8 @@ mod test_sphincsshake192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE192SSIMPLE_AVX2_CRYPTO_BYTES,
@@ -2057,7 +2150,8 @@ mod test_sphincsshake192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2067,7 +2161,8 @@ mod test_sphincsshake192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2077,7 +2172,8 @@ mod test_sphincsshake192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2105,6 +2201,7 @@ mod test_sphincsshake256fsimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE256FSIMPLE_CLEAN_crypto_sign_keypair(
@@ -2118,9 +2215,10 @@ mod test_sphincsshake256fsimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2133,8 +2231,9 @@ mod test_sphincsshake256fsimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2145,7 +2244,8 @@ mod test_sphincsshake256fsimple_clean {
                 PQCLEAN_SPHINCSSHAKE256FSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2155,7 +2255,8 @@ mod test_sphincsshake256fsimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2165,7 +2266,8 @@ mod test_sphincsshake256fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE256FSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -2179,7 +2281,8 @@ mod test_sphincsshake256fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2189,7 +2292,8 @@ mod test_sphincsshake256fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2199,7 +2303,8 @@ mod test_sphincsshake256fsimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2231,6 +2336,7 @@ mod test_sphincsshake256fsimple_avx2 {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256FSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE256FSIMPLE_AVX2_crypto_sign_keypair(
@@ -2244,9 +2350,10 @@ mod test_sphincsshake256fsimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2259,8 +2366,9 @@ mod test_sphincsshake256fsimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2271,7 +2379,8 @@ mod test_sphincsshake256fsimple_avx2 {
                 PQCLEAN_SPHINCSSHAKE256FSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2281,7 +2390,8 @@ mod test_sphincsshake256fsimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2291,7 +2401,8 @@ mod test_sphincsshake256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE256FSIMPLE_AVX2_CRYPTO_BYTES,
@@ -2305,7 +2416,8 @@ mod test_sphincsshake256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2315,7 +2427,8 @@ mod test_sphincsshake256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2325,7 +2438,8 @@ mod test_sphincsshake256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2353,6 +2467,7 @@ mod test_sphincsshake256ssimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE256SSIMPLE_CLEAN_crypto_sign_keypair(
@@ -2366,9 +2481,10 @@ mod test_sphincsshake256ssimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2381,8 +2497,9 @@ mod test_sphincsshake256ssimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2393,7 +2510,8 @@ mod test_sphincsshake256ssimple_clean {
                 PQCLEAN_SPHINCSSHAKE256SSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2403,7 +2521,8 @@ mod test_sphincsshake256ssimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2413,7 +2532,8 @@ mod test_sphincsshake256ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE256SSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -2427,7 +2547,8 @@ mod test_sphincsshake256ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2437,7 +2558,8 @@ mod test_sphincsshake256ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2447,7 +2569,8 @@ mod test_sphincsshake256ssimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2479,6 +2602,7 @@ mod test_sphincsshake256ssimple_avx2 {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHAKE256SSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHAKE256SSIMPLE_AVX2_crypto_sign_keypair(
@@ -2492,9 +2616,10 @@ mod test_sphincsshake256ssimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2507,8 +2632,9 @@ mod test_sphincsshake256ssimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2519,7 +2645,8 @@ mod test_sphincsshake256ssimple_avx2 {
                 PQCLEAN_SPHINCSSHAKE256SSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2529,7 +2656,8 @@ mod test_sphincsshake256ssimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2539,7 +2667,8 @@ mod test_sphincsshake256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHAKE256SSIMPLE_AVX2_CRYPTO_BYTES,
@@ -2553,7 +2682,8 @@ mod test_sphincsshake256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2563,7 +2693,8 @@ mod test_sphincsshake256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2573,7 +2704,8 @@ mod test_sphincsshake256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2601,6 +2733,7 @@ mod test_sphincssha2128fsimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2128FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2128FSIMPLE_CLEAN_crypto_sign_keypair(
@@ -2614,9 +2747,10 @@ mod test_sphincssha2128fsimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2629,8 +2763,9 @@ mod test_sphincssha2128fsimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2641,7 +2776,8 @@ mod test_sphincssha2128fsimple_clean {
                 PQCLEAN_SPHINCSSHA2128FSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2651,7 +2787,8 @@ mod test_sphincssha2128fsimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2661,7 +2798,8 @@ mod test_sphincssha2128fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2128FSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -2675,7 +2813,8 @@ mod test_sphincssha2128fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2685,7 +2824,8 @@ mod test_sphincssha2128fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2695,7 +2835,8 @@ mod test_sphincssha2128fsimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2726,6 +2867,7 @@ mod test_sphincssha2128fsimple_avx2 {
             let mut detached_sig = vec![0u8; PQCLEAN_SPHINCSSHA2128FSIMPLE_AVX2_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2128FSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2128FSIMPLE_AVX2_crypto_sign_keypair(
@@ -2739,9 +2881,10 @@ mod test_sphincssha2128fsimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2754,8 +2897,9 @@ mod test_sphincssha2128fsimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2766,7 +2910,8 @@ mod test_sphincssha2128fsimple_avx2 {
                 PQCLEAN_SPHINCSSHA2128FSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2776,7 +2921,8 @@ mod test_sphincssha2128fsimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2786,7 +2932,8 @@ mod test_sphincssha2128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2128FSIMPLE_AVX2_CRYPTO_BYTES,
@@ -2800,7 +2947,8 @@ mod test_sphincssha2128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2810,7 +2958,8 @@ mod test_sphincssha2128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2820,7 +2969,8 @@ mod test_sphincssha2128fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2848,6 +2998,7 @@ mod test_sphincssha2128ssimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_crypto_sign_keypair(
@@ -2861,9 +3012,10 @@ mod test_sphincssha2128ssimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -2876,8 +3028,9 @@ mod test_sphincssha2128ssimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -2888,7 +3041,8 @@ mod test_sphincssha2128ssimple_clean {
                 PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -2898,7 +3052,8 @@ mod test_sphincssha2128ssimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -2908,7 +3063,8 @@ mod test_sphincssha2128ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -2922,7 +3078,8 @@ mod test_sphincssha2128ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -2932,7 +3089,8 @@ mod test_sphincssha2128ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -2942,7 +3100,8 @@ mod test_sphincssha2128ssimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -2973,6 +3132,7 @@ mod test_sphincssha2128ssimple_avx2 {
             let mut detached_sig = vec![0u8; PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_crypto_sign_keypair(
@@ -2986,9 +3146,10 @@ mod test_sphincssha2128ssimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3001,8 +3162,9 @@ mod test_sphincssha2128ssimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3013,7 +3175,8 @@ mod test_sphincssha2128ssimple_avx2 {
                 PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3023,7 +3186,8 @@ mod test_sphincssha2128ssimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3033,7 +3197,8 @@ mod test_sphincssha2128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_CRYPTO_BYTES,
@@ -3047,7 +3212,8 @@ mod test_sphincssha2128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3057,7 +3223,8 @@ mod test_sphincssha2128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3067,7 +3234,8 @@ mod test_sphincssha2128ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3095,6 +3263,7 @@ mod test_sphincssha2192fsimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2192FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2192FSIMPLE_CLEAN_crypto_sign_keypair(
@@ -3108,9 +3277,10 @@ mod test_sphincssha2192fsimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3123,8 +3293,9 @@ mod test_sphincssha2192fsimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3135,7 +3306,8 @@ mod test_sphincssha2192fsimple_clean {
                 PQCLEAN_SPHINCSSHA2192FSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3145,7 +3317,8 @@ mod test_sphincssha2192fsimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3155,7 +3328,8 @@ mod test_sphincssha2192fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2192FSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -3169,7 +3343,8 @@ mod test_sphincssha2192fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3179,7 +3354,8 @@ mod test_sphincssha2192fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3189,7 +3365,8 @@ mod test_sphincssha2192fsimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3220,6 +3397,7 @@ mod test_sphincssha2192fsimple_avx2 {
             let mut detached_sig = vec![0u8; PQCLEAN_SPHINCSSHA2192FSIMPLE_AVX2_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2192FSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2192FSIMPLE_AVX2_crypto_sign_keypair(
@@ -3233,9 +3411,10 @@ mod test_sphincssha2192fsimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3248,8 +3427,9 @@ mod test_sphincssha2192fsimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3260,7 +3440,8 @@ mod test_sphincssha2192fsimple_avx2 {
                 PQCLEAN_SPHINCSSHA2192FSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3270,7 +3451,8 @@ mod test_sphincssha2192fsimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3280,7 +3462,8 @@ mod test_sphincssha2192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2192FSIMPLE_AVX2_CRYPTO_BYTES,
@@ -3294,7 +3477,8 @@ mod test_sphincssha2192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3304,7 +3488,8 @@ mod test_sphincssha2192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3314,7 +3499,8 @@ mod test_sphincssha2192fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3342,6 +3528,7 @@ mod test_sphincssha2192ssimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2192SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2192SSIMPLE_CLEAN_crypto_sign_keypair(
@@ -3355,9 +3542,10 @@ mod test_sphincssha2192ssimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3370,8 +3558,9 @@ mod test_sphincssha2192ssimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3382,7 +3571,8 @@ mod test_sphincssha2192ssimple_clean {
                 PQCLEAN_SPHINCSSHA2192SSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3392,7 +3582,8 @@ mod test_sphincssha2192ssimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3402,7 +3593,8 @@ mod test_sphincssha2192ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2192SSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -3416,7 +3608,8 @@ mod test_sphincssha2192ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3426,7 +3619,8 @@ mod test_sphincssha2192ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3436,7 +3630,8 @@ mod test_sphincssha2192ssimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3467,6 +3662,7 @@ mod test_sphincssha2192ssimple_avx2 {
             let mut detached_sig = vec![0u8; PQCLEAN_SPHINCSSHA2192SSIMPLE_AVX2_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2192SSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2192SSIMPLE_AVX2_crypto_sign_keypair(
@@ -3480,9 +3676,10 @@ mod test_sphincssha2192ssimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3495,8 +3692,9 @@ mod test_sphincssha2192ssimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3507,7 +3705,8 @@ mod test_sphincssha2192ssimple_avx2 {
                 PQCLEAN_SPHINCSSHA2192SSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3517,7 +3716,8 @@ mod test_sphincssha2192ssimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3527,7 +3727,8 @@ mod test_sphincssha2192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2192SSIMPLE_AVX2_CRYPTO_BYTES,
@@ -3541,7 +3742,8 @@ mod test_sphincssha2192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3551,7 +3753,8 @@ mod test_sphincssha2192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3561,7 +3764,8 @@ mod test_sphincssha2192ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3589,6 +3793,7 @@ mod test_sphincssha2256fsimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2256FSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2256FSIMPLE_CLEAN_crypto_sign_keypair(
@@ -3602,9 +3807,10 @@ mod test_sphincssha2256fsimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3617,8 +3823,9 @@ mod test_sphincssha2256fsimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3629,7 +3836,8 @@ mod test_sphincssha2256fsimple_clean {
                 PQCLEAN_SPHINCSSHA2256FSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3639,7 +3847,8 @@ mod test_sphincssha2256fsimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3649,7 +3858,8 @@ mod test_sphincssha2256fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2256FSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -3663,7 +3873,8 @@ mod test_sphincssha2256fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3673,7 +3884,8 @@ mod test_sphincssha2256fsimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3683,7 +3895,8 @@ mod test_sphincssha2256fsimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3714,6 +3927,7 @@ mod test_sphincssha2256fsimple_avx2 {
             let mut detached_sig = vec![0u8; PQCLEAN_SPHINCSSHA2256FSIMPLE_AVX2_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2256FSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2256FSIMPLE_AVX2_crypto_sign_keypair(
@@ -3727,9 +3941,10 @@ mod test_sphincssha2256fsimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3742,8 +3957,9 @@ mod test_sphincssha2256fsimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3754,7 +3970,8 @@ mod test_sphincssha2256fsimple_avx2 {
                 PQCLEAN_SPHINCSSHA2256FSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3764,7 +3981,8 @@ mod test_sphincssha2256fsimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3774,7 +3992,8 @@ mod test_sphincssha2256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2256FSIMPLE_AVX2_CRYPTO_BYTES,
@@ -3788,7 +4007,8 @@ mod test_sphincssha2256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3798,7 +4018,8 @@ mod test_sphincssha2256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3808,7 +4029,8 @@ mod test_sphincssha2256fsimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3836,6 +4058,7 @@ mod test_sphincssha2256ssimple_clean {
             let mut sm =
                 Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2256SSIMPLE_CLEAN_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2256SSIMPLE_CLEAN_crypto_sign_keypair(
@@ -3849,9 +4072,10 @@ mod test_sphincssha2256ssimple_clean {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3864,8 +4088,9 @@ mod test_sphincssha2256ssimple_clean {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -3876,7 +4101,8 @@ mod test_sphincssha2256ssimple_clean {
                 PQCLEAN_SPHINCSSHA2256SSIMPLE_CLEAN_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -3886,7 +4112,8 @@ mod test_sphincssha2256ssimple_clean {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -3896,7 +4123,8 @@ mod test_sphincssha2256ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2256SSIMPLE_CLEAN_CRYPTO_BYTES,
@@ -3910,7 +4138,8 @@ mod test_sphincssha2256ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -3920,7 +4149,8 @@ mod test_sphincssha2256ssimple_clean {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -3930,7 +4160,8 @@ mod test_sphincssha2256ssimple_clean {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
@@ -3961,6 +4192,7 @@ mod test_sphincssha2256ssimple_avx2 {
             let mut detached_sig = vec![0u8; PQCLEAN_SPHINCSSHA2256SSIMPLE_AVX2_CRYPTO_BYTES];
             let mut sm = Vec::with_capacity(mlen + PQCLEAN_SPHINCSSHA2256SSIMPLE_AVX2_CRYPTO_BYTES);
             let mut smlen = 0;
+
             assert_eq!(
                 0,
                 PQCLEAN_SPHINCSSHA2256SSIMPLE_AVX2_crypto_sign_keypair(
@@ -3974,9 +4206,10 @@ mod test_sphincssha2256ssimple_avx2 {
                     sm.as_mut_ptr(),
                     &mut smlen as *mut usize,
                     msg.as_ptr(),
-                    mlen,
+                    msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign"
             );
             sm.set_len(smlen);
 
@@ -3989,8 +4222,9 @@ mod test_sphincssha2256ssimple_avx2 {
                     &mut mlen as *mut usize,
                     sm.as_ptr(),
                     sm.len(),
-                    pk.as_ptr()
-                )
+                    pk.as_ptr(),
+                ),
+                "sign_open"
             );
             unpacked_m.set_len(mlen);
             assert_eq!(unpacked_m, msg);
@@ -4001,7 +4235,8 @@ mod test_sphincssha2256ssimple_avx2 {
                 PQCLEAN_SPHINCSSHA2256SSIMPLE_AVX2_crypto_sign_keypair(
                     pk_alt.as_mut_ptr(),
                     sk_alt.as_mut_ptr()
-                )
+                ),
+                "keypair"
             );
             assert_eq!(
                 -1,
@@ -4011,7 +4246,8 @@ mod test_sphincssha2256ssimple_avx2 {
                     sm.as_ptr(),
                     sm.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_open"
             );
             assert_eq!(
                 0,
@@ -4021,7 +4257,8 @@ mod test_sphincssha2256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     sk.as_ptr()
-                )
+                ),
+                "sign_signature"
             );
             assert!(
                 smlen <= PQCLEAN_SPHINCSSHA2256SSIMPLE_AVX2_CRYPTO_BYTES,
@@ -4035,7 +4272,8 @@ mod test_sphincssha2256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify"
             );
             assert_eq!(
                 -1,
@@ -4045,7 +4283,8 @@ mod test_sphincssha2256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len(),
                     pk_alt.as_ptr()
-                )
+                ),
+                "sign_verify alt pk"
             );
             assert_eq!(
                 -1,
@@ -4055,7 +4294,8 @@ mod test_sphincssha2256ssimple_avx2 {
                     msg.as_ptr(),
                     msg.len() - 1,
                     pk.as_ptr()
-                )
+                ),
+                "sign_verify wrong length"
             );
         }
     }
