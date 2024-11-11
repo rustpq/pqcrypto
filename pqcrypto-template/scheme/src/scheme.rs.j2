@@ -139,7 +139,7 @@ simple_struct!(SharedSecret, ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES);
 {% else %}
 
 #[derive(Clone, Copy)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
 pub struct DetachedSignature(
     #[cfg_attr(feature = "serialization", serde(with = "BigArray"))]
     [u8; ffi::PQCLEAN_{{ NS_NAME }}_CRYPTO_BYTES],
