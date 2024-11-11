@@ -79,9 +79,9 @@ jobs:
         run: curl https://wasmtime.dev/install.sh -sSf | bash
       - name: Install WASI SDK
         run: |
-          wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
-          tar -xvzf wasi-sysroot-12.0.tar.gz
-          rm wasi-sysroot-12.0.tar.gz
+          wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-24/wasi-sysroot-24.0.tar.gz
+          tar -xvzf wasi-sysroot-24.0.tar.gz
+          rm wasi-sysroot-24.0.tar.gz
       - name: Run tests
         run: |
           export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
