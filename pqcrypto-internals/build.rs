@@ -34,20 +34,20 @@ fn main() {
 
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default();
     let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap_or_default();
+    let mut builder = cc::Build::new();
+
+    if target_os == "wasi" {
+        let wasi_sdk_path =
+            &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
+        builder.flag(format!("--sysroot={wasi_sdk_path}").as_str());
+    }
+
     if target_arch == "x86" || target_arch == "x86_64" {
-        let mut builder = cc::Build::new();
-
-        if target_os == "wasi" {
-            let wasi_sdk_path =
-                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
-            builder.flag(format!("--sysroot={wasi_sdk_path}").as_str());
-        }
-
         if target_env == "msvc" {
             builder.flag("/arch:AVX2");
         } else {
             builder.flag("-mavx2");
-        };
+        }
         builder
             .file(
                 cfiledir
@@ -57,15 +57,8 @@ fn main() {
             .compile("keccak4x");
         println!("cargo:rustc-link-lib=keccak4x")
     } else if target_arch == "aarch64" && target_env != "msvc" {
-        let mut builder = cc::Build::new();
-
-        if target_os == "wasi" {
-            let wasi_sdk_path =
-                &std::env::var("WASI_SDK_DIR").expect("missing environment variable: WASI_SDK_DIR");
-            builder.flag(format!("--sysroot={wasi_sdk_path}").as_str());
-        }
-
         builder
+            .flag("-march=armv8-a")
             .file(cfiledir.join("keccak2x").join("fips202x2.c"))
             .file(cfiledir.join("keccak2x").join("feat.S"))
             .compile("keccak2x");
