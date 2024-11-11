@@ -1,5 +1,8 @@
 # Changelog
 
+## 2024-11-11
+* Fix the `serialization` feature under no-std (Issue #66)
+
 ## 2024-10-24
 * `pqcrypto-kyber` and `pqcrypto-dilithium` are retired and replaced by `pqcrypto-mlkem` and `pqcrypto-mldsa`, respectively.
 * `pqcrypto-falcon` now separates Falcon into the "compressed" mode and the "padded" variants. The "compressed" variant likely produces shorter signatures than the max size.
