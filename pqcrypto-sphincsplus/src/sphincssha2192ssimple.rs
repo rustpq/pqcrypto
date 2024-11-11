@@ -94,7 +94,7 @@ simple_struct!(
 );
 
 #[derive(Clone, Copy)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
 pub struct DetachedSignature(
     #[cfg_attr(feature = "serialization", serde(with = "BigArray"))]
     [u8; ffi::PQCLEAN_SPHINCSSHA2192SSIMPLE_CLEAN_CRYPTO_BYTES],

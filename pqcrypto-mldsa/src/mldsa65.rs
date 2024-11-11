@@ -90,7 +90,7 @@ simple_struct!(PublicKey, ffi::PQCLEAN_MLDSA65_CLEAN_CRYPTO_PUBLICKEYBYTES);
 simple_struct!(SecretKey, ffi::PQCLEAN_MLDSA65_CLEAN_CRYPTO_SECRETKEYBYTES);
 
 #[derive(Clone, Copy)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serialization", derive(Serialize, Deserialize))]
 pub struct DetachedSignature(
     #[cfg_attr(feature = "serialization", serde(with = "BigArray"))]
     [u8; ffi::PQCLEAN_MLDSA65_CLEAN_CRYPTO_BYTES],
