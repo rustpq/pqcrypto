@@ -1,6 +1,6 @@
 ---
 
-pqcrypto_version: 0.18.0
+pqcrypto_version: 0.18.1
 traits_version: 0.3.5
 
 kems:
@@ -50,7 +50,7 @@ kems:
         implementations: [clean, avx2]
         doctest: no
   hqc:
-    version: 0.2.0
+    version: 0.2.1
     implementations: [clean]
     schemes:
       - name: hqc-128
