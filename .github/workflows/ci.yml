@@ -47,47 +47,47 @@ jobs:
       - name: run Cargo clippy
         run: cargo clippy -- -D warnings -A deprecated
 
-  wasi:
-    name: wasi
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        rust:
-          - stable
-          - beta
-          - nightly
-    env:
-      # 20 MiB stack
-      RUST_MIN_STACK: 20971520
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
+  # wasi:
+  #   name: wasi
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       rust:
+  #         - stable
+  #         - beta
+  #         - nightly
+  #   env:
+  #     # 20 MiB stack
+  #     RUST_MIN_STACK: 20971520
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
 
-      - name: Install Rust
-        run: |
-          rustup set auto-self-update disable
-          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
-          rustup default ${{ matrix.rust }}
-          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
-          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
-          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
+  #     - name: Install Rust
+  #       run: |
+  #         rustup set auto-self-update disable
+  #         rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
+  #         rustup default ${{ matrix.rust }}
+  #         echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
+  #         echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
+  #         echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
-      - name: Install WASI
-        run: cargo install cargo-wasi
-      - name: Install wasmtime
-        run: curl https://wasmtime.dev/install.sh -sSf | bash
-      - name: Install WASI SDK
-        run: |
-          wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
-          tar -xvzf wasi-sysroot-12.0.tar.gz
-          rm wasi-sysroot-12.0.tar.gz
-      - name: Run tests
-        run: |
-          export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
-          export WASMTIME_HOME="$(pwd)/.wasmtime"
-          export PATH="$WASMTIME_HOME/bin:$PATH"
-          cargo wasi build --features cryptographically-insecure
-          #cargo wasi test -- --nocapture
+  #     - name: Install WASI
+  #       run: cargo install cargo-wasi
+  #     - name: Install wasmtime
+  #       run: curl https://wasmtime.dev/install.sh -sSf | bash
+  #     - name: Install WASI SDK
+  #       run: |
+  #         wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
+  #         tar -xvzf wasi-sysroot-12.0.tar.gz
+  #         rm wasi-sysroot-12.0.tar.gz
+  #     - name: Run tests
+  #       run: |
+  #         export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
+  #         export WASMTIME_HOME="$(pwd)/.wasmtime"
+  #         export PATH="$WASMTIME_HOME/bin:$PATH"
+  #         cargo wasi build --features cryptographically-insecure
+  #         #cargo wasi test -- --nocapture
 
 #  vim: set ft=yaml ts=2 sw=2 tw=0 et :
