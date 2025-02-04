@@ -47,6 +47,44 @@ jobs:
       - name: run Cargo clippy
         run: cargo clippy -- -D warnings -A deprecated
 
+  android:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - beta
+          - nightly
+    env:
+      CARGO_TERM_COLOR: always
+      # 20 MiB stack
+      RUST_MIN_STACK: 20971520
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install Rust
+        run: |
+          rustup set auto-self-update disable
+          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
+          rustup target add aarch64-linux-android
+          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
+          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
+          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@07976c6290703d34c16d382cb36445f98bb43b1f #3.2.0
+
+      - name: Setup Android NDK
+        run: sdkmanager "ndk;26.1.10909125"
+
+      - name: Compile for Android
+        run: |
+          cargo install cargo-ndk
+          cargo ndk -t aarch64-linux-android build
+
   # wasi:
   #   name: wasi
   #   runs-on: ubuntu-latest
