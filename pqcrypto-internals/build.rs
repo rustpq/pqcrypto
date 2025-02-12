@@ -17,6 +17,10 @@ fn main() {
         cfiledir.join("sp800-185.c"),
     ];
 
+    println!("cargo:rerun-if-changed=cfiles/");
+    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=src/");
+
     let mut build = cc::Build::new();
 
     let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
