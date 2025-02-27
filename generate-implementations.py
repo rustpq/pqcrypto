@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pipenv run python
 """Generates the implementations based on ``implementations.yaml``"""
 
 import yaml
