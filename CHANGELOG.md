@@ -1,5 +1,10 @@
 # Changelog
 
+## 2025-02-27
+* Update PQClean to today's version
+    * Update SPHINCS+ for some minor improvements. This is not yet SLH-DSA.
+    * Update ML-DSA for some minor improvements.
+
 ## 2024-12-11
 * `pqcrypto-hqc` was updated to addresss a security flaw in decapsulation.
 
