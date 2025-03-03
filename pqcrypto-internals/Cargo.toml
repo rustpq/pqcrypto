@@ -4,6 +4,7 @@ version = "0.2.10"
 edition = "2021"
 description = "bindings to common cryptography"
 license = "MIT OR Apache-2.0"
+repository = "https://github.com/rustpq/pqcrypto"
 
 links = "pqcrypto_internals"
 
