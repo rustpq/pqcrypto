@@ -5,7 +5,7 @@ traits_version: 0.3.5
 
 kems:
   mlkem:
-    version: 0.1.0
+    version: 0.1.1
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows && !is_macos'
     implementations: [clean, avx2, aarch64]
     schemes:
@@ -63,7 +63,7 @@ kems:
 
 signs:
   mldsa:
-    version: 0.1.1
+    version: 0.2.0
     x86_avx2_guard: 'target_arch == "x86_64" && avx2_enabled && !is_windows'
     implementations: [clean, avx2, aarch64_sha3]
     supports_context: true
@@ -75,7 +75,7 @@ signs:
       - name: ml-dsa-87
         implementations: [clean, avx2, aarch64_sha3]
   falcon:
-    version: 0.4.0
+    version: 0.4.1
     implementations: [clean, avx2, aarch64]
     schemes:
       - name: falcon-512
