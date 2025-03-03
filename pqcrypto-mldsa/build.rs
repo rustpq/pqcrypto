@@ -9,8 +9,10 @@ macro_rules! build_clean {
         let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
         let common_dir = Path::new("pqclean/common");
 
+        let implementation_dir = "clean";
+
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", $variant, "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", $variant, implementation_dir]
             .iter()
             .collect();
 
@@ -41,8 +43,10 @@ macro_rules! build_avx2 {
         let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
         let common_dir = Path::new("pqclean/common");
 
+        let implementation_dir = "avx2";
+
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", $variant, "avx2"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", $variant, implementation_dir]
             .iter()
             .collect();
 
@@ -80,13 +84,15 @@ macro_rules! build_avx2 {
     };
 }
 
-macro_rules! build_aarch64 {
+macro_rules! build_aarch64_sha3 {
     ($variant:expr) => {
         let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
         let common_dir = Path::new("pqclean/common");
 
+        let implementation_dir = "aarch64";
+
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_sign", $variant, "aarch64"]
+        let target_dir: PathBuf = ["pqclean", "crypto_sign", $variant, implementation_dir]
             .iter()
             .collect();
 
@@ -98,7 +104,7 @@ macro_rules! build_aarch64 {
         }
 
         let scheme_files = glob::glob(target_dir.join("*.[csS]").to_str().unwrap()).unwrap();
-        builder.flag("-march=armv8-a");
+        builder.flag("-march=armv8.2-a+sha3");
 
         builder
             .include(internals_include_path)
@@ -109,7 +115,7 @@ macro_rules! build_aarch64 {
                     .into_iter()
                     .map(|p| p.unwrap().to_string_lossy().into_owned()),
             );
-        builder.compile(format!("{}_aarch64", $variant).as_str());
+        builder.compile(format!("{}_aarch64_sha3", $variant).as_str());
     };
 }
 
@@ -120,6 +126,8 @@ fn main() {
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
     #[allow(unused_variables)]
     let neon_enabled = env::var("CARGO_FEATURE_NEON").is_ok();
+    #[allow(unused_variables)]
+    let aarch64_sha3_enabled = env::var("CARGO_FEATURE_AARCH64_SHA3").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]
@@ -133,22 +141,22 @@ fn main() {
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx2!("ml-dsa-44");
     }
-    if target_arch == "aarch64" && neon_enabled {
-        build_aarch64!("ml-dsa-44");
+    if target_arch == "aarch64" && aarch64_sha3_enabled {
+        build_aarch64_sha3!("ml-dsa-44");
     }
     build_clean!("ml-dsa-65");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx2!("ml-dsa-65");
     }
-    if target_arch == "aarch64" && neon_enabled {
-        build_aarch64!("ml-dsa-65");
+    if target_arch == "aarch64" && aarch64_sha3_enabled {
+        build_aarch64_sha3!("ml-dsa-65");
     }
     build_clean!("ml-dsa-87");
     if target_arch == "x86_64" && avx2_enabled && !is_windows {
         build_avx2!("ml-dsa-87");
     }
-    if target_arch == "aarch64" && neon_enabled {
-        build_aarch64!("ml-dsa-87");
+    if target_arch == "aarch64" && aarch64_sha3_enabled {
+        build_aarch64_sha3!("ml-dsa-87");
     }
 
     println!("cargo::rustc-check-cfg=cfg(enable_x86_avx2)");
@@ -156,9 +164,9 @@ fn main() {
         // Print enableing flag for AVX2 implementation
         println!("cargo:rustc-cfg=enable_x86_avx2");
     }
-    println!("cargo::rustc-check-cfg=cfg(enable_aarch64_neon)");
-    if target_arch == "aarch64" && neon_enabled {
+    println!("cargo::rustc-check-cfg=cfg(enable_aarch64_sha3)");
+    if target_arch == "aarch64" && aarch64_sha3_enabled {
         // Print enableing flag for AARCH64 implementation
-        println!("cargo:rustc-cfg=enable_aarch64_neon");
+        println!("cargo:rustc-cfg=enable_aarch64_sha3");
     }
 }
