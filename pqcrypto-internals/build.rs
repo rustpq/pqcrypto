@@ -62,7 +62,7 @@ fn main() {
         println!("cargo:rustc-link-lib=keccak4x")
     } else if target_arch == "aarch64" && target_env != "msvc" {
         builder
-            .flag("-march=armv8-a+sha3")
+            .flag("-march=armv8.2-a+sha3")
             .file(cfiledir.join("keccak2x").join("fips202x2.c"))
             .file(cfiledir.join("keccak2x").join("feat.S"))
             .compile("keccak2x");
