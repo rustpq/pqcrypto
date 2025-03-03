@@ -2,7 +2,7 @@
 name = "pqcrypto-mldsa"
 description = "Post-Quantum Signature Scheme mldsa"
 readme = "README.md"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
@@ -20,9 +20,9 @@ serde-big-array = { version = "0.5.1", optional = true }
 paste = "1.0"
 
 [features]
-default = ["avx2", "neon", "std"]
+default = ["avx2", "aarch64-sha3", "std"]
 avx2 = ["std"]
-neon = ["std"]
+aarch64-sha3 = ["std"]
 std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
 

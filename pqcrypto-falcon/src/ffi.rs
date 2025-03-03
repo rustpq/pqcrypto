@@ -808,6 +808,9 @@ mod test_falcon512_aarch64 {
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("neon") {
+            return;
+        }
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -1192,6 +1195,9 @@ mod test_falconpadded512_aarch64 {
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("neon") {
+            return;
+        }
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -1578,6 +1584,9 @@ mod test_falcon1024_aarch64 {
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("neon") {
+            return;
+        }
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -1965,6 +1974,9 @@ mod test_falconpadded1024_aarch64 {
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("neon") {
+            return;
+        }
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
