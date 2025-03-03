@@ -39,6 +39,7 @@
 {% set globals.x86_aes = False %}
 {% set globals.x86_avx2 = False %}
 {% set globals.aarch64_neon = False %}
+{% set globals.aarch64_sha3 = False %}
 
 #[cfg(feature = "serialization")]
 use serde::{Deserialize, Serialize};
@@ -125,6 +126,9 @@ macro_rules! simple_struct {
 {% endif %}
 {% if 'aarch64' in scheme.implementations %}
 {% set globals.aarch64_neon = True %}
+{% set AARCH64_NAME = [scheme.name|namespaceize, 'aarch64'|namespaceize]|join('_') %}
+{% elif 'aarch64_sha3' in scheme.implementations %}
+{% set globals.aarch64_sha3 = True %}
 {% set AARCH64_NAME = [scheme.name|namespaceize, 'aarch64'|namespaceize]|join('_') %}
 {% endif %}
 
@@ -251,7 +255,7 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             {% if type == "kem" %}
             return gen_keypair!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_keypair);
             {% else %}
@@ -263,7 +267,7 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             {% if type == "kem" %}
             return gen_keypair!(PQCLEAN_{{ AES_NAME }}_crypto_kem_keypair);
             {% else %}
@@ -275,10 +279,18 @@ pub fn keypair() -> (PublicKey, SecretKey) {
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        // always use AArch64 code, when target is detected as all AArch64 targets have NEON
-        // support, and std::is_aarch64_feature_detected!("neon") works only with Rust nightly at
-        // the moment
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            {% if type == "kem" %}
+            return gen_keypair!(PQCLEAN_{{ AARCH64_NAME }}_crypto_kem_keypair);
+            {% else %}
+            return gen_keypair!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_keypair);
+            {% endif %}
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             {% if type == "kem" %}
             return gen_keypair!(PQCLEAN_{{ AARCH64_NAME }}_crypto_kem_keypair);
             {% else %}
@@ -320,7 +332,7 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return encap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_enc, pk);
         }
     }
@@ -328,7 +340,7 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return encap!(PQCLEAN_{{ AES_NAME }}_crypto_kem_enc, pk);
         }
     }
@@ -336,8 +348,19 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
             return encap!(PQCLEAN_{{ AARCH64_NAME }}_crypto_kem_enc, pk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
+            {% if type == "kem" %}
+            return encap!(PQCLEAN_{{ AARCH64_NAME }}_crypto_kem_enc);
+            {% else %}
+            return encap!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_enc);
+            {% endif %}
         }
     }
     {% endif %}
@@ -371,7 +394,7 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return decap!(PQCLEAN_{{ AVX2_NAME }}_crypto_kem_dec, ct, sk);
         }
     }
@@ -379,7 +402,7 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return decap!(PQCLEAN_{{ AES_NAME }}_crypto_kem_dec, ct, sk);
         }
     }
@@ -387,8 +410,15 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
             return decap!(PQCLEAN_{{ AARCH64_NAME }}_crypto_kem_dec, ct, sk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
+            return decap!(PQCLEAN_{{ AARCH64_NAME }}_crypto_kem_keypair);
         }
     }
     {% endif %}
@@ -468,7 +498,7 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return gen_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign, msg, sk);
         }
     }
@@ -476,7 +506,7 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return gen_signature!(PQCLEAN_{{ AES_NAME }}_crypto_sign, msg, sk);
         }
     }
@@ -484,7 +514,14 @@ pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return gen_signature!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign, msg, sk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return gen_signature!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign, msg, sk);
         }
     }
@@ -501,7 +538,7 @@ pub fn sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return gen_signature_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_ctx, msg, ctx, sk);
         }
     }
@@ -509,7 +546,7 @@ pub fn sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return gen_signature_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_ctx, msg, ctx, sk);
         }
     }
@@ -517,7 +554,14 @@ pub fn sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> SignedMessage {
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return gen_signature_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_ctx, msg, ctx, sk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return gen_signature_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_ctx, msg, ctx, sk);
         }
     }
@@ -602,7 +646,7 @@ pub fn open(
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return open_signed!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_open, sm, pk);
         }
     }
@@ -610,7 +654,7 @@ pub fn open(
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return open_signed!(PQCLEAN_{{ AES_NAME }}_crypto_sign_open, sm, pk);
         }
     }
@@ -618,7 +662,14 @@ pub fn open(
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return open_signed!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_open, sm, pk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return open_signed!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_open, sm, pk);
         }
     }
@@ -639,7 +690,7 @@ pub fn open_ctx(
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return open_signed_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_open_ctx, sm, ctx, pk);
         }
     }
@@ -647,7 +698,7 @@ pub fn open_ctx(
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return open_signed_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_open_ctx, sm, ctx, pk);
         }
     }
@@ -655,7 +706,14 @@ pub fn open_ctx(
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return open_signed_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_open_ctx, sm, ctx, pk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return open_signed_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_open_ctx, sm, ctx, pk);
         }
     }
@@ -725,7 +783,7 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return detached_signature!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_signature, msg, sk);
         }
     }
@@ -733,7 +791,7 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return detached_signature!(PQCLEAN_{{ AES_NAME }}_crypto_sign_signature, msg, sk);
         }
     }
@@ -741,7 +799,14 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return detached_signature!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_signature, msg, sk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return detached_signature!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_signature, msg, sk);
         }
     }
@@ -758,7 +823,7 @@ pub fn detached_sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> DetachedSign
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return detached_signature_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk);
         }
     }
@@ -766,7 +831,7 @@ pub fn detached_sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> DetachedSign
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return detached_signature_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk);
         }
     }
@@ -774,7 +839,14 @@ pub fn detached_sign_ctx(msg: &[u8], ctx: &[u8], sk: &SecretKey) -> DetachedSign
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return detached_signature_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return detached_signature_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_signature_ctx, msg, ctx, sk);
         }
     }
@@ -850,7 +922,7 @@ pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &Publi
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return verify_detached_sig!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_verify, sig, msg, pk);
         }
     }
@@ -858,7 +930,7 @@ pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &Publi
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return verify_detached_sig!(PQCLEAN_{{ AES_NAME }}_crypto_sign_verify, sig, msg, pk);
         }
     }
@@ -866,7 +938,14 @@ pub fn verify_detached_signature(sig: &DetachedSignature, msg: &[u8], pk: &Publi
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return verify_detached_sig!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_verify, sig, msg, pk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return verify_detached_sig!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_verify, sig, msg, pk);
         }
     }
@@ -884,7 +963,7 @@ pub fn verify_detached_signature_ctx(sig: &DetachedSignature, msg: &[u8], ctx: &
     {% if globals.x86_avx2 %}
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return verify_detached_sig_ctx!(PQCLEAN_{{ AVX2_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk);
         }
     }
@@ -892,7 +971,7 @@ pub fn verify_detached_signature_ctx(sig: &DetachedSignature, msg: &[u8], ctx: &
     {% if globals.x86_aes %}
     #[cfg(all(enable_x86_aes, feature = "aes"))]
     {
-        if std::is_x86_feature_detected!("aes") {
+        if std::arch::is_x86_feature_detected!("aes") {
             return verify_detached_sig_ctx!(PQCLEAN_{{ AES_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk);
         }
     }
@@ -900,7 +979,14 @@ pub fn verify_detached_signature_ctx(sig: &DetachedSignature, msg: &[u8], ctx: &
     {% if globals.aarch64_neon %}
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
+            return verify_detached_sig_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk);
+        }
+    }
+    {% elif globals.aarch64_sha3 %}
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
+    {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return verify_detached_sig_ctx!(PQCLEAN_{{ AARCH64_NAME }}_crypto_sign_verify_ctx, sig, msg, ctx, pk);
         }
     }
