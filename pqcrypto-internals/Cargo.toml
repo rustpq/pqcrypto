@@ -1,6 +1,6 @@
 [package]
 name = "pqcrypto-internals"
-version = "0.2.9"
+version = "0.2.10"
 edition = "2021"
 description = "bindings to common cryptography"
 license = "MIT OR Apache-2.0"
