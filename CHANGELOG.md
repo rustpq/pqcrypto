@@ -1,5 +1,8 @@
 # Changelog
 
+## 2025-03-03
+* Actually enable runtime feature detection on AArch64
+
 ## 2025-02-27
 * Update PQClean to today's version
     * Update SPHINCS+ for some minor improvements. This is not yet SLH-DSA.

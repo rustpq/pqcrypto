@@ -186,16 +186,13 @@ macro_rules! gen_keypair {
 pub fn keypair() -> (PublicKey, SecretKey) {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return gen_keypair!(PQCLEAN_FALCONPADDED1024_AVX2_crypto_sign_keypair);
         }
     }
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        // always use AArch64 code, when target is detected as all AArch64 targets have NEON
-        // support, and std::is_aarch64_feature_detected!("neon") works only with Rust nightly at
-        // the moment
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
             return gen_keypair!(PQCLEAN_FALCONPADDED1024_AARCH64_crypto_sign_keypair);
         }
     }
@@ -226,13 +223,13 @@ macro_rules! gen_signature {
 pub fn sign(msg: &[u8], sk: &SecretKey) -> SignedMessage {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return gen_signature!(PQCLEAN_FALCONPADDED1024_AVX2_crypto_sign, msg, sk);
         }
     }
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
             return gen_signature!(PQCLEAN_FALCONPADDED1024_AARCH64_crypto_sign, msg, sk);
         }
     }
@@ -269,13 +266,13 @@ pub fn open(
 ) -> core::result::Result<Vec<u8>, primitive::VerificationError> {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return open_signed!(PQCLEAN_FALCONPADDED1024_AVX2_crypto_sign_open, sm, pk);
         }
     }
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
             return open_signed!(PQCLEAN_FALCONPADDED1024_AARCH64_crypto_sign_open, sm, pk);
         }
     }
@@ -302,7 +299,7 @@ macro_rules! detached_signature {
 pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return detached_signature!(
                 PQCLEAN_FALCONPADDED1024_AVX2_crypto_sign_signature,
                 msg,
@@ -312,7 +309,7 @@ pub fn detached_sign(msg: &[u8], sk: &SecretKey) -> DetachedSignature {
     }
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
             return detached_signature!(
                 PQCLEAN_FALCONPADDED1024_AARCH64_crypto_sign_signature,
                 msg,
@@ -354,7 +351,7 @@ pub fn verify_detached_signature(
 ) -> core::result::Result<(), primitive::VerificationError> {
     #[cfg(all(enable_x86_avx2, feature = "avx2"))]
     {
-        if std::is_x86_feature_detected!("avx2") {
+        if std::arch::is_x86_feature_detected!("avx2") {
             return verify_detached_sig!(
                 PQCLEAN_FALCONPADDED1024_AVX2_crypto_sign_verify,
                 sig,
@@ -365,7 +362,7 @@ pub fn verify_detached_signature(
     }
     #[cfg(all(enable_aarch64_neon, feature = "neon"))]
     {
-        if true {
+        if std::arch::is_aarch64_feature_detected!("neon") {
             return verify_detached_sig!(
                 PQCLEAN_FALCONPADDED1024_AARCH64_crypto_sign_verify,
                 sig,

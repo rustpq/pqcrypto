@@ -28,7 +28,9 @@ methods only.
 {% for scheme in schemes %}
 * ``{{ scheme.name }}``
 {% for implementation in scheme.implementations %}
-{% if implementation == 'avx2' or implementation == 'avx' or implementation == 'aesni' or implementation == 'aarch64' %}
+{% if implementation == 'aarch64_sha3' %}
+  * ``aarch64`` (if supported)
+{% elif implementation == 'avx2' or implementation == 'avx' or implementation == 'aesni' or implementation == 'aarch64' %}
   * ``{{ implementation }}`` (if supported)
 {% else %}
   * ``{{ implementation }}``

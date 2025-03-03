@@ -9,8 +9,10 @@ macro_rules! build_clean {
         let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
         let common_dir = Path::new("pqclean/common");
 
+        let implementation_dir = "clean";
+
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, "clean"]
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, implementation_dir]
             .iter()
             .collect();
 
@@ -41,8 +43,12 @@ macro_rules! build_avx2 {
         let internals_include_path = &std::env::var("DEP_PQCRYPTO_INTERNALS_INCLUDEPATH").unwrap();
         let common_dir = Path::new("pqclean/common");
 
+        let implementation_dir = "avx2";
+
         let mut builder = cc::Build::new();
-        let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, "avx2"].iter().collect();
+        let target_dir: PathBuf = ["pqclean", "crypto_kem", $variant, implementation_dir]
+            .iter()
+            .collect();
 
         let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
         if target_os == "wasi" {
@@ -85,6 +91,8 @@ fn main() {
     let avx2_enabled = env::var("CARGO_FEATURE_AVX2").is_ok();
     #[allow(unused_variables)]
     let neon_enabled = env::var("CARGO_FEATURE_NEON").is_ok();
+    #[allow(unused_variables)]
+    let aarch64_sha3_enabled = env::var("CARGO_FEATURE_AARCH64_SHA3").is_ok();
     #[allow(unused_variables)]
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     #[allow(unused_variables)]

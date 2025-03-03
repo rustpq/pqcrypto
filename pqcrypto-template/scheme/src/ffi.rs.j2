@@ -24,6 +24,8 @@ use pqcrypto_internals::*;
 #[cfg(enable_x86_aes)]
 {% elif implementation == 'aarch64' %}
 #[cfg(enable_aarch64_neon)]
+{% elif implementation == 'aarch64_sha3' %}
+#[cfg(enable_aarch64_sha3)]
 {% endif %}
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -35,6 +37,8 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES: usize = {{ metadata['leng
 #[cfg(enable_x86_aes)]
 {% elif implementation == 'aarch64' %}
 #[cfg(enable_aarch64_neon)]
+{% elif implementation == 'aarch64_sha3' %}
+#[cfg(enable_aarch64_sha3)]
 {% endif %}
 {% if insecure %}
 #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -47,6 +51,8 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['leng
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -58,6 +64,8 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['leng
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -70,6 +78,8 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['leng
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -90,6 +100,8 @@ pub const PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES: usize = {{ metadata['leng
 #[cfg(enable_x86_aes)]
 {% elif implementation == 'aarch64' %}
 #[cfg(enable_aarch64_neon)]
+{% elif implementation == 'aarch64_sha3' %}
+#[cfg(enable_aarch64_sha3)]
 {% endif %}
 #[link(name = "{{ scheme.name }}_{{ implementation }}")]
 extern "C" {
@@ -100,6 +112,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -111,6 +125,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -122,6 +138,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -138,6 +156,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -149,6 +169,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -161,6 +183,8 @@ extern "C" {
         #[cfg(enable_x86_aes)]
         {% elif implementation == 'aarch64' %}
         #[cfg(enable_aarch64_neon)]
+        {% elif implementation == 'aarch64_sha3' %}
+        #[cfg(enable_aarch64_sha3)]
         {% endif %}
         {% if insecure %}
         #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -173,6 +197,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -185,6 +211,8 @@ extern "C" {
         #[cfg(enable_x86_aes)]
         {% elif implementation == 'aarch64' %}
         #[cfg(enable_aarch64_neon)]
+        {% elif implementation == 'aarch64_sha3' %}
+        #[cfg(enable_aarch64_sha3)]
         {% endif %}
         {% if insecure %}
         #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -197,6 +225,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -209,6 +239,8 @@ extern "C" {
         #[cfg(enable_x86_aes)]
         {% elif implementation == 'aarch64' %}
         #[cfg(enable_aarch64_neon)]
+        {% elif implementation == 'aarch64_sha3' %}
+        #[cfg(enable_aarch64_sha3)]
         {% endif %}
         {% if insecure %}
         #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -221,6 +253,8 @@ extern "C" {
     #[cfg(enable_x86_aes)]
     {% elif implementation == 'aarch64' %}
     #[cfg(enable_aarch64_neon)]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(enable_aarch64_sha3)]
     {% endif %}
     {% if insecure %}
     #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -233,6 +267,8 @@ extern "C" {
         #[cfg(enable_x86_aes)]
         {% elif implementation == 'aarch64' %}
         #[cfg(enable_aarch64_neon)]
+        {% elif implementation == 'aarch64_sha3' %}
+        #[cfg(enable_aarch64_sha3)]
         {% endif %}
         {% if insecure %}
         #[deprecated(note = "Insecure cryptography, do not use in production")]
@@ -257,6 +293,8 @@ extern "C" {
 	#[cfg(all(test, enable_x86_aes, feature = "aes", feature = "cryptographically-insecure"))]
 	{% elif implementation == 'aarch64' %}
 	#[cfg(all(test, enable_aarch64_neon, feature = "neon", feature = "cryptographically-insecure"))]
+    {% elif implementation == 'aarch64_sha3' %}
+    #[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3", feature = "cryptographically-insecure")]
 	{% else %}
 	#[cfg(all(test, feature = "cryptographically-insecure"))]
 	{% endif %}
@@ -267,6 +305,8 @@ extern "C" {
 	#[cfg(all(test, enable_x86_aes, feature = "aes"))]
 	{% elif implementation == 'aarch64' %}
 	#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
+	{% elif implementation == 'aarch64_sha3' %}
+	#[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3"))]
 	{% else %}
 	#[cfg(test)]
 	{% endif %}

@@ -22,7 +22,7 @@ paste = "1.0"
 {% endif %}
 
 [features]
-default = [{% if 'avx2' in implementations or 'avx' in implementations %}"avx2", {% endif %}{% if 'aesni' in implementations %}"aes", {% endif %}{% if 'aarch64' in implementations %}"neon", {% endif %}"std"]
+default = [{% if 'avx2' in implementations or 'avx' in implementations %}"avx2", {% endif %}{% if 'aesni' in implementations %}"aes", {% endif %}{% if 'aarch64' in implementations %}"neon", {% elif 'aarch64_sha3' in implementations %}"aarch64-sha3", {% endif %}"std"]
 {% if 'avx2' in implementations or 'avx' in implementations %}
 avx2 = ["std"]
 {% endif %}
@@ -31,6 +31,8 @@ aes = ["std"]
 {% endif %}
 {% if 'aarch64' in implementations %}
 neon = ["std"]
+{% elif 'aarch64_sha3' in implementations %}
+aarch64-sha3 = ["std"]
 {% endif %}
 std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
