@@ -136,9 +136,9 @@ pub fn keypair() -> (PublicKey, SecretKey) {
             return gen_keypair!(PQCLEAN_MLKEM1024_AVX2_crypto_kem_keypair);
         }
     }
-    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    #[cfg(all(enable_aarch64_sha3, feature = "aarch64-sha3"))]
     {
-        if std::arch::is_aarch64_feature_detected!("neon") {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return gen_keypair!(PQCLEAN_MLKEM1024_AARCH64_crypto_kem_keypair);
         }
     }
@@ -165,9 +165,9 @@ pub fn encapsulate(pk: &PublicKey) -> (SharedSecret, Ciphertext) {
             return encap!(PQCLEAN_MLKEM1024_AVX2_crypto_kem_enc, pk);
         }
     }
-    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    #[cfg(all(enable_aarch64_sha3, feature = "enable_aarch64_sha3"))]
     {
-        if std::arch::is_aarch64_feature_detected!("neon") {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return encap!(PQCLEAN_MLKEM1024_AARCH64_crypto_kem_enc, pk);
         }
     }
@@ -193,9 +193,9 @@ pub fn decapsulate(ct: &Ciphertext, sk: &SecretKey) -> SharedSecret {
             return decap!(PQCLEAN_MLKEM1024_AVX2_crypto_kem_dec, ct, sk);
         }
     }
-    #[cfg(all(enable_aarch64_neon, feature = "neon"))]
+    #[cfg(all(enable_aarch64_sha3, feature = "enable_aarch64_sha3"))]
     {
-        if std::arch::is_aarch64_feature_detected!("neon") {
+        if std::arch::is_aarch64_feature_detected!("sha3") {
             return decap!(PQCLEAN_MLKEM1024_AARCH64_crypto_kem_dec, ct, sk);
         }
     }
