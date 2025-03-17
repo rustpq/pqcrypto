@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025-03-17
+
+* Bump dependencies for testing
+
 ## 2025-02-27
 * Update PQClean to today's version
     * Update SPHINCS+ for some minor improvements. This is not yet SLH-DSA.
