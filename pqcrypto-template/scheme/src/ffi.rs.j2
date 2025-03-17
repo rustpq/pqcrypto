@@ -337,9 +337,9 @@ mod test_{{ scheme.name|nameize }}_{{ implementation|nameize }} {
         }
         {% endif %}
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_{{ NS_NAME }}_CRYPTO_SECRETKEYBYTES];
