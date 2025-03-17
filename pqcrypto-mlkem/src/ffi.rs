@@ -28,13 +28,13 @@ pub const PQCLEAN_MLKEM512_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 768;
 #[cfg(enable_x86_avx2)]
 pub const PQCLEAN_MLKEM512_AVX2_CRYPTO_BYTES: usize = 32;
 
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM512_AARCH64_CRYPTO_SECRETKEYBYTES: usize = 1632;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM512_AARCH64_CRYPTO_PUBLICKEYBYTES: usize = 800;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM512_AARCH64_CRYPTO_CIPHERTEXTBYTES: usize = 768;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM512_AARCH64_CRYPTO_BYTES: usize = 32;
 
 pub const PQCLEAN_MLKEM768_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 2400;
@@ -51,13 +51,13 @@ pub const PQCLEAN_MLKEM768_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 1088;
 #[cfg(enable_x86_avx2)]
 pub const PQCLEAN_MLKEM768_AVX2_CRYPTO_BYTES: usize = 32;
 
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM768_AARCH64_CRYPTO_SECRETKEYBYTES: usize = 2400;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM768_AARCH64_CRYPTO_PUBLICKEYBYTES: usize = 1184;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM768_AARCH64_CRYPTO_CIPHERTEXTBYTES: usize = 1088;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM768_AARCH64_CRYPTO_BYTES: usize = 32;
 
 pub const PQCLEAN_MLKEM1024_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 3168;
@@ -74,13 +74,13 @@ pub const PQCLEAN_MLKEM1024_AVX2_CRYPTO_CIPHERTEXTBYTES: usize = 1568;
 #[cfg(enable_x86_avx2)]
 pub const PQCLEAN_MLKEM1024_AVX2_CRYPTO_BYTES: usize = 32;
 
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM1024_AARCH64_CRYPTO_SECRETKEYBYTES: usize = 3168;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM1024_AARCH64_CRYPTO_PUBLICKEYBYTES: usize = 1568;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM1024_AARCH64_CRYPTO_CIPHERTEXTBYTES: usize = 1568;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLKEM1024_AARCH64_CRYPTO_BYTES: usize = 32;
 
 #[link(name = "ml-kem-512_clean")]
@@ -106,18 +106,18 @@ extern "C" {
         -> c_int;
 }
 
-#[cfg(enable_aarch64_neon)]
-#[link(name = "ml-kem-512_aarch64")]
+#[cfg(enable_aarch64_sha3)]
+#[link(name = "ml-kem-512_aarch64_sha3")]
 extern "C" {
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM512_AARCH64_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM512_AARCH64_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM512_AARCH64_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -148,18 +148,18 @@ extern "C" {
         -> c_int;
 }
 
-#[cfg(enable_aarch64_neon)]
-#[link(name = "ml-kem-768_aarch64")]
+#[cfg(enable_aarch64_sha3)]
+#[link(name = "ml-kem-768_aarch64_sha3")]
 extern "C" {
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM768_AARCH64_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM768_AARCH64_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM768_AARCH64_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -194,18 +194,18 @@ extern "C" {
     ) -> c_int;
 }
 
-#[cfg(enable_aarch64_neon)]
-#[link(name = "ml-kem-1024_aarch64")]
+#[cfg(enable_aarch64_sha3)]
+#[link(name = "ml-kem-1024_aarch64_sha3")]
 extern "C" {
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM1024_AARCH64_crypto_kem_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM1024_AARCH64_crypto_kem_enc(
         ct: *mut u8,
         ss: *mut u8,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLKEM1024_AARCH64_crypto_kem_dec(
         ss: *mut u8,
         ct: *const u8,
@@ -287,13 +287,16 @@ mod test_mlkem512_avx2 {
     }
 }
 
-#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
-mod test_mlkem512_aarch64 {
+#[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3"))]
+mod test_mlkem512_aarch64sha3 {
     use super::*;
     use alloc::vec;
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("sha3") {
+            return;
+        }
         unsafe {
             let mut pk = vec![0u8; PQCLEAN_MLKEM512_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLKEM512_AARCH64_CRYPTO_SECRETKEYBYTES];
@@ -396,13 +399,16 @@ mod test_mlkem768_avx2 {
     }
 }
 
-#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
-mod test_mlkem768_aarch64 {
+#[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3"))]
+mod test_mlkem768_aarch64sha3 {
     use super::*;
     use alloc::vec;
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("sha3") {
+            return;
+        }
         unsafe {
             let mut pk = vec![0u8; PQCLEAN_MLKEM768_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLKEM768_AARCH64_CRYPTO_SECRETKEYBYTES];
@@ -505,13 +511,16 @@ mod test_mlkem1024_avx2 {
     }
 }
 
-#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
-mod test_mlkem1024_aarch64 {
+#[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3"))]
+mod test_mlkem1024_aarch64sha3 {
     use super::*;
     use alloc::vec;
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("sha3") {
+            return;
+        }
         unsafe {
             let mut pk = vec![0u8; PQCLEAN_MLKEM1024_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLKEM1024_AARCH64_CRYPTO_SECRETKEYBYTES];

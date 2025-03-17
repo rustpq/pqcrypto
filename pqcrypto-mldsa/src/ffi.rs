@@ -25,11 +25,11 @@ pub const PQCLEAN_MLDSA44_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1312;
 #[cfg(enable_x86_avx2)]
 pub const PQCLEAN_MLDSA44_AVX2_CRYPTO_BYTES: usize = 2420;
 
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA44_AARCH64_CRYPTO_SECRETKEYBYTES: usize = 2560;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA44_AARCH64_CRYPTO_PUBLICKEYBYTES: usize = 1312;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA44_AARCH64_CRYPTO_BYTES: usize = 2420;
 
 pub const PQCLEAN_MLDSA65_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 4032;
@@ -43,11 +43,11 @@ pub const PQCLEAN_MLDSA65_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 1952;
 #[cfg(enable_x86_avx2)]
 pub const PQCLEAN_MLDSA65_AVX2_CRYPTO_BYTES: usize = 3309;
 
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA65_AARCH64_CRYPTO_SECRETKEYBYTES: usize = 4032;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA65_AARCH64_CRYPTO_PUBLICKEYBYTES: usize = 1952;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA65_AARCH64_CRYPTO_BYTES: usize = 3309;
 
 pub const PQCLEAN_MLDSA87_CLEAN_CRYPTO_SECRETKEYBYTES: usize = 4896;
@@ -61,11 +61,11 @@ pub const PQCLEAN_MLDSA87_AVX2_CRYPTO_PUBLICKEYBYTES: usize = 2592;
 #[cfg(enable_x86_avx2)]
 pub const PQCLEAN_MLDSA87_AVX2_CRYPTO_BYTES: usize = 4627;
 
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA87_AARCH64_CRYPTO_SECRETKEYBYTES: usize = 4896;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA87_AARCH64_CRYPTO_PUBLICKEYBYTES: usize = 2592;
-#[cfg(enable_aarch64_neon)]
+#[cfg(enable_aarch64_sha3)]
 pub const PQCLEAN_MLDSA87_AARCH64_CRYPTO_BYTES: usize = 4627;
 
 #[link(name = "ml-dsa-44_clean")]
@@ -218,12 +218,12 @@ extern "C" {
 
 }
 
-#[cfg(enable_aarch64_neon)]
-#[link(name = "ml-dsa-44_aarch64")]
+#[cfg(enable_aarch64_sha3)]
+#[link(name = "ml-dsa-44_aarch64_sha3")]
 extern "C" {
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -231,7 +231,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_ctx(
         sm: *mut u8,
         smlen: *mut usize,
@@ -241,7 +241,7 @@ extern "C" {
         ctxlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -249,7 +249,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_open_ctx(
         m: *mut u8,
         mlen: *mut usize,
@@ -259,7 +259,7 @@ extern "C" {
         ctxlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -267,7 +267,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_signature_ctx(
         sig: *mut u8,
         siglen: *mut usize,
@@ -277,7 +277,7 @@ extern "C" {
         ctxlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -285,7 +285,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA44_AARCH64_crypto_sign_verify_ctx(
         sig: *const u8,
         siglen: usize,
@@ -448,12 +448,12 @@ extern "C" {
 
 }
 
-#[cfg(enable_aarch64_neon)]
-#[link(name = "ml-dsa-65_aarch64")]
+#[cfg(enable_aarch64_sha3)]
+#[link(name = "ml-dsa-65_aarch64_sha3")]
 extern "C" {
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -461,7 +461,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_ctx(
         sm: *mut u8,
         smlen: *mut usize,
@@ -471,7 +471,7 @@ extern "C" {
         ctxlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -479,7 +479,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_open_ctx(
         m: *mut u8,
         mlen: *mut usize,
@@ -489,7 +489,7 @@ extern "C" {
         ctxlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -497,7 +497,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_signature_ctx(
         sig: *mut u8,
         siglen: *mut usize,
@@ -507,7 +507,7 @@ extern "C" {
         ctxlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -515,7 +515,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA65_AARCH64_crypto_sign_verify_ctx(
         sig: *const u8,
         siglen: usize,
@@ -678,12 +678,12 @@ extern "C" {
 
 }
 
-#[cfg(enable_aarch64_neon)]
-#[link(name = "ml-dsa-87_aarch64")]
+#[cfg(enable_aarch64_sha3)]
+#[link(name = "ml-dsa-87_aarch64_sha3")]
 extern "C" {
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_keypair(pk: *mut u8, sk: *mut u8) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign(
         sm: *mut u8,
         smlen: *mut usize,
@@ -691,7 +691,7 @@ extern "C" {
         len: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_ctx(
         sm: *mut u8,
         smlen: *mut usize,
@@ -701,7 +701,7 @@ extern "C" {
         ctxlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_open(
         m: *mut u8,
         mlen: *mut usize,
@@ -709,7 +709,7 @@ extern "C" {
         smlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_open_ctx(
         m: *mut u8,
         mlen: *mut usize,
@@ -719,7 +719,7 @@ extern "C" {
         ctxlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_signature(
         sig: *mut u8,
         siglen: *mut usize,
@@ -727,7 +727,7 @@ extern "C" {
         mlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_signature_ctx(
         sig: *mut u8,
         siglen: *mut usize,
@@ -737,7 +737,7 @@ extern "C" {
         ctxlen: usize,
         sk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_verify(
         sig: *const u8,
         siglen: usize,
@@ -745,7 +745,7 @@ extern "C" {
         mlen: usize,
         pk: *const u8,
     ) -> c_int;
-    #[cfg(enable_aarch64_neon)]
+    #[cfg(enable_aarch64_sha3)]
     pub fn PQCLEAN_MLDSA87_AARCH64_crypto_sign_verify_ctx(
         sig: *const u8,
         siglen: usize,
@@ -1144,8 +1144,8 @@ mod test_mldsa44_avx2 {
     }
 }
 
-#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
-mod test_mldsa44_aarch64 {
+#[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3"))]
+mod test_mldsa44_aarch64sha3 {
     use super::*;
     use alloc::vec;
     use alloc::vec::Vec;
@@ -1153,6 +1153,9 @@ mod test_mldsa44_aarch64 {
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("sha3") {
+            return;
+        }
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -1727,8 +1730,8 @@ mod test_mldsa65_avx2 {
     }
 }
 
-#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
-mod test_mldsa65_aarch64 {
+#[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3"))]
+mod test_mldsa65_aarch64sha3 {
     use super::*;
     use alloc::vec;
     use alloc::vec::Vec;
@@ -1736,6 +1739,9 @@ mod test_mldsa65_aarch64 {
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("sha3") {
+            return;
+        }
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;
@@ -2310,8 +2316,8 @@ mod test_mldsa87_avx2 {
     }
 }
 
-#[cfg(all(test, enable_aarch64_neon, feature = "neon"))]
-mod test_mldsa87_aarch64 {
+#[cfg(all(test, enable_aarch64_sha3, feature = "aarch64-sha3"))]
+mod test_mldsa87_aarch64sha3 {
     use super::*;
     use alloc::vec;
     use alloc::vec::Vec;
@@ -2319,6 +2325,9 @@ mod test_mldsa87_aarch64 {
 
     #[test]
     fn test_ffi() {
+        if !std::arch::is_aarch64_feature_detected!("sha3") {
+            return;
+        }
         unsafe {
             let mut rng = rand::thread_rng();
             let mut mlen: usize = rng.gen::<u16>() as usize;

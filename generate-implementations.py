@@ -11,6 +11,7 @@ import shutil
 DEFAULT_X86_AES_GUARD = 'target_arch == "x86_64" && aes_enabled'
 DEFAULT_X86_AVX2_GUARD = 'target_arch == "x86_64" && avx2_enabled'
 DEFAULT_AARCH64_NEON_GUARD = 'target_arch == "aarch64" && neon_enabled'
+DEFAULT_AARCH64_SHA3_GUARD = 'target_arch == "aarch64" && aarch64_sha3_enabled'
 
 
 def read_yaml():
@@ -33,6 +34,8 @@ def nameize(value):
 
 def render_template(target_dir, target_file, template_file, **templ_vars):
     def namespaceize(value):
+        if value == "aarch64_sha3":
+            value = "aarch64"
         return re.sub(r'(\s|[-_])', '', value).upper()
 
     env = jinja2.Environment(
@@ -87,6 +90,7 @@ def generate_scheme(name, type, properties):
         x86_aes_guard=properties.get('x86_aes_guard', DEFAULT_X86_AES_GUARD),
         x86_avx2_guard=properties.get('x86_avx2_guard', DEFAULT_X86_AVX2_GUARD),
         aarch64_neon_guard=properties.get('aarch64_neon_guard', DEFAULT_AARCH64_NEON_GUARD),
+        aarch64_sha3_guard=properties.get('aarch64_sha3_guard', DEFAULT_AARCH64_SHA3_GUARD),
     )
 
     metadatas = dict()
