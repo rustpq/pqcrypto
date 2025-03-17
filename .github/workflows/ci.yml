@@ -26,7 +26,7 @@ jobs:
       - name: Install Rust
         run: |
           rustup set auto-self-update disable
-          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
+          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt,clippy
           rustup default ${{ matrix.rust }}
           echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
           echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
@@ -68,7 +68,7 @@ jobs:
       - name: Install Rust
         run: |
           rustup set auto-self-update disable
-          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
+          rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt,clippy
           rustup target add aarch64-linux-android
           echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
           echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
