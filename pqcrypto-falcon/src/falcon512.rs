@@ -29,6 +29,9 @@ use alloc::vec::Vec;
 use pqcrypto_traits::sign as primitive;
 use pqcrypto_traits::{Error, Result};
 
+#[cfg(feature = "std")]
+use std::fmt;
+
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
         #[derive(Clone, Copy)]
@@ -79,6 +82,14 @@ macro_rules! simple_struct {
                     .zip(other.0.iter())
                     .try_for_each(|(a, b)| if a == b { Ok(()) } else { Err(()) })
                     .is_ok()
+            }
+        }
+
+        #[cfg(feature = "std")]
+        impl fmt::Debug for $type {
+            /// Add a debug implementation that won't leak private values
+            fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                write!(f, "{} ({} bytes)", stringify!($type), self.0.len())
             }
         }
     };
@@ -367,8 +378,8 @@ mod test {
 
     #[test]
     pub fn test_sign() {
-        let mut rng = rand::thread_rng();
-        let len: u16 = rng.gen();
+        let mut rng = rand::rng();
+        let len: u16 = rng.random();
 
         let message = (0..len).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
         let (pk, sk) = keypair();
@@ -379,8 +390,8 @@ mod test {
 
     #[test]
     pub fn test_sign_detached() {
-        let mut rng = rand::thread_rng();
-        let len: u16 = rng.gen();
+        let mut rng = rand::rng();
+        let len: u16 = rng.random();
         let message = (0..len).map(|_| rng.gen::<u8>()).collect::<Vec<_>>();
 
         let (pk, sk) = keypair();

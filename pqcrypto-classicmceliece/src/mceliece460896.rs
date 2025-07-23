@@ -27,6 +27,9 @@ use crate::ffi;
 use pqcrypto_traits::kem as primitive;
 use pqcrypto_traits::{Error, Result};
 
+#[cfg(feature = "std")]
+use std::fmt;
+
 macro_rules! simple_struct {
     ($type: ident, $size: expr) => {
         #[derive(Clone, Copy)]
@@ -77,6 +80,14 @@ macro_rules! simple_struct {
                     .zip(other.0.iter())
                     .try_for_each(|(a, b)| if a == b { Ok(()) } else { Err(()) })
                     .is_ok()
+            }
+        }
+
+        #[cfg(feature = "std")]
+        impl fmt::Debug for $type {
+            /// Add a debug implementation that won't leak private values
+            fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                write!(f, "{} ({} bytes)", stringify!($type), self.0.len())
             }
         }
     };
