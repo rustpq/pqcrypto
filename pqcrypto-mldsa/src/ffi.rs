@@ -768,9 +768,9 @@ mod test_mldsa44_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA44_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA44_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -963,9 +963,9 @@ mod test_mldsa44_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA44_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA44_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1154,9 +1154,9 @@ mod test_mldsa44_aarch64 {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA44_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA44_AARCH64_CRYPTO_SECRETKEYBYTES];
@@ -1351,9 +1351,9 @@ mod test_mldsa65_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA65_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA65_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -1546,9 +1546,9 @@ mod test_mldsa65_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA65_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA65_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1737,9 +1737,9 @@ mod test_mldsa65_aarch64 {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA65_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA65_AARCH64_CRYPTO_SECRETKEYBYTES];
@@ -1934,9 +1934,9 @@ mod test_mldsa87_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA87_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA87_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -2129,9 +2129,9 @@ mod test_mldsa87_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA87_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA87_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -2320,9 +2320,9 @@ mod test_mldsa87_aarch64 {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_MLDSA87_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_MLDSA87_AARCH64_CRYPTO_SECRETKEYBYTES];

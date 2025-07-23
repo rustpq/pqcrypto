@@ -553,9 +553,9 @@ mod test_falcon512_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCON512_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCON512_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -683,9 +683,9 @@ mod test_falcon512_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCON512_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCON512_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -809,9 +809,9 @@ mod test_falcon512_aarch64 {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCON512_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCON512_AARCH64_CRYPTO_SECRETKEYBYTES];
@@ -935,9 +935,9 @@ mod test_falconpadded512_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCONPADDED512_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCONPADDED512_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -1066,9 +1066,9 @@ mod test_falconpadded512_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCONPADDED512_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCONPADDED512_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1193,9 +1193,9 @@ mod test_falconpadded512_aarch64 {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCONPADDED512_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCONPADDED512_AARCH64_CRYPTO_SECRETKEYBYTES];
@@ -1323,9 +1323,9 @@ mod test_falcon1024_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -1453,9 +1453,9 @@ mod test_falcon1024_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCON1024_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCON1024_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1579,9 +1579,9 @@ mod test_falcon1024_aarch64 {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCON1024_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCON1024_AARCH64_CRYPTO_SECRETKEYBYTES];
@@ -1705,9 +1705,9 @@ mod test_falconpadded1024_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCONPADDED1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCONPADDED1024_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -1839,9 +1839,9 @@ mod test_falconpadded1024_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCONPADDED1024_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCONPADDED1024_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1966,9 +1966,9 @@ mod test_falconpadded1024_aarch64 {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_FALCONPADDED1024_AARCH64_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_FALCONPADDED1024_AARCH64_CRYPTO_SECRETKEYBYTES];

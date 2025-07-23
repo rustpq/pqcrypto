@@ -2,7 +2,7 @@
 name = "pqcrypto-sphincsplus"
 description = "Post-Quantum Signature Scheme sphincsplus"
 readme = "README.md"
-version = "0.7.1"
+version = "0.7.2"
 authors = ["Thom Wiggers <thom@thomwiggers.nl>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
@@ -25,7 +25,7 @@ std = ["pqcrypto-traits/std"]
 serialization = ["serde", "serde-big-array"]
 
 [dev-dependencies]
-rand = "0.8.5"
+rand = "0.9"
 
 [build-dependencies]
 cc = { version = "1.0", features = ["parallel"] }

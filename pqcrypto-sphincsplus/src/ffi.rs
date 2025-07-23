@@ -1125,9 +1125,9 @@ mod test_sphincsshake128fsimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -1260,9 +1260,9 @@ mod test_sphincsshake128fsimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE128FSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE128FSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1391,9 +1391,9 @@ mod test_sphincsshake128ssimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -1526,9 +1526,9 @@ mod test_sphincsshake128ssimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE128SSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE128SSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1657,9 +1657,9 @@ mod test_sphincsshake192fsimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -1792,9 +1792,9 @@ mod test_sphincsshake192fsimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE192FSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE192FSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -1923,9 +1923,9 @@ mod test_sphincsshake192ssimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -2058,9 +2058,9 @@ mod test_sphincsshake192ssimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE192SSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE192SSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -2189,9 +2189,9 @@ mod test_sphincsshake256fsimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -2324,9 +2324,9 @@ mod test_sphincsshake256fsimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE256FSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE256FSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -2455,9 +2455,9 @@ mod test_sphincsshake256ssimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -2590,9 +2590,9 @@ mod test_sphincsshake256ssimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHAKE256SSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHAKE256SSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -2721,9 +2721,9 @@ mod test_sphincssha2128fsimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2128FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2128FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -2856,9 +2856,9 @@ mod test_sphincssha2128fsimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2128FSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2128FSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -2986,9 +2986,9 @@ mod test_sphincssha2128ssimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2128SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -3121,9 +3121,9 @@ mod test_sphincssha2128ssimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2128SSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -3251,9 +3251,9 @@ mod test_sphincssha2192fsimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2192FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2192FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -3386,9 +3386,9 @@ mod test_sphincssha2192fsimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2192FSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2192FSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -3516,9 +3516,9 @@ mod test_sphincssha2192ssimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2192SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2192SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -3651,9 +3651,9 @@ mod test_sphincssha2192ssimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2192SSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2192SSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -3781,9 +3781,9 @@ mod test_sphincssha2256fsimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2256FSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2256FSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -3916,9 +3916,9 @@ mod test_sphincssha2256fsimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2256FSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2256FSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
@@ -4046,9 +4046,9 @@ mod test_sphincssha2256ssimple_clean {
     #[test]
     fn test_ffi() {
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2256SSIMPLE_CLEAN_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2256SSIMPLE_CLEAN_CRYPTO_SECRETKEYBYTES];
@@ -4181,9 +4181,9 @@ mod test_sphincssha2256ssimple_avx2 {
             return;
         }
         unsafe {
-            let mut rng = rand::thread_rng();
-            let mut mlen: usize = rng.gen::<u16>() as usize;
-            let msg: Vec<u8> = (0..mlen).map(|_| rng.gen()).collect();
+            let mut rng = rand::rng();
+            let mut mlen: usize = rng.random::<u16>() as usize;
+            let msg: Vec<u8> = (0..mlen).map(|_| rng.random()).collect();
 
             let mut pk = vec![0u8; PQCLEAN_SPHINCSSHA2256SSIMPLE_AVX2_CRYPTO_PUBLICKEYBYTES];
             let mut sk = vec![0u8; PQCLEAN_SPHINCSSHA2256SSIMPLE_AVX2_CRYPTO_SECRETKEYBYTES];
