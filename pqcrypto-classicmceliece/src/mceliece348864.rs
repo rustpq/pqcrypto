@@ -1,6 +1,6 @@
 //! mceliece348864
 //!
-//! These bindings use the clean version from [PQClean][pqc]
+//! These bindings prefer AVX2 when available and fall back to the clean implementation from [PQClean][pqc]
 //!
 //! # Example
 //! ```
@@ -97,15 +97,62 @@ simple_struct!(
     PublicKey,
     ffi::PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_PUBLICKEYBYTES
 );
-simple_struct!(
-    SecretKey,
-    ffi::PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_SECRETKEYBYTES
-);
+/// Secret key bytes; not `Copy`. Zeroized on drop.
+#[derive(Clone, Eq, PartialEq)]
+pub struct SecretKey(pub [u8; ffi::PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_SECRETKEYBYTES]);
+
+impl core::fmt::Debug for SecretKey {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "SecretKey ({} bytes)", self.0.len())
+    }
+}
+
+impl AsRef<[u8]> for SecretKey {
+    fn as_ref(&self) -> &[u8] { &self.0 }
+}
+
+impl AsMut<[u8]> for SecretKey {
+    fn as_mut(&mut self) -> &mut [u8] { &mut self.0 }
+}
+
+impl Drop for SecretKey {
+    fn drop(&mut self) {
+        // Best-effort zeroization; requires `zeroize` at build time.
+        #[allow(unused_imports)]
+        use zeroize::Zeroize;
+        self.0.as_mut().zeroize();
+    }
+}
 simple_struct!(
     Ciphertext,
     ffi::PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_CIPHERTEXTBYTES
 );
-simple_struct!(SharedSecret, ffi::PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_BYTES);
+/// Shared secret bytes; not `Copy`. Zeroized on drop.
+#[derive(Clone, Eq, PartialEq)]
+pub struct SharedSecret(pub [u8; ffi::PQCLEAN_MCELIECE348864_CLEAN_CRYPTO_BYTES]);
+
+impl core::fmt::Debug for SharedSecret {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "SharedSecret ({} bytes)", self.0.len())
+    }
+}
+
+impl AsRef<[u8]> for SharedSecret {
+    fn as_ref(&self) -> &[u8] { &self.0 }
+}
+
+impl AsMut<[u8]> for SharedSecret {
+    fn as_mut(&mut self) -> &mut [u8] { &mut self.0 }
+}
+
+impl Drop for SharedSecret {
+    fn drop(&mut self) {
+        // Best-effort zeroization; requires `zeroize` at build time.
+        #[allow(unused_imports)]
+        use zeroize::Zeroize;
+        self.0.as_mut().zeroize();
+    }
+}
 
 /// Get the number of bytes for a public key
 pub const fn public_key_bytes() -> usize {
