@@ -4,6 +4,13 @@ on:
 
 name: Continuous integration
 
+env:
+  CARGO_INCREMENTAL: 0
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+  # 20 MiB stack
+  RUST_MIN_STACK: 20971520
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -13,11 +20,6 @@ jobs:
           - stable
           - beta
           - nightly
-    env:
-      CARGO_TERM_COLOR: always
-      # 20 MiB stack
-      RUST_MIN_STACK: 20971520
-
     steps:
       - uses: actions/checkout@v5
         with:
@@ -28,9 +30,6 @@ jobs:
           rustup set auto-self-update disable
           rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt,clippy
           rustup default ${{ matrix.rust }}
-          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
-          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
-          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
       - name: build with cryptographically-insecure turned on (if available)
         run: cargo build --features cryptographically-insecure
@@ -55,10 +54,6 @@ jobs:
           - stable
           - beta
           - nightly
-    env:
-      CARGO_TERM_COLOR: always
-      # 20 MiB stack
-      RUST_MIN_STACK: 20971520
 
     steps:
       - uses: actions/checkout@v5
@@ -70,9 +65,6 @@ jobs:
           rustup set auto-self-update disable
           rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt,clippy
           rustup target add aarch64-linux-android
-          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
-          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
-          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 #3.2.2
@@ -94,9 +86,6 @@ jobs:
   #         - stable
   #         - beta
   #         - nightly
-  #   env:
-  #     # 20 MiB stack
-  #     RUST_MIN_STACK: 20971520
   #   steps:
   #     - uses: actions/checkout@v5
   #       with:
@@ -107,9 +96,6 @@ jobs:
   #         rustup set auto-self-update disable
   #         rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
   #         rustup default ${{ matrix.rust }}
-  #         echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
-  #         echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
-  #         echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
   #     - name: Install WASI
   #       run: cargo install cargo-wasi
