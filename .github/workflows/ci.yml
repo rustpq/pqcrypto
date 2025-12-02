@@ -4,6 +4,13 @@ on:
 
 name: Continuous integration
 
+env:
+  CARGO_INCREMENTAL: 0
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+  # 20 MiB stack
+  RUST_MIN_STACK: 20971520
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -13,24 +20,16 @@ jobs:
           - stable
           - beta
           - nightly
-    env:
-      CARGO_TERM_COLOR: always
-      # 20 MiB stack
-      RUST_MIN_STACK: 20971520
-
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: true
 
-      - name: Install Rust
+      - name: Install Rust ${{ matrix.rust }}
         run: |
           rustup set auto-self-update disable
           rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt,clippy
           rustup default ${{ matrix.rust }}
-          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
-          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
-          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
       - name: build with cryptographically-insecure turned on (if available)
         run: cargo build --features cryptographically-insecure
@@ -55,13 +54,9 @@ jobs:
           - stable
           - beta
           - nightly
-    env:
-      CARGO_TERM_COLOR: always
-      # 20 MiB stack
-      RUST_MIN_STACK: 20971520
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: true
 
@@ -70,15 +65,12 @@ jobs:
           rustup set auto-self-update disable
           rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt,clippy
           rustup target add aarch64-linux-android
-          echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
-          echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
-          echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@07976c6290703d34c16d382cb36445f98bb43b1f #3.2.0
+        uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 #3.2.2
 
       - name: Setup Android NDK
-        run: sdkmanager "ndk;26.1.10909125"
+        run: sdkmanager "ndk;29.0.14206865"
 
       - name: Compile for Android
         run: |
@@ -121,11 +113,8 @@ jobs:
   #         - stable
   #         - beta
   #         - nightly
-  #   env:
-  #     # 20 MiB stack
-  #     RUST_MIN_STACK: 20971520
   #   steps:
-  #     - uses: actions/checkout@v4
+  #     - uses: actions/checkout@v5
   #       with:
   #         submodules: true
 
@@ -134,9 +123,6 @@ jobs:
   #         rustup set auto-self-update disable
   #         rustup toolchain install ${{ matrix.rust }} --profile minimal --component rustfmt clippy
   #         rustup default ${{ matrix.rust }}
-  #         echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
-  #         echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
-  #         echo RUST_BACKTRACE=1 >> $GITHUB_ENV
 
   #     - name: Install WASI
   #       run: cargo install cargo-wasi
@@ -144,9 +130,9 @@ jobs:
   #       run: curl https://wasmtime.dev/install.sh -sSf | bash
   #     - name: Install WASI SDK
   #       run: |
-  #         wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sysroot-12.0.tar.gz
-  #         tar -xvzf wasi-sysroot-12.0.tar.gz
-  #         rm wasi-sysroot-12.0.tar.gz
+  #         wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-27/wasi-sysroot-27.0.tar.gz
+  #         tar -xvzf wasi-sysroot-27.0.tar.gz
+  #         rm wasi-sysroot-27.0.tar.gz
   #     - name: Run tests
   #       run: |
   #         export WASI_SDK_DIR="$(pwd)/wasi-sysroot"
