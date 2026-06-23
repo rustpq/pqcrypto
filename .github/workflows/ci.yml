@@ -6,9 +6,12 @@ name: Continuous integration
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
         rust:
           - stable
           - beta
